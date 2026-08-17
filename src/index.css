@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Myanmar Unicode fonts (self-hosted) ── */
+@font-face {
+  font-family: 'Noto Sans Myanmar';
+  src: url('/fonts/NotoSansMyanmar-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans Myanmar';
+  src: url('/fonts/NotoSansMyanmar-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans Myanmar';
+  src: url('/fonts/NotoSansMyanmar-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* Pyidaungsu fallback */
+@font-face {
+  font-family: 'Pyidaungsu';
+  src: url('/fonts/Pyidaungsu.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Padauk fallback */
+@font-face {
+  font-family: 'Padauk';
+  src: url('/fonts/Padauk-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── CSS custom properties (shadcn/ui) ── */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+/* ── Myanmar font — applied when <html lang="my"> ── */
+html[lang='my'] {
+  font-family: 'Noto Sans Myanmar', 'Pyidaungsu', 'Padauk', sans-serif;
+}
+html[lang='my'] body,
+html[lang='my'] .font-myanmar {
+  font-family: 'Noto Sans Myanmar', 'Pyidaungsu', 'Padauk', sans-serif;
+}
+
+/* ── Smooth scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Focus visible ring (a11y) ── */
+:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2;
+}
+
+/* ── Gradient hero background ── */
+.hero-gradient {
+  background: linear-gradient(135deg, hsl(221deg 83% 53%) 0%, hsl(262deg 83% 58%) 100%);
+}
+
+/* ── Page fade animation ── */
+.page-enter {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* ── Card shine sweep on hover ── */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.08) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+.card-shine:hover::after {
+  transform: translateX(100%);
+}
+
+/* ── Stat counter pulse ── */
+@keyframes stat-pop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  70%  { transform: scale(1.08); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+.stat-pop {
+  animation: stat-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ── Floating badge ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ── Gradient border glow on hover ── */
+.card-glow {
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+.card-glow:hover {
+  box-shadow:
+    0 0 0 1px hsl(var(--primary) / 0.3),
+    0 8px 32px -4px hsl(var(--primary) / 0.15),
+    0 4px 16px -4px rgba(0,0,0,0.08);
+}
+
+/* ── Staggered list fade-in ── */
+@keyframes list-item-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.list-animate > * {
+  opacity: 0;
+  animation: list-item-in 0.35s ease-out forwards;
+}
+.list-animate > *:nth-child(1) { animation-delay: 0ms; }
+.list-animate > *:nth-child(2) { animation-delay: 60ms; }
+.list-animate > *:nth-child(3) { animation-delay: 120ms; }
+.list-animate > *:nth-child(4) { animation-delay: 180ms; }
+.list-animate > *:nth-child(5) { animation-delay: 240ms; }
+.list-animate > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ── Section slide-in heading ── */
+@keyframes heading-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.heading-animate {
+  animation: heading-in 0.5s ease-out forwards;
+}
