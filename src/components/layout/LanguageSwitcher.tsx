@@ -8,18 +8,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { normalizeLanguage, type SupportedLanguage } from '@/lib/i18n/languages'
 
-const LANGUAGES: { code: SupportedLanguage; label: string; nativeLabel: string }[] = [
-  { code: 'en', label: 'English', nativeLabel: 'English' },
-  { code: 'my', label: 'Myanmar', nativeLabel: 'မြန်မာ' },
+const LANGUAGES: {
+  code: SupportedLanguage
+  label: string
+  nativeLabel: string
+  flag: string
+}[] = [
+  { code: 'en', label: 'English', nativeLabel: 'English', flag: '🇬🇧' },
+  { code: 'my', label: 'Myanmar', nativeLabel: 'မြန်မာ', flag: '🇲🇲' },
+  { code: 'zh', label: 'Chinese', nativeLabel: '中文', flag: '🇨🇳' },
 ]
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation()
-  const currentLang = i18n.language as SupportedLanguage
+  const currentLang = normalizeLanguage(i18n.language)
 
-  // Sync <html lang> attribute for Myanmar font CSS rule
+  // Sync <html lang> attribute for Myanmar / Chinese font CSS rules
   useEffect(() => {
     document.documentElement.lang = currentLang
     // Only language preference is stored — never PII or tokens
@@ -33,27 +39,28 @@ export function LanguageSwitcher() {
   const active = LANGUAGES.find((l) => l.code === currentLang) ?? LANGUAGES[0]
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="sm"
-          className="gap-1.5"
+          className="gap-1.5 shrink-0 data-[state=open]:bg-accent"
           aria-label={`Language: ${active.nativeLabel}. Click to switch language`}
+          aria-haspopup="menu"
         >
-          <Globe className="h-4 w-4" aria-hidden="true" />
+          <Globe className="h-4 w-4 shrink-0" aria-hidden="true" />
           <span className="hidden sm:inline">{active.nativeLabel}</span>
           <span className="sm:hidden">{active.code.toUpperCase()}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" side="bottom" className="w-44">
         {LANGUAGES.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => handleChange(lang.code)}
             className={currentLang === lang.code ? 'bg-accent font-medium' : ''}
           >
-            <span className="mr-2">{lang.code === 'my' ? '🇲🇲' : '🇬🇧'}</span>
+            <span className="mr-2 w-5 text-center" aria-hidden="true">{lang.flag}</span>
             {lang.nativeLabel}
           </DropdownMenuItem>
         ))}

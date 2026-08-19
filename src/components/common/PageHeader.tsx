@@ -6,10 +6,10 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, subtitle, children }: PageHeaderProps) {
   return (
-    <div className="bg-gradient-to-r from-brand-700 to-brand-500 text-white py-16 px-4">
+    <div className="bg-gradient-to-r from-brand-700 to-brand-500 text-white py-10 sm:py-12 md:py-16">
       <div className="container">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">{title}</h1>
-        {subtitle && <p className="text-lg text-blue-100 max-w-2xl">{subtitle}</p>}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-3">{title}</h1>
+        {subtitle && <p className="text-sm sm:text-base md:text-lg text-blue-100 max-w-2xl">{subtitle}</p>}
         {children}
       </div>
     </div>

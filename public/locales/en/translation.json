@@ -29,6 +29,9 @@
     "popular": "Most Popular",
     "featured": "Featured"
   },
+  "announcement": {
+    "serviceInterruption": "🔔 Service Interruption: Internet service is temporarily unavailable. Our team is working to restore the connection."
+  },
   "nav": {
     "home": "Home",
     "services": "Services",
@@ -68,6 +71,15 @@
     "feature3Desc": "Our expert team is available around the clock to help you.",
     "feature4Title": "No Data Caps",
     "feature4Desc": "Unlimited data on all plans. Browse, stream, and download freely.",
+    "feature5Title": "Modern Wi-Fi Equipment",
+    "feature5Desc": "Professionally installed routers and optimized in-home coverage for stable performance.",
+    "galleryTitle": "Photo Gallery",
+    "galleryDesc": "A closer look at CG-NET's network, spaces, and connected lifestyle moments.",
+    "galleryItem1": "Fiber-powered home connectivity",
+    "galleryItem2": "Smart workspaces with stable internet",
+    "galleryItem3": "Customer app experience",
+    "galleryItem4": "Citywide network coverage",
+    "galleryItem5": "Always-on digital lifestyle",
     "ctaTitle": "Ready to Get Connected?",
     "ctaDesc": "Join 200,000+ happy customers across Myanmar.",
     "ctaButton": "Get Started Today"
@@ -212,6 +224,6 @@
   "language": {
     "switch": "Switch Language",
     "en": "English",
-    "my": "မြန်မာ"
+    "zh": "中文"
   }
 }

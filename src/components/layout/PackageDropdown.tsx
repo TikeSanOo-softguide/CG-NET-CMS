@@ -27,19 +27,20 @@ export function PackageDropdown({ onClose }: PackageDropdownProps) {
   const { t } = useTranslation()
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="sm"
-          className="gap-1"
+          className="gap-1 data-[state=open]:bg-accent"
           aria-label={t('nav.packagesMenu')}
+          aria-haspopup="menu"
         >
           {t('nav.packages')}
-          <ChevronDown className="h-3.5 w-3.5 opacity-60" aria-hidden="true" />
+          <ChevronDown className="h-3.5 w-3.5 opacity-60 shrink-0" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-52">
+      <DropdownMenuContent align="start" side="bottom" className="w-56">
         <DropdownMenuLabel>{t('nav.packages')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {PACKAGE_CATEGORIES.map(({ key, labelKey, icon: Icon, href }) => (

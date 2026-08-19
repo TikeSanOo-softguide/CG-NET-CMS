@@ -2,9 +2,7 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpBackend from 'i18next-http-backend'
-
-const SUPPORTED_LANGUAGES = ['en', 'my'] as const
-export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
+import { SUPPORTED_LANGUAGES } from './languages'
 
 void i18n
   .use(HttpBackend)
@@ -12,7 +10,9 @@ void i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    supportedLngs: SUPPORTED_LANGUAGES,
+    supportedLngs: [...SUPPORTED_LANGUAGES],
+    load: 'languageOnly',
+    nonExplicitSupportedLngs: true,
     defaultNS: 'translation',
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
@@ -31,4 +31,6 @@ void i18n
   })
 
 export default i18n
-export { SUPPORTED_LANGUAGES }
+export { SUPPORTED_LANGUAGES } from './languages'
+export type { SupportedLanguage } from './languages'
+export { normalizeLanguage } from './languages'

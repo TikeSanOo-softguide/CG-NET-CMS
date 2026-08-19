@@ -9,7 +9,7 @@ import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { useAboutContent } from '@/hooks/useAbout'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { getLocalized } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { normalizeLanguage } from '@/lib/i18n'
 
 function AboutSkeleton() {
   return (
@@ -23,7 +23,7 @@ function AboutSkeleton() {
 
 export default function AboutPage() {
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
 
   usePageTitle(t('about.pageTitle'))
 
@@ -40,13 +40,13 @@ export default function AboutPage() {
       />
 
       {/* Stats */}
-      <section className="bg-brand-800 text-white py-10 px-4" aria-label="Company statistics">
+      <section className="bg-brand-800 text-white h-[60px] flex items-center" aria-label="Company statistics">
         <div className="container">
-          <dl className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <dl className="grid grid-cols-4 gap-1 sm:gap-4 text-center items-center">
             {about.stats.map((stat, i) => (
-              <div key={i}>
-                <dt className="text-sm text-blue-200 mb-1">{getLocalized(stat.label, lang)}</dt>
-                <dd className="text-3xl font-bold">{stat.value}</dd>
+              <div key={i} className="min-w-0 px-1">
+                <dt className="text-[10px] sm:text-xs text-blue-200 leading-tight truncate">{getLocalized(stat.label, lang)}</dt>
+                <dd className="text-sm sm:text-base font-bold leading-tight">{stat.value}</dd>
               </div>
             ))}
           </dl>
@@ -62,20 +62,20 @@ export default function AboutPage() {
             <p className="text-muted-foreground leading-relaxed">{t('about.storyText2')}</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-primary/10 rounded-2xl p-6 text-center">
-              <p className="text-4xl font-bold text-primary">{about.foundedYear}</p>
+            <div className="bg-primary/10 rounded-2xl p-4 sm:p-6 text-center">
+              <p className="text-2xl sm:text-4xl font-bold text-primary">{about.foundedYear}</p>
               <p className="text-sm text-muted-foreground mt-1">Founded</p>
             </div>
-            <div className="bg-primary/10 rounded-2xl p-6 text-center">
-              <p className="text-4xl font-bold text-primary">{about.employees}</p>
+            <div className="bg-primary/10 rounded-2xl p-4 sm:p-6 text-center">
+              <p className="text-2xl sm:text-4xl font-bold text-primary">{about.employees}</p>
               <p className="text-sm text-muted-foreground mt-1">Employees</p>
             </div>
-            <div className="bg-primary/10 rounded-2xl p-6 text-center">
-              <p className="text-4xl font-bold text-primary">{about.coverageAreas}+</p>
+            <div className="bg-primary/10 rounded-2xl p-4 sm:p-6 text-center">
+              <p className="text-2xl sm:text-4xl font-bold text-primary">{about.coverageAreas}+</p>
               <p className="text-sm text-muted-foreground mt-1">Cities</p>
             </div>
-            <div className="bg-primary/10 rounded-2xl p-6 text-center">
-              <p className="text-4xl font-bold text-primary">99.9%</p>
+            <div className="bg-primary/10 rounded-2xl p-4 sm:p-6 text-center">
+              <p className="text-2xl sm:text-4xl font-bold text-primary">99.9%</p>
               <p className="text-sm text-muted-foreground mt-1">Uptime</p>
             </div>
           </div>

@@ -1,6 +1,6 @@
 # CG-NET CMS — Marketing Website
 
-A modern, bilingual **(English + Myanmar)** CMS-style marketing website for **CG-NET ISP**, built with React 18, Vite, TypeScript, Tailwind CSS, and shadcn/ui.
+A modern, multilingual **(English + Myanmar + Chinese)** CMS-style marketing website for **CG-NET ISP**, built with React 18, Vite, TypeScript, Tailwind CSS, and shadcn/ui.
 
 ---
 
@@ -126,7 +126,8 @@ cg-net-cms/
 │   ├── fonts/                   # Self-hosted Myanmar Unicode fonts
 │   ├── locales/
 │   │   ├── en/translation.json  # English UI strings
-│   │   └── my/translation.json  # Myanmar UI strings
+│   │   ├── my/translation.json  # Myanmar UI strings
+│   │   └── zh/translation.json  # Simplified Chinese UI strings
 │   ├── favicon.svg
 │   ├── robots.txt
 │   └── sitemap.xml
@@ -226,7 +227,7 @@ Run these from the project root with `npm run <script>`.
 
 ## Internationalization (i18n)
 
-The site supports **English (en)** and **Myanmar (my)** languages.
+The site supports **English (en)**, **Myanmar (my)**, and **Simplified Chinese (zh)**.
 
 ### Switching Language
 
@@ -239,17 +240,18 @@ UI strings are stored as JSON files:
 ```
 public/locales/
 ├── en/translation.json   ← English
-└── my/translation.json   ← Myanmar
+├── my/translation.json   ← Myanmar
+└── zh/translation.json   ← Simplified Chinese
 ```
 
 Edit these files to change any button label, heading, or static text. The keys are namespaced by page/section (e.g., `home.hero.title`, `contact.form.submit`).
 
 ### Bilingual API Content
 
-API data uses a bilingual shape:
+API data uses a multilingual shape:
 
 ```json
-{ "title": { "en": "Fiber Plan", "my": "ဖိုင်ဘာ အစီအစဉ်" } }
+{ "title": { "en": "Fiber Plan", "my": "ဖိုင်ဘာ အစီအစဉ်", "zh": "光纤套餐" } }
 ```
 
 Always use the `getLocalized(field, lang)` helper from `src/lib/utils.ts` to extract the correct language:
@@ -257,7 +259,7 @@ Always use the `getLocalized(field, lang)` helper from `src/lib/utils.ts` to ext
 ```ts
 import { getLocalized } from '@/lib/utils'
 
-const title = getLocalized(package.title, lang) // "Fiber Plan" or "ဖိုင်ဘာ အစီအစဉ်"
+const title = getLocalized(package.title, lang) // "Fiber Plan" / "ဖိုင်ဘာ အစီအစဉ်" / "光纤套餐"
 ```
 
 ### Myanmar Font Setup
@@ -278,6 +280,10 @@ Download the fonts from:
 - [Pyidaungsu (NLM)](https://software.nlm.gov.mm/)
 
 The Myanmar font is applied automatically when `<html lang="my">` is set. This is handled by `App.tsx` whenever the user switches language.
+
+### Chinese Font Setup
+
+Simplified Chinese uses **Noto Sans SC** loaded from Google Fonts in `index.html`. System fallbacks (`PingFang SC`, `Microsoft YaHei`) apply when the Google Font is unavailable. The font is applied automatically when `<html lang="zh">` is set.
 
 ---
 

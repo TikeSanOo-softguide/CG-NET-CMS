@@ -112,7 +112,7 @@ export function Footer() {
 
         <Separator className="my-8 bg-slate-700" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-slate-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-500 text-center sm:text-left pb-[env(safe-area-inset-bottom)]">
           <p>{t('footer.copyright', { year })}</p>
           <p>{t('footer.madeWith')}</p>
         </div>

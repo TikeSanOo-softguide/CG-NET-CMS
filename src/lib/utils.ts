@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import type { SupportedLanguage } from './i18n'
+import type { SupportedLanguage } from './i18n/languages'
 
 /**
  * Merges Tailwind classes safely.
@@ -9,12 +9,25 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+const DATE_LOCALES: Record<SupportedLanguage, string> = {
+  en: 'en-US',
+  my: 'my-MM',
+  zh: 'zh-CN',
+}
+
+/**
+ * Maps a UI language code to an Intl date locale.
+ */
+export function getDateLocale(lang: SupportedLanguage): string {
+  return DATE_LOCALES[lang] ?? 'en-US'
+}
+
 /**
  * Returns the localized string for a bilingual field.
  * Falls back to English if the requested language is unavailable.
  */
 export function getLocalized(
-  field: { en: string; my: string } | string | undefined,
+  field: Partial<Record<SupportedLanguage, string>> | string | undefined,
   lang: SupportedLanguage
 ): string {
   if (!field) return ''
@@ -26,7 +39,7 @@ export function getLocalized(
  * Returns a localized string array.
  */
 export function getLocalizedArray(
-  field: { en: string[]; my: string[] } | string[] | undefined,
+  field: Partial<Record<SupportedLanguage, string[]>> | string[] | undefined,
   lang: SupportedLanguage
 ): string[] {
   if (!field) return []

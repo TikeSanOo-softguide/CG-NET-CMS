@@ -13,7 +13,12 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1.25rem',
+        md: '1.5rem',
+        lg: '2rem',
+      },
       screens: {
         '2xl': '1400px',
       },
@@ -94,6 +99,7 @@ const config: Config = {
       },
       fontFamily: {
         myanmar: ['"Noto Sans Myanmar"', '"Pyidaungsu"', '"Padauk"', 'sans-serif'],
+        chinese: ['"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },

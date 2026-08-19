@@ -10,11 +10,11 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import { useContactInfo } from '@/hooks/useAbout'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { getLocalized } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { normalizeLanguage } from '@/lib/i18n'
 
 export default function ContactPage() {
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
 
   usePageTitle(t('contact.pageTitle'))
 
@@ -29,7 +29,7 @@ export default function ContactPage() {
           {/* Contact form */}
           <AnimatedCard variant="fade-right" delay={0} className="lg:col-span-2 rounded-lg" hoverClass="">
             <div>
-              <h2 className="text-2xl font-bold mb-6">{t('contact.title')}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-6">{t('contact.title')}</h2>
               <ContactForm />
             </div>
           </AnimatedCard>
@@ -58,14 +58,14 @@ export default function ContactPage() {
                     <CardContent className="space-y-3">
                       <a
                         href={`tel:${contactInfo.phone}`}
-                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors"
+                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors break-all"
                       >
                         <Phone className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                         {contactInfo.phone}
                       </a>
                       <a
                         href={`tel:${contactInfo.hotline}`}
-                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors"
+                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors break-all"
                       >
                         <Phone className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                         {contactInfo.hotline} ({t('contact.info.hotline')})
@@ -82,14 +82,14 @@ export default function ContactPage() {
                     <CardContent className="space-y-3">
                       <a
                         href={`mailto:${contactInfo.email}`}
-                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors"
+                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors break-all"
                       >
                         <Mail className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                         {contactInfo.email}
                       </a>
                       <a
                         href={`mailto:${contactInfo.salesEmail}`}
-                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors"
+                        className="flex items-center gap-3 text-sm hover:text-primary transition-colors break-all"
                       >
                         <Mail className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                         {contactInfo.salesEmail}

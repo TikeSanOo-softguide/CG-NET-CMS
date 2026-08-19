@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/sheet'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { PackageDropdown } from './PackageDropdown'
-import { LanguageSwitcher } from './LanguageSwitcher'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -37,9 +36,9 @@ export function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <nav role="navigation" aria-label="Main navigation">
+    <nav role="navigation" aria-label="Main navigation" className="flex items-center">
       {/* Desktop nav links */}
-      <div className="hidden md:flex items-center gap-1">
+      <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
         {NAV_LINKS.slice(0, 1).map(({ to, labelKey }) => (
           <NavLink
             key={to}
@@ -47,7 +46,7 @@ export function NavBar() {
             end
             className={({ isActive }) =>
               cn(
-                'px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
+                'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
                 isActive && 'bg-accent text-accent-foreground'
               )
             }
@@ -60,7 +59,7 @@ export function NavBar() {
           to="/services"
           className={({ isActive }) =>
             cn(
-              'px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
+              'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
               isActive && 'bg-accent text-accent-foreground'
             )
           }
@@ -77,7 +76,7 @@ export function NavBar() {
             to={to}
             className={({ isActive }) =>
               cn(
-                'px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
+                'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
                 isActive && 'bg-accent text-accent-foreground'
               )
             }
@@ -88,19 +87,20 @@ export function NavBar() {
       </div>
 
       {/* Mobile nav — slide-out sheet */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger asChild>
             <Button
               variant="ghost"
               size="icon"
+              className="h-11 w-11"
               aria-label={t('nav.toggleMenu')}
               aria-expanded={mobileOpen}
             >
               <Menu className="h-5 w-5" aria-hidden="true" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-72 overflow-y-auto">
+          <SheetContent side="left" className="w-[min(20rem,88vw)] overflow-y-auto p-5">
             <SheetHeader className="mb-4">
               <SheetTitle>
                 <Link to="/" onClick={() => setMobileOpen(false)} className="text-xl font-bold text-primary">
@@ -117,7 +117,7 @@ export function NavBar() {
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   cn(
-                    'px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-accent',
+                    'px-3 py-3 rounded-md text-sm font-medium transition-colors hover:bg-accent min-h-11 flex items-center',
                     isActive && 'bg-accent'
                   )
                 }
@@ -130,7 +130,7 @@ export function NavBar() {
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   cn(
-                    'px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-accent',
+                    'px-3 py-3 rounded-md text-sm font-medium transition-colors hover:bg-accent min-h-11 flex items-center',
                     isActive && 'bg-accent'
                   )
                 }
@@ -173,7 +173,7 @@ export function NavBar() {
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-accent',
+                      'px-3 py-3 rounded-md text-sm font-medium transition-colors hover:bg-accent min-h-11 flex items-center',
                       isActive && 'bg-accent'
                     )
                   }
@@ -181,10 +181,6 @@ export function NavBar() {
                   {t(labelKey)}
                 </NavLink>
               ))}
-
-              <div className="mt-4 pt-4 border-t">
-                <LanguageSwitcher />
-              </div>
             </div>
           </SheetContent>
         </Sheet>

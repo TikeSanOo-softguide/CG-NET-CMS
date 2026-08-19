@@ -12,8 +12,8 @@ import { EmptyState } from '@/components/common/EmptyState'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { useCareers } from '@/hooks/useCareers'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { getLocalized, formatDate } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { getLocalized, formatDate, getDateLocale } from '@/lib/utils'
+import { normalizeLanguage } from '@/lib/i18n'
 
 const BENEFITS = [
   { icon: DollarSign, titleKey: 'career.benefit1', descKey: 'career.benefit1Desc', color: 'text-green-500' },
@@ -42,7 +42,7 @@ function CareerSkeleton() {
 
 export default function CareerPage() {
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
 
   usePageTitle(t('career.pageTitle'))
 
@@ -120,12 +120,12 @@ export default function CareerPage() {
                     </span>
                     <span className="flex items-center gap-1.5">
                       <Clock className="h-4 w-4" aria-hidden="true" />
-                      {formatDate(career.publishedAt, 'en-US')}
+                      {formatDate(career.publishedAt, getDateLocale(lang))}
                     </span>
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button asChild className="gap-2">
+                  <Button asChild className="w-full sm:w-auto gap-2">
                     <Link to={`/career/${career.slug}`}>
                       {t('career.applyNow')}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -11,7 +11,7 @@ import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { useGuides } from '@/hooks/useGuides'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { getLocalized, getLocalizedArray } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { normalizeLanguage } from '@/lib/i18n'
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Download, UserPlus, BarChart2, CreditCard, AlertCircle,
@@ -34,7 +34,7 @@ function GuideSkeleton() {
 
 export default function AppGuidePage() {
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
 
   usePageTitle(t('appGuide.pageTitle'))
 
@@ -49,7 +49,7 @@ export default function AppGuidePage() {
         <div className="mb-10 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#"
-            className="inline-flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors w-full sm:w-auto"
             aria-label="Download on the App Store"
           >
             <span className="text-2xl" aria-hidden="true">🍎</span>
@@ -60,7 +60,7 @@ export default function AppGuidePage() {
           </a>
           <a
             href="#"
-            className="inline-flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors w-full sm:w-auto"
             aria-label="Get it on Google Play"
           >
             <span className="text-2xl" aria-hidden="true">🤖</span>
@@ -118,18 +118,18 @@ export default function AppGuidePage() {
                 return (
                   <AccordionItem key={step.id} value={step.id} className="border rounded-lg px-4">
                     <AccordionTrigger className="text-left hover:no-underline">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 min-w-0">
                         <span className="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0" aria-hidden="true">
                           {index + 1}
                         </span>
-                        <span className="font-semibold">{getLocalized(step.title, lang)}</span>
+                        <span className="font-semibold text-sm sm:text-base min-w-0">{getLocalized(step.title, lang)}</span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p className="text-muted-foreground mb-3 pl-10">
+                      <p className="text-muted-foreground mb-3 pl-0 sm:pl-10">
                         {getLocalized(step.description, lang)}
                       </p>
-                      <ol className="pl-10 space-y-2" aria-label={`Steps for ${getLocalized(step.title, lang)}`}>
+                      <ol className="pl-0 sm:pl-10 space-y-2" aria-label={`Steps for ${getLocalized(step.title, lang)}`}>
                         {steps.map((s, i) => (
                           <li key={i} className="text-sm flex items-start gap-2">
                             <span className="text-primary font-semibold shrink-0" aria-hidden="true">{i + 1}.</span>

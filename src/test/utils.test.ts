@@ -3,14 +3,16 @@ import { getLocalized, getLocalizedArray, formatCurrency, isHttpsUrl, truncate }
 
 describe('getLocalized', () => {
   it('returns the correct language string', () => {
-    const field = { en: 'Hello', my: 'မင်္ဂလာပါ' }
+    const field = { en: 'Hello', my: 'မင်္ဂလာပါ', zh: '你好' }
     expect(getLocalized(field, 'en')).toBe('Hello')
     expect(getLocalized(field, 'my')).toBe('မင်္ဂလာပါ')
+    expect(getLocalized(field, 'zh')).toBe('你好')
   })
 
   it('falls back to English when language is missing', () => {
     const field = { en: 'Hello', my: '' }
     expect(getLocalized(field, 'my')).toBe('Hello')
+    expect(getLocalized(field, 'zh')).toBe('Hello')
   })
 
   it('handles plain strings', () => {
@@ -24,9 +26,10 @@ describe('getLocalized', () => {
 
 describe('getLocalizedArray', () => {
   it('returns the correct language array', () => {
-    const field = { en: ['a', 'b'], my: ['က', 'ခ'] }
+    const field = { en: ['a', 'b'], my: ['က', 'ခ'], zh: ['甲', '乙'] }
     expect(getLocalizedArray(field, 'en')).toEqual(['a', 'b'])
     expect(getLocalizedArray(field, 'my')).toEqual(['က', 'ခ'])
+    expect(getLocalizedArray(field, 'zh')).toEqual(['甲', '乙'])
   })
 })
 

@@ -48,6 +48,7 @@ describe('LanguageSwitcher', () => {
     const englishItems = screen.getAllByText('English')
     expect(englishItems.length).toBeGreaterThan(0)
     expect(screen.getByText('မြန်မာ')).toBeInTheDocument()
+    expect(screen.getByText('中文')).toBeInTheDocument()
   })
 
   it('calls changeLanguage when a language is selected', async () => {
@@ -56,5 +57,13 @@ describe('LanguageSwitcher', () => {
     await user.click(screen.getByRole('button'))
     await user.click(screen.getByText('မြန်မာ'))
     expect(mockChangeLanguage).toHaveBeenCalledWith('my')
+  })
+
+  it('switches to Chinese when 中文 is selected', async () => {
+    const user = userEvent.setup()
+    renderSwitcher()
+    await user.click(screen.getByRole('button'))
+    await user.click(screen.getByText('中文'))
+    expect(mockChangeLanguage).toHaveBeenCalledWith('zh')
   })
 })

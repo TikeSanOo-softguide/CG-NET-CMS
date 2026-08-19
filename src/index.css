@@ -93,8 +93,12 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground font-sans;
+    word-break: break-word;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
@@ -110,9 +114,12 @@ html[lang='my'] .font-myanmar {
   font-family: 'Noto Sans Myanmar', 'Pyidaungsu', 'Padauk', sans-serif;
 }
 
-/* ── Smooth scroll ── */
-html {
-  scroll-behavior: smooth;
+/* ── Simplified Chinese font — applied when <html lang="zh"> ── */
+html[lang='zh'] {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+html[lang='zh'] body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 /* ── Focus visible ring (a11y) ── */
@@ -207,4 +214,48 @@ html {
 }
 .heading-animate {
   animation: heading-in 0.5s ease-out forwards;
+}
+
+/* ── Card media image zoom ── */
+.card-media {
+  overflow: hidden;
+}
+.card-media img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .card-media img,
+.card-media:hover img {
+  transform: scale(1.08);
+}
+
+/* ── Announcement marquee ── */
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ── Hide native scrollbars but keep scrolling/swiping ── */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

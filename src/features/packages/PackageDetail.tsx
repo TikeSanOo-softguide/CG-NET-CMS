@@ -11,12 +11,12 @@ import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { usePackageBySlug } from '@/hooks/usePackages'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { getLocalized, getLocalizedArray, formatCurrency } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { normalizeLanguage } from '@/lib/i18n'
 
 export default function PackageDetailPage() {
   const { slug = '' } = useParams()
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
 
   const { data: pkg, isLoading, isError, refetch } = usePackageBySlug(slug)
 
@@ -59,7 +59,7 @@ export default function PackageDetailPage() {
               <Badge variant="secondary">{getLocalized(pkg.categoryLabel, lang)}</Badge>
               {pkg.isPopular && <Badge className="ml-2">{t('common.popular')}</Badge>}
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{getLocalized(pkg.title, lang)}</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{getLocalized(pkg.title, lang)}</h1>
             <p className="text-lg text-muted-foreground mb-6">{getLocalized(pkg.description, lang)}</p>
 
             <Separator className="mb-6" />
@@ -102,7 +102,7 @@ export default function PackageDetailPage() {
               </CardHeader>
               <CardContent className="text-center space-y-4">
                 <div>
-                  <span className="text-4xl font-bold text-primary">{formatCurrency(pkg.price)}</span>
+                  <span className="text-3xl sm:text-4xl font-bold text-primary">{formatCurrency(pkg.price)}</span>
                   <span className="text-muted-foreground text-sm">{t('packages.perMonth')}</span>
                 </div>
                 <p className="text-muted-foreground text-sm">{pkg.speed} {t('packages.download')}</p>

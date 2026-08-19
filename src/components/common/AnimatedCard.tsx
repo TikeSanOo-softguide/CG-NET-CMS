@@ -8,6 +8,7 @@ export type AnimationVariant =
   | 'fade-right'
   | 'zoom-in'
   | 'flip-up'
+  | 'rise'
 
 interface AnimatedCardProps {
   children: React.ReactNode
@@ -28,6 +29,7 @@ const VARIANT_HIDDEN: Record<AnimationVariant, string> = {
   'fade-right': 'opacity-0 -translate-x-8',
   'zoom-in':    'opacity-0 scale-90',
   'flip-up':    'opacity-0 rotateX-12 translate-y-6',
+  'rise':       'opacity-0 translate-y-10 scale-[0.96]',
 }
 
 const VARIANT_VISIBLE: Record<AnimationVariant, string> = {
@@ -37,6 +39,7 @@ const VARIANT_VISIBLE: Record<AnimationVariant, string> = {
   'fade-right': 'opacity-100 translate-x-0',
   'zoom-in':    'opacity-100 scale-100',
   'flip-up':    'opacity-100 translate-y-0',
+  'rise':       'opacity-100 translate-y-0 scale-100',
 }
 
 export function AnimatedCard({
@@ -50,7 +53,7 @@ export function AnimatedCard({
   const { ref, inView } = useInView<HTMLDivElement>()
 
   const defaultHover =
-    'hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10 hover:border-primary/30'
+    '[@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:shadow-xl [@media(hover:hover)]:hover:shadow-black/10 [@media(hover:hover)]:hover:border-primary/30'
 
   return (
     <Tag

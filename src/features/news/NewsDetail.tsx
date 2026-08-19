@@ -10,13 +10,13 @@ import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { useNewsBySlug } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { getLocalized, formatDate } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { getLocalized, formatDate, getDateLocale } from '@/lib/utils'
+import { normalizeLanguage } from '@/lib/i18n'
 
 export default function NewsDetailPage() {
   const { slug = '' } = useParams()
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
 
   const { data: article, isLoading, isError, refetch } = useNewsBySlug(slug)
 
@@ -60,7 +60,7 @@ export default function NewsDetailPage() {
               <Badge variant="secondary" className="mb-3">
                 {getLocalized(article.category, lang)}
               </Badge>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
                 {getLocalized(article.title, lang)}
               </h1>
 
@@ -68,7 +68,7 @@ export default function NewsDetailPage() {
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" aria-hidden="true" />
                   <time dateTime={article.publishedAt}>
-                    {formatDate(article.publishedAt, lang === 'my' ? 'my-MM' : 'en-US')}
+                    {formatDate(article.publishedAt, getDateLocale(lang))}
                   </time>
                 </span>
                 <span className="flex items-center gap-1.5">
@@ -89,6 +89,14 @@ export default function NewsDetailPage() {
               )}
             </header>
 
+            <div className="card-media rounded-xl overflow-hidden mb-6 h-52 sm:h-72">
+              <img
+                src={article.imageUrl}
+                alt={getLocalized(article.title, lang)}
+                className="h-full w-full object-cover"
+              />
+            </div>
+
             <Separator className="mb-6" />
 
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -97,7 +105,7 @@ export default function NewsDetailPage() {
 
             {/* Sanitized HTML content */}
             <div
-              className="prose prose-slate max-w-none"
+              className="prose prose-slate prose-sm sm:prose-base max-w-none overflow-x-auto"
               dangerouslySetInnerHTML={{ __html: sanitizedContent }}
             />
           </article>

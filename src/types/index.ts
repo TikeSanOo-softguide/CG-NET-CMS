@@ -1,11 +1,13 @@
 export interface BilingualString {
   en: string
   my: string
+  zh: string
 }
 
 export interface BilingualStringArray {
   en: string[]
   my: string[]
+  zh: string[]
 }
 
 export interface Service {
@@ -39,6 +41,7 @@ export interface Package {
   isFeatured: boolean
   features: BilingualStringArray
   cta: BilingualString
+  imageUrl: string
 }
 
 export interface NewsArticle {

@@ -16,7 +16,7 @@ import { useCareerBySlug } from '@/hooks/useCareers'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { toast } from '@/hooks/useToast'
 import { getLocalized, getLocalizedArray } from '@/lib/utils'
-import type { SupportedLanguage } from '@/lib/i18n'
+import { normalizeLanguage } from '@/lib/i18n'
 
 // Max resume file size: 5MB
 const MAX_FILE_SIZE = 5 * 1024 * 1024
@@ -26,7 +26,7 @@ const ALLOWED_MIME = ['application/pdf', 'application/msword', 'application/vnd.
 export default function CareerDetailPage() {
   const { slug = '' } = useParams()
   const { t, i18n } = useTranslation()
-  const lang = i18n.language as SupportedLanguage
+  const lang = normalizeLanguage(i18n.language)
   const [fileError, setFileError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
@@ -93,7 +93,7 @@ export default function CareerDetailPage() {
           {/* Main content */}
           <div className="lg:col-span-2">
             <Badge variant="secondary" className="mb-3">{getLocalized(career.department, lang)}</Badge>
-            <h1 className="text-3xl font-bold mb-4">{getLocalized(career.title, lang)}</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold mb-4">{getLocalized(career.title, lang)}</h1>
 
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
               <span className="flex items-center gap-1.5">

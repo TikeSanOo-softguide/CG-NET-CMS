@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HelmetProvider } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+import { normalizeLanguage } from '@/lib/i18n'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { AppRoutes } from '@/routes/AppRoutes'
@@ -24,9 +25,9 @@ const queryClient = new QueryClient({
 function AppContent() {
   const { i18n } = useTranslation()
 
-  // Sync html[lang] on language change (also drives Myanmar font CSS)
+  // Sync html[lang] on language change (drives Myanmar and Chinese font CSS)
   useEffect(() => {
-    document.documentElement.lang = i18n.language
+    document.documentElement.lang = normalizeLanguage(i18n.language)
   }, [i18n.language])
 
   // Analytics — track initial page view on mount
@@ -35,7 +36,7 @@ function AppContent() {
   }, [])
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
       <div className="flex-1">
         <ErrorBoundary>
