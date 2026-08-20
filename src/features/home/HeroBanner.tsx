@@ -1,8 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useHeroSlides } from '@/hooks/useAbout'
 import { getLocalized } from '@/lib/utils'
 import { cn } from '@/lib/utils'
@@ -15,7 +12,6 @@ interface HeroBannerProps {
 }
 
 export function HeroBanner({ lang }: HeroBannerProps) {
-  const { t } = useTranslation()
   const { data: slides, isLoading } = useHeroSlides()
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -68,7 +64,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
   }
 
   const frameClass =
-    'relative overflow-hidden text-white select-none h-[26.5rem] sm:h-[375px]'
+  'relative overflow-hidden text-white select-none h-[320px] sm:h-[375px]'
 
   if (isLoading) {
     return (
@@ -100,7 +96,6 @@ export function HeroBanner({ lang }: HeroBannerProps) {
     >
       {slides.map((s, i) => {
         const isActive = i === current
-        const overlay = s.overlayColor ?? 'rgba(10,20,50,0.62)'
 
         return (
           <div
@@ -126,7 +121,6 @@ export function HeroBanner({ lang }: HeroBannerProps) {
 
             <div
               className="absolute inset-0"
-              style={{ background: overlay }}
               aria-hidden="true"
             />
 
@@ -136,17 +130,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             />
 
             <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-14 md:px-16 pb-10 pt-6">
-              <div className="container text-center max-w-3xl">
-                <div
-                  className={cn(
-                    'hidden sm:inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3.5 py-1 text-xs font-semibold tracking-widest uppercase mb-4 transition-all duration-500',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                  )}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
-                  CG-NET · Slide {i + 1}/{total}
-                </div>
-
+              <div className="container text-center max-w-3xl">           
                 <h1
                   className={cn(
                     'text-[1.65rem] leading-tight sm:text-3xl md:text-5xl font-black mb-3 sm:mb-4 drop-shadow-lg transition-all duration-500 delay-75',
@@ -171,22 +155,6 @@ export function HeroBanner({ lang }: HeroBannerProps) {
                     isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
                   )}
                 >
-                  <Button
-                    size="default"
-                    variant="secondary"
-                    asChild
-                    className="font-bold shadow-xl sm:h-11 sm:px-8 [@media(hover:hover)]:hover:scale-105 transition-transform"
-                  >
-                    <Link to={s.ctaLink}>{getLocalized(s.cta, lang)}</Link>
-                  </Button>
-                  <Button
-                    size="default"
-                    variant="outline"
-                    asChild
-                    className="text-white border-white/50 hover:bg-white/15 backdrop-blur-sm"
-                  >
-                    <Link to="/contact">{t('common.contactUs')}</Link>
-                  </Button>
                 </div>
               </div>
             </div>

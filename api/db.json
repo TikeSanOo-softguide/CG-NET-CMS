@@ -1457,7 +1457,7 @@
         "zh": "查看套餐"
       },
       "ctaLink": "/packages",
-      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&fit=crop",
+      "imageUrl": "assets/banner/packages-banner.svg",
       "overlayColor": "rgba(15,23,42,0.62)"
     },
     {
@@ -1478,7 +1478,7 @@
         "zh": "了解服务"
       },
       "ctaLink": "/services",
-      "imageUrl": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1600&q=80&fit=crop",
+      "imageUrl": "assets/banner/internet-banner.svg",
       "overlayColor": "rgba(15,23,42,0.65)"
     },
     {
@@ -1499,7 +1499,7 @@
         "zh": "立即开通"
       },
       "ctaLink": "/packages?category=home",
-      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80&fit=crop",
+      "imageUrl": "assets/banner/ads-banner.svg",
       "overlayColor": "rgba(10,14,46,0.68)"
     },
     {
@@ -1520,7 +1520,28 @@
         "zh": "了解更多"
       },
       "ctaLink": "/about",
-      "imageUrl": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1600&q=80&fit=crop",
+      "imageUrl": "assets/banner/payment-banner.svg",
+      "overlayColor": "rgba(5,25,45,0.70)"
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Lightning-Fast Network, Zero Downtime",
+        "my": "လျှပ်စီးကဲ့သို့ မြန်သော ကွန်ရက်၊ ရပ်တန့်မှု မရှိ",
+        "zh": "极速网络，零中断"
+      },
+      "subtitle": {
+        "en": "99.9% uptime SLA backed by our nationwide fiber infrastructure and expert NOC team.",
+        "my": "ကျွမ်းကျင်သော NOC အဖွဲ့နှင့် တစ်နိုင်ငံလုံး ဖိုက်ဘာ အခြေခံ အဆောက်အအုံမှ ပံ့ပိုးသည့် 99.9% SLA။",
+        "zh": "全国光纤基础设施与专业 NOC 团队支撑 99.9% 可用性 SLA。"
+      },
+      "cta": {
+        "en": "Learn More",
+        "my": "ပိုမိုသိရှိပါ",
+        "zh": "了解更多"
+      },
+      "ctaLink": "/about",
+      "imageUrl": "assets/banner/guide-banner.svg",
       "overlayColor": "rgba(5,25,45,0.70)"
     }
   ]

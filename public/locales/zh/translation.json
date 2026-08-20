@@ -64,7 +64,7 @@
     "stat2Label": "覆盖城市",
     "stat3Label": "网络可用性",
     "stat4Label": "服务年限",
-    "stat5Label": "成立 ",
+    "stat5Label": "支持服务",
     "feature1Title": "闪电般的网速",
     "feature1Desc": "高达 1Gbps 光纤宽带，畅享流畅观影、游戏与办公。",
     "feature2Title": "始终可靠",
@@ -82,6 +82,9 @@
     "galleryItem3": "客户应用使用体验",
     "galleryItem4": "覆盖全城的网络能力",
     "galleryItem5": "始终在线的数字生活方式",
+    "downloadTitle": "下载我们的 App",
+    "downloadDesc": "通过手机即可管理您的账户、缴纳账单并获取客户支持，轻松便捷。",
+    "downloadItem": "随时随地保持连接。",
     "ctaTitle": "准备好接入网络了吗？",
     "ctaDesc": "加入缅甸超过 20 万满意客户的行列。",
     "ctaButton": "立即开通"

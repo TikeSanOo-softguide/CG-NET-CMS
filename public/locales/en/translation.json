@@ -64,7 +64,7 @@
     "stat2Label": "Cities Covered",
     "stat3Label": "Network Uptime",
     "stat4Label": "Years of Service",
-    "stat5Label": "Founded",
+    "stat5Label": "Support Available",
     "feature1Title": "Lightning Fast Speeds",
     "feature1Desc": "Up to 1Gbps fiber internet for seamless streaming, gaming, and work.",
     "feature2Title": "Always Reliable",
@@ -82,6 +82,9 @@
     "galleryItem3": "Customer app experience",
     "galleryItem4": "Citywide network coverage",
     "galleryItem5": "Always-on digital lifestyle",
+    "downloadTitle": "Download Our App",
+    "downloadDesc": "Manage your account, pay bills, and get support all from your phone.",
+    "downloadItem": "Stay connected on the go.",
     "ctaTitle": "Ready to Get Connected?",
     "ctaDesc": "Join 200,000+ happy customers across Myanmar.",
     "ctaButton": "Get Started Today"
