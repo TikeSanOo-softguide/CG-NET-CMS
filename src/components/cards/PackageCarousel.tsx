@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card'
 import { getLocalized } from '@/lib/utils'
 import type { Package } from '@/types'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
+import { t } from 'i18next'
 
 const SWIPE_THRESHOLD = 40
 const SCROLL_PX_PER_MS = 0.035
@@ -65,7 +66,7 @@ function PackageCarouselCard({
             ].join(' ')}
           >
             <Link to={`/packages/${pkg.slug}`}>
-              Get Started
+              {t('common.viewAll')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </Button>

@@ -18,11 +18,12 @@ export const homeContent = {
   ],
 
   galleryItems: [
-    { key: 'home.galleryItem1', imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop', className: 'md:col-span-2 md:row-span-2' },
-    { key: 'home.galleryItem2', imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fit=crop', className: 'md:col-span-1' },
-    { key: 'home.galleryItem3', imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&fit=crop', className: 'md:col-span-1' },
-    { key: 'home.galleryItem4', imageUrl: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=80&fit=crop', className: 'md:col-span-1' },
-    { key: 'home.galleryItem5', imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80&fit=crop', className: 'md:col-span-1' },
+    { key: 'home.galleryItem1', imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop'},
+    { key: 'home.galleryItem2', imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fit=crop'},
+    { key: 'home.galleryItem3', imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&fit=crop'},
+    { key: 'home.galleryItem4', imageUrl: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=80&fit=crop'},
+    { key: 'home.galleryItem5', imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80&fit=crop'},
+    { key: 'home.galleryItem5', imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80&fit=crop'},
   ],
 
   downloadItems: [
