@@ -38,6 +38,7 @@
     "packages": "套餐",
     "news": "新闻",
     "career": "招聘",
+    "promotion": "促销",
     "appGuide": "应用指南",
     "about": "关于我们",
     "contact": "联系我们",
@@ -63,6 +64,7 @@
     "stat2Label": "覆盖城市",
     "stat3Label": "网络可用性",
     "stat4Label": "服务年限",
+    "stat5Label": "成立 ",
     "feature1Title": "闪电般的网速",
     "feature1Desc": "高达 1Gbps 光纤宽带，畅享流畅观影、游戏与办公。",
     "feature2Title": "始终可靠",
@@ -125,6 +127,18 @@
     "noNews": "暂无文章",
     "noNewsDesc": "请稍后再来查看最新新闻与动态。"
   },
+  "promotion": {
+    "title": "特别促销",
+    "subtitle": "探索 CG-NET 的独家优惠与套餐",
+    "pageTitle": "促销活动 - CG-NET",
+    "detailPageTitle": "促销详情 - CG-NET",
+    "publishedOn": "有效期限",
+    "category": "类别",
+    "backToPromotions": "返回促销列表",
+    "relatedPromotions": "相关促销",
+    "noPromotions": "暂无促销活动",
+    "noPromotionsDesc": "请稍后回来查看更多精彩优惠与折扣。"
+  },
   "career": {
     "title": "加入我们",
     "subtitle": "共建缅甸互联未来",
@@ -169,9 +183,9 @@
     "ourVision": "我们的愿景",
     "ourTeam": "认识我们的团队",
     "ourStats": "CG-NET 数据一览",
-    "ourStory": "我们的故事",
-    "storyText1": "CG-NET 成立于 2015 年，使命很简单：让缅甸每个人都能用上快速、可靠的互联网。",
-    "storyText2": "如今，我们已为 50 多座城市的超过 20 万客户提供服务，以光纤级连接赋能家庭、企业与社区。"
+    "ourStory": "我们的历程",
+    "storyText1": "晨光WiFi是缅甸掸邦东部第四特区（勐拉）领先的互联网服务提供商。我们致力于为该地区的家庭、企业和社区提供快速、可靠且安全的网络连接，以弥合数字鸿沟。",
+    "storyText2": "凭借十多年的行业经验、强大的本地影响力以及超过6个的分支机构，我们在提供可靠服务和赢得社区信任方面树立了卓越的声誉。"
   },
   "contact": {
     "title": "联系我们",

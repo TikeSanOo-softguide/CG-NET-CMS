@@ -38,6 +38,7 @@
     "packages": "Packages",
     "news": "News",
     "career": "Career",
+    "promotion": "Promotion",
     "appGuide": "App Guide",
     "about": "About",
     "contact": "Contact",
@@ -63,6 +64,7 @@
     "stat2Label": "Cities Covered",
     "stat3Label": "Network Uptime",
     "stat4Label": "Years of Service",
+    "stat5Label": "Founded",
     "feature1Title": "Lightning Fast Speeds",
     "feature1Desc": "Up to 1Gbps fiber internet for seamless streaming, gaming, and work.",
     "feature2Title": "Always Reliable",
@@ -151,6 +153,18 @@
     "benefit4": "Great Team",
     "benefit4Desc": "Work with talented, passionate colleagues in a collaborative environment."
   },
+  "promotion": {
+    "title": "Special Promotions",
+    "subtitle": "Explore our exclusive offers and packages from CG-NET",
+    "pageTitle": "Promotions - CG-NET",
+    "detailPageTitle": "Promotion Details - CG-NET",
+    "publishedOn": "Valid period",
+    "category": "Category",
+    "backToPromotions": "Back to Promotions",
+    "relatedPromotions": "Related Promotions",
+    "noPromotions": "No promotions available",
+    "noPromotionsDesc": "Check back later for exciting new offers and discounts."
+  },
   "appGuide": {
     "title": "App Guide",
     "subtitle": "Get started with the CG-NET app in minutes",
@@ -169,9 +183,9 @@
     "ourVision": "Our Vision",
     "ourTeam": "Meet Our Team",
     "ourStats": "CG-NET by the Numbers",
-    "ourStory": "Our Story",
-    "storyText1": "Founded in 2015, CG-NET started with a simple mission: to make fast, reliable internet accessible to everyone in Myanmar.",
-    "storyText2": "Today, we serve over 200,000 customers across 50+ cities, powering homes, businesses, and communities with fiber-fast connectivity."
+    "ourStory": "About Our Jounery",
+    "storyText1": "Chen Guang WiFi is a leading internet service provider based in Special Region 4 (Mongla), Eastern Shan State, Myanmar. We’ve been committed to bridging the digital divide by delivering fast, reliable, and secure internet to homes, businesses, and communities across the region.",
+    "storyText2": "With over a decade of experience, a strong local presence, and more than 6 branch offices, we’ve built a reputation for dependable service and community trust."
   },
   "contact": {
     "title": "Get In Touch",
