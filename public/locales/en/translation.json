@@ -87,7 +87,9 @@
     "downloadItem": "Stay connected on the go.",
     "ctaTitle": "Ready to Get Connected?",
     "ctaDesc": "Join 200,000+ happy customers across Myanmar.",
-    "ctaButton": "Get Started Today"
+    "ctaButton": "Connect with CG-NET",
+    "more": "More",
+    "viewAllGallery": "View All Gallery"
   },
   "services": {
     "title": "Our Services",
@@ -187,6 +189,16 @@
     "ourTeam": "Meet Our Team",
     "ourStats": "CG-NET by the Numbers",
     "ourStory": "About Our Jounery",
+    "tagline": "Delivering the fastest and most reliable internet for your daily needs",
+    "mission": "To connect people to what matters most — with high-speed internet, innovative solutions, and a customer-first mindset. We aim to empower local communities through technology and provide seamless online experiences for work, learning, entertainment, and connection.",
+    "vision": "Our vision is to be the leading internet service provider known for our customer-centric approach and cutting-edge technology. We aim to empower communities by ensuring everyone has access to fast and reliable internet, bridging the digital divide and fostering a connected world.",
+    "foundedYear": 2015,
+    "headquarters": "Yangon, Myanmar",
+    "employees": "500+",
+    "coverageAreas": "50+",
+    "name1": "Maintenance Team",
+    "name2": "Installation Team",
+    "name3": "Network Team",
     "storyText1": "Chen Guang WiFi is a leading internet service provider based in Special Region 4 (Mongla), Eastern Shan State, Myanmar. We’ve been committed to bridging the digital divide by delivering fast, reliable, and secure internet to homes, businesses, and communities across the region.",
     "storyText2": "With over a decade of experience, a strong local presence, and more than 6 branch offices, we’ve built a reputation for dependable service and community trust."
   },
