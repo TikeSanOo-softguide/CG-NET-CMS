@@ -16,7 +16,7 @@ function trackEvent({ name, properties }: AnalyticsEvent): void {
   // Example: window.gtag?.('event', name, properties)
   // Example: window.plausible?.(name, { props: properties })
   if (import.meta.env.DEV) {
-    console.warn('[Analytics]', name, properties)
+    console.debug('[Analytics]', name, properties)
   }
 }
 
