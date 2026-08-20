@@ -27,12 +27,7 @@
           "တပ်ဆင်ခ အခမဲ့",
           "နေ့ည မပြတ် နည်းပညာ အကူအညီ"
         ],
-        "zh": [
-          "速率高达 1Gbps",
-          "99.9% 可用性 SLA",
-          "免费安装",
-          "全天候技术支持"
-        ]
+        "zh": ["速率高达 1Gbps", "99.9% 可用性 SLA", "免费安装", "全天候技术支持"]
       },
       "category": "residential",
       "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
@@ -52,24 +47,9 @@
       },
       "icon": "Building2",
       "features": {
-        "en": [
-          "Dedicated bandwidth",
-          "Static IP addresses",
-          "SLA guarantee",
-          "Account manager"
-        ],
-        "my": [
-          "သီးသန့် bandwidth",
-          "တည်ငြိမ်သော IP လိပ်စာများ",
-          "SLA အာမခံ",
-          "အကောင့် မန်နေဂျာ"
-        ],
-        "zh": [
-          "专线带宽",
-          "静态 IP 地址",
-          "SLA 保障",
-          "客户经理"
-        ]
+        "en": ["Dedicated bandwidth", "Static IP addresses", "SLA guarantee", "Account manager"],
+        "my": ["သီးသန့် bandwidth", "တည်ငြိမ်သော IP လိပ်စာများ", "SLA အာမခံ", "အကောင့် မန်နေဂျာ"],
+        "zh": ["专线带宽", "静态 IP 地址", "SLA 保障", "客户经理"]
       },
       "category": "business",
       "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop"
@@ -89,24 +69,9 @@
       },
       "icon": "Home",
       "features": {
-        "en": [
-          "Multiple speed tiers",
-          "Unlimited data",
-          "Free router",
-          "Easy setup"
-        ],
-        "my": [
-          "မြန်နှုန်း အဆင့်ဆင့်",
-          "အကန့်အသတ်မဲ့ ဒေတာ",
-          "Router အခမဲ့",
-          "လွယ်ကူသော တပ်ဆင်မှု"
-        ],
-        "zh": [
-          "多种速率档位",
-          "不限流量",
-          "免费路由器",
-          "轻松开通"
-        ]
+        "en": ["Multiple speed tiers", "Unlimited data", "Free router", "Easy setup"],
+        "my": ["မြန်နှုန်း အဆင့်ဆင့်", "အကန့်အသတ်မဲ့ ဒေတာ", "Router အခမဲ့", "လွယ်ကူသော တပ်ဆင်မှု"],
+        "zh": ["多种速率档位", "不限流量", "免费路由器", "轻松开通"]
       },
       "category": "residential",
       "imageUrl": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80&fit=crop"
@@ -138,12 +103,7 @@
           "မြေပြင်လိုင်း မလိုအပ်",
           "မြန်ဆန်သော အသက်သွင်းမှု"
         ],
-        "zh": [
-          "覆盖范围广",
-          "速率高达 100Mbps",
-          "无需固定电话线路",
-          "快速开通"
-        ]
+        "zh": ["覆盖范围广", "速率高达 100Mbps", "无需固定电话线路", "快速开通"]
       },
       "category": "wireless",
       "imageUrl": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80&fit=crop"
@@ -175,12 +135,7 @@
           "နေ့စဉ် ဒေတာ backup",
           "SSL လက်မှတ် ပါဝင်"
         ],
-        "zh": [
-          "资源自动扩缩",
-          "99.99% 可用性",
-          "每日备份",
-          "含 SSL 证书"
-        ]
+        "zh": ["资源自动扩缩", "99.99% 可用性", "每日备份", "含 SSL 证书"]
       },
       "category": "hosting",
       "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&fit=crop"
@@ -200,24 +155,14 @@
       },
       "icon": "Tv",
       "features": {
-        "en": [
-          "200+ channels",
-          "HD & 4K content",
-          "Catch-up TV",
-          "Multi-device streaming"
-        ],
+        "en": ["200+ channels", "HD & 4K content", "Catch-up TV", "Multi-device streaming"],
         "my": [
           "200+ ချန်နယ်",
           "HD နှင့် 4K အကြောင်းအရာ",
           "Catch-up ရုပ်မြင်သံကြား",
           "စက်ပစ္စည်း အများစု Streaming"
         ],
-        "zh": [
-          "200+ 频道",
-          "高清与 4K 内容",
-          "回看电视",
-          "多设备串流"
-        ]
+        "zh": ["200+ 频道", "高清与 4K 内容", "回看电视", "多设备串流"]
       },
       "category": "entertainment",
       "imageUrl": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&q=80&fit=crop"
@@ -281,13 +226,7 @@
           "Router အခမဲ့",
           "နေ့ည မပြတ် ပံ့ပိုးမှု"
         ],
-        "zh": [
-          "30 Mbps 下载",
-          "15 Mbps 上传",
-          "不限流量",
-          "免费路由器",
-          "全天候支持"
-        ]
+        "zh": ["30 Mbps 下载", "15 Mbps 上传", "不限流量", "免费路由器", "全天候支持"]
       },
       "cta": {
         "en": "Get Started",
@@ -508,14 +447,7 @@
           "စီးပွားရေး ပံ့ပိုးမှု",
           "တပ်ဆင်ခ အခမဲ့"
         ],
-        "zh": [
-          "50 Mbps 对称速率",
-          "不限流量",
-          "静态 IP",
-          "SLA 99.5%",
-          "企业支持",
-          "免费安装"
-        ]
+        "zh": ["50 Mbps 对称速率", "不限流量", "静态 IP", "SLA 99.5%", "企业支持", "免费安装"]
       },
       "cta": {
         "en": "Contact Sales",
@@ -712,11 +644,7 @@
       },
       "publishedAt": "2025-01-15T08:00:00Z",
       "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop",
-      "tags": [
-        "fiber",
-        "launch",
-        "1gbps"
-      ]
+      "tags": ["fiber", "launch", "1gbps"]
     },
     {
       "id": "2",
@@ -748,11 +676,7 @@
       },
       "publishedAt": "2025-02-20T09:00:00Z",
       "imageUrl": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80&fit=crop",
-      "tags": [
-        "expansion",
-        "mandalay",
-        "fiber"
-      ]
+      "tags": ["expansion", "mandalay", "fiber"]
     },
     {
       "id": "3",
@@ -784,11 +708,7 @@
       },
       "publishedAt": "2025-03-10T10:00:00Z",
       "imageUrl": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&fit=crop",
-      "tags": [
-        "app",
-        "mobile",
-        "update"
-      ]
+      "tags": ["app", "mobile", "update"]
     },
     {
       "id": "4",
@@ -820,11 +740,7 @@
       },
       "publishedAt": "2025-04-05T08:00:00Z",
       "imageUrl": "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&q=80&fit=crop",
-      "tags": [
-        "award",
-        "recognition",
-        "2025"
-      ]
+      "tags": ["award", "recognition", "2025"]
     }
   ],
   "careers": [
@@ -1069,6 +985,127 @@
       "isActive": true
     }
   ],
+  "promotions": [
+    {
+      "id": "1",
+      "slug": "thingyan-fiber-special-promo",
+      "title": {
+        "en": "Thingyan Special: 50% Off Fiber Installation",
+        "my": "သင်္ကြန် အထူးအစီအစဉ် - ဖိုက်ဘာ တပ်ဆင်ခ ၅၀% လျှော့စျေး",
+        "zh": "泼水节特惠：光纤安装费 50% 折扣"
+      },
+      "subtitle": {
+        "en": "Enjoy ultra-fast internet this festive season with zero activation fees.",
+        "my": "ယခု ပွဲတော်ရာသီတွင် အလွန်မြန်ဆန်သော အင်တာနက်ကို ဝန်ဆောင်ခ အခမဲ့ဖြင့် ခံစားလိုက်ပါ။",
+        "zh": "在这个节日期间享受超高速互联网，免激活费。"
+      },
+      "description": {
+        "en": "Get connected this Thingyan with our exclusive fiber internet promotion. Sign up for any 1Gbps plan and get 50% off installation plus free router upgrade.",
+        "my": "ယခု သင်္ကြန်ပွဲတော်တွင် ကျွန်ုပ်တို့၏ အထူးဖိုက်ဘာ အင်တာနက် ပရိုမိုးရှင်းဖြင့် ချိတ်ဆက်လိုက်ပါ။ 1Gbps အစီအစဉ် မည်သည့်ဟာကိုမဆို ရွေးချယ်ပြီး တပ်ဆင်ခ ၅၀% လျှော့စျေးနှင့် ရောက်တာ အခမဲ့ မြှင့်တင်မှုကို ရယူလိုက်ပါ။",
+        "zh": "通过我们的独家光纤互联网促销活动连接泼水节。注册任何 1Gbps 套餐即可享受 50% 安装折扣以及免费路由器升级。"
+      },
+      "content": {
+        "en": "<p>Celebrate Thingyan with CG-NET's special promotion! We are offering an incredible 50% discount on all fiber installation fees for new subscribers throughout the festival month.</p><p>Whether you're streaming 4K movies with family or gaming during the holidays, our high-speed connection has you covered. Don't miss out on this limited-time offer.</p>",
+        "my": "<p>CG-NET ၏ အထူးပရိုမိုးရှင်းဖြင့် သင်္ကြန်ပွဲတော်ကို ပျော်ရွှင်စွာ ဖြတ်သန်းလိုက်ပါ။ ပွဲတော်လတစ်လျှောက်တွင် ဖိုက်ဘာတပ်ဆင်ခ အားလုံးအတွက် မယုံနိုင်စရာ ၅၀% လျှော့စျေးကို ပေးအပ်နေပါသည်။</p>",
+        "zh": "<p>与 CG-NET 的特别促销一起庆祝泼水节！在整个节日期间，我们为所有新订户提供 50% 的光纤安装费惊人折扣。</p>"
+      },
+      "discountValue": "50% OFF",
+      "startDate": "2026-04-01T00:00:00Z",
+      "endDate": "2026-04-30T23:59:59Z",
+      "isActive": true,
+      "features": {
+        "en": [
+          "50% off standard installation fee",
+          "Free dual-band Wi-Fi router included",
+          "No hidden contract charges",
+          "24/7 dedicated technical support"
+        ],
+        "my": [
+          "စံတပ်ဆင်ခ ၅၀% လျှော့စျေး",
+          "Dual-band Wi-Fi ရောက်တာ အခမဲ့ ပါဝင်သည်",
+          "လျှို့ဝှက်စာချုပ်ကြေး လုံးဝမရှိပါ",
+          "၂၄ နာရီ ပံ့ပိုးကူညီမှု ရရှိနိုင်သည်"
+        ],
+        "zh": [
+          "标准安装费 50% 折扣",
+          "免费赠送双频无线路由器",
+          "无隐藏合同费用",
+          "24/7 专属技术支持"
+        ]
+      },
+      "imageUrl": "https://www.lepoint.fr/resizer/v2/3OJHMFKBZ5JZVFOGOUGWQY7CFA.jpg?auth=00594ab6a83445f55d0a1790dfe39f315c305a0bef8562d07a03506840878985&width=765&height=575&smart=true",
+      "termsAndConditions": {
+        "en": [
+          "Valid for new residential subscribers only.",
+          "Must subscribe to a minimum 6-month contract.",
+          "Promotion cannot be combined with other offers."
+        ],
+        "my": [
+          "အိမ်သုံးဖောက်သည် အသစ်များအတွက်သာ အကျုံးဝင်ပါသည်။",
+          "အနည်းဆုံး ၆ လ စာချုပ် ချုပ်ဆိုရမည် ဖြစ်ပါသည်။",
+          "အခြား ပရိုမိုးရှင်းများနှင့် တွဲဖက် အသုံးမပြုနိုင်ပါ။"
+        ],
+        "zh": [
+          "仅适用于新住宅用户。",
+          "必须订购至少 6 个月的合同。",
+          "此优惠不能与其他优惠同时使用。"
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "slug": "upgrade-speed-bonus-data",
+      "title": {
+        "en": "Speed Booster: Double Your Bandwidth",
+        "my": "မြန်နှုန်းမြှင့်တင်မှု - သင်၏ ဘန်းဝဒ်ကို နှစ်ဆတိုးယူပါ",
+        "zh": "提速计划：带宽直接翻倍"
+      },
+      "subtitle": {
+        "en": "Upgrade your current plan and get double the speed for the first 3 months.",
+        "my": "သင်၏ လက်ရှိအစီအစဉ်ကို မြှင့်တင်ပြီး ပထမ ၃ လအတွက် အမြန်နှုန်း နှစ်ဆကို ရယူလိုက်ပါ။",
+        "zh": "升级当前套餐，前 3 个月享受双倍网速。"
+      },
+      "description": {
+        "en": "Existing customers can now upgrade their plans and enjoy double bandwidth speed for the first three months without extra costs.",
+        "my": "လက်ရှိ ဖောက်သည်များအနေဖြင့် ၎င်းတို့၏ အစီအစဉ်များကို မြှင့်တင်နိုင်ပြီး အပိုကုန်ကျစရိတ်မရှိဘဲ ပထမသုံးလအတွက် နှစ်ဆမြန်နှုန်းကို ခံစားနိုင်ပါပြီ။",
+        "zh": "现有客户现在可以升级套餐，在前三个月内免费享受双倍带宽速度。"
+      },
+      "content": {
+        "en": "<p>We appreciate our loyal customers! Starting this month, any upgrade to our higher-tier packages will automatically double your connection speed for the initial three months.</p>",
+        "my": "<p>ကျွန်ုပ်တို့၏ သစ္စာရှိဖောက်သည်များကို ကျေးဇူးတင်ရှိပါသည်။ ယခုလမှစတင်၍ အဆင့်မြင့်အစီအစဉ်များသို့ မြှင့်တင်မှုတိုင်းသည် ပထမ ၃ လအတွင်း သင့်ချိတ်ဆက်မှု အမြန်နှုန်းကို အလိုအလျောက် နှစ်ဆတိုးပေးမည် ဖြစ်ပါသည်။</p>",
+        "zh": "<p>感谢我们的忠实客户！从本月开始，升级到更高等级的套餐将在前三个月自动将您的连接速度翻倍。</p>"
+      },
+      "discountValue": "Double Speed",
+      "startDate": "2026-05-01T00:00:00Z",
+      "endDate": "2026-06-30T23:59:59Z",
+      "isActive": true,
+      "features": {
+        "en": [
+          "Double download and upload speed",
+          "Free upgrade process",
+          "Applicable for all tiers"
+        ],
+        "my": [
+          "ဒေါင်းလုဒ်နှင့် အပ်လုဒ် အမြန်နှုန်း နှစ်ဆ",
+          "အခမဲ့ မြှင့်တင်ပေးခြင်း",
+          "အဆင့်တိုင်းအတွက် အကျုံးဝင်သည်"
+        ],
+        "zh": ["下载和上传速度双倍", "免费升级流程", "适用于所有层级"]
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&fit=crop",
+      "termsAndConditions": {
+        "en": [
+          "Applicable to existing active subscribers only.",
+          "Standard speed reverts after 3 months."
+        ],
+        "my": [
+          "လက်ရှိ အသုံးပြုနေဆဲ ဖောက်သည်များအတွက်သာ အကျုံးဝင်ပါသည်။",
+          "၃ လပြည့်ပါက မူလအမြန်နှုန်းသို့ ပြန်ရောက်မည် ဖြစ်ပါသည်။"
+        ],
+        "zh": ["仅适用于现有的活跃订户。", "3 个月后恢复标准速度。"]
+      }
+    }
+  ],
   "guides": [
     {
       "id": "1",
@@ -1269,19 +1306,19 @@
     "id": "1",
     "companyName": "CG-NET",
     "tagline": {
-      "en": "Connecting Myanmar, One Home at a Time",
-      "my": "မြန်မာနိုင်ငံကို ချိတ်ဆက်ပေး၊ တစ်အိမ်ခြင်း",
-      "zh": "连接缅甸，从每一个家庭开始"
+      "en": "Delivering the fastest and most reliable internet for your daily needs",
+      "my": "သင်၏ နေ့စဉ်လိုအပ်ချက်များအတွက် အမြန်ဆုံးနှင့် ယုံကြည်စိတ်ချရဆုံး အင်တာနက်ကို ပံ့ပိုးပေးနေပါသည်",
+      "zh": "为您的日常需求提供最快、最可靠的网络连接"
     },
     "mission": {
-      "en": "To provide affordable, reliable, and high-speed internet connectivity to every household and business in Myanmar, bridging the digital divide and empowering communities through technology.",
-      "my": "မြန်မာနိုင်ငံရှိ အိမ်ထောင်နှင့် လုပ်ငန်းတိုင်းသို့ စျေးနှုန်းသင့်မြတ်၊ ယုံကြည်စိတ်ချရ နှင့် မြင့်မားသော မြန်နှုန်း အင်တာနက် ချိတ်ဆက်မှုကို ပေးအပ်ရန်၊ ဒစ်ဂျစ်တယ် ကွာဟချက်ကို ကူးဖြတ်ပြီး နည်းပညာမှတဆင့် လူ့အဖွဲ့အစည်းများကို ခွန်အားပေးရန်။",
-      "zh": "为缅甸每个家庭与企业提供实惠、可靠、高速的互联网连接，弥合数字鸿沟，以技术赋能社区。"
+      "en": "To connect people to what matters most — with high-speed internet, innovative solutions, and a customer-first mindset. We aim to empower local communities through technology and provide seamless online experiences for work, learning, entertainment, and connection.",
+      "my": "လူများကို ၎င်းတို့အတွက် အရေးအပါဆုံး အရာများနှင့် ချိတ်ဆက်ပေးရန် — မြန်နှုန်းမြင့် အင်တာနက်၊ ဆန်းသစ်သော ဖြေရှင်းချက်များနှင့် ဖောက်သည်ကို ပထမဦးစားပေးသည့် စိတ်ဓာတ်တို့ဖြင့် ဆောင်ရွက်ပါသည်။ ကျွန်ုပ်တို့သည် နည်းပညာမှတစ်ဆင့် ဒေသတွင်း လူ့အသိုင်းအဝိုင်းများကို စွမ်းဆောင်ရည်မြှင့်တင်ပေးရန်နှင့် အလုပ်လုပ်ခြင်း၊ လေ့လာသင်ယူခြင်း၊ ဖျော်ဖြေရေးနှင့် ချိတ်ဆက်ခြင်းများအတွက် အဆင်ပြေချောမွေ့သော အွန်လိုင်းအတွေ့အကြုံများကို ပံ့ပိုးပေးရန် ရည်ရွယ်ပါသည်။",
+      "zh": "将人们与最重要的人和事物连接起来——依托高速互联网、创新的解决方案和客户至上的理念。我们旨在通过技术赋能当地社区，并为工作、学习、娱乐和沟通联系提供无缝的在线体验。"
     },
     "vision": {
-      "en": "To be Myanmar's most trusted internet service provider, known for outstanding reliability, customer-centric service, and continuous innovation.",
-      "my": "မြန်မာနိုင်ငံ၏ အယုံကြည်ဆုံး အင်တာနက် ဝန်ဆောင်မှု ပေးသူ ဖြစ်ရန်၊ ထူးကဲသော ယုံကြည်စိတ်ချမှု၊ ဖောက်သည်ဗဟိုပြု ဝန်ဆောင်မှု နှင့် စဉ်ဆက်မပြတ် တီထွင်ဖန်တီးမှုအတွက် လူသိများသည်။",
-      "zh": "成为缅甸最值得信赖的互联网服务商，以卓越可靠性、以客户为中心的服务与持续创新著称。"
+      "en": "Our vision is to be the leading internet service provider known for our customer-centric approach and cutting-edge technology. We aim to empower communities by ensuring everyone has access to fast and reliable internet, bridging the digital divide and fostering a connected world.",
+      "my": "ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်မှာ ဖောက်သည်များအပေါ် အဓိကထားသည့် ဝန်ဆောင်မှုနှင့် ခေတ်မီဆန်းသစ်သော နည်းပညာများကြောင့် နာမည်ကျော်ကြားသည့် ထိပ်တန်း အင်တာနက် ဝန်ဆောင်မှုပေးသော ကုမ္ပဏီတစ်ခု ဖြစ်လာရန် ဖြစ်ပါသည်။ လူတိုင်း လျင်မြန်ပြီး ယုံကြည်စိတ်ချရသော အင်တာနက်ကို ရရှိသုံးစွဲနိုင်စေရန် သေချာစေခြင်းဖြင့် လူ့အသိုင်းအဝိုင်းများကို စွမ်းအားမြှင့်တင်ပေးရန်၊ ဒစ်ဂျစ်တယ် ကွာဟချက်ကို ပေါင်းကူးပေးရန်နှင့် အချင်းချင်း ချိတ်ဆက်ထားသော ကမ္ဘာကြီးကို ဖန်တီးပေးရန် ကျွန်ုပ်တို့ ရည်ရွယ်ပါသည်။",
+      "zh": "我们的愿景是成为领先的互联网服务提供商，以客户为中心的理念和前沿的技术享誉业界。我们旨在通过确保每个人都能使用快速、可靠的互联网来赋能社区，弥合数字鸿沟，推动构建一个互联互通的世界。"
     },
     "foundedYear": 2015,
     "headquarters": {
@@ -1323,15 +1360,23 @@
           "zh": "网络可用性"
         },
         "value": "99.9%"
+      },
+      {
+        "label": {
+          "en": "Support Available",
+          "my": "ပံ့ပိုးကူညီမှု",
+          "zh": "支持服务"
+        },
+        "value": "24/7"
       }
     ],
     "team": [
       {
         "id": "1",
         "name": {
-          "en": "U Kyaw Zin",
-          "my": "ဦးကျော်ဇင်",
-          "zh": "U Kyaw Zin"
+          "en": "Maintenance Team",
+          "my": "ပြုပြင်ထိန်းသိမ်းရေးအဖွဲ့",
+          "zh": "维护团队"
         },
         "role": {
           "en": "Chief Executive Officer",
@@ -1343,9 +1388,9 @@
       {
         "id": "2",
         "name": {
-          "en": "Daw Thiri",
-          "my": "ဒေါ်သီရိ",
-          "zh": "Daw Thiri"
+          "en": "Installation Team",
+          "my": "တပ်ဆင်ရေးအဖွဲ့",
+          "zh": "安装团队"
         },
         "role": {
           "en": "Chief Technology Officer",
@@ -1357,9 +1402,9 @@
       {
         "id": "3",
         "name": {
-          "en": "U Aung Ko",
-          "my": "ဦးအောင်ကို",
-          "zh": "U Aung Ko"
+          "en": "Network Team",
+          "my": "ကွန်ရက်အဖွဲ့",
+          "zh": "网络团队"
         },
         "role": {
           "en": "Chief Operations Officer",
