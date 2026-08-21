@@ -46,6 +46,7 @@
     "business": "စီးပွားရေး",
     "fiber": "ဖိုက်ဘာ",
     "enterprise": "လုပ်ငန်းကြီး",
+    "cgNetCard": "CG-NET ဒေတာကဒ်",
     "viewAllPackages": "အစီအစဉ်အားလုံးကြည့်မည်",
     "toggleMenu": "လမ်းညွှန် မီနူး ပြောင်းမည်",
     "packagesMenu": "အစီအစဉ် မီနူး"
@@ -118,7 +119,9 @@
     "filterAll": "အားလုံး",
     "filterHome": "အိမ်",
     "filterBusiness": "စီးပွားရေး",
-    "filterEnterprise": "လုပ်ငန်းကြီး"
+    "filterEnterprise": "လုပ်ငန်းကြီး",
+    "filterPlan": "ပလန်",
+    "filterCGNetCard": "CG-NET ဒေတာကတ်"
   },
   "news": {
     "title": "သတင်းနှင့် မွမ်းမံမှုများ",

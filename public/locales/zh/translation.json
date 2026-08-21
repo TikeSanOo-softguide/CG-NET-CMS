@@ -46,6 +46,7 @@
     "business": "企业",
     "fiber": "光纤",
     "enterprise": "政企",
+    "cgNetCard": "CG-NET 数据卡",
     "viewAllPackages": "查看全部套餐",
     "toggleMenu": "打开导航菜单",
     "packagesMenu": "套餐菜单"
@@ -118,7 +119,9 @@
     "filterAll": "全部",
     "filterHome": "家庭",
     "filterBusiness": "企业",
-    "filterEnterprise": "政企"
+    "filterEnterprise": "政企",
+    "filterPlan": "套餐",
+    "filterCGNetCard": "CG-NET 数据卡"
   },
   "news": {
     "title": "新闻与动态",

@@ -33,13 +33,13 @@ export default function HomePage() {
       <HeroBanner lang={lang} />
 
       {/* Stats */}
-      <section className="bg-brand-800 text-white h-[70px] flex items-center" aria-label="Company statistics">
+      <section className="bg-app-bar h-[70px] flex items-center" aria-label="Company statistics">
         <div className="container">
           <dl className="grid grid-cols-5 gap-1 sm:gap-4 text-center items-center">
             {homeContent.stats.map(({ value, labelKey }) => (
               <div key={labelKey} className="min-w-0 px-1">
-                <dt className="text-[6px] xs:text-xs sm:text-xs text-blue-200 leading-tight truncate">{t(labelKey)}</dt>
-                <dd className="text-[9px] xs:text-xs sm:text-base font-bold leading-tight">{value}</dd>
+                <dt className="text-[6px] xs:text-xs sm:text-xs text-font-light-blue leading-tight truncate">{t(labelKey)}</dt>
+                <dd className="text-[9px] xs:text-xs sm:text-base text-font-white font-bold leading-tight">{value}</dd>
               </div>
             ))}
           </dl>
@@ -70,8 +70,8 @@ export default function HomePage() {
                   duration={8}
                   delay={i * 1.2}
                   borderWidth={2}
-                  colorFrom="#004AC6"
-                  colorTo="#004AC6"
+                  colorFrom="var(--color-primary)"
+                  colorTo="var(--color-primary)"
                 />
                 <BorderBeam
                   size={80}
@@ -79,8 +79,8 @@ export default function HomePage() {
                   delay={i * 1.2 + 4}
                   reverse
                   borderWidth={2}
-                  colorFrom="#004AC6"
-                  colorTo="#004AC6"
+                  colorFrom="var(--color-primary)"
+                  colorTo="var(--color-primary)"
                 />
               </Card>
             </AnimatedCard>
@@ -120,7 +120,7 @@ export default function HomePage() {
         )}
 
         <div className="text-center mt-8">
-          <Button variant="outline" asChild>
+          <Button variant="outline" className='bg-font-white' asChild>
             <Link to="/packages">
               {t('common.viewAll')} {t('nav.packages')} <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -161,7 +161,7 @@ export default function HomePage() {
         )}
 
         <div className="text-center mt-8">
-          <Button variant="outline" asChild>
+          <Button variant="outline" className='bg-font-white' asChild>
             <Link to="/news">
               {t('common.viewAll')} {t('nav.news')} <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -270,7 +270,7 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* CTA Section */}
-      <SectionWrapper className="hero-gradient text-white">
+      <SectionWrapper className="hero-gradient text-font-white">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('home.ctaTitle')}</h2>
           <p className="text-blue-100 mb-8">{t('home.ctaDesc')}</p>

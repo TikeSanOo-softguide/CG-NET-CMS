@@ -72,6 +72,64 @@ const config: Config = {
           900: '#1e3a8a',
           950: '#172554',
         },
+        //Custom colors
+        hero: {
+          title: 'var(--color-title-white-hero)',
+          subtitle: 'var(--color-subtitle-white-hero)',
+          'gradient-bg':  'var(--gradient-bg)',
+          'gradient-font': 'var(--gradient-font)',
+        },
+        app: {
+          primary: 'var(--color-primary)',
+          secondary: 'var(--color-secondary)',
+          hover: 'var(--color-hover)',
+          bar: 'var(--color-bar)',
+        },
+        font: {
+          black: 'var(--color-font-black)',
+          secondary: 'var(--color-font-secondary-black)',
+          blue: 'var(--color-font-blue)',
+          'light-blue': 'var(--color-font-light-blue)',
+          white: 'var(--color-font-white)',
+          muted: 'var(--color-font-muted)',
+          hover: 'var(--color-font-hover)',
+        },
+        icon: {
+          lightning: 'var(--color-icon-lightning)',
+          shield: 'var(--color-icon-shield)',
+          clock: 'var(--color-icon-clock)',
+          data: 'var(--color-icon-data)',
+          router: 'var(--color-icon-router)',
+
+          award: 'var(--color-icon-award)',
+          activity: 'var(--color-icon-activity)',
+          map: 'var(--color-icon-map)',
+          user: 'var(--color-icon-user)',
+          calendar: 'var(--color-icon-calendar)',
+
+          abg: 'var(--color-icon-a-bg)',
+          bbg: 'var(--color-icon-b-bg)',
+          cbg: 'var(--color-icon-c-bg)',
+          dbg: 'var(--color-icon-d-bg)',
+          ebg: 'var(--color-icon-e-bg)',
+
+          'a-hover': 'var(--color-icon-lightning)',
+          'b-hover': 'var(--color-icon-shield)',
+          'c-hover': 'var(--color-icon-clock)',
+          'd-hover': 'var(--color-icon-data)',
+          'e-hover': 'var(--color-icon-router)',
+
+          'lightning-hover': 'var(--color-font-white)',
+          'shield-hover': 'var(--color-font-white)',
+          'clock-hover': 'var(--color-font-white)',
+          'data-hover': 'var(--color-font-white)',
+          'router-hover': 'var(--color-font-white)',
+
+        },
+      },
+      backgroundImage: {
+        'gradient-font': 'var(--gradient-font)',
+        'gradient-bg': 'var(--gradient-bg)',
       },
       borderRadius: {
         lg: 'var(--radius)',
