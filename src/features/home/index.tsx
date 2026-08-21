@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
           {homeContent.features.map(({ icon: Icon, titleKey, descKey, color, hoverColor, iconBg, hoverBg, variant }, i) => (
             <AnimatedCard key={titleKey} delay={i * 90} variant={variant} hoverClass="" className="rounded-lg">
-              <Card className="group relative flex h-[220px] flex-col overflow-hidden text-center border border-border/70 shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
+              <Card className="group relative flex h-[180px] flex-col overflow-hidden text-center border border-border/70 shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
                 <CardHeader className="pb-2 pt-5">
                   <div
                     className={`mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 ${iconBg} ${hoverBg} ${color} ${hoverColor} group-hover:scale-110 group-hover:shadow-[0_0_18px_currentColor]`}
