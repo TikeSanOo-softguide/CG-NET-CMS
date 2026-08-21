@@ -14,10 +14,9 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 
 const FILTERS = [
-  { value: '', labelKey: 'packages.filterAll' },
-  { value: 'home', labelKey: 'packages.filterHome' },
+  { value: 'plan', labelKey: 'packages.filterPlan' },
   { value: 'business', labelKey: 'packages.filterBusiness' },
-  { value: 'enterprise', labelKey: 'packages.filterEnterprise' },
+  { value: 'enterprise', labelKey: 'packages.filterCGNetCard' },
 ]
 
 function PackageSkeleton() {

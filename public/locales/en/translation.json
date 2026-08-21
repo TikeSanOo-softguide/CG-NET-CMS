@@ -46,6 +46,8 @@
     "business": "Business",
     "fiber": "Fiber",
     "enterprise": "Enterprise",
+    "plan" : "Plan",
+    "cgNetCard": "CG-NET Data Card",
     "viewAllPackages": "View All Packages",
     "toggleMenu": "Toggle navigation menu",
     "packagesMenu": "Packages menu"
@@ -118,7 +120,9 @@
     "filterAll": "All",
     "filterHome": "Home",
     "filterBusiness": "Business",
-    "filterEnterprise": "Enterprise"
+    "filterEnterprise": "Enterprise",
+    "filterPlan": "Plan",
+    "filterCGNetCard": "CG-Net Data Card"
   },
   "news": {
     "title": "News & Updates",

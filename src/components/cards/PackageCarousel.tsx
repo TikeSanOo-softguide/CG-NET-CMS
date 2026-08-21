@@ -57,8 +57,8 @@ function PackageCarouselCard({
           <Button
             asChild
             className={[
-              'w-[190px] gap-2 rounded-[6px] border border-white/10 bg-[#004AC6] px-4 text-sm text-white shadow-[0_14px_30px_-16px_rgba(0,74,198,0.9)] backdrop-blur-sm',
-              'hover:-translate-y-0.5 hover:bg-[#0354df] hover:text-[#dbeafe] hover:shadow-[0_18px_36px_-16px_rgba(0,74,198,0.95)]',
+              'w-[190px] gap-2 rounded-[6px] border border-white/10 bg-app-primary px-4 text-sm text-font-white shadow-[0_14px_30px_-16px_rgba(0,74,198,0.9)] backdrop-blur-sm',
+              'hover:-translate-y-0.5 hover:bg-app-hover hover:text-font-hover hover:shadow-[0_18px_36px_-16px_rgba(0,74,198,0.95)]',
               'focus-visible:ring-[#004AC6]/60',
               'transition-all duration-300 ease-out',
               'opacity-100 translate-y-0',
