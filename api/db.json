@@ -985,6 +985,7 @@
       "isActive": true
     }
   ],
+
   "promotions": [
     {
       "id": "1",
@@ -994,63 +995,15 @@
         "my": "သင်္ကြန် အထူးအစီအစဉ် - ဖိုက်ဘာ တပ်ဆင်ခ ၅၀% လျှော့စျေး",
         "zh": "泼水节特惠：光纤安装费 50% 折扣"
       },
-      "subtitle": {
-        "en": "Enjoy ultra-fast internet this festive season with zero activation fees.",
-        "my": "ယခု ပွဲတော်ရာသီတွင် အလွန်မြန်ဆန်သော အင်တာနက်ကို ဝန်ဆောင်ခ အခမဲ့ဖြင့် ခံစားလိုက်ပါ။",
-        "zh": "在这个节日期间享受超高速互联网，免激活费。"
-      },
       "description": {
         "en": "Get connected this Thingyan with our exclusive fiber internet promotion. Sign up for any 1Gbps plan and get 50% off installation plus free router upgrade.",
         "my": "ယခု သင်္ကြန်ပွဲတော်တွင် ကျွန်ုပ်တို့၏ အထူးဖိုက်ဘာ အင်တာနက် ပရိုမိုးရှင်းဖြင့် ချိတ်ဆက်လိုက်ပါ။ 1Gbps အစီအစဉ် မည်သည့်ဟာကိုမဆို ရွေးချယ်ပြီး တပ်ဆင်ခ ၅၀% လျှော့စျေးနှင့် ရောက်တာ အခမဲ့ မြှင့်တင်မှုကို ရယူလိုက်ပါ။",
         "zh": "通过我们的独家光纤互联网促销活动连接泼水节。注册任何 1Gbps 套餐即可享受 50% 安装折扣以及免费路由器升级。"
       },
-      "content": {
-        "en": "<p>Celebrate Thingyan with CG-NET's special promotion! We are offering an incredible 50% discount on all fiber installation fees for new subscribers throughout the festival month.</p><p>Whether you're streaming 4K movies with family or gaming during the holidays, our high-speed connection has you covered. Don't miss out on this limited-time offer.</p>",
-        "my": "<p>CG-NET ၏ အထူးပရိုမိုးရှင်းဖြင့် သင်္ကြန်ပွဲတော်ကို ပျော်ရွှင်စွာ ဖြတ်သန်းလိုက်ပါ။ ပွဲတော်လတစ်လျှောက်တွင် ဖိုက်ဘာတပ်ဆင်ခ အားလုံးအတွက် မယုံနိုင်စရာ ၅၀% လျှော့စျေးကို ပေးအပ်နေပါသည်။</p>",
-        "zh": "<p>与 CG-NET 的特别促销一起庆祝泼水节！在整个节日期间，我们为所有新订户提供 50% 的光纤安装费惊人折扣。</p>"
-      },
-      "discountValue": "50% OFF",
       "startDate": "2026-04-01T00:00:00Z",
       "endDate": "2026-04-30T23:59:59Z",
       "isActive": true,
-      "features": {
-        "en": [
-          "50% off standard installation fee",
-          "Free dual-band Wi-Fi router included",
-          "No hidden contract charges",
-          "24/7 dedicated technical support"
-        ],
-        "my": [
-          "စံတပ်ဆင်ခ ၅၀% လျှော့စျေး",
-          "Dual-band Wi-Fi ရောက်တာ အခမဲ့ ပါဝင်သည်",
-          "လျှို့ဝှက်စာချုပ်ကြေး လုံးဝမရှိပါ",
-          "၂၄ နာရီ ပံ့ပိုးကူညီမှု ရရှိနိုင်သည်"
-        ],
-        "zh": [
-          "标准安装费 50% 折扣",
-          "免费赠送双频无线路由器",
-          "无隐藏合同费用",
-          "24/7 专属技术支持"
-        ]
-      },
-      "imageUrl": "https://www.lepoint.fr/resizer/v2/3OJHMFKBZ5JZVFOGOUGWQY7CFA.jpg?auth=00594ab6a83445f55d0a1790dfe39f315c305a0bef8562d07a03506840878985&width=765&height=575&smart=true",
-      "termsAndConditions": {
-        "en": [
-          "Valid for new residential subscribers only.",
-          "Must subscribe to a minimum 6-month contract.",
-          "Promotion cannot be combined with other offers."
-        ],
-        "my": [
-          "အိမ်သုံးဖောက်သည် အသစ်များအတွက်သာ အကျုံးဝင်ပါသည်။",
-          "အနည်းဆုံး ၆ လ စာချုပ် ချုပ်ဆိုရမည် ဖြစ်ပါသည်။",
-          "အခြား ပရိုမိုးရှင်းများနှင့် တွဲဖက် အသုံးမပြုနိုင်ပါ။"
-        ],
-        "zh": [
-          "仅适用于新住宅用户。",
-          "必须订购至少 6 个月的合同。",
-          "此优惠不能与其他优惠同时使用。"
-        ]
-      }
+      "imageUrl": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80&fit=crop"
     },
     {
       "id": "2",
@@ -1060,50 +1013,87 @@
         "my": "မြန်နှုန်းမြှင့်တင်မှု - သင်၏ ဘန်းဝဒ်ကို နှစ်ဆတိုးယူပါ",
         "zh": "提速计划：带宽直接翻倍"
       },
-      "subtitle": {
-        "en": "Upgrade your current plan and get double the speed for the first 3 months.",
-        "my": "သင်၏ လက်ရှိအစီအစဉ်ကို မြှင့်တင်ပြီး ပထမ ၃ လအတွက် အမြန်နှုန်း နှစ်ဆကို ရယူလိုက်ပါ။",
-        "zh": "升级当前套餐，前 3 个月享受双倍网速。"
-      },
       "description": {
         "en": "Existing customers can now upgrade their plans and enjoy double bandwidth speed for the first three months without extra costs.",
         "my": "လက်ရှိ ဖောက်သည်များအနေဖြင့် ၎င်းတို့၏ အစီအစဉ်များကို မြှင့်တင်နိုင်ပြီး အပိုကုန်ကျစရိတ်မရှိဘဲ ပထမသုံးလအတွက် နှစ်ဆမြန်နှုန်းကို ခံစားနိုင်ပါပြီ။",
         "zh": "现有客户现在可以升级套餐，在前三个月内免费享受双倍带宽速度。"
       },
-      "content": {
-        "en": "<p>We appreciate our loyal customers! Starting this month, any upgrade to our higher-tier packages will automatically double your connection speed for the initial three months.</p>",
-        "my": "<p>ကျွန်ုပ်တို့၏ သစ္စာရှိဖောက်သည်များကို ကျေးဇူးတင်ရှိပါသည်။ ယခုလမှစတင်၍ အဆင့်မြင့်အစီအစဉ်များသို့ မြှင့်တင်မှုတိုင်းသည် ပထမ ၃ လအတွင်း သင့်ချိတ်ဆက်မှု အမြန်နှုန်းကို အလိုအလျောက် နှစ်ဆတိုးပေးမည် ဖြစ်ပါသည်။</p>",
-        "zh": "<p>感谢我们的忠实客户！从本月开始，升级到更高等级的套餐将在前三个月自动将您的连接速度翻倍。</p>"
-      },
-      "discountValue": "Double Speed",
       "startDate": "2026-05-01T00:00:00Z",
       "endDate": "2026-06-30T23:59:59Z",
       "isActive": true,
-      "features": {
-        "en": [
-          "Double download and upload speed",
-          "Free upgrade process",
-          "Applicable for all tiers"
-        ],
-        "my": [
-          "ဒေါင်းလုဒ်နှင့် အပ်လုဒ် အမြန်နှုန်း နှစ်ဆ",
-          "အခမဲ့ မြှင့်တင်ပေးခြင်း",
-          "အဆင့်တိုင်းအတွက် အကျုံးဝင်သည်"
-        ],
-        "zh": ["下载和上传速度双倍", "免费升级流程", "适用于所有层级"]
+      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80&fit=crop"
+    },
+    {
+      "id": "3",
+      "slug": "unlimited-weekend-gaming-pass",
+      "title": {
+        "en": "Weekend Gamer Pack: Zero Lag Guaranteed",
+        "my": "စနေ၊ တနင်္ဂနွေ ဂိမ်းပက်ကေ့ချ် - လုံးဝ Lag မရှိစေရ",
+        "zh": "周末玩家包：保证零延迟"
       },
-      "imageUrl": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&fit=crop",
-      "termsAndConditions": {
-        "en": [
-          "Applicable to existing active subscribers only.",
-          "Standard speed reverts after 3 months."
-        ],
-        "my": [
-          "လက်ရှိ အသုံးပြုနေဆဲ ဖောက်သည်များအတွက်သာ အကျုံးဝင်ပါသည်။",
-          "၃ လပြည့်ပါက မူလအမြန်နှုန်းသို့ ပြန်ရောက်မည် ဖြစ်ပါသည်။"
-        ],
-        "zh": ["仅适用于现有的活跃订户。", "3 个月后恢复标准速度。"]
-      }
+      "description": {
+        "en": "Level up your gaming experience. Subscribe to our gaming add-on and get prioritized routing and zero packet loss every weekend.",
+        "my": "သင်၏ ဂိမ်းကစားခြင်း အတွေ့အကြုံကို မြှင့်တင်လိုက်ပါ။ ကျွန်ုပ်တို့၏ ဂိမ်း add-on ကို စာရင်းသွင်းပြီး စနေ၊ တနင်္ဂနွေတိုင်းတွင် ဦးစားပေးလိုင်းနှင့် packet loss ကင်းစင်မှုကို ရယူလိုက်ပါ။",
+        "zh": "提升您的游戏体验。订阅我们的游戏附加组件，每个周末享受优先路由和零丢包。"
+      },
+      "startDate": "2026-06-01T00:00:00Z",
+      "endDate": "2026-06-30T23:59:59Z",
+      "isActive": true,
+      "imageUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80&fit=crop"
+    },
+    {
+      "id": "4",
+      "slug": "smarthome-router-bundle",
+      "title": {
+        "en": "Smart Home Wi-Fi 6 Mesh Bundle",
+        "my": "စမတ်ဟုန်း Wi-Fi 6 Mesh ပက်ကေ့ချ်",
+        "zh": "智能家居 Wi-Fi 6 Mesh 套装"
+      },
+      "description": {
+        "en": "Eliminate dead zones in your house. Get a dual-pack Wi-Fi 6 mesh router system with free professional setup when you sign a 12-month contract.",
+        "my": "သင့်အိမ်ရှိ အင်တာနက်မမိသော နေရာများကို ဖယ်ရှားလိုက်ပါ။ ၁၂ လစာချုပ် ချုပ်ဆိုပါက အခမဲ့ ကျွမ်းကျင်သူ တပ်ဆင်မှုနှင့်အတူ Wi-Fi 6 mesh router အစုံကို ရယူလိုက်ပါ။",
+        "zh": "消除您家中的死角。签订 12 个月合同，即可获得双包 Wi-Fi 6 mesh 路由器系统并免费进行专业设置。"
+      },
+      "startDate": "2026-07-01T00:00:00Z",
+      "endDate": "2026-07-31T23:59:59Z",
+      "isActive": true,
+      "imageUrl": "https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=800&q=80&fit=crop"
+    },
+    {
+      "id": "5",
+      "slug": "refer-a-friend-cashback",
+      "title": {
+        "en": "Refer a Friend, Get 1 Month Free",
+        "my": "သူငယ်ချင်းကို မိတ်ဆက်ပေးပြီး ၁ လ အခမဲ့ ရယူပါ",
+        "zh": "推荐朋友，获得 1 个月免费"
+      },
+      "description": {
+        "en": "Share the high-speed internet joy! Refer a friend to our fiber service, and both of you will receive 1 month of subscription fee credited back.",
+        "my": "အမြန်နှုန်းမြင့် အင်တာနက် အတွေ့အကြုံကို မျှဝေလိုက်ပါ။ ကျွန်ုပ်တို့၏ ဖိုင်ဘာ ဝန်ဆောင်မှုသို့ သူငယ်ချင်းတစ်ဦးကို မိတ်ဆက်ပေးပြီး နှစ်ဦးစလုံး ၁ လစာ အခမဲ့ ရယူလိုက်ပါ။",
+        "zh": "分享高速互联网的乐趣！向朋友推荐我们的光纤服务，你们两人都将获得 1 个月的订阅费返还。"
+      },
+      "startDate": "2026-08-01T00:00:00Z",
+      "endDate": "2026-12-31T23:59:59Z",
+      "isActive": true,
+      "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&fit=crop"
+    },
+    {
+      "id": "6",
+      "slug": "thadingyut-festival-promo",
+      "title": {
+        "en": "Thadingyut Special: Free Installation & TV Box",
+        "my": "သီတင်းကျွတ် အထူးအစီအစဉ် - အခမဲ့ တပ်ဆင်ခနှင့် တီဗွီဘောက်စ်",
+        "zh": "点灯节特惠：免费安装 & 电视盒子"
+      },
+      "description": {
+        "en": "Celebrate the festival of lights with our new broadband plan. Enjoy completely free installation and a complimentary 4K Android TV box.",
+        "my": "သီတင်းကျွတ် မီးထွန်းပွဲတော်ကို ကျွန်ုပ်တို့၏ ဘရော့ဘန်း အစီအစဉ်သစ်ဖြင့် ဆင်နွှဲလိုက်ပါ။ လုံးဝ အခမဲ့ တပ်ဆင်မှုနှင့်အတူ 4K Android TV box ကို လက်ဆောင်ရယူလိုက်ပါ။",
+        "zh": "通过我们的新宽带计划庆祝点灯节。享受完全免费的安装和赠送的 4K Android 电视盒子。"
+      },
+      "startDate": "2026-10-01T00:00:00Z",
+      "endDate": "2026-10-31T23:59:59Z",
+      "isActive": true,
+      "imageUrl": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80&fit=crop"
     }
   ],
   "guides": [

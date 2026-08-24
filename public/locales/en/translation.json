@@ -46,7 +46,7 @@
     "business": "Business",
     "fiber": "Fiber",
     "enterprise": "Enterprise",
-    "plan" : "Plan",
+    "plan": "Plan",
     "cgNetCard": "CG-NET Data Card",
     "viewAllPackages": "View All Packages",
     "toggleMenu": "Toggle navigation menu",
@@ -162,17 +162,12 @@
     "benefit4": "Great Team",
     "benefit4Desc": "Work with talented, passionate colleagues in a collaborative environment."
   },
-  "promotion": {
+  "promotions": {
     "title": "Special Promotions",
-    "subtitle": "Explore our exclusive offers and packages from CG-NET",
-    "pageTitle": "Promotions - CG-NET",
-    "detailPageTitle": "Promotion Details - CG-NET",
-    "publishedOn": "Valid period",
-    "category": "Category",
-    "backToPromotions": "Back to Promotions",
-    "relatedPromotions": "Related Promotions",
-    "noPromotions": "No promotions available",
-    "noPromotionsDesc": "Check back later for exciting new offers and discounts."
+    "subtitle": "Enjoy exclusive internet bundles and special rewards designed to give you the best connection experience.",
+    "viewDetail": "View Detail",
+    "periodLabel": "Periode Promo:",
+    "back": "Back to Promotions"
   },
   "appGuide": {
     "title": "App Guide",
@@ -193,8 +188,8 @@
     "ourTeam": "Meet Our Team",
     "ourStats": "CG-NET by the Numbers",
     "ourStory": "About Our Jounery",
-    "tagline": "Delivering the fastest and most reliable internet for your daily needs",
-    "mission": "To connect people to what matters most — with high-speed internet, innovative solutions, and a customer-first mindset. We aim to empower local communities through technology and provide seamless online experiences for work, learning, entertainment, and connection.",
+    "tagline": "We are dedicated to providing reliable, high-speed internet services to homes and businesses.",
+    "mission": "Our mission is to connect you to what matters most through seamless online experiences, cutting-edge technology, and exceptional customer service.",
     "vision": "Our vision is to be the leading internet service provider known for our customer-centric approach and cutting-edge technology. We aim to empower communities by ensuring everyone has access to fast and reliable internet, bridging the digital divide and fostering a connected world.",
     "foundedYear": 2015,
     "headquarters": "Yangon, Myanmar",
@@ -203,8 +198,12 @@
     "name1": "Maintenance Team",
     "name2": "Installation Team",
     "name3": "Network Team",
-    "storyText1": "Chen Guang WiFi is a leading internet service provider based in Special Region 4 (Mongla), Eastern Shan State, Myanmar. We’ve been committed to bridging the digital divide by delivering fast, reliable, and secure internet to homes, businesses, and communities across the region.",
-    "storyText2": "With over a decade of experience, a strong local presence, and more than 6 branch offices, we’ve built a reputation for dependable service and community trust."
+    "storyText1": "Founded in 2014, Chen Guang WiFi has grown to become a trusted name in the internet service industry. We are a team of passionate professionals committed to bringing the best internet solutions to our customers. With our extensive network and innovative technology, we strive to deliver superior connectivity and support.",
+    "storyText2": "With over a decade of experience, a strong local presence, and more than 6 branch offices, we’ve built a reputation for dependable service and community trust.",
+    "cultureBadge": "Team Culture & Events",
+    "cultureTitle1": "Fostering Collaboration, Growth,",
+    "cultureTitle2": "and Team Member Activities",
+    "cultureDescription": "Beyond our technical duties, our team thrives on regular collaborative workshops, skill-sharing sessions, and engaging company events that build strong bonds and drive collective success."
   },
   "contact": {
     "title": "Get In Touch",
