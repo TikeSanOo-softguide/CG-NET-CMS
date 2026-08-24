@@ -8,7 +8,6 @@ import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { useAboutContent } from '@/hooks/useAbout'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { normalizeLanguage } from '@/lib/i18n'
 import { motion } from 'framer-motion'
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { aboutContent } from '@/lib/content/about'
@@ -25,10 +24,8 @@ function AboutSkeleton() {
     </SectionWrapper>
   )
 }
-
 export default function AboutPage() {
-  const { t, i18n } = useTranslation()
-  const lang = normalizeLanguage(i18n.language)
+  const { t } = useTranslation()
 
   usePageTitle(t('about.pageTitle'))
   const { data: about, isLoading, isError, refetch } = useAboutContent()
