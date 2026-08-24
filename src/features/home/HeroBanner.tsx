@@ -10,7 +10,7 @@ interface HeroBannerProps {
   lang: SupportedLanguage
 }
 
-export function HeroBanner({ lang }: HeroBannerProps) {
+export function HeroBanner({}: HeroBannerProps) {
   const { data: slides, isLoading } = useHeroSlides()
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
