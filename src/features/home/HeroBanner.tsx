@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useHeroSlides } from '@/hooks/useAbout'
-import { getLocalized } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 
@@ -11,7 +10,7 @@ interface HeroBannerProps {
   lang: SupportedLanguage
 }
 
-export function HeroBanner({ lang }: HeroBannerProps) {
+export function HeroBanner({}: HeroBannerProps) {
   const { data: slides, isLoading } = useHeroSlides()
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -64,7 +63,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
   }
 
   const frameClass =
-  'relative overflow-hidden text-white select-none h-[320px] sm:h-[375px]'
+    'relative overflow-hidden text-white select-none h-[320px] sm:h-[375px]'
 
   if (isLoading) {
     return (
@@ -109,12 +108,12 @@ export function HeroBanner({ lang }: HeroBannerProps) {
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
             )}
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms] ease-linear"
+           <img
+              src={s.imageUrl}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[82%_50%] sm:object-center transition-transform duration-[8000ms] ease-linear"
               style={{
-                backgroundImage: `url(${s.imageUrl})`,
                 transform: isActive ? 'scale(1.06)' : 'scale(1)',
-                backgroundColor: '#0f172a',
               }}
               aria-hidden="true"
             />
@@ -128,36 +127,6 @@ export function HeroBanner({ lang }: HeroBannerProps) {
               className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent"
               aria-hidden="true"
             />
-
-            <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-14 md:px-16 pb-10 pt-6">
-              <div className="container text-center max-w-3xl">           
-                <h1
-                  className={cn(
-                    'text-[1.65rem] leading-tight sm:text-3xl md:text-5xl font-black mb-3 sm:mb-4 drop-shadow-lg transition-all duration-500 delay-75',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-                  )}
-                >
-                  {getLocalized(s.title, lang)}
-                </h1>
-
-                <p
-                  className={cn(
-                    'text-sm sm:text-base md:text-lg text-white/85 mb-5 sm:mb-7 max-w-2xl mx-auto leading-relaxed drop-shadow line-clamp-3 sm:line-clamp-none transition-all duration-500 delay-150',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-                  )}
-                >
-                  {getLocalized(s.subtitle, lang)}
-                </p>
-
-                <div
-                  className={cn(
-                    'flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center items-stretch sm:items-center max-w-xs sm:max-w-none mx-auto transition-all duration-500 delay-200',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-                  )}
-                >
-                </div>
-              </div>
-            </div>
           </div>
         )
       })}
@@ -195,7 +164,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => goTo(i)}
               className={cn(
-                'rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white min-h-8 min-w-8 sm:min-h-0 sm:min-w-0 flex items-center justify-center',
+                'rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white min-h-3 min-w-3 sm:min-h-0 sm:min-w-0 flex items-center justify-center',
                 i === current
                   ? 'w-7 h-2 bg-white shadow'
                   : 'w-2 h-2 bg-white/40 hover:bg-white/70'

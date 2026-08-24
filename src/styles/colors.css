@@ -4,15 +4,16 @@
   --color-title-white-hero: #FFFFFF;
   --color-subtitle-white-hero: #FFFFFFD9;
 
-  --color-primary: #004AC6;
-  --color-secondary: #2563EB;
-  --color-hover: #0354df;
-  --color-bar: #1E40AF;
+  --color-primary: #0100ca;
+  --color-secondary: #0100ca;
+  --color-hover: #0100ca;
+  --color-bar: #0100ca;
+  --color-footer: #080A3D;
 
   /* Font */
   --color-font-black: #020817;
   --color-font-secondary-black: #0F172A;
-  --color-font-blue: #004AC6;
+  --color-font-blue: #0100ca;
   --color-font-light-blue: #BFDBFE;
   --color-font-white: #FFFFFF;
   --color-font-muted: #64748B;
@@ -46,7 +47,7 @@
   --gradient-font: linear-gradient(
     to right,
     var(--color-primary),
-    #2563EB,
+    #1D4ED8,
     #9333EA
   );
   --gradient-bg: linear-gradient(to right, #1D4ED8, #3B82F6);

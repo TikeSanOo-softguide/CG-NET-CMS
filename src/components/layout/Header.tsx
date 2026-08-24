@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { NavBar } from './NavBar'
 import { LanguageSwitcher } from './LanguageSwitcher'
-// import { AnnouncementBar } from './AnnouncementBar'
-import { Wifi } from 'lucide-react'
 
 export function Header() {
   return (
@@ -13,11 +11,15 @@ export function Header() {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 font-bold text-lg sm:text-xl text-primary shrink-0 min-w-0"
+            className="flex h-full shrink-0 items-center"
             aria-label="CG-NET Home"
           >
-            <Wifi className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
-            <span>CG-NET</span>
+            <img
+              src="/assets/logo/logo.svg"
+              alt="CG-NET logo"
+              className="block h-[38px] w-auto object-cover"
+              loading="lazy"
+            />
           </Link>
 
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">

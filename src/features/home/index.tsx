@@ -179,7 +179,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
           {homeContent.galleryItems.slice(0, 5).map((item, i) => {
             const isMoreCard = i === 4 && hasMore
-            const cardClass = i === 0 ? 'md:col-span-2 md:row-span-2' : 'md:col-span-1'
+            const cardClass = i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[28px]' : 'md:col-span-1 rounded-[28px]'
 
             return (
               <AnimatedCard
@@ -245,14 +245,26 @@ export default function HomePage() {
           title={t('home.downloadTitle')}
           subtitle={t('home.downloadDesc')}
         />
-
-        <div className="grid grid-cols-1 auto-rows-[190px] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
+          <div className="space-y-6 text-left relative">
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+              <span className="bg-gradient-font bg-clip-text text-transparent">
+                {t('home.downloadHead')}
+              </span>
+            </h3>
+            <div className="border-l-4 border-primary/50 pl-4 py-1">
+              <p className="text-muted-foreground leading-relaxed text-sm md:text-base font-medium">
+               {t('home.downloadSub1')}<br/>
+               {t('home.downloadSub2')}<br/>
+               {t('home.downloadSub3')}
+              </p>
+            </div>
+          </div>
           {homeContent.downloadItems.map((item, i) => (
             <AnimatedCard
               key={item.key}
               delay={i * 90}
-              variant="rise"
-              className="'md:col-span-2 md:row-span-2"
+              className="'md:col-span-2 md:row-span-2 rounded-[28px]"
             >
               <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
                 <div className="card-media h-full">
@@ -266,19 +278,6 @@ export default function HomePage() {
               </div>
             </AnimatedCard>
           ))}
-        </div>
-      </SectionWrapper>
-
-      {/* CTA Section */}
-      <SectionWrapper className="hero-gradient text-font-white">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('home.ctaTitle')}</h2>
-          <p className="text-blue-100 mb-8">{t('home.ctaDesc')}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
-              <Link to="/packages">{t('home.ctaButton')}</Link>
-            </Button>
-          </div>
         </div>
       </SectionWrapper>
     </main>

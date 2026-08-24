@@ -61,7 +61,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
           <span className="text-xs text-muted-foreground">
             {formatDate(article.publishedAt, getDateLocale(lang))}
           </span>
-          <Button variant="ghost" size="sm" asChild className="h-8 gap-1 px-2 text-primary hover:text-primary">
+          <Button variant="ghost" size="sm" asChild className="h-8 gap-1 px-2 text-font-blue hover:text-font-blue">
             <Link to={`/news/${article.slug}`}>
               {t('common.readMore')}
               <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

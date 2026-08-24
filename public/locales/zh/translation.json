@@ -86,15 +86,27 @@
     "downloadTitle": "下载我们的 App",
     "downloadDesc": "通过手机即可管理您的账户、缴纳账单并获取客户支持，轻松便捷。",
     "downloadItem": "随时随地保持连接。",
+    "downloadHead": "下载 CG-NET 应用程序",
+    "downloadSub1": "CG-NET 是您的全方位宽带管理助手，",
+    "downloadSub2": "可用于追踪使用情况、查询账单以及监控您的网络连接",
+    "downloadSub3": "状态，并提供实时更新。",
     "ctaTitle": "准备好接入网络了吗？",
     "ctaDesc": "加入缅甸超过 20 万满意客户的行列。",
     "ctaButton": "联系 CG-NET",
     "more": "更多",
     "viewAllGallery": "查看全部图库"
   },
+  "downloadCard": {
+    "title": "下载 CG-NET 应用程序",
+    "description": "实时管理您的宽带、查看账单、追踪使用情况并监控网络连接状态。",
+    "downloadApp": "下载应用",
+    "downloadAndroid": "下载 Android 版",
+    "downloadIOS": "下载 iPhone 版",
+    "close": "关闭下载提示"
+  },
   "services": {
     "title": "我们的服务",
-    "subtitle": "面向家庭与企业的全方位互联网解决方案",
+    "subtitle": "提供多种互联网套餐，满足不同客户的多样化需求。",
     "pageTitle": "服务 - CG-NET",
     "learnMore": "了解更多"
   },
@@ -121,7 +133,7 @@
     "filterBusiness": "企业",
     "filterEnterprise": "政企",
     "filterPlan": "套餐",
-    "filterCGNetCard": "CG-NET 数据卡"
+    "filterCGNetCard": "数据卡"
   },
   "news": {
     "title": "新闻与动态",

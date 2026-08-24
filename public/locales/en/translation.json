@@ -87,15 +87,27 @@
     "downloadTitle": "Download Our App",
     "downloadDesc": "Manage your account, pay bills, and get support all from your phone.",
     "downloadItem": "Stay connected on the go.",
+    "downloadHead": "Download CG-NET Application",
+    "downloadSub1": "CG Net is your complete broadband management companion,",
+    "downloadSub2": "designed to track usage, check bills, and monitor your connection",
+    "downloadSub3": "status in real-time.",
     "ctaTitle": "Ready to Get Connected?",
     "ctaDesc": "Join 200,000+ happy customers across Myanmar.",
     "ctaButton": "Connect with CG-NET",
     "more": "More",
     "viewAllGallery": "View All Gallery"
   },
+  "downloadCard": {
+    "title": "Download CG-NET Application",
+    "description": "Manage your broadband, check bills, track usage, and monitor your connection in real-time.",
+    "downloadApp": "Download App",
+    "downloadAndroid": "Download for Android",
+    "downloadIOS": "Download for iPhone",
+    "close": "Close download card"
+  },
   "services": {
     "title": "Our Services",
-    "subtitle": "Comprehensive internet solutions for homes and businesses",
+    "subtitle": "Offer a range of internet plans tailored to meet the diverse needs of customers",
     "pageTitle": "Services - CG-NET",
     "learnMore": "Learn More"
   },
@@ -122,7 +134,7 @@
     "filterBusiness": "Business",
     "filterEnterprise": "Enterprise",
     "filterPlan": "Plan",
-    "filterCGNetCard": "CG-Net Data Card"
+    "filterCGNetCard": "Data Card"
   },
   "news": {
     "title": "News & Updates",
