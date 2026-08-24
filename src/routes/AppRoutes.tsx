@@ -11,6 +11,8 @@ const NewsPage = lazy(() => import('@/features/news'))
 const NewsDetailPage = lazy(() => import('@/features/news/NewsDetail'))
 const CareerPage = lazy(() => import('@/features/career'))
 const CareerDetailPage = lazy(() => import('@/features/career/CareerDetail'))
+const PromotionPage = lazy(() => import('@/features/promotion'))
+const PromotionDetailPage = lazy(() => import('@/features/promotion/PromotionDetail'))
 const AppGuidePage = lazy(() => import('@/features/app-guide'))
 const AboutPage = lazy(() => import('@/features/about'))
 const ContactPage = lazy(() => import('@/features/contact'))
@@ -23,7 +25,9 @@ function PageLoader() {
       <Skeleton className="h-5 w-full" />
       <Skeleton className="h-5 w-5/6" />
       <div className="grid grid-cols-3 gap-4 pt-4">
-        {[1, 2, 3].map((i) => <Skeleton key={i} className="h-48" />)}
+        {[1, 2, 3].map((i) => (
+          <Skeleton key={i} className="h-48" />
+        ))}
       </div>
     </div>
   )
@@ -41,6 +45,8 @@ export function AppRoutes() {
         <Route path="/news/:slug" element={<NewsDetailPage />} />
         <Route path="/career" element={<CareerPage />} />
         <Route path="/career/:slug" element={<CareerDetailPage />} />
+        <Route path="/promotion" element={<PromotionPage />} />
+        <Route path="/promotion/:slug" element={<PromotionDetailPage />} />
         <Route path="/app-guide" element={<AppGuidePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />

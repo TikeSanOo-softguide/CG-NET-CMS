@@ -1,0 +1,95 @@
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnimatedCard } from '@/components/common/AnimatedCard'
+import { cn, formatDate, getDateLocale, getLocalized } from '@/lib/utils'
+import type { Promotion } from '@/types/promotion'
+import type { SupportedLanguage } from '@/lib/i18n/languages'
+
+interface PromotionCardProps {
+  promotion: Promotion
+  lang: SupportedLanguage
+  delay?: number
+  compact?: boolean
+}
+
+export function PromotionCard({ promotion, lang, delay = 0, compact = false }: PromotionCardProps) {
+  const { t } = useTranslation()
+
+  return (
+    <AnimatedCard delay={delay} variant="rise" className="rounded-2xl h-full">
+      <Card
+        className={cn(
+          'group flex flex-col overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl bg-card',
+          compact ? 'h-[360px]' : 'h-full'
+        )}
+      >
+        {/* 1. Top Image Header */}
+        <Link
+          to={`/promotions/${promotion.slug}`}
+          className={cn('block overflow-hidden bg-muted relative', compact ? 'h-[140px]' : 'h-48')}
+        >
+          <img
+            src={promotion.imageUrl}
+            alt={t('promotions.title')}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+        </Link>
+        {promotion.isActive && (
+          <div className="absolute top-3 right-3 z-10">
+            <span className="px-3 py-1 text-xs font-semibold text-white bg-blue-600/90 backdrop-blur-md rounded-full shadow-sm">
+              Active
+            </span>
+          </div>
+        )}
+
+        {/* 2. Title Section */}
+        <CardHeader className="pb-3 pt-4 px-5">
+          <CardTitle className="text-base font-bold leading-snug text-foreground h-[3rem] flex items-center">
+            <Link
+              to={`/promotion/${promotion.slug}`}
+              className="hover:text-primary transition-colors line-clamp-2"
+            >
+              {getLocalized(promotion.title, lang)}
+            </Link>
+          </CardTitle>
+        </CardHeader>
+
+        {/* Divider Line */}
+        <div className="px-5">
+          <div className="h-[1px] w-full bg-border/60" />
+        </div>
+
+        {/* 3. Metadata Content Rows (Periode Promo / Details) */}
+        <CardContent className="flex-1 py-3 px-5 space-y-2 text-xs text-muted-foreground">
+          <div className="flex items-center justify-between">
+            <span className="font-medium">{t('promotions.periodLabel')}</span>
+            <span className="text-foreground font-medium text-right">
+              {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
+              {formatDate(promotion.endDate, getDateLocale(lang))}
+            </span>
+          </div>
+        </CardContent>
+
+        {/* 4. Bottom Full-Width Pill CTA Button */}
+        <CardFooter className="pt-3 pb-5 px-5 flex justify-center ">
+          <Button
+            asChild
+            className="w-full h-8 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm active:scale-95"
+          >
+            <Link
+              to={`/promotion/${promotion.slug}`}
+              className="flex items-center justify-center gap-2"
+            >
+              <span>{t('promotions.viewDetail')}</span>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+        </CardFooter>
+      </Card>
+    </AnimatedCard>
+  )
+}
