@@ -11,6 +11,8 @@ import { AppRoutes } from '@/routes/AppRoutes'
 import { ErrorBoundary } from '@/components/common/ErrorBoundary'
 import { Toaster } from '@/components/ui/toaster'
 import { analytics } from '@/lib/analytics'
+import ScrollToTop from './components/common/ScrollToTop'
+import AppDownloadCard from './components/common/AppDownloadCard'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,7 +60,9 @@ export default function App() {
             v7_startTransition: true,
             v7_relativeSplatPath: true,
         }}>
+          <AppDownloadCard />
           <AppContent />
+          <ScrollToTop />
         </BrowserRouter>
         {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
       </QueryClientProvider>

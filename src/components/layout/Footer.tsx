@@ -16,7 +16,6 @@ const QUICK_LINKS = [
 
 const SUPPORT_LINKS = [
   { to: '/app-guide', labelKey: 'footer.helpCenter' },
-  { to: '/career', labelKey: 'nav.career' },
   { to: '#', labelKey: 'footer.faq' },
   { to: '#', labelKey: 'footer.termsOfService' },
   { to: '#', labelKey: 'footer.privacyPolicy' },
@@ -28,7 +27,7 @@ export function Footer() {
   const [showWechatQR, setShowWechatQR] = useState(false)
 
   return (
-    <footer className="bg-slate-900 text-slate-300">
+    <footer className="bg-app-footer text-slate-300">
       <div className="container py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-1">

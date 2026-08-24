@@ -80,10 +80,11 @@ const config: Config = {
           'gradient-font': 'var(--gradient-font)',
         },
         app: {
-          primary: 'var(--color-primary)',
+          primary: 'var(--color-primary)', //primary color
           secondary: 'var(--color-secondary)',
-          hover: 'var(--color-hover)',
-          bar: 'var(--color-bar)',
+          hover: 'var(--color-hover)', //button hover
+          bar: 'var(--color-bar)', //stat bar
+          footer: 'var(--color-footer)', //footer
         },
         font: {
           black: 'var(--color-font-black)',

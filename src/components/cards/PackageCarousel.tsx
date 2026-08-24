@@ -270,7 +270,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
               aria-label={`Go to package slide ${index + 1}`}
               className={[
                 'h-2.5 rounded-full transition-all duration-300',
-                activeIndex === index ? 'w-6 bg-primary' : 'w-2.5 bg-border hover:bg-primary/40',
+                activeIndex === index ? 'w-6 bg-app-primary' : 'w-2.5 bg-border hover:bg-app-primary/40',
               ].join(' ')}
             />
           ))}
