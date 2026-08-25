@@ -45,7 +45,7 @@ export default function PromotionPage() {
   const lang = normalizeLanguage(i18n.language)
   const [page, setPage] = useState(1)
 
-  usePageTitle(t('promotion.pageTitle'))
+  usePageTitle(t('promotions.pageTitle'))
 
   const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE)
 
@@ -57,7 +57,7 @@ export default function PromotionPage() {
 
       <SectionWrapper>
         <div className="max-w-6xl mx-auto w-full mb-6 sm:mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-2 sm:gap-3">
               <div className="w-full sm:max-w-[600px]">
                 <SearchBar />
@@ -69,16 +69,17 @@ export default function PromotionPage() {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-font-blue text-font-blue text-white bg-font-blue rounded-full hover:bg-font-blue/10 transition-colors"
+                    className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-font-blue bg-font-blue text-white rounded-full hover:bg-font-blue/90 transition-all duration-300 shadow-sm"
                   >
-                    <Filter className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-white transition-transform duration-300 hover:scale-110" />
                     <span className="sr-only">Filter</span>
                   </Button>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent
                   align="end"
-                  className="w-40 sm:w-48 rounded-xl bg-background border border-border shadow-lg z-50 p-2 mt-2"
+                  // className="w-40 sm:w-48 rounded-xl bg-background border border-font-blue/15 shadow-lg z-50 p-2 mt-2"
+                  className="cursor-pointer font-medium text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg transition-colors hover:bg-font-blue/10 hover:text-font-blue focus:bg-font-blue/10 focus:text-font-blue z-50"
                 >
                   <DropdownMenuItem className="cursor-pointer font-medium text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3">
                     All Categories

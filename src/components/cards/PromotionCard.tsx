@@ -22,7 +22,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
     <AnimatedCard delay={delay} variant="rise" className="rounded-2xl h-full">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl bg-card',
+          'group flex flex-col overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl  bg-[#f5f5f5]',
           compact ? 'h-[360px]' : 'h-full'
         )}
       >
@@ -38,20 +38,31 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
             loading="lazy"
           />
         </Link>
-        {promotion.isActive && (
+        {/* {promotion.isActive && (
           <div className="absolute top-3 right-3 z-10">
-            <span className="px-3 py-1 text-xs font-semibold text-white bg-blue-600/90 backdrop-blur-md rounded-full shadow-sm">
+            <span className="px-3 py-1 text-xs font-semibold text-white bg-green-600 backdrop-blur-md rounded-full shadow-sm">
               Active
             </span>
           </div>
-        )}
+        )} */}
+
+        {/* {promotion.isActive && (
+          <div className="absolute top-3 right-3 z-10">
+           
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-green-600 bg-green-600/10 backdrop-blur-md rounded-full shadow-sm border border-green-600/10">
+              
+              <span className="h-2 w-2  rounded-full bg-green-600" />
+              Active
+            </span>
+          </div>
+        )} */}
 
         {/* 2. Title Section */}
         <CardHeader className="pb-3 pt-4 px-5">
-          <CardTitle className="text-base font-bold leading-snug text-foreground h-[3rem] flex items-center">
+          <CardTitle className="text-base font-bold leading-snug text-font-black h-[3rem] flex items-center">
             <Link
               to={`/promotion/${promotion.slug}`}
-              className="hover:text-primary transition-colors line-clamp-2"
+              className="hover:text-font-blue text-[#0E0E0E]  transition-colors line-clamp-2"
             >
               {getLocalized(promotion.title, lang)}
             </Link>
@@ -60,14 +71,14 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
 
         {/* Divider Line */}
         <div className="px-5">
-          <div className="h-[1px] w-full bg-border/60" />
+          <div className="h-[1px] w-full  bg-border/60" />
         </div>
 
         {/* 3. Metadata Content Rows (Periode Promo / Details) */}
-        <CardContent className="flex-1 py-3 px-5 space-y-2 text-xs text-muted-foreground">
+        <CardContent className="flex-1 py-3 px-5 space-y-2 text-xs ">
           <div className="flex items-center justify-between">
-            <span className="font-medium">{t('promotions.periodLabel')}</span>
-            <span className="text-foreground font-medium text-right">
+            <span className="font-medium text-font-muted">{t('promotions.periodLabel')}</span>
+            <span className="text-font-black font-medium text-right">
               {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
               {formatDate(promotion.endDate, getDateLocale(lang))}
             </span>
@@ -75,10 +86,10 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
         </CardContent>
 
         {/* 4. Bottom Full-Width Pill CTA Button */}
-        <CardFooter className="pt-3 pb-5 px-5 flex justify-center ">
+        {/* <CardFooter className="pt-3 pb-5 px-5 flex justify-center ">
           <Button
             asChild
-            className="w-full h-8 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm active:scale-95"
+            className="w-full h-8 rounded-lg font-medium text-white bg-font-blue hover:bg-font-blue/90 transition-colors shadow-sm active:scale-95"
           >
             <Link
               to={`/promotion/${promotion.slug}`}
@@ -86,6 +97,35 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
             >
               <span>{t('promotions.viewDetail')}</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+ </CardFooter> */}
+
+        <CardFooter className="pt-3 pb-5 px-5 flex items-center justify-between gap-3">
+          {promotion.isActive ? (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-green-600 bg-green-600/15 backdrop-blur-md rounded-full shadow-sm border border-green-600/20 shrink-0">
+              <span className="h-2 w-2 rounded-full bg-green-600" />
+              Active
+            </span>
+          ) : (
+            <div />
+          )}
+
+          {/* 2. View Detail Button with Hover Effect */}
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+
+            className="group h-8 gap-1 px-3 py-1.5 text-font-blue hover:text-font-blue hover:bg-font-blue/10 rounded-lg transition-all duration-200"
+          >
+            <Link to={`/promotion/${promotion.slug}`} className="flex items-center gap-1.5">
+              <span>{t('promotions.viewDetail')}</span>
+
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </Link>
           </Button>
         </CardFooter>
