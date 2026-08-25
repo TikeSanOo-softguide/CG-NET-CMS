@@ -18,10 +18,8 @@ const NAV_LINKS = [
   { to: '/services', labelKey: 'nav.services' },
   { to: '/news', labelKey: 'nav.news' },
   { to: '/promotion', labelKey: 'nav.promotion' },
-  { to: '/career', labelKey: 'nav.career' },
   { to: '/app-guide', labelKey: 'nav.appGuide' },
   { to: '/about', labelKey: 'nav.about' },
-  { to: '/contact', labelKey: 'nav.contact' },
 ]
 
 const MOBILE_PACKAGE_LINKS = [
@@ -35,7 +33,7 @@ export function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <nav role="navigation" aria-label="Main navigation" className="flex items-center">
+    <nav role="navigation" aria-label="Main navigation" className="flex items-center font-heading">
       {/* Desktop nav links */}
       <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
         {NAV_LINKS.slice(0, 1).map(({ to, labelKey }) => (

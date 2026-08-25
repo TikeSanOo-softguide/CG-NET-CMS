@@ -44,7 +44,15 @@ export function LanguageSwitcher() {
         <Button
           variant="ghost"
           size="sm"
-          className="gap-1.5 shrink-0 data-[state=open]:bg-accent"
+          className="
+            gap-1.5 
+            shrink-0
+            focus:ring-0
+            focus:ring-offset-0
+            focus-visible:outline-none
+            focus-visible:ring-0
+            focus-visible:ring-offset-0
+            data-[state=open]:bg-accent"
           aria-label={`Language: ${active.nativeLabel}. Click to switch language`}
           aria-haspopup="menu"
         >
@@ -53,12 +61,44 @@ export function LanguageSwitcher() {
           <span className="sm:hidden">{active.code.toUpperCase()}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" side="bottom" className="w-44">
+      <DropdownMenuContent 
+        align="end" 
+        side="bottom" 
+        className="
+          w-44
+          outline-none
+          ring-0
+          focus:outline-none
+          focus:ring-0
+          focus:ring-offset-0"
+        >
         {LANGUAGES.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => handleChange(lang.code)}
-            className={currentLang === lang.code ? 'bg-accent font-medium' : ''}
+            className={`
+              cursor-pointer
+              rounded-md
+              border-0
+              px-2 py-1.5
+              text-xs
+              outline-none
+              ring-0
+              focus:outline-none
+              focus:ring-0
+              focus:ring-offset-0
+              focus-visible:outline-none
+              focus-visible:ring-0
+              focus-visible:ring-offset-0
+              sm:px-3
+              sm:py-2
+              sm:text-sm
+              ${
+                currentLang === lang.code
+                  ? 'text-transparent bg-clip-text bg-gradient-font font-semibold'
+                  : 'font-medium'
+              }
+            `}
           >
             <span className="mr-2 w-5 text-center" aria-hidden="true">{lang.flag}</span>
             {lang.nativeLabel}

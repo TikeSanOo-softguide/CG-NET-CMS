@@ -12,6 +12,9 @@ import { NewsCard } from '@/components/cards/NewsCard'
 import { useNews } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
+import { SearchBar } from '@/components/common/SearchBar'
+import { CommonFilter } from '@/components/common/CommonFilter'
+import {newsFilterOptions} from '@/lib/content/new'
 
 const PAGE_SIZE = 6
 
@@ -35,6 +38,7 @@ export default function NewsPage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
   const [page, setPage] = useState(1)
+  const [filter, setFilter] = useState('all')
 
   usePageTitle(t('news.pageTitle'))
 
@@ -47,6 +51,23 @@ export default function NewsPage() {
       <PageHeader title={t('news.title')} subtitle={t('news.subtitle')} />
 
       <SectionWrapper>
+        <div className="max-w-6xl w-full mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0">
+              <div className="w-full sm:max-w-[600px]">
+                <SearchBar />
+              </div>
+
+              {/* Filter Icon Button (Dropdown Menu) */}
+              <CommonFilter 
+                options={newsFilterOptions}
+                value={filter}
+                onChange={setFilter}
+              />
+            </div>
+          </div>
+        </div>
+
         {isLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => <NewsSkeleton key={i} />)}

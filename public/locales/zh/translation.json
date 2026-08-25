@@ -1,7 +1,8 @@
 {
   "common": {
     "loading": "加载中...",
-    "error": "出错了，请重试。",
+    "error": "出错了。",
+    "errorSubtitle": "我们遇到了一个意外错误。请尝试重新加载页面。如果问题仍然存在，请联系我们的客服团队。",
     "noData": "暂无数据。",
     "backToHome": "返回首页",
     "readMore": "阅读更多",
@@ -22,12 +23,14 @@
     "notFound": "页面未找到",
     "notFoundDesc": "您访问的页面不存在或已被移动。",
     "reload": "重新加载",
+    "tryagain": "再试一次",
     "emptyState": "暂无内容",
     "emptyStateDesc": "请稍后再来查看更新。",
     "month": "/月",
     "free": "免费",
     "popular": "最受欢迎",
-    "featured": "精选"
+    "featured": "精选",
+    "goBack": "返回"
   },
   "announcement": {
     "serviceInterruption": "🔔 服务中断：互联网服务暂时不可用。我们的团队正在努力恢复连接。"
@@ -257,11 +260,12 @@
     "services": "服务",
     "support": "支持",
     "faq": "常见问题",
+    "brandGuideLine": "品牌指南",
     "helpCenter": "帮助中心",
     "termsOfService": "服务条款",
     "privacyPolicy": "隐私政策",
     "followUs": "关注我们",
-    "copyright": "© {{year}} CG-NET。保留所有权利。",
+    "copyright": "© {{year}} Chen Guang Co., Ltd。保留所有权利。",
     "madeWith": "用心打造于缅甸 ❤️"
   },
   "language": {
@@ -269,5 +273,186 @@
     "en": "English",
     "my": "မြန်မာ",
     "zh": "中文"
+  },
+  "privacy": {
+    "pageTitle": "隐私政策",
+    "pageSubtitle": "说明您使用本服务时，我们对您的信息进行收集、使用和披露的相关政策与流程",
+    "title": "隐私政策",
+    "lastUpdatedDate": "2025年7月3日",
+    "lastUpdated": "最后更新",
+    "main1": "本隐私政策说明了当您使用本服务时，我们如何收集、使用和披露您的信息，以及您的隐私权利和法律如何保护您。",
+    "main2": "我们使用您的个人数据来提供和改进本服务。使用本服务即表示您同意根据本隐私政策收集和使用您的信息。",
+
+    "interpretationAndDefinitions": "解释和定义",
+    "interpretation": "首字母大写的词语具有以下条件所定义的含义。无论以单数或复数形式出现，以下定义均具有相同的含义。",
+
+    "account": "账户",
+    "accountDesc": "指为您创建的唯一账户，用于访问我们的服务或服务的部分功能。",
+
+    "affiliate": "关联方",
+    "affiliateDesc": "指控制某一方、受某一方控制或与某一方处于共同控制之下的实体，其中“控制”是指拥有50%或以上有权选举董事或其他管理机构的股份、股权或其他证券。",
+
+    "company": "公司",
+    "companyDesc": "指 Chen Guang Co., Ltd.，地址：Myanmar, Eastern Shan, Mongla, North-Circular Rd., Double Elephant Apartments, 1st Floor。",
+
+    "cookies": "Cookie",
+    "cookiesDesc": "指网站放置在您的计算机、移动设备或其他设备上的小型文件，其中可能包含您在该网站上的浏览历史等信息。",
+
+    "country": "国家",
+    "countryDesc": "指缅甸（Myanmar）。",
+
+    "device": "设备",
+    "deviceDesc": "指能够访问本服务的任何设备，例如计算机、手机或数字平板电脑。",
+
+    "personalData": "个人数据",
+    "personalDataDesc": "指与已识别或可识别的个人相关的任何信息。",
+
+    "service": "服务",
+    "serviceDesc": "指本网站。",
+
+    "serviceProvider": "服务提供商",
+    "serviceProviderDesc": "指代表公司处理数据的任何自然人或法人。包括受公司委托协助提供服务、代表公司提供服务、执行与服务相关的工作或协助公司分析服务使用情况的第三方公司或个人。",
+
+    "usageData": "使用数据",
+    "usageDataDesc": "指在使用本服务过程中自动收集的数据，或由服务基础设施本身产生的数据，例如页面访问时长。",
+
+    "website": "网站",
+    "websiteDesc": "指 Chen Guang，可通过 chenguangnetwork.com 访问。",
+
+    "you": "您",
+    "youDesc": "指访问或使用本服务的个人，或根据具体情况代表该个人访问或使用本服务的公司或其他法人实体。",
+
+    "collectingAndUsingData": "收集和使用您的个人数据",
+    "typesOfDataCollected": "收集的数据类型",
+    "personalDataCollected": "个人数据",
+    "emailAddress": "电子邮箱地址",
+    "firstAndLastName": "名字和姓氏",
+    "phoneNumber": "电话号码",
+
+    "usageDataCollected": "使用数据",
+    "usageData1": "使用数据会在您使用本服务时自动收集。",
+    "usageData2": "使用数据可能包括您的设备互联网协议地址（例如 IP 地址）、浏览器类型、浏览器版本、您访问的服务页面、访问时间和日期、在这些页面上停留的时间、唯一设备标识符以及其他诊断数据。",
+    "usageData3": "当您通过移动设备访问本服务时，我们可能会自动收集某些信息，包括但不限于您使用的移动设备类型、移动设备唯一 ID、移动设备 IP 地址、移动操作系统、移动互联网浏览器类型、唯一设备标识符及其他诊断数据。",
+    "usageData4": "当您访问本服务或通过移动设备访问本服务时，我们也可能收集您的浏览器发送的信息。",
+
+    "trackingTechnologies": "追踪技术和 Cookie",
+    "trackingDesc": "我们使用 Cookie 和类似的追踪技术来追踪您在本服务上的活动并存储某些信息。所使用的追踪技术包括信标、标签和脚本，用于收集和追踪信息，以及改进和分析我们的服务。",
+
+    "browserCookies": "Cookie 或浏览器 Cookie",
+    "browserCookiesDesc": "Cookie 是存放在您设备上的小型文件。您可以设置浏览器拒绝所有 Cookie，或在发送 Cookie 时通知您。但是，如果您不接受 Cookie，您可能无法使用本服务的某些功能。除非您已调整浏览器设置以拒绝 Cookie，否则本服务可能会使用 Cookie。",
+
+    "webBeacons": "网络信标",
+    "webBeaconsDesc": "本服务的某些部分和我们的电子邮件可能包含称为网络信标的小型电子文件，也称为透明 GIF、像素标签或单像素 GIF。这些文件可帮助公司统计访问相关页面或打开电子邮件的用户数量，并用于其他相关的网站统计。",
+
+    "cookieTypesDesc": "Cookie 可以是“持久性 Cookie”或“会话 Cookie”。持久性 Cookie 会在您离线后保留在您的个人计算机或移动设备上，而会话 Cookie 会在您关闭浏览器后立即被删除。",
+
+    "necessaryCookies": "必要 / 基本 Cookie",
+    "necessaryCookiesType": "会话 Cookie",
+    "necessaryCookiesAdmin": "我们",
+    "necessaryCookiesPurpose": "这些 Cookie 是通过网站向您提供服务并使您能够使用某些功能所必需的。它们有助于验证用户身份并防止用户账户被欺诈性使用。没有这些 Cookie，您所请求的服务将无法提供。",
+
+    "acceptanceCookies": "Cookie 政策 / 通知接受 Cookie",
+    "acceptanceCookiesType": "持久性 Cookie",
+    "acceptanceCookiesAdmin": "我们",
+    "acceptanceCookiesPurpose": "这些 Cookie 用于识别用户是否已接受网站对 Cookie 的使用。",
+
+    "functionalityCookies": "功能性 Cookie",
+    "functionalityCookiesType": "持久性 Cookie",
+    "functionalityCookiesAdmin": "我们",
+    "functionalityCookiesPurpose": "这些 Cookie 允许我们记住您在使用网站时所做的选择，例如您的登录信息或语言偏好。其目的是为您提供更个性化的体验，并避免您每次使用网站时都需要重新输入偏好设置。",
+
+    "moreCookieInfo": "如需了解更多关于我们使用的 Cookie 以及您对 Cookie 的选择，请查看我们的 Cookie 政策或本隐私政策中的 Cookie 部分。",
+
+    "useOfPersonalData": "使用您的个人数据",
+    "provideService": "提供和维护我们的服务",
+    "provideServiceDesc": "包括监控我们服务的使用情况。",
+
+    "manageAccount": "管理您的账户",
+    "manageAccountDesc": "用于管理您作为服务用户的注册。您提供的个人数据可让您访问注册用户可使用的不同服务功能。",
+
+    "performanceOfContract": "履行合同",
+    "performanceOfContractDesc": "用于开发、遵守和履行您所购买的产品、商品或服务的购买合同，或通过本服务与我们签订的任何其他合同。",
+
+    "contactYou": "联系您",
+    "contactYouDesc": "通过电子邮件、电话、短信或其他等效的电子通信方式联系您，例如与功能、产品或已订购服务相关的移动应用推送通知，包括在必要或合理情况下提供安全更新或相关通知。",
+
+    "provideYou": "向您提供信息",
+    "provideYouDesc": "向您提供新闻、特别优惠以及有关我们提供的其他商品、服务和活动的一般信息，这些内容与您已经购买或咨询过的商品或服务类似，除非您选择不接收此类信息。",
+
+    "manageRequests": "管理您的请求",
+    "manageRequestsDesc": "处理和管理您向我们提出的请求。",
+
+    "businessTransfers": "用于业务转让",
+    "businessTransfersDesc": "我们可能使用您的信息来评估或进行合并、资产剥离、重组、改组、解散，或出售或转让我们全部或部分资产。",
+
+    "otherPurposes": "用于其他目的",
+    "otherPurposesDesc": "我们可能将您的信息用于其他目的，例如数据分析、识别使用趋势、评估促销活动的效果，以及评估和改进我们的服务、产品、营销和您的使用体验。",
+
+    "sharingPersonalData": "共享您的个人信息",
+    "withServiceProviders": "与服务提供商共享",
+    "withServiceProvidersDesc": "我们可能与服务提供商共享您的个人信息，以监控和分析我们服务的使用情况并与您联系。",
+
+    "businessTransferSharing": "用于业务转让",
+    "businessTransferSharingDesc": "在涉及公司合并、出售公司资产、融资或将我们全部或部分业务收购给另一家公司时，我们可能共享或转让您的个人信息。",
+
+    "withAffiliates": "与关联方共享",
+    "withAffiliatesDesc": "我们可能与我们的关联方共享您的信息，并要求这些关联方遵守本隐私政策。",
+
+    "withBusinessPartners": "与商业合作伙伴共享",
+    "withBusinessPartnersDesc": "我们可能与商业合作伙伴共享您的信息，以向您提供某些产品、服务或促销活动。",
+
+    "withOtherUsers": "与其他用户共享",
+    "withOtherUsersDesc": "当您在公共区域与其他用户分享个人信息或进行互动时，该信息可能会被所有用户看到，并可能在公共范围内进一步传播。",
+
+    "withYourConsent": "经您同意",
+    "withYourConsentDesc": "经您同意，我们可能出于任何其他目的披露您的个人信息。",
+
+    "retentionOfPersonalData": "保留您的个人数据",
+    "retention1": "公司仅会在实现本隐私政策所述目的所必需的期间内保留您的个人数据。我们将根据需要保留和使用您的个人数据，以履行法律义务、解决争议并执行我们的法律协议和政策。",
+    "retention2": "公司也会为内部分析目的保留使用数据。除非使用数据用于加强安全性、改进功能，或法律要求我们更长时间地保留，否则使用数据通常会保留较短的时间。",
+
+    "transferOfPersonalData": "传输您的个人数据",
+    "transfer1": "您的信息，包括个人数据，可能会在公司的运营办公室以及参与处理数据的相关方所在地进行处理。这些信息可能会被传输并保存在您所在司法管辖区以外的计算机上。",
+    "transfer2": "您同意本隐私政策并提交相关信息，即表示您同意进行此类传输。",
+    "transfer3": "公司将采取一切合理必要的措施，确保您的数据得到安全处理并符合本隐私政策。",
+
+    "deletePersonalData": "删除您的个人数据",
+    "delete1": "您有权删除或要求我们协助删除我们收集的关于您的个人数据。",
+    "delete2": "我们的服务可能允许您在服务内部删除某些关于您的信息。",
+    "delete3": "您可以随时通过账户设置更新、修改或删除您的信息，也可以联系我们进行处理。",
+    "delete4": "请注意，当我们有法律义务或其他合法依据时，可能仍需要保留某些信息。",
+
+    "disclosureOfPersonalData": "披露您的个人数据",
+    "businessTransactions": "商业交易",
+    "businessTransactionsDesc": "如果公司参与合并、收购或资产出售，您的个人数据可能会被转移。在您的个人数据被转移并适用不同的隐私政策之前，我们会向您发出通知。",
+
+    "lawEnforcement": "执法要求",
+    "lawEnforcementDesc": "在某些情况下，如果法律要求或为了回应公共机构的有效请求，公司可能需要披露您的个人数据。",
+
+    "otherLegalRequirements": "其他法律要求",
+    "legalRequirement1": "履行法律义务",
+    "legalRequirement2": "保护和维护公司的权利或财产",
+    "legalRequirement3": "防止或调查与本服务有关的可能不当行为",
+    "legalRequirement4": "保护服务用户或公众的人身安全",
+    "legalRequirement5": "防范法律责任",
+
+    "securityOfPersonalData": "您的个人数据安全",
+    "securityDesc": "您的个人数据安全对我们非常重要，但请注意，任何互联网传输方式或电子存储方式都无法保证 100% 安全。虽然我们努力采用商业上可接受的方式保护您的个人数据，但无法保证其绝对安全。",
+
+    "childrensPrivacy": "儿童隐私",
+    "children1": "我们的服务不面向13岁以下的任何人。我们不会故意收集13岁以下任何人的可识别个人信息。如果您是父母或监护人，并且您知道您的孩子向我们提供了个人数据，请联系我们。",
+    "children2": "如果我们发现未经父母同意验证而收集了13岁以下人士的个人数据，我们将采取措施从我们的服务器中删除该信息。",
+
+    "linksToOtherWebsites": "其他网站的链接",
+    "links1": "我们的服务可能包含指向非我们运营的其他网站的链接。如果您点击第三方链接，您将被引导至该第三方的网站。我们强烈建议您查看您访问的每个网站的隐私政策。",
+    "links2": "我们无法控制，也不对任何第三方网站或服务的内容、隐私政策或做法承担责任。",
+
+    "changesToPrivacyPolicy": "本隐私政策的变更",
+    "changes1": "我们可能会不时更新本隐私政策。任何变更都会通过在本页面发布新的隐私政策通知您。",
+    "changes2": "在变更生效前，我们将通过电子邮件和/或在我们的服务上发布显著通知告知您，并更新本隐私政策顶部的“最后更新”日期。",
+    "changes3": "建议您定期查看本隐私政策，以了解任何变更。本隐私政策的变更将在发布到本页面后生效。",
+
+    "contactUs": "联系我们",
+    "contactUsDesc": "如果您对本隐私政策有任何疑问，您可以联系我们："
   }
 }

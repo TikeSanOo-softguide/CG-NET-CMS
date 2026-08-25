@@ -19,7 +19,7 @@ export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
       )}
       {onRetry && (
         <Button variant="outline" onClick={onRetry}>
-          Try Again
+          {t('common.tryagain')}
         </Button>
       )}
     </div>

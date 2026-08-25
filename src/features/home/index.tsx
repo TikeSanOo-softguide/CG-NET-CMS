@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -35,7 +35,7 @@ export default function HomePage() {
       {/* Stats */}
       <section className="bg-app-bar h-[70px] flex items-center" aria-label="Company statistics">
         <div className="container">
-          <dl className="grid grid-cols-5 gap-1 sm:gap-4 text-center items-center">
+          <dl className="font-heading grid grid-cols-5 gap-1 sm:gap-4 text-center items-center">
             {homeContent.stats.map(({ value, labelKey }) => (
               <div key={labelKey} className="min-w-0 px-1">
                 <dt className="text-[6px] xs:text-xs sm:text-xs text-font-light-blue leading-tight truncate">{t(labelKey)}</dt>
@@ -49,7 +49,7 @@ export default function HomePage() {
       {/* Why Choose Us */}
       <SectionWrapper>
         <SectionHeading title={t('home.whyChooseUs')} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
+        <div className="font-heading grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
           {homeContent.features.map(({ icon: Icon, titleKey, descKey, color, hoverColor, iconBg, hoverBg, variant }, i) => (
             <AnimatedCard key={titleKey} delay={i * 90} variant={variant} hoverClass="" className="rounded-lg">
               <Card className="group relative flex h-[180px] flex-col overflow-hidden text-center border border-border/70 shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
@@ -259,6 +259,26 @@ export default function HomePage() {
                {t('home.downloadSub3')}
               </p>
             </div>
+            <button
+              type="button"
+              className="
+                mt-3 inline-flex
+                items-center justify-center gap-2
+                rounded-full
+                bg-app-primary
+                px-5 py-2
+                text-xs font-semibold text-white
+                shadow-md
+                transition-all duration-200
+                hover:scale-[1.03]
+                hover:opacity-90
+                active:scale-95
+                sm:text-sm
+              "
+            >
+              <Download className="h-4 w-4" />
+                {t('downloadCard.downloadApp')}
+            </button>
           </div>
           {homeContent.downloadItems.map((item, i) => (
             <AnimatedCard

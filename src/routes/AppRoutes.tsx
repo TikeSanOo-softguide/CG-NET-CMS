@@ -14,6 +14,7 @@ const CareerDetailPage = lazy(() => import('@/features/career/CareerDetail'))
 const PromotionPage = lazy(() => import('@/features/promotion'))
 const PromotionDetailPage = lazy(() => import('@/features/promotion/PromotionDetail'))
 const AppGuidePage = lazy(() => import('@/features/app-guide'))
+const PrivacyPage = lazy(() => import('@/features/privacy-policy'))
 const AboutPage = lazy(() => import('@/features/about'))
 const ContactPage = lazy(() => import('@/features/contact'))
 const NotFoundPage = lazy(() => import('@/features/not-found'))
@@ -50,6 +51,7 @@ export function AppRoutes() {
         <Route path="/app-guide" element={<AppGuidePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
