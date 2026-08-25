@@ -85,6 +85,7 @@ const config: Config = {
           hover: 'var(--color-hover)', //button hover
           bar: 'var(--color-bar)', //stat bar
           footer: 'var(--color-footer)', //footer
+          card: 'var(--color-card-bg)', //card bg
         },
         font: {
           black: 'var(--color-font-black)',
@@ -159,7 +160,8 @@ const config: Config = {
       fontFamily: {
         myanmar: ['"Noto Sans Myanmar"', '"Pyidaungsu"', '"Padauk"', 'sans-serif'],
         chinese: ['"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Satoshi', 'Inter', 'system-ui', 'sans-serif'],
+        heading: ['Inter', 'system-ui', 'sans-serif']
       },
     },
   },

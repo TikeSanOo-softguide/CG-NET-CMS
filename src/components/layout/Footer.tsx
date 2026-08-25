@@ -16,9 +16,8 @@ const QUICK_LINKS = [
 
 const SUPPORT_LINKS = [
   { to: '/app-guide', labelKey: 'footer.helpCenter' },
-  { to: '#', labelKey: 'footer.faq' },
-  { to: '#', labelKey: 'footer.termsOfService' },
-  { to: '#', labelKey: 'footer.privacyPolicy' },
+  { to: '/about#brand', labelKey: 'footer.brandGuideLine' },
+  { to: '/privacy-policy', labelKey: 'footer.privacyPolicy' },
 ]
 
 export function Footer() {
@@ -159,7 +158,6 @@ export function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-500 text-center sm:text-left pb-[env(safe-area-inset-bottom)]">
           <p>{t('footer.copyright', { year })}</p>
-          <p>{t('footer.madeWith')}</p>
         </div>
       </div>
     </footer>

@@ -489,4 +489,4 @@ To integrate a real analytics provider (Google Analytics 4, Plausible, etc.), re
 
 ## License
 
-Internal project — © CG-NET. All rights reserved.
+Internal project — © Chen Guang Co., Ltd. All rights reserved.

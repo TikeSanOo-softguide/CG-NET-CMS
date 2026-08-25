@@ -23,7 +23,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
     <AnimatedCard delay={delay} variant="rise" className="rounded-[20px] h-full">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-[20px]',
+          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-[20px] bg-app-card',
           compact ? 'h-[300px]' : 'h-full'
         )}
       >

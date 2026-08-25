@@ -47,19 +47,21 @@ export default function NewsDetailPage() {
   return (
     <main>
       <SectionWrapper>
-        <div className="max-w-3xl mx-auto">
-          <Button variant="ghost" asChild className="mb-6 gap-2">
-            <Link to="/news">
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              {t('news.backToNews')}
-            </Link>
-          </Button>
-
+        <div className="max-w-3xl mx-auto">     
           <article>
             <header className="mb-6">
-              <Badge variant="secondary" className="mb-3">
-                {getLocalized(article.category, lang)}
-              </Badge>
+              <div className="mb-6 flex items-center justify-between gap-3">
+                <Badge variant="secondary">
+                  {getLocalized(article.category, lang)}
+                </Badge>
+
+                <Button variant="ghost" asChild className="gap-2">
+                  <Link to="/news">
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                    {t('news.backToNews')}
+                  </Link>
+                </Button>
+              </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
                 {getLocalized(article.title, lang)}
               </h1>

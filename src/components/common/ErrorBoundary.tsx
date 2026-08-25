@@ -1,7 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
-import { AlertTriangle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { devLog } from '@/lib/utils'
+import { t } from 'i18next'
 
 interface Props {
   children: ReactNode
@@ -40,17 +40,21 @@ export class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) return this.props.fallback
 
       return (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] px-4 text-center">
-          <AlertTriangle className="h-16 w-16 text-destructive mb-6" aria-hidden="true" />
-          <h2 className="text-2xl font-bold mb-3">Something went wrong</h2>
+        <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
+          <img 
+            src="/assets/error/500.svg" 
+            className="mx-auto w-64 h-64 object-contain" 
+            alt="500 - Unexpected Error" 
+            loading="eager"
+          />
+          <h2 className="text-2xl font-bold text-red-500 mb-3">{t('common.error')}</h2>
           <p className="text-muted-foreground mb-6 max-w-md">
-            We encountered an unexpected error. Please try reloading the page. If the problem
-            persists, contact our support team.
+            {t('common.errorSubtitle')}
           </p>
           <div className="flex gap-3">
-            <Button onClick={this.handleReload}>Reload Page</Button>
+            <Button onClick={this.handleReload}>{t('common.reload')}</Button>
             <Button variant="outline" onClick={this.handleReset}>
-              Try Again
+              {t('common.tryagain')}
             </Button>
           </div>
         </div>

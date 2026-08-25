@@ -43,6 +43,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── CSS custom properties (shadcn/ui) ── */
 @layer base {
   :root {
