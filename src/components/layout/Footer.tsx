@@ -10,8 +10,9 @@ const QUICK_LINKS = [
   { to: '/services', labelKey: 'nav.services' },
   { to: '/packages', labelKey: 'nav.packages' },
   { to: '/news', labelKey: 'nav.news' },
+  { to: '/promotin', labelKey: 'nav.promotion' },
+  { to: '/app-guide', labelKey: 'nav.appGuide' },
   { to: '/about', labelKey: 'nav.about' },
-  { to: '/contact', labelKey: 'nav.contact' },
 ]
 
 const SUPPORT_LINKS = [
@@ -30,7 +31,11 @@ export function Footer() {
       <div className="container py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 text-white font-bold text-xl mb-3" aria-label="CG-NET">
+            <Link
+              to="/"
+              className="flex items-center gap-2 text-white font-bold text-xl mb-3"
+              aria-label="CG-NET"
+            >
               <Wifi className="h-6 w-6 text-primary" aria-hidden="true" />
               <span>{t('footer.company')}</span>
             </Link>
@@ -50,33 +55,33 @@ export function Footer() {
 
               {/* WeChat links */}
               <button
-                  type="button"
-                  onClick={() => setShowWechatQR(true)}
-                  aria-label="CG-NET WeChat"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  <SiWechat className="h-5 w-5" aria-hidden="true" />
+                type="button"
+                onClick={() => setShowWechatQR(true)}
+                aria-label="CG-NET WeChat"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                <SiWechat className="h-5 w-5" aria-hidden="true" />
               </button>
 
               {showWechatQR && (
+                <div
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+                  onClick={() => setShowWechatQR(false)}
+                >
                   <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
-                    onClick={() => setShowWechatQR(false)}
+                    className="relative  max-w-sm rounded-2xl bg-white p-2 shadow-2xl"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <div
-                      className="relative  max-w-sm rounded-2xl bg-white p-2 shadow-2xl"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <div className="text-center">
-                        <img
-                          src="/assets/QR/wechat-QR.png"
-                          alt="CG-NET WeChat QR Code"
-                          className="mx-auto w-64 h-64 object-contain"
-                        />
-                      </div>
+                    <div className="text-center">
+                      <img
+                        src="/assets/QR/wechat-QR.png"
+                        alt="CG-NET WeChat QR Code"
+                        className="mx-auto w-64 h-64 object-contain"
+                      />
                     </div>
                   </div>
-                )}
+                </div>
+              )}
 
               {/* Telegram links */}
               <a

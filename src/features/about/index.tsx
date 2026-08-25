@@ -12,6 +12,7 @@ import { motion } from 'framer-motion'
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { aboutContent } from '@/lib/content/about'
 import { StackedCards } from '@/components/common/StackedCards'
+import { Users, Gem, ShieldCheck, Megaphone } from 'lucide-react'
 
 function AboutSkeleton() {
   return (
@@ -69,7 +70,7 @@ export default function AboutPage() {
         >
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tight bg-gradient-font  bg-clip-text text-transparent leading-normal pt-3 pb-3">
+              <h2 className="text-xl md:text-6xl font-black tracking-tight bg-gradient-font  bg-clip-text text-transparent leading-normal pt-3 pb-3">
                 {t('about.ourStory')}
               </h2>
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>
@@ -130,6 +131,13 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <SectionWrapper className="bg-muted/40">
+        <div className="text-center max-w-2xl mx-auto mb-5 ">
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
+            {t('about.purpose')}
+          </h2>
+
+          <div className="h-1.5 w-24 bg-app-primary rounded-full mx-auto"></div>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <AnimatedCard variant="fade-right" delay={0} className="rounded-lg">
             <Card className="h-full card-shine card-glow border">
@@ -206,10 +214,122 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
+      {/* Brand Guideline Section */}
+      <SectionWrapper id="brand-guideline" className="bg-background pt-8 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
+          {/* Left Side: Features Card */}
+          <div className="bg-white border-2 border-font-blue shadow-2xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-[28px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex flex-col">
+              {/* Item 1: Brand Personality */}
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-primary/10">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-ebg  flex items-center justify-center shrink-0">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-icon-user " />
+                </div>
+                <div>
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
+                    {t('about.personalityTitle')}
+                  </h4>
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                    {t('about.personalityDesc')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 2: Core Values */}
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-b border-primary/10">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-cbg  flex items-center justify-center shrink-0">
+                  <Gem className="w-5 h-5 sm:w-6 sm:h-6 text-icon-map " />
+                </div>
+                <div>
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
+                    {t('about.coreValuesTitle')}
+                  </h4>
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                    {t('about.coreValuesDesc')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 3: Brand Promise */}
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-b border-primary/10">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-bbg  flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-icon-activity " />
+                </div>
+                <div>
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
+                    {t('about.brandPromiseTitle')}
+                  </h4>
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                    {t('about.brandPromiseDesc')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 4: Tone of Voice */}
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4 pt-3 sm:pt-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-dbg  flex items-center justify-center shrink-0">
+                  <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-icon-award  duration-300" />
+                </div>
+                <div>
+                  <h4 className="text-font-blue  text-base sm:text-lg font-bold mb-0.5">
+                    {t('about.toneOfVoiceTitle')}
+                  </h4>
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                    {t('about.toneOfVoiceDesc')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side: Text Content */}
+          <div className="space-y-6">
+            <div className="flex gap-4 sm:gap-6">
+              <div className="w-2 sm:w-3 rounded-full bg-[#f2c035] shrink-0"></div>
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-font-blue uppercase leading-[1.1] whitespace-pre-line">
+                {t('about.brandGuidelineTitle')}
+              </h2>
+            </div>
+            <p className="text-font-muted text-base md:text-lg leading-relaxed max-w-lg">
+              {t('about.brandGuidelineDesc')}
+            </p>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Activities Gallery*/}
+      <SectionWrapper id="gallery">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
+          <div className="space-y-6 text-left relative">
+            <div className="absolute -left-4 -top-4 w-32 h-32 bg-app-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-app-primary/10 border border-app-primary/20 text-app-primary text-xs font-bold tracking-wider uppercase shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-app-primary animate-ping"></span>
+              {t(aboutContent.culture.badgeKey)}
+            </div>
+
+            <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+              <span className="bg-gradient-font bg-clip-text text-transparent">
+                {t(aboutContent.culture.titleKey1)}
+              </span>
+              <br />
+              <span className="text-font-black">{t(aboutContent.culture.titleKey2)}</span>
+            </h3>
+            <div className="border-l-4 border-primary/50 pl-4 py-1">
+              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium">
+                {t(aboutContent.culture.descriptionKey)}
+              </p>
+            </div>
+          </div>
+
+          <StackedCards items={aboutContent.galleryItems as any} />
+        </div>
+      </SectionWrapper>
+
       {/* Team */}
       <SectionWrapper>
         <div className="text-center max-w-2xl mx-auto mb-5 space-y-3">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight bg-gradient-font bg-clip-text text-transparent pb-3 pt-3 ">
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight bg-gradient-font bg-clip-text text-transparent pb-3 pt-3 leading-relaxed py-2">
             {t('about.ourTeam')}
           </h2>
           <div className="h-1.5 w-24 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full mx-auto"></div>
@@ -244,35 +364,6 @@ export default function AboutPage() {
               </AnimatedCard>
             )
           })}
-        </div>
-      </SectionWrapper>
-
-      {/* Activities Gallery*/}
-      <SectionWrapper id="gallery">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
-          <div className="space-y-6 text-left relative">
-            <div className="absolute -left-4 -top-4 w-32 h-32 bg-app-primary/10 rounded-full blur-2xl pointer-events-none"></div>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-app-primary/10 border border-app-primary/20 text-app-primary text-xs font-bold tracking-wider uppercase shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-app-primary animate-ping"></span>
-              {t(aboutContent.culture.badgeKey)}
-            </div>
-
-            <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
-              <span className="bg-gradient-font bg-clip-text text-transparent">
-                {t(aboutContent.culture.titleKey1)}
-              </span>
-              <br />
-              <span className="text-font-black">{t(aboutContent.culture.titleKey2)}</span>
-            </h3>
-            <div className="border-l-4 border-primary/50 pl-4 py-1">
-              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium">
-                {t(aboutContent.culture.descriptionKey)}
-              </p>
-            </div>
-          </div>
-
-          <StackedCards items={aboutContent.galleryItems as any} />
         </div>
       </SectionWrapper>
     </main>
