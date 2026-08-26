@@ -1,59 +1,97 @@
-import { Zap, Home, Wifi, Building2, Cloud, Tv } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
-import { getLocalized, getLocalizedArray } from '@/lib/utils'
-import type { Service } from '@/types'
+import { serviceContent } from '@/lib/content/service'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  Zap, Home, Wifi, Building2, Cloud, Tv,
-}
-
 interface ServiceCardProps {
-  service: Service
+  service: (typeof serviceContent.services)[number]
   lang: SupportedLanguage
   delay?: number
+  featured?: boolean
 }
 
-export function ServiceCard({ service, lang, delay = 0 }: ServiceCardProps) {
-  const IconComp = ICON_MAP[service.icon] ?? Zap
-  const features = getLocalizedArray(service.features, lang)
+export function ServiceCard({
+  service,
+  lang,
+  delay = 0,
+  featured = false,
+}: ServiceCardProps) {
+  const { t } = useTranslation()
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full">
-      <Card className="group flex flex-col h-full overflow-hidden border shadow-sm card-glow">
-        <div className="card-media relative h-40">
-          <img
-            src={service.imageUrl}
-            alt={getLocalized(service.title, lang)}
-            className="h-full w-full object-cover"
-            loading="lazy"
+    <AnimatedCard delay={delay} variant="rise" className="h-full rounded-xl">
+      <Card
+        className={`bg-app-card group flex h-full flex-col overflow-hidden border shadow-sm card-glow ${
+          featured ? 'lg:flex-row' : ''
+        }`}
+      >
+        {/* Image / Icon */}
+        <div
+          className={`relative h-40 overflow-hidden bg-muted ${
+            featured
+              ? 'lg:h-auto lg:min-h-64 lg:w-2/5 lg:shrink-0'
+              : ''
+          }`}
+        >
+          <div
+            className={`absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-20 ${service.iconBg}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <div className="absolute bottom-3 left-3 w-10 h-10 bg-white/90 rounded-lg flex items-center justify-center">
-            <IconComp className="h-5 w-5 text-primary" aria-hidden="true" />
+
+          <div
+            className={`absolute inset-0 flex items-center justify-center ${service.iconBg}`}
+          >
+             <img src={service.imageUrl} alt="" />
           </div>
         </div>
-        <CardHeader className="pb-2">
-          <Badge variant="secondary" className="w-fit text-xs mb-1">
-            {service.category}
-          </Badge>
-          <CardTitle className="text-lg">{getLocalized(service.title, lang)}</CardTitle>
-          <CardDescription className="line-clamp-2">
-            {getLocalized(service.description, lang)}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex-1 pt-0">
-          <ul className="space-y-2" aria-label={`${getLocalized(service.title, lang)} features`}>
-            {features.map((feature) => (
-              <li key={feature} className="text-sm flex items-start gap-2">
-                <span className="text-green-500 font-bold mt-0.5 shrink-0" aria-hidden="true">✓</span>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
+
+        {/* Content */}
+        <div
+          className={`flex flex-1 flex-col ${
+            featured
+              ? 'lg:justify-center lg:px-8 lg:py-8'
+              : ''
+          }`}
+        >
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg text-font-blue">
+              {t(service.titleKey, { lng: lang })}
+            </CardTitle>
+
+            <CardDescription className="line-clamp-2">
+              {t(service.descriptionKey, { lng: lang })}
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="flex-1 pt-0">
+            <ul
+              className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1"
+              aria-label={`${t(service.titleKey, {
+                lng: lang,
+              })} features`}
+            >
+              {service.features.map((feature) => {
+                const FeatureIcon = feature.icon
+
+                return (
+                  <li
+                    key={feature.key}
+                    className="flex items-start gap-2 text-sm"
+                  >
+                    <FeatureIcon
+                      className="mt-0.5 h-4 w-4 shrink-0 text-font-blue"
+                      aria-hidden="true"
+                    />
+
+                    <span>
+                      {t(feature.labelKey, { lng: lang })}
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+          </CardContent>
+        </div>
       </Card>
     </AnimatedCard>
   )

@@ -112,7 +112,47 @@
     "title": "Our Services",
     "subtitle": "Offer a range of internet plans tailored to meet the diverse needs of customers",
     "pageTitle": "Services - CG-NET",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "mmBroadband": {
+    "title": "Myanmar Network",
+    "description": "Myanmar broadband service with 20Mbps, 50Mbps, 100Mbps, and 150Mbps speed plans for reliable home internet.",
+      "features": {
+      "speed": "20Mbps, 50Mbps, 100Mbps, and 150Mbps plans",
+      "uptime": "99.9% uptime SLA",
+      "installation": "Free installation",
+      "support": "24/7 technical support"
+      }
+    },
+    "cgBroadband": {
+    "title": "Chen Guang Network",
+    "description": "Chen Guang broadband service offering 50Mbps and 100Mbps plans with reliable connectivity.",
+      "features": {
+      "bandwidth": "50Mbps and 100Mbps plans",
+      "staticIp": "Static IP addresses",
+      "sla": "SLA guarantee",
+      "support": "24/7 technical support"
+      }
+    },
+    "cgNetBroadband": {
+    "title": "CG-NET Network",
+    "description": "Reliable CG-NET home internet service with a 20Mbps plan and convenient home connectivity.",
+      "features": {
+      "speedTiers": "20Mbps home internet plan",
+      "unlimitedData": "Unlimited data",
+      "freeRouter": "Receiver included",
+      "easySetup": "Free installation"
+      }
+    },
+    "iptv": {
+    "title": "IPTV Service",
+    "description": "Digital television service with 288 channels for entertainment and television viewing.",
+      "features": {
+      "channels": "288 channels",
+      "resolution": "HD digital TV content",
+      "service": "IPTV service",
+      "easySetup": "Easy installation"
+      }
+    }
   },
   "packages": {
     "title": "Internet Packages",

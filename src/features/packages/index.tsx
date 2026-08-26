@@ -14,9 +14,10 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 
 const FILTERS = [
-  { value: 'plan', labelKey: 'packages.filterPlan' },
-  { value: 'business', labelKey: 'packages.filterBusiness' },
-  { value: 'enterprise', labelKey: 'packages.filterCGNetCard' },
+  { value: 'mm-broadband', labelKey: 'services.mmBroadband.title' },
+  { value: 'cg-broadband', labelKey: 'services.cgBroadband.title' },
+  { value: 'cg-net-broadband', labelKey: 'services.cgNetBroadband.title' },
+  { value: 'iptv-service', labelKey: 'services.iptv.title' },
 ]
 
 function PackageSkeleton() {
