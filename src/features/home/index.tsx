@@ -153,7 +153,7 @@ export default function HomePage() {
         {newsError && <ErrorMessage />}
 
         {news && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
             {news.map((article, i) => (
               <NewsCard key={article.id} article={article} lang={lang} delay={i * 100} compact />
             ))}

@@ -615,38 +615,6 @@
   ],
   "news": [
     {
-      "id": "1",
-      "slug": "cgnet-launches-1gbps-fiber",
-      "title": {
-        "en": "CG-NET Launches 1Gbps Fiber Plans",
-        "my": "CG-NET မှ 1Gbps ဖိုက်ဘာ အစီအစဉ်များ မိတ်ဆက်",
-        "zh": "CG-NET 推出 1Gbps 光纤套餐"
-      },
-      "excerpt": {
-        "en": "CG-NET has officially launched its gigabit fiber internet plans, bringing ultra-fast connectivity to homes and businesses across the region.",
-        "my": "CG-NET သည် ဒေသတစ်ဝှမ်း အိမ်များနှင့် လုပ်ငန်းများသို့ အလွန်မြန်သော ချိတ်ဆက်မှုကို ဆောင်ကြဉ်းရန် gigabit ဖိုက်ဘာ အင်တာနက် အစီအစဉ်များကို တရားဝင် မိတ်ဆက်ခဲ့သည်။",
-        "zh": "CG-NET 正式推出千兆光纤宽带套餐，为区域内家庭与企业带来超高速连接。"
-      },
-      "content": {
-        "en": "<p>CG-NET, Myanmar's leading internet service provider, has officially launched its 1Gbps fiber broadband plans, marking a significant milestone in the country's digital infrastructure development.</p><p>The new plans are available in select areas and will be expanded nationwide over the coming months. With download speeds of up to 1Gbps, customers can enjoy buffer-free 4K streaming, seamless video conferencing, and lightning-fast file transfers.</p><p>\"We're committed to bringing world-class internet connectivity to every corner of Myanmar,\" said the CEO of CG-NET. \"This launch represents our biggest infrastructure investment to date.\"</p>",
-        "my": "<p>မြန်မာနိုင်ငံ၏ ဦးဆောင်သော အင်တာနက် ဝန်ဆောင်မှု ပေးသူ CG-NET သည် နိုင်ငံ၏ ဒစ်ဂျစ်တယ် အခြေခံ အဆောက်အအုံ ဖွံ့ဖြိုးတိုးတက်မှုတွင် အရေးကြီးသော မှတ်တိုင်တစ်ခုကို ချမှတ်ကာ 1Gbps ဖိုက်ဘာ ဘရောက်ဘင်း အစီအစဉ်များကို တရားဝင် ဤသည်။</p>",
-        "zh": "<p>缅甸领先的互联网服务商 CG-NET 正式推出 1Gbps 光纤宽带套餐，标志着国家数字基础设施建设的重要里程碑。</p><p>新套餐目前在部分区域开放，并将在未来数月内向全国扩展。下载速率高达 1Gbps，用户可畅享无卡顿 4K 观影、流畅视频会议与极速文件传输。</p><p>CG-NET 首席执行官表示：“我们致力于将世界级互联网连接带到缅甸的每一个角落。此次发布是迄今为止最大的基础设施投资。”</p>"
-      },
-      "category": {
-        "en": "Product Launch",
-        "my": "ထုတ်ကုန် မိတ်ဆက်",
-        "zh": "产品发布"
-      },
-      "author": {
-        "en": "CG-NET Team",
-        "my": "CG-NET အဖွဲ့",
-        "zh": "CG-NET 团队"
-      },
-      "publishedAt": "2025-01-15T08:00:00Z",
-      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop",
-      "tags": ["fiber", "launch", "1gbps"]
-    },
-    {
       "id": "2",
       "slug": "network-expansion-mandalay",
       "title": {

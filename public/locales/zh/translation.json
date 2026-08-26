@@ -111,7 +111,47 @@
     "title": "我们的服务",
     "subtitle": "提供多种互联网套餐，满足不同客户的多样化需求。",
     "pageTitle": "服务 - CG-NET",
-    "learnMore": "了解更多"
+    "learnMore": "了解更多",
+    "mmBroadband": {
+      "title": "缅甸网络",
+      "description": "缅甸宽带服务，提供 20Mbps、50Mbps、100Mbps 和 150Mbps 多种速率套餐，满足稳定的家庭上网需求。",
+        "features": {
+        "speed": "20Mbps、50Mbps、100Mbps 和 150Mbps 套餐",
+        "uptime": "99.9% 可用性 SLA",
+        "installation": "免费安装",
+        "support": "全天候技术支持"
+        }
+      },
+      "cgBroadband": {
+      "title": "晨光网",
+      "description": "晨光网宽带服务，提供 50Mbps 和 100Mbps 速率套餐，满足稳定的网络连接需求。",
+        "features": {
+        "bandwidth": "50Mbps 和 100Mbps 套餐",
+        "staticIp": "静态 IP 地址",
+        "sla": "SLA 保障",
+        "support": "全天候技术支持"
+        }
+      },
+      "cgNetBroadband": {
+      "title": "CG-NET 家庭网",
+      "description": "可靠的 CG-NET 家庭宽带服务，提供 20Mbps 套餐，为家庭提供便捷的网络连接。",
+        "features": {
+        "speedTiers": "20Mbps 家庭宽带套餐",
+        "unlimitedData": "不限流量",
+        "freeRouter": "包含接收器",
+        "easySetup": "免费安装"
+        }
+      },
+      "iptv": {
+      "title": "IPTV 服务",
+      "description": "数字电视服务，提供 288 个频道，满足日常电视和娱乐观看需求。",
+        "features": {
+        "channels": "288 个频道",
+        "resolution": "高清数字电视内容",
+        "service": "IPTV 服务",
+        "easySetup": "轻松安装"
+        }
+      }
   },
   "packages": {
     "title": "宽带套餐",
