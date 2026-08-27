@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -23,14 +23,17 @@ const NAV_LINKS = [
 ]
 
 const MOBILE_PACKAGE_LINKS = [
-  { to: '/packages?category=plan', labelKey: 'nav.plan' },
-  { to: '/packages?category=business', labelKey: 'nav.business' },
-  { to: '/packages?category=cg-net-card', labelKey: 'nav.cgNetCard' },
+  { to: '/packages?category=mm-broadband', labelKey: 'services.mmBroadband.title' },
+  { to: '/packages?category=cg-broadband', labelKey: 'services.cgBroadband.title' },
+  { to: '/packages?category=cg-net-broadband', labelKey: 'services.cgNetBroadband.title' },
+  { to: '/packages?category=iptv-service', labelKey: 'services.iptv.title' },
 ]
 
 export function NavBar() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const isPackagesActive = pathname === '/packages' || pathname.startsWith('/packages/')
 
   return (
     <nav role="navigation" aria-label="Main navigation" className="flex items-center font-heading">
@@ -65,11 +68,11 @@ export function NavBar() {
         </NavLink>
 
         <NavLink
-          to="/packages?category=plan"
-          className={({ isActive }) =>
+          to="/packages?category=mm-broadband"
+          className={() =>
             cn(
               'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
-              isActive && 'text-transparent bg-clip-text bg-gradient-font'
+              isPackagesActive && 'text-transparent bg-clip-text bg-gradient-font'
             )
           }
         >
