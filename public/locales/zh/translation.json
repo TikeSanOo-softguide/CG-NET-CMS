@@ -185,14 +185,118 @@
     "benefit4Desc": "与才华出众、充满热情的同事在协作环境中共事。"
   },
   "appGuide": {
-    "title": "应用指南",
-    "subtitle": "几分钟内上手 CG-NET 应用",
-    "pageTitle": "应用指南 - CG-NET",
-    "downloadApp": "下载应用",
-    "iosApp": "iOS 应用",
-    "androidApp": "Android 应用",
-    "stepBy": "步骤",
-    "overview": "快速概览"
+    "title": "應用程式指南",
+    "subtitle": "幾分鐘內即可開始使用 CG-NET 應用程式",
+    "pageTitle": "應用程式指南 - CG-NET",
+    "downloadApp": "下載應用程式",
+    "iosApp": "App Store",
+    "androidApp": "Google Play",
+    "androidApk": "Android APK",
+    "appGallery": "AppGallery",
+    "iosSubtitle": "從 App Store",
+    "androidSubtitle": "透過 Google Play",
+    "apkSubtitle": "下載 Android",
+    "gallerySubtitle": "可在以下平台取得",
+    "stepBy": "步驟",
+    "overview": "快速總覽",
+    "faqTitle": "常見問題",
+    "guides": {
+      "1": {
+        "title": "下載 CG-NET 應用",
+        "description": "從 App Store（iOS）或 Google Play（Android）下載 CG-NET 移動應用。",
+        "steps": [
+          "在設備上打開 App Store 或 Google Play",
+          "搜索“CG-NET”",
+          "點擊“安裝”或“獲取”",
+          "等待下載完成"
+        ]
+      },
+      "2": {
+        "title": "創建您的賬戶",
+        "description": "使用訂閱賬單上的賬號進行註冊。",
+        "steps": [
+          "打開 CG-NET 應用",
+          "在歡迎頁點擊“註冊”",
+          "輸入賬單上的賬號",
+          "創建安全密碼",
+          "通過短信驗證手機號"
+        ]
+      },
+      "3": {
+        "title": "查詢您的用量",
+        "description": "在儀表盤實時查看流量、網速與服務狀態。",
+        "steps": [
+          "登錄 CG-NET 應用",
+          "在儀表盤查看實時用量統計",
+          "點擊“用量詳情”查看明細",
+          "設置用量提醒，避免超額"
+        ]
+      },
+      "4": {
+        "title": "繳納賬單",
+        "description": "通過應用使用 MPU、KBZ Pay、Wave Money 或銀行轉賬直接繳納月費。",
+        "steps": [
+          "點擊底部導航中的“賬單”",
+          "查看當前賬單金額與到期日",
+          "選擇支付方式",
+          "完成支付",
+          "保存回執"
+        ]
+      },
+      "5": {
+        "title": "報告問題",
+        "description": "直接在應用中提交工單並跟蹤處理進度。",
+        "steps": [
+          "點擊“支持”選項卡",
+          "選擇“報告問題”",
+          "選擇問題分類",
+          "詳細描述問題",
+          "提交並跟蹤工單"
+        ]
+      }
+    },
+    "faq": {
+      "1": {
+        "question": "什麼是 CG-Points？如何獲得它們？",
+        "answer": "CG-Points 是透過使用 CG Wallet 等合作夥伴錢包進行每筆交易、儲值和轉帳所賺取的忠誠度獎勵。您可以累積這些點數來兌換免費上網方案和專屬優惠。"
+      },
+      "2": {
+        "question": "自動續約功能是如何運作的？",
+        "answer": "當您訂閱啟用自動續約且符合資格的方案，且您的可用流量低於 50 MB 時，系統將自動為您續約，讓您無需手動重新購買即可保持連線。"
+      },
+      "3": {
+        "question": "支援哪些付款方式？",
+        "answer": "您可以使用 CG Wallet、KBZPay、WavePay、AYA Pay 和 CB Pay 安全地購買上網方案並為帳戶儲值。"
+      },
+      "4": {
+        "question": "未用完的流量可以累積到下期嗎？",
+        "answer": "可以！對於特定的 Data Carry Plus 方案，當您續訂時，任何未用完的流量餘額將在到期後的 7 天內自動累積保留。"
+      },
+      "5": {
+        "question": "如何檢查我目前的方案狀態和點數餘額？",
+        "answer": "您可以隨時登入您的帳戶儀表板，在「帳戶 (Account)」或「獎勵 (Rewards)」分頁下查看您的即時流量、有效期限和累積的 CG-Points。"
+      },
+      "6": {
+        "question": "在主要使用期間我可以期待什麼樣的網速？",
+        "answer": "根據您所選擇的特定方案和每日流量限制，訂閱者可以享用從 2.5 Mbps 到專用多兆位元 (multi-megabit) 等級的高速連線。"
+      },
+      "7": {
+        "question": "我可以在多個裝置上使用我的上網方案嗎？",
+        "answer": "為了獲得最佳的連線穩定性和網路對應，標準帳戶嚴格限制為「一帳戶一裝置 (One Account per Device)」。"
+      },
+      "8": {
+        "question": "如果我的連線中斷或變慢，我該怎麼辦？",
+        "answer": "首先，檢查您的路由器電源和指示燈是否穩定。如果您的流量偏低，可以透過應用程式快速儲值或續約。若遇到高遊戲延遲或路由中斷等持續性問題，請聯繫我們的 2/7 技術支援團隊。"
+      },
+      "9": {
+        "question": "如何更改我的 Wi-Fi 網路名稱或密碼？",
+        "answer": "您可以直接透過 CG Net 行動應用程式或客戶網路入口網站輕鬆管理路由器設定、更新 Wi-Fi 密碼並檢視已連線的裝置。"
+      },
+      "10": {
+        "question": "訂閱維護或流量累積方案有什麼好處？",
+        "answer": "符合資格的方案皆內建防護機制，例如流量累積選項（允許未使用的流量在到期後 7 天內滾入）以及自動續約觸發機制，確保您不會遭遇意外的服務中斷。"
+      }
+    }
   },
   "about": {
     "title": "关于 CG-NET",

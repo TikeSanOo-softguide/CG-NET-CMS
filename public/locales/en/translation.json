@@ -185,15 +185,120 @@
     "periodLabel": "Periode Promo:",
     "back": "Back to Promotions"
   },
+
   "appGuide": {
     "title": "App Guide",
     "subtitle": "Get started with the CG-NET app in minutes",
     "pageTitle": "App Guide - CG-NET",
     "downloadApp": "Download the App",
-    "iosApp": "iOS App",
-    "androidApp": "Android App",
+    "iosApp": "App Store",
+    "androidApp": "Google Play",
+    "androidApk": "Android APK",
+    "appGallery": "AppGallery",
+    "iosSubtitle": "Download on the",
+    "androidSubtitle": "Get it on",
+    "apkSubtitle": "Download APK for",
+    "gallerySubtitle": "Available on the",
     "stepBy": "Step",
-    "overview": "Quick Overview"
+    "overview": "Quick Overview",
+    "faqTitle": "Frequently Asked Questions",
+    "guides": {
+      "1": {
+        "title": "Download the CG-NET App",
+        "description": "Download the CG-NET mobile app from the App Store (iOS) or Google Play (Android).",
+        "steps": [
+          "Open the App Store or Google Play on your device",
+          "Search for \"CG-NET\"",
+          "Tap \"Install\" or \"Get\"",
+          "Wait for the download to complete"
+        ]
+      },
+      "2": {
+        "title": "Create Your Account",
+        "description": "Register with your account number found on your subscription invoice.",
+        "steps": [
+          "Open the CG-NET app",
+          "Tap \"Register\" on the welcome screen",
+          "Enter your account number from your invoice",
+          "Create a secure password",
+          "Verify your phone number via SMS"
+        ]
+      },
+      "3": {
+        "title": "Check Your Usage",
+        "description": "Monitor your data usage, speed, and service status in real-time from the dashboard.",
+        "steps": [
+          "Log in to the CG-NET app",
+          "View the dashboard for real-time usage stats",
+          "Tap \"Usage Details\" for a breakdown",
+          "Set usage alerts to avoid overages"
+        ]
+      },
+      "4": {
+        "title": "Pay Your Bill",
+        "description": "Pay your monthly internet bill directly through the app using MPU, KBZ Pay, Wave Money, or bank transfer.",
+        "steps": [
+          "Tap \"Billing\" in the bottom navigation",
+          "View your current bill amount and due date",
+          "Select a payment method",
+          "Complete the payment",
+          "Save your receipt"
+        ]
+      },
+      "5": {
+        "title": "Report an Issue",
+        "description": "Submit a support ticket directly from the app and track its resolution status.",
+        "steps": [
+          "Tap the \"Support\" tab",
+          "Select \"Report an Issue\"",
+          "Choose the issue category",
+          "Describe the problem in detail",
+          "Submit and track your ticket"
+        ]
+      }
+    },
+    "faq": {
+      "1": {
+        "question": "What are CG-Points and how do I earn them?",
+        "answer": "CG-Points are loyalty rewards earned on every transaction, top-up, and transfer using partner wallets like the CG Wallet. You can accumulate these points to redeem free internet data plans and exclusive perks."
+      },
+      "2": {
+        "question": "How does the Auto-Renewal feature work?",
+        "answer": "When you subscribe to eligible packages with Auto-Renewal enabled and your data balance drops below 50 MB, the package will renew automatically so you stay connected without manual repurchasing."
+      },
+      "3": {
+        "question": "What payment methods are supported?",
+        "answer": "You can purchase data packages and top up your account securely using CG Wallet, KBZPay, WavePay, AYA Pay, and CB Pay."
+      },
+      "4": {
+        "question": "Can my unused data be carried forward?",
+        "answer": "Yes! For specific Data Carry Plus packages, any unused data balance will be automatically carried forward within 7 days after expiry when you renew your subscription."
+      },
+      "5": {
+        "question": "How can I check my current package status and point balance?",
+        "answer": "You can view your real-time data balance, validity dates, and accumulated CG-Points anytime by logging into your account dashboard under the \"Account\" or \"Rewards\" tab."
+      },
+      "6": {
+        "question": "What speeds can I expect during my primary usage period?",
+        "answer": "Subscribers can enjoy high-speed connectivity ranging from 2.5 Mbps up to dedicated multi-megabit tiers, depending on the specific package and daily quota limits chosen."
+      },
+      "7": {
+        "question": "Can I use my internet package across multiple devices?",
+        "answer": "For optimal connection stability and network mapping, standard accounts are strictly limited to One Account per Device."
+      },
+      "8": {
+        "question": "What should I do if my connection drops or slows down?",
+        "answer": "First, check if your router's power and indicator lights are steady. If your data balance is low, you can quickly top up or renew through the app. For persistent issues such as high game ping or routing drops, reach out to our 24/7 technical support team."
+      },
+      "9": {
+        "question": "How do I change my Wi-Fi network name or password?",
+        "answer": "You can easily manage your router settings, update your Wi-Fi password, and view connected devices directly through the CG Net mobile application or customer web portal."
+      },
+      "10": {
+        "question": "What are the benefits of subscribing to Maintenance or Data Carry packages?",
+        "answer": "Eligible plans come with built-in safeguards like data carry-forward options (allowing unused data to roll over within a 7-day post-expiry window) and automated renewal triggers so you never experience unexpected service interruptions."
+      }
+    }
   },
   "about": {
     "title": "About CG-NET",
@@ -274,7 +379,7 @@
     "support": "Support",
     "faq": "FAQ",
     "helpCenter": "Help Center",
-    "brandGuideLine" : "Brand Guideline",
+    "brandGuideLine": "Brand Guideline",
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
     "followUs": "Follow Us",

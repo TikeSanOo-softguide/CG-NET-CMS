@@ -3,7 +3,7 @@ import { Users, MapPin, Activity, Award, Calendar, Network, Wrench, Settings } f
 export const aboutContent = {
   stats: [
     {
-      value: '200,000+',
+      value: '100,000+',
       labelKey: 'home.stat1Label',
       icon: Users,
       color: 'text-icon-user',

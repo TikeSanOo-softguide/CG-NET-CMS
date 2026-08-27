@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChevronLeft, ChevronRight, Filter } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardFooter, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -13,15 +13,9 @@ import { usePromotion } from '@/hooks/usePromotion'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { SearchBar } from '@/components/common/SearchBar'
+import { CommonFilter } from '@/components/common/CommonFilter'
+import { newsFilterOptions } from '@/lib/content/new'
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
-
-// Set your page size directly here (e.g., 5 items per page)
 const PAGE_SIZE = 6
 
 function PromotionSkeleton() {
@@ -50,6 +44,7 @@ export default function PromotionPage() {
   const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE)
 
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 1
+  const [filter, setFilter] = useState('all')
 
   return (
     <main>
@@ -64,40 +59,7 @@ export default function PromotionPage() {
               </div>
 
               {/* Filter Icon Button (Dropdown Menu) */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-font-blue bg-font-blue text-white rounded-full hover:bg-font-blue/90 transition-all duration-300 shadow-sm"
-                  >
-                    <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-white transition-transform duration-300 hover:scale-110" />
-                    <span className="sr-only">Filter</span>
-                  </Button>
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent
-                  align="end"
-                  // className="w-40 sm:w-48 rounded-xl bg-background border border-font-blue/15 shadow-lg z-50 p-2 mt-2"
-                  className="cursor-pointer font-medium text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg transition-colors hover:bg-font-blue/10 hover:text-font-blue focus:bg-font-blue/10 focus:text-font-blue z-50"
-                >
-                  <DropdownMenuItem className="cursor-pointer font-medium text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3">
-                    All Categories
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem className="cursor-pointer text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3">
-                    Fiber Internet
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem className="cursor-pointer text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3">
-                    Mobile Data
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem className="cursor-pointer text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3">
-                    Business Plans
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <CommonFilter options={newsFilterOptions} value={filter} onChange={setFilter} />
             </div>
           </div>
         </div>

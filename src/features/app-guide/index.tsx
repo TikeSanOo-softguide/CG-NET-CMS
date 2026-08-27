@@ -1,44 +1,19 @@
 import { useTranslation } from 'react-i18next'
-import { Download, UserPlus, BarChart2, CreditCard, AlertCircle } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
-import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
-import { useGuides } from '@/hooks/useGuides'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { getLocalized, getLocalizedArray } from '@/lib/utils'
-import { normalizeLanguage } from '@/lib/i18n'
-
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  Download, UserPlus, BarChart2, CreditCard, AlertCircle,
-}
-
-function GuideSkeleton() {
-  return (
-    <Card>
-      <CardHeader>
-        <Skeleton className="h-10 w-10 rounded-full mb-2" />
-        <Skeleton className="h-6 w-2/3" />
-      </CardHeader>
-      <CardContent className="space-y-2">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-5/6" />
-      </CardContent>
-    </Card>
-  )
-}
+import { appGuideContent } from '../../lib/content/guide'
 
 export default function AppGuidePage() {
-  const { t, i18n } = useTranslation()
-  const lang = normalizeLanguage(i18n.language)
-
+  const { t } = useTranslation()
   usePageTitle(t('appGuide.pageTitle'))
-
-  const { data: guides, isLoading, isError, refetch } = useGuides()
 
   return (
     <main>
@@ -46,104 +21,170 @@ export default function AppGuidePage() {
 
       <SectionWrapper>
         {/* App download links */}
-        <div className="mb-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#"
-            className="inline-flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors w-full sm:w-auto"
-            aria-label="Download on the App Store"
-          >
-            <span className="text-2xl" aria-hidden="true">🍎</span>
-            <div className="text-left">
-              <p className="text-xs text-gray-300">Download on the</p>
-              <p className="font-semibold">{t('appGuide.iosApp')}</p>
-            </div>
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center justify-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors w-full sm:w-auto"
-            aria-label="Get it on Google Play"
-          >
-            <span className="text-2xl" aria-hidden="true">🤖</span>
-            <div className="text-left">
-              <p className="text-xs text-gray-300">Get it on</p>
-              <p className="font-semibold">{t('appGuide.androidApp')}</p>
-            </div>
-          </a>
+
+        <div className="mb-10 flex flex-row flex-nowrap gap-3 justify-start sm:justify-center items-center overflow-x-auto px-4 sm:px-6 py-2 scrollbar-none">
+          {appGuideContent.downloadLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              className="inline-flex items-center gap-2.5 bg-font-black text-font-white px-4 py-2.5 rounded-xl hover:bg-gray-800 transition-colors shrink-0"
+              aria-label={link.ariaLabel}
+            >
+              <svg
+                viewBox={link.viewBox}
+                fill="currentColor"
+                className="w-6 h-6 shrink-0 text-app-yellow"
+                aria-hidden="true"
+              >
+                <path d={link.iconPath} />
+              </svg>
+              <div className="text-left">
+                <p className="text-[10px] text-font-muted leading-tight">{t(link.subtitleKey)}</p>
+                <p className="text-sm font-semibold leading-tight">{t(link.titleKey)}</p>
+              </div>
+            </a>
+          ))}
         </div>
 
-        {isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            {[1, 2, 3].map((i) => <GuideSkeleton key={i} />)}
-          </div>
-        )}
-
-        {isError && <ErrorMessage onRetry={() => void refetch()} />}
-
-        {guides && (
-          <>
-            {/* Overview cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-              {guides.map((step, index) => {
-                const IconComp = ICON_MAP[step.icon] ?? Download
-                return (
-                  <AnimatedCard key={step.id} delay={index * 80} variant="zoom-in" className="rounded-lg">
-                  <Card className="h-full card-shine card-glow border">
-                    <CardHeader className="pb-2">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                          <IconComp className="h-5 w-5 text-primary" aria-hidden="true" />
+        <>
+          {/* Overview cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            {appGuideContent.guides.map((guide, index) => {
+              const IconComp = guide.icon
+              return (
+                <AnimatedCard
+                  key={guide.id}
+                  delay={index * 80}
+                  variant="zoom-in"
+                  className="rounded-2xl"
+                >
+                  <div className="h-full group relative overflow-hidden bg-app-card backdrop-blur-sm border border-border/40  rounded-2xl transition-all duration-700 hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-1 cursor-pointer">
+                    <div className="p-6 sm:p-8 flex flex-col h-full">
+                      <div className="flex items-start justify-between mb-8">
+                        <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center transition-all duration-500 group-hover:bg-font-blue group-hover:shadow-lg group-hover:shadow-app-blue/20 group-hover:scale-105">
+                          <IconComp
+                            className="h-6 w-6 text-primary group-hover:text-font-white transition-colors duration-500"
+                            aria-hidden="true"
+                          />
                         </div>
-                        <Badge variant="outline" className="text-xs">
-                          {t('appGuide.stepBy')} {index + 1}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-base">{getLocalized(step.title, lang)}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {getLocalized(step.description, lang)}
-                      </p>
-                    </CardContent>
-                  </Card>
-                  </AnimatedCard>
-                )
-              })}
-            </div>
 
-            {/* Detailed steps accordion */}
-            <h2 className="text-2xl font-bold mb-6">{t('appGuide.overview')}</h2>
-            <Accordion type="single" collapsible className="space-y-2">
-              {guides.map((step, index) => {
-                const steps = getLocalizedArray(step.steps, lang)
-                return (
-                  <AccordionItem key={step.id} value={step.id} className="border rounded-lg px-4">
-                    <AccordionTrigger className="text-left hover:no-underline">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <span className="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0" aria-hidden="true">
-                          {index + 1}
+                        <span className="text-xs font-bold tracking-widest uppercase text-font-muted group-hover:text-font-blue  transition-colors duration-500 mt-1">
+                          {t('appGuide.stepBy')} 0{index + 1}
                         </span>
-                        <span className="font-semibold text-sm sm:text-base min-w-0">{getLocalized(step.title, lang)}</span>
                       </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-muted-foreground mb-3 pl-0 sm:pl-10">
-                        {getLocalized(step.description, lang)}
-                      </p>
-                      <ol className="pl-0 sm:pl-10 space-y-2" aria-label={`Steps for ${getLocalized(step.title, lang)}`}>
-                        {steps.map((s, i) => (
-                          <li key={i} className="text-sm flex items-start gap-2">
-                            <span className="text-primary font-semibold shrink-0" aria-hidden="true">{i + 1}.</span>
-                            {s}
-                          </li>
-                        ))}
-                      </ol>
-                    </AccordionContent>
-                  </AccordionItem>
-                )
-              })}
+
+                      <div className="mt-auto">
+                        <h3 className="text-[1.15rem] font-semibold tracking-tight  mb-3 group-hover:text-font-blue  transition-colors duration-500">
+                          {t(guide.titleKey)}
+                        </h3>
+
+                        <p className="text-sm text-font-muted  leading-relaxed">
+                          {t(guide.descriptionKey)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedCard>
+              )
+            })}
+          </div>
+
+          {/* Detailed steps accordion */}
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6">
+            {t('appGuide.overview')}
+          </h2>
+
+          <Accordion type="single" collapsible className="space-y-4">
+            {appGuideContent.guides.map((guide, index) => {
+              const stepsList = t(guide.stepsKey, { returnObjects: true }) as string[]
+              return (
+                <AccordionItem
+                  key={guide.id}
+                  value={guide.id}
+                  className="bg-card border border-border/60 rounded-xl px-5 shadow-sm transition-all duration-300 data-[state=open]:border-font-blue data-[state=open]:shadow-md overflow-hidden relative"
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-font-blue data-[state=open]:bg-border-font-blue transition-colors duration-300" />
+
+                  <AccordionTrigger className="text-left hover:no-underline py-4 pl-2">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <span
+                        className="w-8 h-8 bg-font-blue text-font-white  rounded-lg flex items-center justify-center text-sm font-bold shrink-0"
+                        aria-hidden="true"
+                      >
+                        {index + 1}
+                      </span>
+                      <span className="font-semibold text-sm sm:text-base min-w-0 text-font-black">
+                        {t(guide.titleKey)}
+                      </span>
+                    </div>
+                  </AccordionTrigger>
+
+                  <AccordionContent className="pb-5 pt-1 pl-2">
+                    <p className="text-sm text-font-muted mb-4 pl-0 sm:pl-11 leading-relaxed">
+                      {t(guide.descriptionKey)}
+                    </p>
+
+                    <ol
+                      className="pl-0 sm:pl-11 space-y-2.5"
+                      aria-label={`Steps for ${t(guide.titleKey)}`}
+                    >
+                      {stepsList.map((s, i) => (
+                        <li key={i} className="text-sm flex items-start gap-2.5 text-font-black">
+                          <span
+                            className="text-app-black font-semibold shrink-0 mt-0.5"
+                            aria-hidden="true"
+                          >
+                            {i + 1}.
+                          </span>
+                          <span className="leading-relaxed">{s}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </AccordionContent>
+                </AccordionItem>
+              )
+            })}
+          </Accordion>
+
+          {/* Frequently Asked Questions (FAQ Section) */}
+          <div className="mt-16 mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6">
+              {t('appGuide.faqTitle')}
+            </h2>
+
+            <Accordion type="single" collapsible className="space-y-4">
+              {appGuideContent.faqs.map((faq, index) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={`faq-${faq.id}`}
+                  className="bg-card border border-border/60 rounded-xl px-5 shadow-sm transition-all duration-300 data-[state=open]:border-font-blue data-[state=open]:shadow-md overflow-hidden relative"
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-font-blue transition-colors duration-300" />
+
+                  <AccordionTrigger className="text-left hover:no-underline py-4 pl-2">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <span
+                        className="w-8 h-8 bg-font-blue text-font-white rounded-lg flex items-center justify-center text-sm font-bold shrink-0 shadow-sm"
+                        aria-hidden="true"
+                      >
+                        {index + 1}
+                      </span>
+                      <span className="font-semibold text-sm sm:text-base min-w-0 ">
+                        {t(faq.questionKey)}
+                      </span>
+                    </div>
+                  </AccordionTrigger>
+
+                  <AccordionContent className="pb-5 pt-1 pl-2">
+                    <p className="text-sm text-font-muted  pl-0 sm:pl-11 leading-relaxed">
+                      {t(faq.answerKey)}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
-          </>
-        )}
+          </div>
+        </>
       </SectionWrapper>
     </main>
   )

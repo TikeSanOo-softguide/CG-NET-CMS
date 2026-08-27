@@ -22,14 +22,16 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
     <AnimatedCard delay={delay} variant="rise" className="rounded-2xl h-full">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl  bg-[#f5f5f5]',
+          'group flex flex-col overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl  bg-app-card',
           compact ? 'h-[360px]' : 'h-full'
         )}
       >
         {/* 1. Top Image Header */}
-        <Link
-          to={`/promotions/${promotion.slug}`}
-          className={cn('block overflow-hidden bg-muted relative', compact ? 'h-[140px]' : 'h-48')}
+        <div
+          className={cn(
+            'block overflow-hidden bg-font-muted relative',
+            compact ? 'h-[140px]' : 'h-48'
+          )}
         >
           <img
             src={promotion.imageUrl}
@@ -37,32 +39,14 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-        </Link>
-        {/* {promotion.isActive && (
-          <div className="absolute top-3 right-3 z-10">
-            <span className="px-3 py-1 text-xs font-semibold text-white bg-green-600 backdrop-blur-md rounded-full shadow-sm">
-              Active
-            </span>
-          </div>
-        )} */}
-
-        {/* {promotion.isActive && (
-          <div className="absolute top-3 right-3 z-10">
-           
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-green-600 bg-green-600/10 backdrop-blur-md rounded-full shadow-sm border border-green-600/10">
-              
-              <span className="h-2 w-2  rounded-full bg-green-600" />
-              Active
-            </span>
-          </div>
-        )} */}
+        </div>
 
         {/* 2. Title Section */}
         <CardHeader className="pb-3 pt-4 px-5">
           <CardTitle className="text-base font-bold leading-snug text-font-black h-[3rem] flex items-center">
             <Link
               to={`/promotion/${promotion.slug}`}
-              className="hover:text-font-blue text-[#0E0E0E]  transition-colors line-clamp-2"
+              className="hover:text-font-blue   transition-colors line-clamp-2"
             >
               {getLocalized(promotion.title, lang)}
             </Link>
@@ -85,47 +69,18 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           </div>
         </CardContent>
 
-        {/* 4. Bottom Full-Width Pill CTA Button */}
-        {/* <CardFooter className="pt-3 pb-5 px-5 flex justify-center ">
-          <Button
-            asChild
-            className="w-full h-8 rounded-lg font-medium text-white bg-font-blue hover:bg-font-blue/90 transition-colors shadow-sm active:scale-95"
-          >
-            <Link
-              to={`/promotion/${promotion.slug}`}
-              className="flex items-center justify-center gap-2"
-            >
-              <span>{t('promotions.viewDetail')}</span>
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Button>
- </CardFooter> */}
-
-        <CardFooter className="pt-3 pb-5 px-5 flex items-center justify-between gap-3">
-          {promotion.isActive ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-green-600 bg-green-600/15 backdrop-blur-md rounded-full shadow-sm border border-green-600/20 shrink-0">
-              <span className="h-2 w-2 rounded-full bg-green-600" />
-              Active
-            </span>
-          ) : (
-            <div />
-          )}
-
+        <CardFooter className="pt-3 pb-5 px-5 flex items-center justify-end gap-3">
           {/* 2. View Detail Button with Hover Effect */}
           <Button
             variant="ghost"
             size="sm"
             asChild
-
-            className="group h-8 gap-1 px-3 py-1.5 text-font-blue hover:text-font-blue hover:bg-font-blue/10 rounded-lg transition-all duration-200"
+            className="h-8 gap-1 px-2 text-font-blue hover:text-font-blue"
           >
             <Link to={`/promotion/${promotion.slug}`} className="flex items-center gap-1.5">
               <span>{t('promotions.viewDetail')}</span>
 
-              <ArrowRight
-                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1"
-                aria-hidden="true"
-              />
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </Button>
         </CardFooter>
