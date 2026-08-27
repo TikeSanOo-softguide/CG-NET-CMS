@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
 import { Separator } from '@/components/ui/separator'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
-import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
-import { useAboutContent } from '@/hooks/useAbout'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { motion } from 'framer-motion'
 import { BorderBeam } from '@/components/magicui/border-beam'
@@ -14,53 +11,16 @@ import { aboutContent } from '@/lib/content/about'
 import { StackedCards } from '@/components/common/StackedCards'
 import { Users, Gem, ShieldCheck, Megaphone } from 'lucide-react'
 
-function AboutSkeleton() {
-  return (
-    <SectionWrapper>
-      <div className="space-y-4 max-w-3xl mx-auto">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Skeleton key={i} className="h-5 w-full" />
-        ))}
-      </div>
-    </SectionWrapper>
-  )
-}
 export default function AboutPage() {
   const { t } = useTranslation()
 
   usePageTitle(t('about.pageTitle'))
-  const { data: about, isLoading, isError, refetch } = useAboutContent()
-
-  if (isLoading) return <AboutSkeleton />
-  if (isError || !about) return <ErrorMessage onRetry={() => void refetch()} />
-
   return (
     <main>
       <PageHeader title={t('about.title')} subtitle={t('about.tagline')} />
 
-      {/* Stats */}
-      <section
-        className="bg-app-bar text-font-white h-[60px] flex items-center"
-        aria-label="Company statistics"
-      >
-        <div className="container">
-          <dl className="grid grid-cols-5 gap-1 sm:gap-4 text-center items-center">
-            {aboutContent.stats.map((stat, i) => (
-              <div key={i} className="min-w-0 px-1">
-                <dt className="text-[6px] xs:text-xs sm:text-xs text-font-white leading-tight truncate">
-                  {t(stat.labelKey)}
-                </dt>
-                <dd className="text-[9px] xs:text-x sm:text-base font-bold leading-tight">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
       {/* Our Story */}
-      <SectionWrapper className="relative overflow-hidden !py-2 sm:!py-4 my-0">
+      <SectionWrapper className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +50,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto  my-6"
+            className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto  my-1"
           >
             {aboutContent.stats.map((stat, i) => {
               const IconComponent = stat.icon
@@ -131,94 +91,96 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <SectionWrapper className="bg-muted/40">
-        <div className="text-center max-w-2xl mx-auto mb-5 ">
-          <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
-            {t('about.purpose')}
-          </h2>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-5 ">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
+              {t('about.purpose')}
+            </h2>
 
-          <div className="h-1.5 w-24 bg-app-primary rounded-full mx-auto"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <AnimatedCard variant="fade-right" delay={0} className="rounded-lg">
-            <Card className="h-full card-shine card-glow border">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
-                    <span className="text-xl" aria-hidden="true">
-                      🎯
+            <div className="h-1.5 w-24 bg-app-primary rounded-full mx-auto"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <AnimatedCard variant="fade-right" delay={0} className="rounded-lg">
+              <Card className="h-full card-shine card-glow border">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
+                      <span className="text-xl" aria-hidden="true">
+                        🎯
+                      </span>
+                    </div>
+                    <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font text-font-muted  bg-clip-text text-transparent pt-3">
+                      {t('about.ourMission')}
                     </span>
-                  </div>
-                  <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font text-font-muted  bg-clip-text text-transparent pt-3">
-                    {t('about.ourMission')}
-                  </span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-font-muted leading-relaxed">{t('about.mission')}</p>
-              </CardContent>
-              <BorderBeam
-                size={80}
-                duration={6}
-                delay={0}
-                borderWidth={2}
-                colorFrom="#004AC6"
-                colorTo="#004AC6"
-              />
-              <BorderBeam
-                size={80}
-                duration={6}
-                delay={4}
-                reverse
-                borderWidth={2}
-                colorFrom="#004AC6"
-                colorTo="#004AC6"
-              />
-            </Card>
-          </AnimatedCard>
-          <AnimatedCard variant="fade-left" delay={100} className="rounded-lg">
-            <Card className="h-full card-shine card-glow border">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/25 to-pink-500/20 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-500/10 transition-transform duration-300 group-hover:scale-105">
-                    <span className="text-xl" aria-hidden="true">
-                      🔭
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-font-muted leading-relaxed">{t('about.mission')}</p>
+                </CardContent>
+                <BorderBeam
+                  size={80}
+                  duration={6}
+                  delay={0}
+                  borderWidth={2}
+                  colorFrom="#004AC6"
+                  colorTo="#004AC6"
+                />
+                <BorderBeam
+                  size={80}
+                  duration={6}
+                  delay={4}
+                  reverse
+                  borderWidth={2}
+                  colorFrom="#004AC6"
+                  colorTo="#004AC6"
+                />
+              </Card>
+            </AnimatedCard>
+            <AnimatedCard variant="fade-left" delay={100} className="rounded-lg">
+              <Card className="h-full card-shine card-glow border">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/25 to-pink-500/20 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-500/10 transition-transform duration-300 group-hover:scale-105">
+                      <span className="text-xl" aria-hidden="true">
+                        🔭
+                      </span>
+                    </div>
+                    <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font bg-clip-text text-transparent pt-3">
+                      {t('about.ourVision')}
                     </span>
-                  </div>
-                  <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font bg-clip-text text-transparent pt-3">
-                    {t('about.ourVision')}
-                  </span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-font-muted leading-relaxed">{t('about.vision')}</p>
-              </CardContent>
-              <BorderBeam
-                size={80}
-                duration={6}
-                delay={0}
-                borderWidth={2}
-                colorFrom="#004AC6"
-                colorTo="#004AC6"
-              />
-              <BorderBeam
-                size={80}
-                duration={6}
-                delay={4}
-                reverse
-                borderWidth={2}
-                colorFrom="#004AC6"
-                colorTo="#004AC6"
-              />
-            </Card>
-          </AnimatedCard>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-font-muted leading-relaxed">{t('about.vision')}</p>
+                </CardContent>
+                <BorderBeam
+                  size={80}
+                  duration={6}
+                  delay={0}
+                  borderWidth={2}
+                  colorFrom="#004AC6"
+                  colorTo="#004AC6"
+                />
+                <BorderBeam
+                  size={80}
+                  duration={6}
+                  delay={4}
+                  reverse
+                  borderWidth={2}
+                  colorFrom="#004AC6"
+                  colorTo="#004AC6"
+                />
+              </Card>
+            </AnimatedCard>
+          </div>
         </div>
       </SectionWrapper>
 
       {/* Brand Guideline Section */}
-      <SectionWrapper id="brand-guideline" className="bg-background pt-8 pb-16">
+      <SectionWrapper id="brand-guideline" className="bg-background pt-8 pb-4 sm:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
           {/* Left Side: Features Card */}
-          <div className="bg-white border-2 border-font-blue shadow-2xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-[28px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="bg-white border-2 border-font-blue shadow-xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-[28px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex flex-col">
               {/* Item 1: Brand Personality */}
               <div className="flex items-start sm:items-center gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-primary/10">
@@ -285,12 +247,12 @@ export default function AboutPage() {
           {/* Right Side: Text Content */}
           <div className="space-y-6">
             <div className="flex gap-4 sm:gap-6">
-              <div className="w-2 sm:w-3 rounded-full bg-[#f2c035] shrink-0"></div>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-font-blue uppercase leading-[1.1] whitespace-pre-line">
+              <div className="w-2 sm:w-3 rounded-full bg-app-yellow shrink-0"></div>
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-font-blue uppercase leading-[1.1] whitespace-pre-line ">
                 {t('about.brandGuidelineTitle')}
               </h2>
             </div>
-            <p className="text-font-muted text-base md:text-lg leading-relaxed max-w-lg">
+            <p className="text-font-muted text-base md:text-lg leading-relaxed max-w-lg ">
               {t('about.brandGuidelineDesc')}
             </p>
           </div>
@@ -315,7 +277,7 @@ export default function AboutPage() {
               <br />
               <span className="text-font-black">{t(aboutContent.culture.titleKey2)}</span>
             </h3>
-            <div className="border-l-4 border-primary/50 pl-4 py-1">
+            <div className="border-l-4 border-app-primary/50 pl-4 py-1">
               <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium">
                 {t(aboutContent.culture.descriptionKey)}
               </p>

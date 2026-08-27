@@ -76,7 +76,7 @@ const config: Config = {
         hero: {
           title: 'var(--color-title-white-hero)',
           subtitle: 'var(--color-subtitle-white-hero)',
-          'gradient-bg':  'var(--gradient-bg)',
+          'gradient-bg': 'var(--gradient-bg)',
           'gradient-font': 'var(--gradient-font)',
         },
         app: {
@@ -86,6 +86,7 @@ const config: Config = {
           bar: 'var(--color-bar)', //stat bar
           footer: 'var(--color-footer)', //footer
           card: 'var(--color-card-bg)', //card bg
+          yellow: 'var(--color-yellow)',
         },
         font: {
           black: 'var(--color-font-black)',
@@ -126,7 +127,6 @@ const config: Config = {
           'clock-hover': 'var(--color-font-white)',
           'data-hover': 'var(--color-font-white)',
           'router-hover': 'var(--color-font-white)',
-
         },
       },
       backgroundImage: {
@@ -161,7 +161,7 @@ const config: Config = {
         myanmar: ['"Noto Sans Myanmar"', '"Pyidaungsu"', '"Padauk"', 'sans-serif'],
         chinese: ['"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
         sans: ['Satoshi', 'Inter', 'system-ui', 'sans-serif'],
-        heading: ['Inter', 'system-ui', 'sans-serif']
+        heading: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
