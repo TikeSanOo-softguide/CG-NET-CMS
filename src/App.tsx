@@ -13,6 +13,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { analytics } from '@/lib/analytics'
 import ScrollToTop from './components/common/ScrollToTop'
 import AppDownloadCard from './components/common/AppDownloadCard'
+import PromotionModal from './components/common/PromotionModal'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +61,7 @@ export default function App() {
             v7_startTransition: true,
             v7_relativeSplatPath: true,
         }}>
+          <PromotionModal/>
           <AppDownloadCard />
           <AppContent />
           <ScrollToTop />

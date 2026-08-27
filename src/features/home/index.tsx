@@ -16,16 +16,36 @@ import { useLatestNews } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { homeContent } from '@/lib/content/home'
+import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { usePromotion } from '@/hooks/usePromotion'
+import { PromotionCard } from '@/components/cards/PromotionCard'
+import { EmptyState } from '@/components/common/EmptyState'
+import CommonTab from '@/components/common/CommonTab'
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
   usePageTitle()
   const navigate = useNavigate()
-
   const { data: packages, isLoading: pkgLoading, isError: pkgError, refetch: pkgRefetch } = usePackages()
-  const { data: news, isLoading: newsLoading, isError: newsError } = useLatestNews(4)
+  const { data: news, isLoading: newsLoading, isError: newsError } = useLatestNews(3)
+  const { data: promotions, isLoading, isError } = usePromotion(1, 3)
   const hasMore = homeContent.galleryItems.length > 5
+  const [searchParams, setSearchParams] = useSearchParams()
+  const initialCategory = searchParams.get('category') ?? 'news'
+  const [activeFilter, setActiveFilter] = useState(initialCategory)
+  
+  const FILTERS = [
+    { value: 'news', labelKey: 'home.latestNews' },
+    { value: 'promotion', labelKey: 'nav.promotion' },
+  ]
+
+  function handleFilterChange(value: string) {
+    setActiveFilter(value)
+    if (value) setSearchParams({ category: value })
+    else setSearchParams({})
+  }
 
   return (
     <main>
@@ -38,7 +58,7 @@ export default function HomePage() {
           <dl className="font-heading grid grid-cols-5 gap-1 sm:gap-4 text-center items-center">
             {homeContent.stats.map(({ value, labelKey }) => (
               <div key={labelKey} className="min-w-0 px-1">
-                <dt className="text-[6px] xs:text-xs sm:text-xs text-font-light-blue leading-tight truncate">{t(labelKey)}</dt>
+                <dt className="text-[6px] xs:text-xs sm:text-xs text-font-light-blue leading-[1.6] whitespace-nowrap overflow-visible font-normal">{t(labelKey)}</dt>
                 <dd className="text-[9px] xs:text-xs sm:text-base text-font-white font-bold leading-tight">{value}</dd>
               </div>
             ))}
@@ -119,54 +139,131 @@ export default function HomePage() {
           <PackageCarousel packages={packages} lang={lang} />
         )}
 
-        <div className="text-center mt-8">
-          <Button variant="outline" className='bg-font-white' asChild>
-            <Link to="/packages">
-              {t('common.viewAll')} {t('nav.packages')} <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
       </SectionWrapper>
 
       {/* Latest News */}
       <SectionWrapper>
-        <SectionHeading
-          title={t('home.latestNews')}
-          subtitle={t('home.latestNewsDesc')}
-        />
+      <SectionHeading title="Whats new?" />
+      {/* Tabs */}
+      <CommonTab
+        filters={FILTERS}
+        activeValue={activeFilter}
+        onValueChange={handleFilterChange}
+      />
 
-        {newsLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
-            {[1, 2, 3, 4].map((i) => (
-              <Card key={i} className="h-[300px] overflow-hidden rounded-[20px]">
-                <Skeleton className="h-[150px] w-full rounded-none" />
-                <CardHeader className="px-4 pt-3">
-                  <Skeleton className="h-4 w-2/3" />
-                  <Skeleton className="h-3 w-full mt-2" />
-                  <Skeleton className="h-3 w-4/5" />
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        )}
+      {/* NEWS TAB */}
+      {activeFilter === 'news' && (
+        <>
+          {newsLoading && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              {[1, 2, 3].map((i) => (
+                <Card
+                  key={i}
+                  className="h-[300px] overflow-hidden rounded-[20px]"
+                >
+                  <Skeleton className="h-[150px] w-full rounded-none" />
 
-        {newsError && <ErrorMessage />}
+                  <CardHeader className="px-4 pt-3">
+                    <Skeleton className="h-4 w-2/3" />
+                    <Skeleton className="h-3 w-full mt-2" />
+                    <Skeleton className="h-3 w-4/5" />
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          )}
 
-        {news && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
-            {news.map((article, i) => (
-              <NewsCard key={article.id} article={article} lang={lang} delay={i * 100} compact />
-            ))}
-          </div>
-        )}
+          {newsError && <ErrorMessage />}
 
-        <div className="text-center mt-8">
-          <Button variant="outline" className='bg-font-white' asChild>
-            <Link to="/news">
-              {t('common.viewAll')} {t('nav.news')} <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
+          {!newsLoading &&
+            !newsError &&
+            news?.length === 0 && (
+              <EmptyState
+                title={t('news.noNews')}
+                description={t('news.noNewsDesc')}
+              />
+            )}
+
+          {!newsLoading && !newsError && news && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              {news.slice(0, 3).map((article, i) => (
+                <NewsCard
+                  key={article.id}
+                  article={article}
+                  lang={lang}
+                  delay={i * 100}
+                  compact
+                />
+              ))}
+            </div>
+          )}
+
+          {(news?.length ?? 0) > 0 && (
+            <div className="text-center mt-8">
+              <Button variant="outline" className="bg-font-white" asChild>
+                <Link to="/news">
+                  {t('common.viewAll')} {t('nav.news')}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* PROMOTION TAB */}
+      {activeFilter === 'promotion' && (
+        <>
+          {isLoading && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              {[1, 2, 3].map((i) => (
+                <Card
+                  key={i}
+                  className="h-[300px] overflow-hidden rounded-[20px]"
+                >
+                  <Skeleton className="h-full w-full rounded-none" />
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {isError && <ErrorMessage />}
+
+          {!isLoading &&
+            !isError &&
+            promotions?.data?.length === 0 && (
+             <EmptyState
+              title={t('common.noData')}
+              description={t('common.emptyStateDesc')}
+            />
+          )}
+
+          {!isLoading && !isError && promotions && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              {promotions?.data?.slice(0, 3).map((promotion, i) => (
+                <PromotionCard
+                  key={promotion.id}
+                  promotion={promotion}
+                  lang={lang}
+                  delay={i * 100}
+                  compact
+                />
+              ))}
+            </div>
+          )}
+
+          {(promotions?.data?.length ?? 0) > 0 && (
+            <div className="text-center mt-8">
+              <Button variant="outline" className="bg-font-white" asChild>
+                <Link to="/promotion">
+                  {t('promotions.viewAllPromotions')}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          )}
+        </>
+      )}
       </SectionWrapper>
 
       {/* Photo Gallery */}

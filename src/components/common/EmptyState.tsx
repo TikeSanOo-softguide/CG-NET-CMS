@@ -14,7 +14,7 @@ export function EmptyState({ title, description, action }: EmptyStateProps) {
     <div className="flex flex-col items-center justify-center -mt-10 px-4 text-center">
       <img 
         src="/assets/error/nodata.svg" 
-        className="mx-auto w-[350px] h-[350px] object-contain" 
+        className="mx-auto w-[320px] h-[320px] object-contain" 
         alt="No Data Avaliable" 
         loading="eager"
       />

@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { ErrorMessage } from '@/components/common/ErrorMessage'
@@ -12,13 +11,14 @@ import { PackageCard } from '@/components/cards/PackageCard'
 import { usePackages } from '@/hooks/usePackages'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
+import CommonTab from '@/components/common/CommonTab'
 
 const FILTERS = [
   { value: 'mm-broadband', labelKey: 'services.mmBroadband.title' },
   { value: 'cg-broadband', labelKey: 'services.cgBroadband.title' },
   { value: 'cg-net-broadband', labelKey: 'services.cgNetBroadband.title' },
   { value: 'iptv-service', labelKey: 'services.iptv.title' },
-]
+] 
 
 function PackageSkeleton() {
   return (
@@ -61,17 +61,11 @@ export default function PackagesPage() {
       <PageHeader title={t('packages.title')} subtitle={t('packages.subtitle')} />
 
       <SectionWrapper>
-        <div className="mb-8 overflow-x-auto pb-1">
-          <Tabs value={activeFilter} onValueChange={handleFilterChange}>
-            <TabsList className="flex w-max min-w-full justify-start sm:justify-center h-auto gap-1">
-              {FILTERS.map(({ value, labelKey }) => (
-                <TabsTrigger key={value} value={value}>
-                  {t(labelKey)}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-        </div>
+        <CommonTab
+          filters={FILTERS}
+          activeValue={activeFilter}
+          onValueChange={handleFilterChange}
+        />
 
         {isLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
