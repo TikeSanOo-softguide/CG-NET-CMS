@@ -142,3 +142,15 @@ export interface ContactSubmission {
   message: string
   honeypot?: string
 }
+
+export interface Banner {
+  id: number
+  image_url_en: string
+  image_url_zh: string
+  image_url_my: string
+}
+
+export interface Contact {
+  id: number
+  contact_point: string
+}
