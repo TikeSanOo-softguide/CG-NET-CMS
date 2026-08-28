@@ -65,7 +65,7 @@ function PackageCarouselCard({
               'sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0',
             ].join(' ')}
           >
-            <Link to={`/packages/${pkg.slug}`}>
+            <Link to={`/packages?category=${pkg.slug}`}>
               {t('common.viewAll')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
