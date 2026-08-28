@@ -32,7 +32,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
     const imageMap = {
       en: slide.image_url_en,
       zh: slide.image_url_zh,
-      ja: slide.image_url_my,
+      my: slide.image_url_my,
     }
     const imagePath = imageMap[lang as keyof typeof imageMap] ?? slide.image_url_en
     return `${STORAGE_URL}/${imagePath}`
