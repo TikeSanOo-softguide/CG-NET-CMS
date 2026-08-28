@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
