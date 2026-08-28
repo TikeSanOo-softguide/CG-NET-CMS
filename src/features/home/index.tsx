@@ -143,7 +143,8 @@ export default function HomePage() {
 
       {/* Latest News */}
       <SectionWrapper>
-      <SectionHeading title="Whats new?" />
+      <SectionHeading title={t('home.whatsNew')}/>
+
       {/* Tabs */}
       <CommonTab
         filters={FILTERS}

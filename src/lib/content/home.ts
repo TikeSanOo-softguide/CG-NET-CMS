@@ -55,7 +55,7 @@ export const homeContent = {
   ],
 
   stats: [
-    { value: '200,000+', labelKey: 'home.stat1Label' },
+    { value: '100,000+', labelKey: 'home.stat1Label' },
     { value: '50+', labelKey: 'home.stat2Label' },
     { value: '99.9%', labelKey: 'home.stat3Label' },
     { value: '10+', labelKey: 'home.stat4Label' },

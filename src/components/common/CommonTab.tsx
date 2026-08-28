@@ -64,7 +64,7 @@ export default function CommonTab({
                 data-[state=active]:after:bottom-0
                 data-[state=active]:after:left-0
                 data-[state=active]:after:right-0
-                data-[state=active]:after:h-[7px]
+                data-[state=active]:after:h-[4px]
                 data-[state=active]:after:bg-font-blue
 
                 hover:bg-white/10
