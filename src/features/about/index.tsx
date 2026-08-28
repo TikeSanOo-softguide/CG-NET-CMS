@@ -30,7 +30,7 @@ export default function AboutPage() {
         >
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <h2 className="text-xl md:text-6xl font-black tracking-tight bg-gradient-font  bg-clip-text text-transparent leading-normal pt-3 pb-3">
+              <h2 className="text-xl md:text-5xl font-black tracking-tight bg-gradient-font  bg-clip-text text-transparent leading-normal pt-3 pb-3">
                 {t('about.ourStory')}
               </h2>
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>

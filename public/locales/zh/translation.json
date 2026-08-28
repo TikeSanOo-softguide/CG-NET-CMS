@@ -116,43 +116,51 @@
     "mmBroadband": {
       "title": "缅甸网络",
       "description": "缅甸宽带服务，提供 20Mbps、50Mbps、100Mbps 和 150Mbps 多种速率套餐，满足稳定的家庭上网需求。",
-        "features": {
+      "features": {
         "speed": "20Mbps、50Mbps、100Mbps 和 150Mbps 套餐",
-        "uptime": "99.9% 可用性 SLA",
-        "installation": "免费安装",
+        "uptime": "99.9% 網路穩定度保證",
+        "installation": "免費安裝（適用於 6 個月和 1 年方案）",
         "support": "全天候技术支持"
-        }
-      },
-      "cgBroadband": {
+      }
+    },
+    "cgBroadband": {
       "title": "晨光网",
       "description": "晨光网宽带服务，提供 50Mbps 和 100Mbps 速率套餐，满足稳定的网络连接需求。",
-        "features": {
+      "features": {
         "bandwidth": "50Mbps 和 100Mbps 套餐",
         "staticIp": "静态 IP 地址",
         "sla": "SLA 保障",
         "support": "全天候技术支持"
-        }
-      },
-      "cgNetBroadband": {
+      }
+    },
+    "cgNetBroadband": {
       "title": "CG-NET 家庭网",
       "description": "可靠的 CG-NET 家庭宽带服务，提供 20Mbps 套餐，为家庭提供便捷的网络连接。",
-        "features": {
+      "features": {
         "speedTiers": "20Mbps 家庭宽带套餐",
         "unlimitedData": "不限流量",
         "freeRouter": "包含接收器",
-        "easySetup": "免费安装"
-        }
-      },
-      "iptv": {
-      "title": "IPTV 服务",
-      "description": "数字电视服务，提供 288 个频道，满足日常电视和娱乐观看需求。",
-        "features": {
+        "easySetup": "免費安裝（適用於 6 個月和 1 年方案）"
+      }
+    },
+    "iptv": {
+      "title": "其他服务",
+      "description": "提供288个频道的数字电视服务，并搭配CG-NET附加网络加速和扩展服务。",
+      "features": {
         "channels": "288 个频道",
         "resolution": "高清数字电视内容",
         "service": "IPTV 服务",
         "easySetup": "轻松安装"
-        }
       }
+    },
+    "cgNetAddon": {
+      "title": "CG-NET 附加服务",
+      "description": "为您的 CG-NET 连接提供额外的网络加速和扩展服务。",
+      "features": {
+        "feature1": "高速网络扩展",
+        "feature2": "借助 CG Net 附加服务，轻松进行配置与设置"
+      }
+    }
   },
   "packages": {
     "title": "宽带套餐",
@@ -228,6 +236,8 @@
   },
   "appGuide": {
     "title": "應用程式指南",
+    "detailStep": "詳細步驟",
+    "faqs": "常見問題",
     "subtitle": "幾分鐘內即可開始使用 CG-NET 應用程式",
     "pageTitle": "應用程式指南 - CG-NET",
     "downloadApp": "下載應用程式",

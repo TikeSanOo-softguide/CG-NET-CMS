@@ -21,7 +21,6 @@ export default function AppGuidePage() {
 
       <SectionWrapper>
         {/* App download links */}
-
         <div className="mb-10 flex flex-row flex-nowrap gap-3 justify-start sm:justify-center items-center overflow-x-auto px-4 sm:px-6 py-2 scrollbar-none">
           {appGuideContent.downloadLinks.map((link) => (
             <a
@@ -90,7 +89,10 @@ export default function AppGuidePage() {
           </div>
 
           {/* Detailed steps accordion */}
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6">
+          <h2
+            className="text-xl sm:text-2xl font-bold tracking-tight mb-6 scroll-mt-24"
+            id="detail-step"
+          >
             {t('appGuide.overview')}
           </h2>
 
@@ -147,7 +149,7 @@ export default function AppGuidePage() {
           </Accordion>
 
           {/* Frequently Asked Questions (FAQ Section) */}
-          <div className="mt-16 mb-12">
+          <div className="mt-16 mb-12" id="faq">
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6">
               {t('appGuide.faqTitle')}
             </h2>
