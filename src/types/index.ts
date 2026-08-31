@@ -44,19 +44,6 @@ export interface Package {
   imageUrl: string
 }
 
-export interface NewsArticle {
-  id: string
-  slug: string
-  title: BilingualString
-  excerpt: BilingualString
-  content: BilingualString
-  category: BilingualString
-  author: BilingualString
-  publishedAt: string
-  imageUrl: string
-  tags: string[]
-}
-
 export interface Career {
   id: string
   slug: string

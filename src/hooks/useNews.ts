@@ -11,7 +11,10 @@ export function useNews(page = 1, limit = 6) {
 export function useNewsBySlug(slug: string) {
   return useQuery({
     queryKey: ['news-article', slug],
-    queryFn: () => getNewsBySlug(slug),
+    queryFn: async () => {
+      const response = await getNewsBySlug(slug)
+      return response.data
+    },
     enabled: Boolean(slug),
   })
 }

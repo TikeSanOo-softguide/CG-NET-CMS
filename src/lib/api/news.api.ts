@@ -1,23 +1,61 @@
+import { NewsArticle, NewsArticleResponse } from '@/types/new'
 import { apiClient } from './client'
-import type { NewsArticle } from '@/types'
 
-export async function getNews(page = 1, limit = 6): Promise<{ data: NewsArticle[]; total: number }> {
-  const { data, headers } = await apiClient.get<NewsArticle[]>(
-    `/news?_page=${page}&_limit=${limit}&_sort=publishedAt&_order=desc`
+type NewsResponse = {
+  data: NewsArticle[]
+  links: {
+    first: string | null
+    last: string | null
+    prev: string | null
+    next: string | null
+  }
+  meta: {
+    current_page: number
+    last_page: number
+    per_page: number
+    total: number
+  }
+}
+
+export async function getNews(page = 1,limit = 6): Promise<{
+  data: NewsArticle[]
+  total: number
+}> {
+  const { data } = await apiClient.get<NewsResponse>(
+    `/web-app/news?page=${page}&per_page=${limit}`,
+    {
+      params: {
+        page,
+        per_page: limit,
+      },
+    }
   )
-  const total = parseInt(headers['x-total-count'] ?? String(data.length), 10)
-  return { data, total }
+  return {
+    data: data.data,
+    total: data.meta.total,
+  } 
 }
 
-export async function getNewsBySlug(slug: string): Promise<NewsArticle> {
-  const { data } = await apiClient.get<NewsArticle[]>(`/news?slug=${slug}`)
-  if (!data.length) throw new Error('Article not found')
-  return data[0]
-}
-
-export async function getLatestNews(limit = 3): Promise<NewsArticle[]> {
-  const { data } = await apiClient.get<NewsArticle[]>(
-    `/news?_sort=publishedAt&_order=desc&_limit=${limit}`
+export async function getNewsBySlug(
+  slug: string
+): Promise<NewsArticleResponse> {
+  const { data } = await apiClient.get<NewsArticleResponse>(
+    `/web-app/news/${encodeURIComponent(slug)}`
   )
   return data
+}
+
+export async function getLatestNews(
+  limit = 3
+): Promise<NewsArticle[]> {
+  const { data } = await apiClient.get<NewsResponse>(
+    '/web-app/news',
+    {
+      params: {
+        page: 1,
+        per_page: limit,
+      },
+    }
+  )
+  return data.data
 }

@@ -29,7 +29,11 @@ export default function HomePage() {
   usePageTitle()
   const navigate = useNavigate()
   const { data: packages, isLoading: pkgLoading, isError: pkgError, refetch: pkgRefetch } = usePackages()
-  const { data: news, isLoading: newsLoading, isError: newsError } = useLatestNews(3)
+  const {
+    data: news,
+    isLoading: newsLoading,
+    isError: newsError,
+  } = useLatestNews(3)
   const { data: promotions, isLoading, isError } = usePromotion(1, 3)
   const hasMore = homeContent.galleryItems.length > 5
   const [searchParams, setSearchParams] = useSearchParams()
@@ -193,7 +197,6 @@ export default function HomePage() {
                   article={article}
                   lang={lang}
                   delay={i * 100}
-                  compact
                 />
               ))}
             </div>
@@ -247,7 +250,6 @@ export default function HomePage() {
                   promotion={promotion}
                   lang={lang}
                   delay={i * 100}
-                  compact
                 />
               ))}
             </div>
