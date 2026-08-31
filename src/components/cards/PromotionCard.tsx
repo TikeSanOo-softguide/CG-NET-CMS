@@ -14,32 +14,30 @@ interface PromotionCardProps {
   delay?: number
   compact?: boolean
 }
-
 export function PromotionCard({ promotion, lang, delay = 0, compact = false }: PromotionCardProps) {
   const { t } = useTranslation()
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-2xl h-full">
+    <AnimatedCard delay={delay} variant="rise" className="rounded-[20px] h-full">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl  bg-app-card',
+          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-[20px] bg-app-card',
           compact ? 'h-[360px]' : 'h-full'
         )}
       >
         {/* 1. Top Image Header */}
-        <div
-          className={cn(
-            'block overflow-hidden bg-font-muted relative',
-            compact ? 'h-[140px]' : 'h-48'
-          )}
+        <Link
+          to={`/promotion/${promotion.slug}`}
+          className={cn('card-media relative block', compact ? 'h-[140px]' : 'h-44')}
         >
           <img
             src={promotion.imageUrl}
-            alt={t('promotions.title')}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            alt={getLocalized(promotion.title, lang)}
+            className="h-full w-full object-cover"
             loading="lazy"
           />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        </Link>
 
         {/* 2. Title Section */}
         <CardHeader className="pb-3 pt-4 px-5">
@@ -69,8 +67,10 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           </div>
         </CardContent>
 
-        <CardFooter className="pt-3 pb-5 px-5 flex items-center justify-end gap-3">
-          {/* 2. View Detail Button with Hover Effect */}
+        {/* 4. Footer Section (Date & Read More) */}
+        <CardFooter
+          className={cn('flex items-center justify-end gap-2 pt-0', compact && 'px-4 pb-3')}
+        >
           <Button
             variant="ghost"
             size="sm"

@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { Card, CardFooter, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PageHeader } from '@/components/common/PageHeader'
@@ -13,9 +11,7 @@ import { usePromotion } from '@/hooks/usePromotion'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { SearchBar } from '@/components/common/SearchBar'
-import { CommonFilter } from '@/components/common/CommonFilter'
-import { newsFilterOptions } from '@/lib/content/new'
-
+import Pagination from '@/components/common/pagination'
 const PAGE_SIZE = 6
 
 function PromotionSkeleton() {
@@ -44,22 +40,17 @@ export default function PromotionPage() {
   const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE)
 
   const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 1
-  const [filter, setFilter] = useState('all')
-
   return (
     <main>
       <PageHeader title={t('promotions.title')} subtitle={t('promotions.subtitle')} />
 
       <SectionWrapper>
-        <div className="max-w-6xl mx-auto w-full mb-6 sm:mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-2 sm:gap-3">
+        <div className="max-w-6xl w-full mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0">
               <div className="w-full sm:max-w-[600px]">
                 <SearchBar />
               </div>
-
-              {/* Filter Icon Button (Dropdown Menu) */}
-              <CommonFilter options={newsFilterOptions} value={filter} onChange={setFilter} />
             </div>
           </div>
         </div>
@@ -83,7 +74,7 @@ export default function PromotionPage() {
 
         {data && data.data.length > 0 && (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {data.data.map((promotion, i) => (
                 <PromotionCard
                   key={promotion.id}
@@ -94,36 +85,7 @@ export default function PromotionPage() {
               ))}
             </div>
 
-            {totalPages > 1 && (
-              <nav
-                aria-label="Promotion pagination"
-                className="flex items-center justify-center gap-2 flex-wrap"
-              >
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  aria-label={t('common.previous')}
-                >
-                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                  <span className="hidden sm:inline">{t('common.previous')}</span>
-                </Button>
-                <span className="text-sm text-muted-foreground px-1">
-                  {t('common.page')} {page} {t('common.of')} {totalPages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  aria-label={t('common.next')}
-                >
-                  <span className="hidden sm:inline">{t('common.next')}</span>
-                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
-                </Button>
-              </nav>
-            )}
+            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} />
           </>
         )}
       </SectionWrapper>

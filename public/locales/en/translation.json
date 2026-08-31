@@ -115,43 +115,51 @@
     "pageTitle": "Services - CG-NET",
     "learnMore": "Learn More",
     "mmBroadband": {
-    "title": "Myanmar Network",
-    "description": "Myanmar broadband service with 20Mbps, 50Mbps, 100Mbps, and 150Mbps speed plans for reliable home internet.",
+      "title": "Myanmar Network",
+      "description": "Myanmar broadband service with 20Mbps, 50Mbps, 100Mbps, and 150Mbps speed plans for reliable home internet.",
       "features": {
-      "speed": "20Mbps, 50Mbps, 100Mbps, and 150Mbps plans",
-      "uptime": "99.9% uptime SLA",
-      "installation": "Free installation",
-      "support": "24/7 technical support"
+        "speed": "20Mbps, 50Mbps, 100Mbps, and 150Mbps plans",
+        "uptime": "99.9% Network Uptime",
+        "installation": "Free installation (For 6-month and 1-year plans)",
+        "support": "24/7 technical support"
       }
     },
     "cgBroadband": {
-    "title": "Chen Guang Network",
-    "description": "Chen Guang broadband service offering 50Mbps and 100Mbps plans with reliable connectivity.",
+      "title": "Chen Guang Network",
+      "description": "Chen Guang broadband service offering 50Mbps and 100Mbps plans with reliable connectivity.",
       "features": {
-      "bandwidth": "50Mbps and 100Mbps plans",
-      "staticIp": "Static IP addresses",
-      "sla": "SLA guarantee",
-      "support": "24/7 technical support"
+        "bandwidth": "50Mbps and 100Mbps plans",
+        "staticIp": "Static IP addresses",
+        "sla": "Free installation (For 6-month and 1-year plans)",
+        "support": "24/7 technical support"
       }
     },
     "cgNetBroadband": {
-    "title": "CG-NET Network",
-    "description": "Reliable CG-NET home internet service with a 20Mbps plan and convenient home connectivity.",
+      "title": "CG-NET Network",
+      "description": "Reliable CG-NET home internet service with a 20Mbps plan and convenient home connectivity.",
       "features": {
-      "speedTiers": "20Mbps home internet plan",
-      "unlimitedData": "Unlimited data",
-      "freeRouter": "Receiver included",
-      "easySetup": "Free installation"
+        "speedTiers": "20Mbps home internet plan",
+        "unlimitedData": "Unlimited data",
+        "freeRouter": "Receiver included",
+        "easySetup": "Free installation (For 6-month and 1-year plans)"
       }
     },
     "iptv": {
-    "title": "IPTV Service",
-    "description": "Digital television service with 288 channels for entertainment and television viewing.",
+      "title": "Other Services",
+      "description": "Digital television service featuring 288 channels, bundled with extra CG-NET add-on network booster and extension services.",
       "features": {
-      "channels": "288 channels",
-      "resolution": "HD digital TV content",
-      "service": "IPTV service",
-      "easySetup": "Easy installation"
+        "channels": "288 channels",
+        "resolution": "HD digital TV content",
+        "service": "IPTV service",
+        "easySetup": "Easy installation"
+      }
+    },
+    "cgNetAddon": {
+      "title": "CG-NET Add-on",
+      "description": "Additional network booster and extension services...",
+      "features": {
+        "feature1": "High-speed network extension",
+        "feature2": "Easy configuration and setup with CG Net add on Service"
       }
     }
   },
@@ -230,6 +238,8 @@
 
   "appGuide": {
     "title": "App Guide",
+    "detailStep": "Detailed Steps",
+    "faqs": "FAQ",
     "subtitle": "Get started with the CG-NET app in minutes",
     "pageTitle": "App Guide - CG-NET",
     "downloadApp": "Download the App",

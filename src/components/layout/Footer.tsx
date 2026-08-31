@@ -8,7 +8,7 @@ import { useState } from 'react'
 const QUICK_LINKS = [
   { to: '/', labelKey: 'nav.home' },
   { to: '/services', labelKey: 'nav.services' },
-  { to: '/packages', labelKey: 'nav.packages' },
+  { to: '/packages?category=mm-broadband', labelKey: 'nav.packages' },
   { to: '/news', labelKey: 'nav.news' },
   { to: '/promotin', labelKey: 'nav.promotion' },
   { to: '/app-guide', labelKey: 'nav.appGuide' },
@@ -17,6 +17,8 @@ const QUICK_LINKS = [
 
 const SUPPORT_LINKS = [
   { to: '/app-guide', labelKey: 'footer.helpCenter' },
+  { to: '/app-guide#faq', labelKey: 'appGuide.faqs' },
+  { to: '/app-guide#detail-step', labelKey: 'appGuide.detailStep' },
   { to: '/about#brand', labelKey: 'footer.brandGuideLine' },
   { to: '/privacy-policy', labelKey: 'footer.privacyPolicy' },
 ]

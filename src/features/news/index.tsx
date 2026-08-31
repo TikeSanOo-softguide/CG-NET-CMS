@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { Card, CardFooter, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PageHeader } from '@/components/common/PageHeader'
@@ -14,7 +12,8 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { SearchBar } from '@/components/common/SearchBar'
 import { CommonFilter } from '@/components/common/CommonFilter'
-import {newsFilterOptions} from '@/lib/content/new'
+import { newsFilterOptions } from '@/lib/content/new'
+import Pagination from '@/components/common/pagination'
 
 const PAGE_SIZE = 6
 
@@ -59,18 +58,16 @@ export default function NewsPage() {
               </div>
 
               {/* Filter Icon Button (Dropdown Menu) */}
-              <CommonFilter 
-                options={newsFilterOptions}
-                value={filter}
-                onChange={setFilter}
-              />
+              <CommonFilter options={newsFilterOptions} value={filter} onChange={setFilter} />
             </div>
           </div>
         </div>
 
         {isLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => <NewsSkeleton key={i} />)}
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <NewsSkeleton key={i} />
+            ))}
           </div>
         )}
 
@@ -88,33 +85,7 @@ export default function NewsPage() {
               ))}
             </div>
 
-            {totalPages > 1 && (
-              <nav aria-label="News pagination" className="flex items-center justify-center gap-2 flex-wrap">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  aria-label={t('common.previous')}
-                >
-                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                  <span className="hidden sm:inline">{t('common.previous')}</span>
-                </Button>
-                <span className="text-sm text-muted-foreground px-1">
-                  {t('common.page')} {page} {t('common.of')} {totalPages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  aria-label={t('common.next')}
-                >
-                  <span className="hidden sm:inline">{t('common.next')}</span>
-                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
-                </Button>
-              </nav>
-            )}
+            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} />
           </>
         )}
       </SectionWrapper>

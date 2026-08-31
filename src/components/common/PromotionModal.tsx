@@ -25,7 +25,9 @@ export default function PromotionModal() {
       <div
         className="
           relative
-          w-[60vw]
+         w-[90vw]            
+          sm:w-[70vw]      
+          md:w-[60vw]         
           max-w-[800px]
           overflow-hidden
           rounded-xl

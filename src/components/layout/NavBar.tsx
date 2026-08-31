@@ -1,16 +1,15 @@
 import { useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -31,66 +30,106 @@ const MOBILE_PACKAGE_LINKS = [
 
 export function NavBar() {
   const { t } = useTranslation()
-  const { pathname } = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const isPackagesActive = pathname === '/packages' || pathname.startsWith('/packages/')
 
   return (
     <nav role="navigation" aria-label="Main navigation" className="flex items-center font-heading">
       {/* Desktop nav links */}
-      <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
-        {NAV_LINKS.slice(0, 1).map(({ to, labelKey }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end
-            className={({ isActive }) =>
-              cn(
-                'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
-                isActive && 'text-transparent bg-clip-text bg-gradient-font'
-              )
-            }
-          >
-            {t(labelKey)}
-          </NavLink>
-        ))}
 
+      <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+        {/* Home */}
+        <NavLink
+          to="/"
+          end
+          className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+        >
+          {({ isActive }) => (
+            <span className="relative inline-block">
+              {/* Normal text - always exists */}
+              <span className="text-foreground">{t('nav.home')}</span>
+
+              {/* Gradient text - always exists, only opacity changes */}
+              <span
+                className={cn(
+                  'absolute inset-0 bg-gradient-font bg-clip-text text-transparent transition-opacity duration-150',
+                  isActive ? 'opacity-100' : 'opacity-0'
+                )}
+                aria-hidden="true"
+              >
+                {t('nav.home')}
+              </span>
+            </span>
+          )}
+        </NavLink>
+
+        {/* Services */}
         <NavLink
           to="/services"
-          className={({ isActive }) =>
-            cn(
-              'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
-              isActive && 'text-transparent bg-clip-text bg-gradient-font'
-            )
-          }
+          className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
         >
-          {t('nav.services')}
+          {({ isActive }) => (
+            <span className="relative inline-block">
+              <span className="text-foreground">{t('nav.services')}</span>
+
+              <span
+                className={cn(
+                  'absolute inset-0 bg-gradient-font bg-clip-text text-transparent transition-opacity duration-150',
+                  isActive ? 'opacity-100' : 'opacity-0'
+                )}
+                aria-hidden="true"
+              >
+                {t('nav.services')}
+              </span>
+            </span>
+          )}
         </NavLink>
 
+        {/* Packages */}
         <NavLink
-          to="/packages?category=mm-broadband"
-          className={() =>
-            cn(
-              'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
-              isPackagesActive && 'text-transparent bg-clip-text bg-gradient-font'
-            )
-          }
+          to="/packages?category=plan"
+          className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
         >
-          {t('nav.packages')}
+          {({ isActive }) => (
+            <span className="relative inline-block">
+              <span className="text-foreground">{t('nav.packages')}</span>
+
+              <span
+                className={cn(
+                  'absolute inset-0 bg-gradient-font bg-clip-text text-transparent transition-opacity duration-150',
+                  isActive ? 'opacity-100' : 'opacity-0'
+                )}
+                aria-hidden="true"
+              >
+                {t('nav.packages')}
+              </span>
+            </span>
+          )}
         </NavLink>
 
+        {/* News, Promotion, App Guide, About */}
         {NAV_LINKS.slice(2).map(({ to, labelKey }) => (
           <NavLink
             key={to}
             to={to}
-            className={({ isActive }) =>
-              cn(
-                'px-2 xl:px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
-                isActive && 'text-transparent bg-clip-text bg-gradient-font'
-              )
-            }
+            className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
           >
-            {t(labelKey)}
+            {({ isActive }) => (
+              <span className="relative inline-block">
+                {/* Normal text */}
+                <span className="text-foreground">{t(labelKey)}</span>
+
+                {/* Gradient text */}
+                <span
+                  className={cn(
+                    'absolute inset-0 bg-gradient-font bg-clip-text text-transparent transition-opacity duration-150',
+                    isActive ? 'opacity-100' : 'opacity-0'
+                  )}
+                  aria-hidden="true"
+                >
+                  {t(labelKey)}
+                </span>
+              </span>
+            )}
           </NavLink>
         ))}
       </div>
@@ -112,7 +151,11 @@ export function NavBar() {
           <SheetContent side="left" className="w-[min(20rem,88vw)] overflow-y-auto p-5">
             <SheetHeader className="mb-4">
               <SheetTitle>
-                <Link to="/" onClick={() => setMobileOpen(false)} className="text-xl font-bold text-primary">
+                <Link
+                  to="/"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-xl font-bold text-primary"
+                >
                   CG-NET
                 </Link>
               </SheetTitle>
