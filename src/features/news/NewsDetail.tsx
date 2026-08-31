@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft, Calendar, User, Tag } from 'lucide-react'
-import DOMPurify from 'dompurify'
+import { ArrowLeft, Calendar} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -17,8 +16,13 @@ export default function NewsDetailPage() {
   const { slug = '' } = useParams()
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
-
-  const { data: article, isLoading, isError, refetch } = useNewsBySlug(slug)
+  const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+  const {
+    data: article,
+    isLoading,
+    isError,
+    refetch,
+  } = useNewsBySlug(slug)
 
   usePageTitle(article ? getLocalized(article.title, lang) : t('news.detailPageTitle'))
 
@@ -37,13 +41,6 @@ export default function NewsDetailPage() {
 
   if (isError || !article) return <ErrorMessage onRetry={() => void refetch()} />
 
-  // Sanitize HTML content before injection — never skip this step
-  const rawContent = getLocalized(article.content, lang)
-  const sanitizedContent = DOMPurify.sanitize(rawContent, {
-    ALLOWED_TAGS: ['p', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'strong', 'em', 'a', 'blockquote'],
-    ALLOWED_ATTR: ['href', 'target', 'rel'],
-  })
-
   return (
     <main>
       <SectionWrapper>
@@ -52,64 +49,49 @@ export default function NewsDetailPage() {
             <header className="mb-6">
               <div className="mb-6 flex items-center justify-between gap-3">
                 <Badge variant="secondary">
-                  {getLocalized(article.category, lang)}
+                  {getLocalized(article.category.name, lang)}
                 </Badge>
 
                 <Button variant="ghost" asChild className="gap-2">
                   <Link to="/news">
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                    {t('news.backToNews')}
+                    {t('common.goBack')}
                   </Link>
                 </Button>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-font-black leading-[1.6] sm:leading-[1.6] block">
                 {getLocalized(article.title, lang)}
               </h1>
 
-              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground py-2">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" aria-hidden="true" />
-                  <time dateTime={article.publishedAt}>
-                    {formatDate(article.publishedAt, getDateLocale(lang))}
+                  <time dateTime={article.created_at}>
+                    {formatDate(article.created_at, getDateLocale(lang))}
                   </time>
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <User className="h-4 w-4" aria-hidden="true" />
-                  {getLocalized(article.author, lang)}
-                </span>
               </div>
-
-              {article.tags.length > 0 && (
-                <div className="flex gap-2 mt-3 flex-wrap" aria-label="Article tags">
-                  <Tag className="h-4 w-4 text-muted-foreground mt-0.5" aria-hidden="true" />
-                  {article.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              )}
             </header>
 
             <div className="card-media rounded-xl overflow-hidden mb-6 h-52 sm:h-72">
               <img
-                src={article.imageUrl}
+                src={`${STORAGE_URL}/${article.image_url}`}
                 alt={getLocalized(article.title, lang)}
                 className="h-full w-full object-cover"
               />
             </div>
 
             <Separator className="mb-6" />
-
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              {getLocalized(article.excerpt, lang)}
-            </p>
-
-            {/* Sanitized HTML content */}
-            <div
-              className="prose prose-slate prose-sm sm:prose-base max-w-none overflow-x-auto"
-              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-            />
+            <div className="prose prose-slate prose-sm sm:prose-base max-w-none">
+              {getLocalized(article.description, lang)
+                .split(/\r?\n\r?\n/)
+                .filter(Boolean)
+                .map((paragraph, index) => (
+                  <p key={index} className="leading-7">
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
           </article>
         </div>
       </SectionWrapper>

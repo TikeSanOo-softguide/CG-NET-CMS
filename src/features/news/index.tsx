@@ -41,9 +41,9 @@ export default function NewsPage() {
 
   usePageTitle(t('news.pageTitle'))
 
-  const { data, isLoading, isError, refetch } = useNews(page, PAGE_SIZE)
-
-  const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 1
+  const { data: news, isLoading, isError, refetch } = useNews(page, PAGE_SIZE)
+  const totalPages = news ? Math.ceil(news.total / PAGE_SIZE) : 1
+  console.log(totalPages);
 
   return (
     <main>
@@ -73,14 +73,14 @@ export default function NewsPage() {
 
         {isError && <ErrorMessage onRetry={() => void refetch()} />}
 
-        {data && data.data.length === 0 && (
+        {news && news.data.length === 0 && (
           <EmptyState title={t('news.noNews')} description={t('news.noNewsDesc')} />
         )}
 
-        {data && data.data.length > 0 && (
+        {news && news.data.length > 0 && (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {data.data.map((article, i) => (
+              {news.data.map((article, i) => (
                 <NewsCard key={article.id} article={article} lang={lang} delay={i * 80} />
               ))}
             </div>
