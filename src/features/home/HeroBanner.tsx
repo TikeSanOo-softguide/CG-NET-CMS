@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useHeroSlides } from '@/hooks/useAbout'
+import { useBanners } from '@/hooks/useBanner'
 import { cn } from '@/lib/utils'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
+import { Banner } from '@/types'
 
 const AUTOPLAY_MS = 5000
 
@@ -10,13 +11,14 @@ interface HeroBannerProps {
   lang: SupportedLanguage
 }
 
-export function HeroBanner({}: HeroBannerProps) {
-  const { data: slides, isLoading } = useHeroSlides()
+export function HeroBanner({ lang }: HeroBannerProps) {
+  const { data: slides, isLoading } = useBanners()
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
   const [, setLoaded] = useState<Record<string, boolean>>({})
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const touchStartX = useRef<number | null>(null)
+  const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   const total = slides?.length ?? 0
 
@@ -26,20 +28,30 @@ export function HeroBanner({}: HeroBannerProps) {
   )
   const next = useCallback(() => goTo(current + 1), [current, goTo])
   const prev = useCallback(() => goTo(current - 1), [current, goTo])
-
+  const getImageUrl = (slide: Banner) => {
+    const imageMap = {
+      en: slide.image_url_en,
+      zh: slide.image_url_zh,
+      my: slide.image_url_my,
+    }
+    const imagePath = imageMap[lang as keyof typeof imageMap] ?? slide.image_url_en
+    return `${STORAGE_URL}/${imagePath}`
+  }
   useEffect(() => {
     if (!total || paused) return
     timerRef.current = setTimeout(next, AUTOPLAY_MS)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
   }, [current, paused, next, total])
 
   useEffect(() => {
     slides?.forEach((s) => {
       const img = new Image()
-      img.src = s.imageUrl
+      img.src = getImageUrl(s)
       img.onload = () => setLoaded((prev) => ({ ...prev, [s.id]: true }))
     })
-  }, [slides])
+  }, [slides, lang])
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'ArrowRight') next()
@@ -62,8 +74,7 @@ export function HeroBanner({}: HeroBannerProps) {
     else prev()
   }
 
-  const frameClass =
-    'relative overflow-hidden text-white select-none h-[320px] sm:h-[375px]'
+  const frameClass = 'relative overflow-hidden text-white select-none h-[320px] sm:h-[375px]'
 
   if (isLoading) {
     return (
@@ -108,8 +119,8 @@ export function HeroBanner({}: HeroBannerProps) {
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
             )}
           >
-           <img
-              src={s.imageUrl}
+            <img
+              src={getImageUrl(s)}
               alt=""
               className="absolute inset-0 h-full w-full object-cover object-[82%_50%] sm:object-center transition-transform duration-[8000ms] ease-linear"
               style={{
@@ -118,10 +129,7 @@ export function HeroBanner({}: HeroBannerProps) {
               aria-hidden="true"
             />
 
-            <div
-              className="absolute inset-0"
-              aria-hidden="true"
-            />
+            <div className="absolute inset-0" aria-hidden="true" />
 
             <div
               className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent"
@@ -165,9 +173,7 @@ export function HeroBanner({}: HeroBannerProps) {
               onClick={() => goTo(i)}
               className={cn(
                 'rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white min-h-3 min-w-3 sm:min-h-0 sm:min-w-0 flex items-center justify-center',
-                i === current
-                  ? 'w-7 h-2 bg-white shadow'
-                  : 'w-2 h-2 bg-white/40 hover:bg-white/70'
+                i === current ? 'w-7 h-2 bg-white shadow' : 'w-2 h-2 bg-white/40 hover:bg-white/70'
               )}
             />
           ))}
@@ -179,7 +185,9 @@ export function HeroBanner({}: HeroBannerProps) {
           aria-hidden="true"
           key={`pb-${current}`}
           className="absolute bottom-0 left-0 h-[3px] bg-white/50 z-20 rounded-r"
-          style={{ animation: `cgnet-progress ${AUTOPLAY_MS}ms linear ${paused ? 'paused' : 'running'}` }}
+          style={{
+            animation: `cgnet-progress ${AUTOPLAY_MS}ms linear ${paused ? 'paused' : 'running'}`,
+          }}
         />
       )}
 

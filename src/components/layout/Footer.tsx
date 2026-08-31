@@ -4,6 +4,7 @@ import { Wifi } from 'lucide-react'
 import { SiFacebook, SiWechat, SiTelegram, SiViber } from 'react-icons/si'
 import { Separator } from '@/components/ui/separator'
 import { useState } from 'react'
+import { useContact } from '@/hooks/useContact'
 
 const QUICK_LINKS = [
   { to: '/', labelKey: 'nav.home' },
@@ -27,6 +28,7 @@ export function Footer() {
   const { t } = useTranslation()
   const year = new Date().getFullYear()
   const [showWechatQR, setShowWechatQR] = useState(false)
+  const { data: contacts } = useContact()
 
   return (
     <footer className="bg-app-footer text-slate-300">
@@ -153,10 +155,9 @@ export function Footer() {
               {t('contact.title')}
             </h3>
             <address className="not-italic space-y-2 text-sm text-slate-400">
-              <p>📞 09 887288882</p>
-              <p>📞 09 421823339</p>
-              <p>📧 contact@chenguangnetwork.com</p>
-              <p>🕘 Mon–Sat: 9:00 AM – 6:00 PM</p>
+              {contacts?.map((contact) => (
+                <p key={contact.id}>{contact.contact_point}</p>
+              ))}
             </address>
           </div>
         </div>
