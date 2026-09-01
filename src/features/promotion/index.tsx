@@ -12,6 +12,7 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { SearchBar } from '@/components/common/SearchBar'
 import Pagination from '@/components/common/pagination'
+
 const PAGE_SIZE = 6
 
 function PromotionSkeleton() {
@@ -38,8 +39,8 @@ export default function PromotionPage() {
   usePageTitle(t('promotions.pageTitle'))
 
   const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE)
+  const totalPages = data?.meta?.last_page ?? 1
 
-  const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 1
   return (
     <main>
       <PageHeader title={t('promotions.title')} subtitle={t('promotions.subtitle')} />

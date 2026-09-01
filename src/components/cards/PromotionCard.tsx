@@ -16,6 +16,7 @@ interface PromotionCardProps {
 }
 export function PromotionCard({ promotion, lang, delay = 0, compact = false }: PromotionCardProps) {
   const { t } = useTranslation()
+  const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   return (
     <AnimatedCard delay={delay} variant="rise" className="rounded-[20px] h-full">
@@ -31,7 +32,11 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           className={cn('card-media relative block', compact ? 'h-[140px]' : 'h-44')}
         >
           <img
-            src={promotion.imageUrl}
+            src={
+              promotion.imageUrl.startsWith('http')
+                ? promotion.imageUrl
+                : `${STORAGE_URL}/${promotion.imageUrl}`
+            }
             alt={getLocalized(promotion.title, lang)}
             className="h-full w-full object-cover"
             loading="lazy"
@@ -41,10 +46,10 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
 
         {/* 2. Title Section */}
         <CardHeader className="pb-3 pt-4 px-5">
-          <CardTitle className="text-base font-bold leading-snug text-font-black h-[3rem] flex items-center">
+          <CardTitle className="text-base font-bold leading-relaxed text-font-black min-h-[4rem] flex items-center">
             <Link
               to={`/promotion/${promotion.slug}`}
-              className="hover:text-font-blue   transition-colors line-clamp-2"
+              className="hover:text-font-blue transition-colors line-clamp-2 py-1"
             >
               {getLocalized(promotion.title, lang)}
             </Link>

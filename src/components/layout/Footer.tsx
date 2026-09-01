@@ -11,7 +11,7 @@ const QUICK_LINKS = [
   { to: '/services', labelKey: 'nav.services' },
   { to: '/packages?category=mm-broadband', labelKey: 'nav.packages' },
   { to: '/news', labelKey: 'nav.news' },
-  { to: '/promotin', labelKey: 'nav.promotion' },
+  { to: '/promotion', labelKey: 'nav.promotion' },
   { to: '/app-guide', labelKey: 'nav.appGuide' },
   { to: '/about', labelKey: 'nav.about' },
 ]
