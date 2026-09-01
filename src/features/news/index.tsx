@@ -43,8 +43,6 @@ export default function NewsPage() {
 
   const { data: news, isLoading, isError, refetch } = useNews(page, PAGE_SIZE)
   const totalPages = news ? Math.ceil(news.total / PAGE_SIZE) : 1
-  console.log(totalPages);
-
   return (
     <main>
       <PageHeader title={t('news.title')} subtitle={t('news.subtitle')} />

@@ -4,15 +4,19 @@ import { ArrowLeft, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { normalizeLanguage } from '@/lib/i18n'
-import { usePromotion } from '@/hooks/usePromotion'
+import { usePromotionBySlug } from '@/hooks/usePromotion'
 import { formatDate, getDateLocale, getLocalized } from '@/lib/utils'
 
 export default function PromotionDetail() {
   const { slug } = useParams()
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
-  const { data: promotionData, isLoading } = usePromotion(1, 10)
-  const promotion = promotionData?.data?.find((p) => p.slug === slug)
+  const { data: promotion, isLoading } = usePromotionBySlug(slug as string)
+
+  if (isLoading) {
+    return <div className="container py-16 text-center">Loading...</div>
+  }
+  const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   if (isLoading) {
     return <div className="container py-16 text-center">Loading...</div>
   }
@@ -22,7 +26,7 @@ export default function PromotionDetail() {
       <div className="container py-16 text-center space-y-4">
         <h2 className="text-2xl font-bold">Promotion not found</h2>
         <Button asChild>
-          <Link to="/promotion">{t('promotions.back')}</Link>
+          <Link to="/promotion">{t('common.goBack')}</Link>
         </Button>
       </div>
     )
@@ -33,11 +37,11 @@ export default function PromotionDetail() {
       <SectionWrapper className="py-0 ">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center justify-between gap-3 py-3 sm:py-0">
               {/* Date Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-font-blue/10 text-primary text-xs font-medium border border-font-blue/20">
-                <Calendar className="h-3.5 w-3.5" />
-                <span>
+              <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 px-3 pt-2 pb-1.5 sm:py-1.5 rounded-full bg-font-blue/10 text-primary text-[11px] sm:text-xs font-medium border border-font-blue/20 max-w-full text-center sm:text-left">
+                <Calendar className="h-3 w-3 shrink-0" />
+                <span className="break-words">
                   {formatDate(promotion.startDate, getDateLocale(lang))} —{' '}
                   {formatDate(promotion.endDate, getDateLocale(lang))}
                 </span>
@@ -51,13 +55,13 @@ export default function PromotionDetail() {
               >
                 <Link to="/promotion">
                   <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                  <span>{t('promotions.back')}</span>
+                  <span>{t('common.goBack')}</span>
                 </Link>
               </Button>
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-font-black leading-snug sm:leading-tight md:text-4xl">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-font-black leading-[1.6] sm:leading-[1.6]  block">
               {getLocalized(promotion.title, lang)}
             </h1>
           </div>
@@ -65,9 +69,14 @@ export default function PromotionDetail() {
           {/* Banner Image with modern shadow and zoom on hover */}
           <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-lg shadow-black/5 aspect-[16/10] sm:aspect-[16/9] w-full transition-all duration-300 hover:shadow-xl hover:border-primary/30">
             <img
-              src={promotion.imageUrl}
+              src={
+                promotion.imageUrl.startsWith('http')
+                  ? promotion.imageUrl
+                  : `${STORAGE_URL}/${promotion.imageUrl}`
+              }
               alt={getLocalized(promotion.title, lang)}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60" />
           </div>
