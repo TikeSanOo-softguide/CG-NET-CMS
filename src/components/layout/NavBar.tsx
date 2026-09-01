@@ -86,7 +86,7 @@ export function NavBar() {
 
         {/* Packages */}
         <NavLink
-          to="/packages?category=plan"
+          to="/packages?category=mm-broadband"
           className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
         >
           {({ isActive }) => (

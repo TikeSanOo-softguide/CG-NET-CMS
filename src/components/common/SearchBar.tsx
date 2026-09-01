@@ -7,12 +7,21 @@ import { Button } from '@/components/ui/button'
 
 interface SearchBarProps {
   placeholder?: string
+  value?: string
+  onChange?: (value: string) => void
   onSearch?: (value: string) => void
 }
 
-export function SearchBar({ placeholder = 'Search...', onSearch }: SearchBarProps) {
-  const [query, setQuery] = React.useState('')
+export function SearchBar({
+  placeholder = 'Search...',
+  value,
+  onChange,
+  onSearch,
+}: SearchBarProps) {
+  const isControlled = value !== undefined
+  const [internalQuery, setInternalQuery] = React.useState('')
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const query = isControlled ? value : internalQuery
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -26,14 +35,21 @@ export function SearchBar({ placeholder = 'Search...', onSearch }: SearchBarProp
   }, [])
 
   const handleClear = () => {
-    setQuery('')
-    onSearch?.('')
+    const nextValue = ''
+    if (!isControlled) {
+      setInternalQuery(nextValue)
+    }
+    onChange?.(nextValue)
+    onSearch?.(nextValue)
     inputRef.current?.focus()
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value
-    setQuery(val)
+    if (!isControlled) {
+      setInternalQuery(val)
+    }
+    onChange?.(val)
     onSearch?.(val)
   }
 
@@ -52,9 +68,9 @@ export function SearchBar({ placeholder = 'Search...', onSearch }: SearchBarProp
         placeholder={placeholder}
         className="
             w-full
-           h-8 sm:h-10
-           pl-10 sm:pl-12
-          pr-10 sm:pr-12
+            h-8 sm:h-10
+            pl-10 sm:pl-12
+            pr-10 sm:pr-12
             rounded-full
 
             border-2

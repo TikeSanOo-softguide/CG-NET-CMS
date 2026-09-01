@@ -35,11 +35,15 @@ export default function PromotionPage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
   const [page, setPage] = useState(1)
-
+  const [searchInput, setSearchInput] = useState('')
+  const [search, setSearch] = useState('')
   usePageTitle(t('promotions.pageTitle'))
-
-  const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE)
+  const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE, search)
   const totalPages = data?.meta?.last_page ?? 1
+  const handleSearch = (value: string) => {
+    setPage(1)
+    setSearch(value.trim())
+  }
 
   return (
     <main>
@@ -50,7 +54,11 @@ export default function PromotionPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0">
               <div className="w-full sm:max-w-[600px]">
-                <SearchBar />
+                <SearchBar
+                  value={searchInput}
+                  onChange={setSearchInput}
+                  onSearch={handleSearch}
+                />
               </div>
             </div>
           </div>
@@ -68,8 +76,8 @@ export default function PromotionPage() {
 
         {data && data.data.length === 0 && (
           <EmptyState
-            title={t('promotion.noPromotions')}
-            description={t('promotion.noPromotionsDesc')}
+            title={t('common.noData')}
+            description={t('common.emptyStateDesc')}
           />
         )}
 

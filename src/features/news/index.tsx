@@ -12,8 +12,9 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { SearchBar } from '@/components/common/SearchBar'
 import { CommonFilter } from '@/components/common/CommonFilter'
-import { newsFilterOptions } from '@/lib/content/new'
 import Pagination from '@/components/common/pagination'
+import { useNewsCategories } from '@/hooks/useCategory'
+import { NewsCategory } from '@/types/new'
 
 const PAGE_SIZE = 6
 
@@ -36,13 +37,46 @@ function NewsSkeleton() {
 export default function NewsPage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
+  const [searchInput, setSearchInput] = useState('')
+  const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
-  const [filter, setFilter] = useState('all')
-
+  const [filter, setFilter] = useState('')
   usePageTitle(t('news.pageTitle'))
+  const { data: news, isLoading, isError, refetch } = useNews(page, PAGE_SIZE, search, filter)
+  const { data: categories = [] } = useNewsCategories()
 
-  const { data: news, isLoading, isError, refetch } = useNews(page, PAGE_SIZE)
+  const getCategoryName = (category: NewsCategory) => {
+    const nameMap = {
+      en: category.name.en,
+      my: category.name.my,
+      zh: category.name.zh,
+    }
+
+    return nameMap[i18n.language as keyof typeof nameMap] || category.name.en
+  }
+  
+  const newsFilterOptions = [
+    {
+      label: t('common.viewAll'),
+      value: '',
+    },
+    ...categories.map((category) => ({
+      label: getCategoryName(category),
+      value: category.slug,
+    })),
+  ]
   const totalPages = news ? Math.ceil(news.total / PAGE_SIZE) : 1
+
+  const handleSearch = (value: string) => {
+    setPage(1)
+    setSearch(value.trim())
+  }
+
+  const handleFilterChange = (value: string) => {
+    setPage(1)
+    setFilter(value)
+  }
+
   return (
     <main>
       <PageHeader title={t('news.title')} subtitle={t('news.subtitle')} />
@@ -52,11 +86,15 @@ export default function NewsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0">
               <div className="w-full sm:max-w-[600px]">
-                <SearchBar />
+                <SearchBar
+                  value={searchInput}
+                  onChange={setSearchInput}
+                  onSearch={handleSearch}
+                />
               </div>
 
               {/* Filter Icon Button (Dropdown Menu) */}
-              <CommonFilter options={newsFilterOptions} value={filter} onChange={setFilter} />
+              <CommonFilter options={newsFilterOptions} value={filter} onChange={handleFilterChange} />
             </div>
           </div>
         </div>

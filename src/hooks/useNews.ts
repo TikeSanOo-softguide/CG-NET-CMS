@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { getNews, getNewsBySlug, getLatestNews } from '@/lib/api/news.api'
 
-export function useNews(page = 1, limit = 6) {
+export function useNews(page = 1, limit = 6,search = '', category = '') {
   return useQuery({
-    queryKey: ['news', page, limit],
-    queryFn: () => getNews(page, limit),
+    queryKey: ['news', page, limit, search, category],
+    queryFn: () => getNews(page, limit, search, category),
+    placeholderData: (previousData) => previousData,
   })
 }
 
