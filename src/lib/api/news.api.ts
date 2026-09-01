@@ -17,23 +17,35 @@ type NewsResponse = {
   }
 }
 
-export async function getNews(page = 1,limit = 6): Promise<{
+export async function getNews(
+  page = 1,
+  limit = 6,
+  search = '',
+  category = ''
+): Promise<{
   data: NewsArticle[]
   total: number
 }> {
   const { data } = await apiClient.get<NewsResponse>(
-    `/web-app/news?page=${page}&per_page=${limit}`,
+    '/web-app/news',
     {
       params: {
         page,
         per_page: limit,
+        ...(search.trim() && {
+          search: search.trim(),
+        }),
+        ...(category && {
+          category,
+        }),
       },
     }
   )
+
   return {
     data: data.data,
     total: data.meta.total,
-  } 
+  }
 }
 
 export async function getNewsBySlug(

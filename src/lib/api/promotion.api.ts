@@ -24,7 +24,9 @@ export async function getPromotions(page = 1, limit = 5, search = ''): Promise<P
     params: {
       page,
       per_page: limit,
-      search,
+      ...(search.trim() && {
+          search: search.trim(),
+        }),
     },
   })
 
