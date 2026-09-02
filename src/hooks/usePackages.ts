@@ -1,24 +1,36 @@
 import { useQuery } from '@tanstack/react-query'
-import { getPackages, getPackageBySlug, getFeaturedPackages } from '@/lib/api/packages.api'
 
-export function usePackages(category?: string) {
+import {
+  getPackages,
+  getOtherPackages,
+  getNetworks,
+  getRecommendPackage,
+} from '@/lib/api/packages.api'
+
+export function usePackages() {
   return useQuery({
-    queryKey: ['packages', category ?? 'all'],
-    queryFn: () => getPackages(category),
+    queryKey: ['packages'],
+    queryFn: getPackages,
   })
 }
 
-export function usePackageBySlug(slug: string) {
+export function useOtherPackages() {
   return useQuery({
-    queryKey: ['package', slug],
-    queryFn: () => getPackageBySlug(slug),
-    enabled: Boolean(slug),
+    queryKey: ['packages', 'addons'],
+    queryFn: getOtherPackages,
   })
 }
 
-export function useFeaturedPackages() {
+export function useRecommendPackage() {
   return useQuery({
-    queryKey: ['packages', 'featured'],
-    queryFn: getFeaturedPackages,
+    queryKey: ['packages', 'recommended'],
+    queryFn: getRecommendPackage,
+  })
+}
+
+export function useNetworks() {
+  return useQuery({
+    queryKey: ['packages', 'networks'],
+    queryFn: getNetworks,
   })
 }
