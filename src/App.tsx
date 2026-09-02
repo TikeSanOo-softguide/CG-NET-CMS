@@ -18,9 +18,10 @@ import PromotionModal from './components/common/PromotionModal'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 0,
       retry: 2,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
     },
   },
 })
@@ -56,12 +57,13 @@ export default function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter 
+        <BrowserRouter
           future={{
             v7_startTransition: true,
             v7_relativeSplatPath: true,
-        }}>
-          <PromotionModal/>
+          }}
+        >
+          <PromotionModal />
           <AppDownloadCard />
           <AppContent />
           <ScrollToTop />

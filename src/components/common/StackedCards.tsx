@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react'
 gsap.registerPlugin(ScrollTrigger)
 
 interface CardItem {
-  key: string
+  id: string
   imageUrl: string
 }
 
@@ -22,10 +22,7 @@ export function StackedCards({ items }: StackedCardsProps) {
     () => {
       if (!containerRef.current || !trackRef.current) return
 
-      const images = gsap.utils.toArray<HTMLElement>(
-        '.stacked-image',
-        containerRef.current
-      )
+      const images = gsap.utils.toArray<HTMLElement>('.stacked-image', containerRef.current)
 
       if (images.length < 2) return
 
@@ -76,15 +73,11 @@ export function StackedCards({ items }: StackedCardsProps) {
         [&::-webkit-scrollbar]:hidden
       "
     >
-      <div
-        ref={trackRef}
-        style={{ height: scrollTrackHeight }}
-        className="relative w-full"
-      >
+      <div ref={trackRef} style={{ height: scrollTrackHeight }} className="relative w-full">
         <div className="sticky top-0 h-[250px] w-full overflow-hidden rounded-[28px] sm:h-[300px] md:h-[340px] lg:h-[390px]">
           {items.map((item, index) => (
             <div
-              key={item.key}
+              key={item.id}
               className="stacked-image absolute inset-0 h-full w-full"
               style={{
                 zIndex: index + 1,
@@ -92,7 +85,7 @@ export function StackedCards({ items }: StackedCardsProps) {
             >
               <img
                 src={item.imageUrl}
-                alt={item.key}
+                alt={item.id}
                 className="h-full w-full object-cover"
                 draggable={false}
               />
