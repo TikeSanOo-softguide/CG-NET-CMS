@@ -8,7 +8,7 @@ import { SectionWrapper, SectionHeading } from '@/components/common/SectionWrapp
 import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { BorderBeam } from '@/components/magicui/border-beam'
-import { PackageCarousel } from '@/components/cards/PackageCarousel'
+// import { PackageCarousel } from '@/components/cards/PackageCarousel'
 import { NewsCard } from '@/components/cards/NewsCard'
 import { HeroBanner } from './HeroBanner'
 import { usePackages } from '@/hooks/usePackages'
@@ -157,7 +157,7 @@ export default function HomePage() {
 
         {pkgError && <ErrorMessage onRetry={() => void pkgRefetch()} />}
 
-        {packages && <PackageCarousel packages={packages} lang={lang} />}
+        {/* {packages && <PackageCarousel packages={packages} lang={lang} />} */}
       </SectionWrapper>
 
       {/* Latest News */}
