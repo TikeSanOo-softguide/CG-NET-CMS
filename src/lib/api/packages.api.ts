@@ -1,19 +1,45 @@
+import type { Addon, Network, Package } from '@/types/package'
 import { apiClient } from './client'
-import type { Package } from '@/types'
-
-export async function getPackages(category?: string): Promise<Package[]> {
-  const url = category ? `/packages?category=${category}` : '/packages'
-  const { data } = await apiClient.get<Package[]>(url)
-  return data
+interface PackageResponse {
+  data: Package[]
 }
 
-export async function getPackageBySlug(slug: string): Promise<Package> {
-  const { data } = await apiClient.get<Package[]>(`/packages?slug=${slug}`)
-  if (!data.length) throw new Error('Package not found')
-  return data[0]
+interface AddonResponse {
+  data: Addon[]
 }
 
-export async function getFeaturedPackages(): Promise<Package[]> {
-  const { data } = await apiClient.get<Package[]>('/packages?isFeatured=true')
-  return data
+interface NetworkResponse {
+  data: Network[]
+}
+
+export async function getPackages(): Promise<Package[]> {
+  const { data } = await apiClient.get<PackageResponse>(
+    '/web-app/packages'
+  )
+
+  return data.data
+}
+
+export async function getOtherPackages(): Promise<Addon[]> {
+  const { data } = await apiClient.get<AddonResponse>(
+    '/web-app/addons'
+  )
+
+  return data.data
+}
+
+export async function getRecommendPackage(): Promise<Package[]> {
+  const { data } = await apiClient.get<PackageResponse>(
+    '/web-app/recommended'
+  )
+
+  return data.data
+}
+
+export async function getNetworks(): Promise<Network[]> {
+  const { data } = await apiClient.get<NetworkResponse>(
+    '/web-app/networks'
+  )
+
+  return data.data
 }

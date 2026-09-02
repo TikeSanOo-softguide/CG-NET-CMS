@@ -6,7 +6,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 const HomePage = lazy(() => import('@/features/home'))
 const ServicesPage = lazy(() => import('@/features/services'))
 const PackagesPage = lazy(() => import('@/features/packages'))
-const PackageDetailPage = lazy(() => import('@/features/packages/PackageDetail'))
 const NewsPage = lazy(() => import('@/features/news'))
 const NewsDetailPage = lazy(() => import('@/features/news/NewsDetail'))
 const CareerPage = lazy(() => import('@/features/career'))
@@ -41,7 +40,6 @@ export function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/packages" element={<PackagesPage />} />
-        <Route path="/packages/:slug" element={<PackageDetailPage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/news/:slug" element={<NewsDetailPage />} />
         <Route path="/career" element={<CareerPage />} />
