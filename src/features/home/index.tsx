@@ -8,10 +8,9 @@ import { SectionWrapper, SectionHeading } from '@/components/common/SectionWrapp
 import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { BorderBeam } from '@/components/magicui/border-beam'
-// import { PackageCarousel } from '@/components/cards/PackageCarousel'
+import { PackageCarousel } from '@/components/cards/PackageCarousel'
 import { NewsCard } from '@/components/cards/NewsCard'
 import { HeroBanner } from './HeroBanner'
-import { usePackages } from '@/hooks/usePackages'
 import { useLatestNews } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
@@ -24,6 +23,7 @@ import { EmptyState } from '@/components/common/EmptyState'
 import CommonTab from '@/components/common/CommonTab'
 import { useGallery } from '@/hooks/useGallery'
 import { getLocalized } from '@/lib/utils'
+import { useRecommendPackage } from '@/hooks/usePackages'
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
@@ -31,11 +31,12 @@ export default function HomePage() {
   usePageTitle()
   const navigate = useNavigate()
   const {
-    data: packages,
+    data: recommendedPackages,
     isLoading: pkgLoading,
     isError: pkgError,
     refetch: pkgRefetch,
-  } = usePackages()
+  } = useRecommendPackage()
+  console.log('R Package', recommendedPackages)
   const { data: news, isLoading: newsLoading, isError: newsError } = useLatestNews(3)
   const { data: promotions, isLoading, isError } = useLatestPromotions(3)
   const [searchParams, setSearchParams] = useSearchParams()
@@ -157,7 +158,25 @@ export default function HomePage() {
 
         {pkgError && <ErrorMessage onRetry={() => void pkgRefetch()} />}
 
-        {/* {packages && <PackageCarousel packages={packages} lang={lang} />} */}
+        {recommendedPackages &&
+          (() => {
+            const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+            const formattedPackages = recommendedPackages.map((pkg: any) => {
+              const rawImg = pkg.image_url || pkg.imageUrl
+              const fullImageUrl = rawImg
+                ? rawImg.startsWith('http')
+                  ? rawImg
+                  : `${STORAGE_URL}/${rawImg}`
+                : ''
+              return {
+                ...pkg,
+                image_url: fullImageUrl,
+                imageUrl: fullImageUrl,
+              }
+            })
+
+            return <PackageCarousel packages={formattedPackages} lang={lang} />
+          })()}
       </SectionWrapper>
 
       {/* Latest News */}
