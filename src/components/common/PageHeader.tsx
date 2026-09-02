@@ -10,7 +10,9 @@ export function PageHeader({ title, subtitle, children }: PageHeaderProps) {
       <div className="container">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-3">{title}</h1>
         {subtitle && (
-          <p className="text-sm sm:text-base md:text-lg text-blue-100 max-w-5xl">{subtitle}</p>
+          <p className="text-sm sm:text-base md:text-lg text-blue-100 max-w-5xl leading-[1.8]">
+            {subtitle}
+          </p>
         )}
         {children}
       </div>

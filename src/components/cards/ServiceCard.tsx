@@ -45,7 +45,7 @@ export function ServiceCard({ service, lang, delay = 0, featured = false }: Serv
               {t(service.titleKey, { lng: lang })}
             </CardTitle>
 
-            <CardDescription className="line-clamp-2">
+            <CardDescription className=" leading-[1.7]">
               {t(service.descriptionKey, { lng: lang })}
             </CardDescription>
           </CardHeader>

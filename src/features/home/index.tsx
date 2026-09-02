@@ -285,71 +285,73 @@ export default function HomePage() {
       {/* Photo Gallery */}
       <SectionWrapper className="bg-muted/30">
         <SectionHeading title={t('home.galleryTitle')} subtitle={t('home.galleryDesc')} />
+        {!galleryData?.data || galleryData.data.length === 0 ? (
+          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
+            {galleryData.data.slice(0, 5).map((item, i) => {
+              const isMoreCard = i === 4 && hasMore
+              const cardClass =
+                i === 0
+                  ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
+                  : 'md:col-span-1 rounded-[28px]'
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
-          {galleryData?.data?.slice(0, 5).map((item, i) => {
-            const isMoreCard = i === 4 && hasMore
-            const cardClass =
-              i === 0
-                ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
-                : 'md:col-span-1 rounded-[28px]'
+              const imageUrl = item.imageUrl?.startsWith('http')
+                ? item.imageUrl
+                : `${STORAGE_URL}/${item.imageUrl}`
 
-            const imageUrl = item.imageUrl?.startsWith('http')
-              ? item.imageUrl
-              : `${STORAGE_URL}/${item.imageUrl}`
+              const displayTitle = getLocalized(item.label, lang)
 
-            const displayTitle = getLocalized(item.label, lang)
-
-            return (
-              <AnimatedCard key={item.id} delay={i * 90} variant="rise" className={cardClass}>
-                {isMoreCard ? (
-                  <button
-                    type="button"
-                    onClick={() => navigate('/about#gallery')}
-                    className="group relative h-full w-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40"
-                  >
-                    <img
-                      src={imageUrl}
-                      alt="View More"
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-                      loading="lazy"
-                    />
-
-                    <div className="absolute inset-0 bg-black/60 transition-all duration-500 group-hover:bg-black/70" />
-
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                      <span className="text-2xl font-bold">+ {t('home.more')}</span>
-                      <span className="mt-1 text-sm opacity-80">{t('home.viewAllGallery')}</span>
-                    </div>
-                  </button>
-                ) : (
-                  <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
-                    <div className="card-media h-full">
+              return (
+                <AnimatedCard key={item.id} delay={i * 90} variant="rise" className={cardClass}>
+                  {isMoreCard ? (
+                    <button
+                      type="button"
+                      onClick={() => navigate('/about#gallery')}
+                      className="group relative h-full w-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40"
+                    >
                       <img
                         src={imageUrl}
-                        alt={displayTitle}
+                        alt="View More"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
                         loading="lazy"
                       />
-                    </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
+                      <div className="absolute inset-0 bg-black/60 transition-all duration-500 group-hover:bg-black/70" />
 
-                    {displayTitle && (
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                        <p className="text-white text-sm sm:text-base font-semibold tracking-wide drop-shadow-sm">
-                          {displayTitle}
-                        </p>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                        <span className="text-2xl font-bold">+ {t('home.more')}</span>
+                        <span className="mt-1 text-sm opacity-80">{t('home.viewAllGallery')}</span>
                       </div>
-                    )}
-                  </div>
-                )}
-              </AnimatedCard>
-            )
-          })}
-        </div>
-      </SectionWrapper>
+                    </button>
+                  ) : (
+                    <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
+                      <div className="card-media h-full">
+                        <img
+                          src={imageUrl}
+                          alt={displayTitle}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                          loading="lazy"
+                        />
+                      </div>
 
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
+
+                      {displayTitle && (
+                        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                          <p className="text-white text-sm sm:text-base font-semibold tracking-wide drop-shadow-sm">
+                            {displayTitle}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </AnimatedCard>
+              )
+            })}
+          </div>
+        )}
+      </SectionWrapper>
       {/* Download Section */}
       <SectionWrapper className="bg-muted/30">
         <SectionHeading title={t('home.downloadTitle')} subtitle={t('home.downloadDesc')} />
