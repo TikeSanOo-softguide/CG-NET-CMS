@@ -55,7 +55,7 @@ export function CommonFilter({
         >
           <div
             className="
-              flex h-11 w-11
+              flex h-9 w-9 sm:h-11 sm:w-11
               items-center justify-center
               rounded-full
               bg-icon-cbg

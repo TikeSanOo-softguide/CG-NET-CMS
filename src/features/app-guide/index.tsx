@@ -69,7 +69,7 @@ export default function AppGuidePage() {
                           />
                         </div>
 
-                        <span className="text-xs font-bold tracking-widest uppercase text-font-muted group-hover:text-font-blue  transition-colors duration-500 mt-1">
+                        <span className="text-xs font-bold tracking-widest uppercase text-font-muted group-hover:text-font-blue  transition-colors duration-500 mt-1 leading-[1.7]">
                           {t('appGuide.stepBy')} 0{index + 1}
                         </span>
                       </div>
@@ -79,7 +79,7 @@ export default function AppGuidePage() {
                           {t(guide.titleKey)}
                         </h3>
 
-                        <p className="text-sm text-font-muted  leading-relaxed">
+                        <p className="text-sm text-font-muted  leading-[1.8]">
                           {t(guide.descriptionKey)}
                         </p>
                       </div>
@@ -92,7 +92,7 @@ export default function AppGuidePage() {
 
           {/* Detailed steps accordion */}
           <h2
-            className="text-xl sm:text-2xl font-bold tracking-tight mb-6 scroll-mt-24"
+            className="text-xl sm:text-2xl font-bold tracking-tight mb-6 scroll-mt-24 leading-[1.7]"
             id="detail-step"
           >
             {t('appGuide.overview')}
@@ -124,16 +124,19 @@ export default function AppGuidePage() {
                   </AccordionTrigger>
 
                   <AccordionContent className="pb-5 pt-1 pl-2">
-                    <p className="text-sm text-font-muted mb-4 pl-0 sm:pl-11 leading-relaxed">
+                    <p className="text-sm text-font-muted mb-4 pl-0 sm:pl-11 leading-relaxed leading-[2.0]">
                       {t(guide.descriptionKey)}
                     </p>
 
                     <ol
-                      className="pl-0 sm:pl-11 space-y-2.5"
+                      className="pl-0 sm:pl-11 space-y-2.5 leading-[1.7]"
                       aria-label={`Steps for ${t(guide.titleKey)}`}
                     >
                       {stepsList.map((s, i) => (
-                        <li key={i} className="text-sm flex items-start gap-2.5 text-font-black">
+                        <li
+                          key={i}
+                          className="text-sm flex items-start gap-2.5 text-font-black leading-[1.7]"
+                        >
                           <span
                             className="text-app-black font-semibold shrink-0 mt-0.5"
                             aria-hidden="true"
@@ -152,7 +155,7 @@ export default function AppGuidePage() {
 
           {/* Frequently Asked Questions (FAQ Section) */}
           <div className="mt-16 mb-12" id="faq">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6 ">
               {t('appGuide.faqTitle')}
             </h2>
 
@@ -173,14 +176,14 @@ export default function AppGuidePage() {
                       >
                         {index + 1}
                       </span>
-                      <span className="font-semibold text-sm sm:text-base min-w-0 ">
+                      <span className="font-semibold text-sm sm:text-base min-w-0 leading-[1.8]">
                         {t(faq.questionKey)}
                       </span>
                     </div>
                   </AccordionTrigger>
 
                   <AccordionContent className="pb-5 pt-1 pl-2">
-                    <p className="text-sm text-font-muted  pl-0 sm:pl-11 leading-relaxed">
+                    <p className="text-sm text-font-muted  pl-0 sm:pl-11 leading-relaxed leading-[1.8]">
                       {t(faq.answerKey)}
                     </p>
                   </AccordionContent>

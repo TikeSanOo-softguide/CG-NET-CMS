@@ -12,6 +12,7 @@ import { StackedCards } from '@/components/common/StackedCards'
 import { Users, Gem, ShieldCheck, Megaphone } from 'lucide-react'
 import { useHashScroll } from '@/hooks/useHashScroll'
 import { useGallery } from '@/hooks/useGallery'
+import { EmptyState } from '@/components/common/EmptyState'
 
 export default function AboutPage() {
   const { t } = useTranslation()
@@ -41,11 +42,11 @@ export default function AboutPage() {
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>
             </div>
 
-            <p className="text-font-muted text-base md:text-lg leading-relaxed">
+            <p className="text-font-muted text-sm md:text-base leading-relaxed">
               {t('about.storyText1')}
             </p>
 
-            <p className="text-font-muted text-base md:text-lg leading-relaxed">
+            <p className="text-font-muted text-sm md:text-base leading-relaxed">
               {t('about.storyText2')}
             </p>
           </div>
@@ -120,7 +121,9 @@ export default function AboutPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-font-muted leading-relaxed">{t('about.mission')}</p>
+                  <p className="text-font-muted text-sm md:text-base leading-relaxed">
+                    {t('about.mission')}
+                  </p>
                 </CardContent>
                 <BorderBeam
                   size={80}
@@ -156,7 +159,9 @@ export default function AboutPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-font-muted leading-relaxed">{t('about.vision')}</p>
+                  <p className="text-font-muted text-sm md:text-base leading-relaxed">
+                    {t('about.vision')}
+                  </p>
                 </CardContent>
                 <BorderBeam
                   size={80}
@@ -257,7 +262,7 @@ export default function AboutPage() {
                 {t('about.brandGuidelineTitle')}
               </h2>
             </div>
-            <p className="text-font-muted text-base md:text-lg leading-relaxed max-w-lg ">
+            <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg">
               {t('about.brandGuidelineDesc')}
             </p>
           </div>
@@ -289,16 +294,22 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <StackedCards
-            items={
-              (galleryData?.data?.map((item) => ({
-                id: item.id,
-                imageUrl: item.imageUrl?.startsWith('http')
-                  ? item.imageUrl
-                  : `${STORAGE_URL}/${item.imageUrl}`,
-              })) || []) as any
-            }
-          />
+          {!galleryData?.data || galleryData.data.length === 0 ? (
+            <div className="flex justify-center items-center h-full min-h-[300px]">
+              <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+            </div>
+          ) : (
+            <StackedCards
+              items={
+                galleryData.data.map((item) => ({
+                  id: item.id,
+                  imageUrl: item.imageUrl?.startsWith('http')
+                    ? item.imageUrl
+                    : `${STORAGE_URL}/${item.imageUrl}`,
+                })) as any
+              }
+            />
+          )}
         </div>
       </SectionWrapper>
 
@@ -332,7 +343,7 @@ export default function AboutPage() {
                       </div>
                     </div>
 
-                    <CardTitle className="text-lg font-bold tracking-tight text-font-secondary group-hover:text-font-blue transition-colors duration-300">
+                    <CardTitle className="text-sm md:text-base font-bold tracking-tight text-font-secondary group-hover:text-font-blue transition-colors duration-300">
                       {t(member.nameKey)}
                     </CardTitle>
                   </CardHeader>
