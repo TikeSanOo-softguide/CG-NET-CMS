@@ -10,9 +10,14 @@ import { BorderBeam } from '@/components/magicui/border-beam'
 import { aboutContent } from '@/lib/content/about'
 import { StackedCards } from '@/components/common/StackedCards'
 import { Users, Gem, ShieldCheck, Megaphone } from 'lucide-react'
+import { useHashScroll } from '@/hooks/useHashScroll'
+import { useGallery } from '@/hooks/useGallery'
 
 export default function AboutPage() {
   const { t } = useTranslation()
+  useHashScroll()
+  const { data: galleryData } = useGallery()
+  const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   usePageTitle(t('about.pageTitle'))
   return (
@@ -284,7 +289,16 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <StackedCards items={aboutContent.galleryItems as any} />
+          <StackedCards
+            items={
+              (galleryData?.data?.map((item) => ({
+                id: item.id,
+                imageUrl: item.imageUrl?.startsWith('http')
+                  ? item.imageUrl
+                  : `${STORAGE_URL}/${item.imageUrl}`,
+              })) || []) as any
+            }
+          />
         </div>
       </SectionWrapper>
 

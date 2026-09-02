@@ -17,10 +17,10 @@ const QUICK_LINKS = [
 ]
 
 const SUPPORT_LINKS = [
-  { to: '/app-guide', labelKey: 'footer.helpCenter' },
+  // { to: '/app-guide', labelKey: 'footer.helpCenter' },
   { to: '/app-guide#faq', labelKey: 'appGuide.faqs' },
   { to: '/app-guide#detail-step', labelKey: 'appGuide.detailStep' },
-  { to: '/about#brand', labelKey: 'footer.brandGuideLine' },
+  { to: '/about#brand-guideline', labelKey: 'footer.brandGuideLine' },
   { to: '/privacy-policy', labelKey: 'footer.privacyPolicy' },
 ]
 

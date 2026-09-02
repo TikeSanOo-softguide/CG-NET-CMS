@@ -10,10 +10,12 @@ import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { appGuideContent } from '../../lib/content/guide'
+import { useHashScroll } from '@/hooks/useHashScroll'
 
 export default function AppGuidePage() {
   const { t } = useTranslation()
   usePageTitle(t('appGuide.pageTitle'))
+  useHashScroll()
 
   return (
     <main>

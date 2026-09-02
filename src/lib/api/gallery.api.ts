@@ -1,18 +1,5 @@
 import { apiClient } from './client'
-
-export interface Gallery {
-  id: string
-  label: {
-    en: string
-    my: string
-    zh: string
-  }
-  imageUrl: string
-}
-
-export interface GalleryResponse {
-  data: Gallery[]
-}
+import { GalleryResponse } from '@/types/gallery'
 
 export async function getGalleries(): Promise<GalleryResponse> {
   const { data } = await apiClient.get<GalleryResponse>('/web-app/gallery')
