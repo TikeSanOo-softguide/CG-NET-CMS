@@ -186,7 +186,18 @@
     "filterBusiness": "Business",
     "filterEnterprise": "Enterprise",
     "filterPlan": "Plan",
-    "filterCGNetCard": "Data Card"
+    "filterCGNetCard": "Data Card",
+    "durationHead": "Duration Selector",
+    "durationDec": "Choose your subscription period",
+    "yourSelection": "Your Selection",
+    "duration": "Duration",
+    "reviewYourPackage": "Review your package",
+    "totalPrice": "Total Price",
+    "package": "Package",
+    "addsOn": "Add-ons",
+    "months": "Months",
+    "year": "Year",
+    "OtherService": "Other Service"
   },
   "news": {
     "title": "News & Updates",
