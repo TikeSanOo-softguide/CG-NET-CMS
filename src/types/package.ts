@@ -36,8 +36,8 @@ export interface Package {
   network: Network
   speed: Speed
   term: Term
-  price: number
-  installation_fee: number
+  price: string
+  installation_fee: string
   image_url: string | null
   includes_free_iptv: boolean
   is_active: boolean

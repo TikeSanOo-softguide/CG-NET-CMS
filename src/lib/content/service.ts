@@ -119,7 +119,7 @@ export const serviceContent = {
     },
     {
       id: '4',
-      slug: 'iptv-service',
+      slug: 'other-service',
       titleKey: 'services.iptv.title',
       descriptionKey: 'services.iptv.description',
       imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop',

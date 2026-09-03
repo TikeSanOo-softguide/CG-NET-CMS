@@ -13,13 +13,21 @@ export default function Pagination({ page, totalPages, setPage, t }: PaginationP
     return null
   }
 
+  const handlePageChange = (newPage: number) => { 
+    setPage(newPage) 
+    window.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth', 
+    }) 
+  }
+
   return (
     <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap">
       {/* Previous */}
       <Button
         variant="outline"
         size="sm"
-        onClick={() => setPage((p) => Math.max(1, p - 1))}
+        onClick={() => handlePageChange(Math.max(1, page - 1))}
         disabled={page === 1}
         aria-label={t('common.previous')}
         className="text-font-blue"
@@ -38,7 +46,7 @@ export default function Pagination({ page, totalPages, setPage, t }: PaginationP
       <Button
         variant="outline"
         size="sm"
-        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+        onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
         disabled={page === totalPages}
         aria-label={t('common.next')}
         className="text-font-blue"

@@ -185,7 +185,18 @@
     "filterBusiness": "企业",
     "filterEnterprise": "政企",
     "filterPlan": "套餐",
-    "filterCGNetCard": "数据卡"
+    "filterCGNetCard": "数据卡",
+    "durationHead": "订阅时长",
+    "durationDec": "选择您的订阅期限",
+    "yourSelection": "您的选择",
+    "reviewYourPackage": "查看您的套餐",
+    "duration": "订阅时长",
+    "totalPrice": "总价",
+    "package": "套餐",
+    "addsOn": "附加服务",
+    "months": "个月",
+    "year": "年",
+    "OtherService": "其他服务"
   },
   "news": {
     "title": "新闻与动态",

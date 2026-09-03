@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 type Filter = {
   value: string
-  labelKey: string
+  labelKey?: string
+  label?: string
 }
 
 interface CommonTabProps {
@@ -27,7 +28,7 @@ export default function CommonTab({
             flex
             w-max
             min-w-full
-            justify-start
+            justify-center
             sm:justify-center
             h-auto
             gap-0
@@ -36,7 +37,7 @@ export default function CommonTab({
             p-0
           "
         >
-          {filters.map(({ value, labelKey }) => (
+          {filters.map(({ value, labelKey, label }) => (
             <TabsTrigger
               key={value}
               value={value}
@@ -74,7 +75,7 @@ export default function CommonTab({
                 data-[state=active]:hover:text-font-blue
               "
             >
-              {t(labelKey)}
+              {label ?? t(labelKey ?? '')}
             </TabsTrigger>
           ))}
         </TabsList>

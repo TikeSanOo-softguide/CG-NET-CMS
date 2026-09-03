@@ -25,7 +25,7 @@ const MOBILE_PACKAGE_LINKS = [
   { to: '/packages?category=mm-broadband', labelKey: 'services.mmBroadband.title' },
   { to: '/packages?category=cg-broadband', labelKey: 'services.cgBroadband.title' },
   { to: '/packages?category=cg-net-broadband', labelKey: 'services.cgNetBroadband.title' },
-  { to: '/packages?category=iptv-service', labelKey: 'services.iptv.title' },
+  { to: '/packages?category=other-service', labelKey: 'services.iptv.title' },
 ]
 
 export function NavBar() {

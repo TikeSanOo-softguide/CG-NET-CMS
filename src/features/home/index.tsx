@@ -36,7 +36,6 @@ export default function HomePage() {
     isError: pkgError,
     refetch: pkgRefetch,
   } = useRecommendPackage()
-  console.log('R Package', recommendedPackages)
   const { data: news, isLoading: newsLoading, isError: newsError } = useLatestNews(3)
   const { data: promotions, isLoading, isError } = useLatestPromotions(3)
   const [searchParams, setSearchParams] = useSearchParams()
@@ -157,6 +156,13 @@ export default function HomePage() {
         )}
 
         {pkgError && <ErrorMessage onRetry={() => void pkgRefetch()} />}
+
+        {(!recommendedPackages || recommendedPackages.length === 0) && (
+          <EmptyState
+            title={t('common.noData')}
+            description={t('common.emptyStateDesc')}
+          />
+        )}
 
         {recommendedPackages &&
           (() => {

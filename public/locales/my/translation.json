@@ -172,7 +172,7 @@
     "fup": "ဒေတာ မူဝါဒ",
     "contract": "သဘောတူညီချက်",
     "installation": "တပ်ဆင်မှု",
-    "installationFee": "တပ်ဆင်ကြေ",
+    "installationFee": "တပ်ဆင်ခ",
     "perMonth": "/လ",
     "choosePlan": "အစီအစဉ် ရွေးချယ်မည်",
     "contactSales": "ရောင်းချမှုကို ဆက်သွယ်ရန်",
@@ -185,7 +185,18 @@
     "filterBusiness": "စီးပွားရေး",
     "filterEnterprise": "လုပ်ငန်းကြီး",
     "filterPlan": "ပလန်",
-    "filterCGNetCard": "ဒေတာကတ်"
+    "filterCGNetCard": "ဒေတာကတ်",
+    "durationHead": "အသုံးပြုမည့်ကာလ ရွေးချယ်ရန်",
+    "durationDec": "သင်၏ ဝန်ဆောင်မှုအသုံးပြုမည့်ကာလကို ရွေးချယ်ပါ",
+    "yourSelection": "သင်ရွေးချယ်ထားသည်",
+    "reviewYourPackage": "သင်၏ ပက်ကေ့ချ် ကို ပြန်လည်စစ်ဆေးပါ",
+    "duration": "သက်တမ်း",
+    "totalPrice": "စုစုပေါင်းကျသင့်ငွေ",
+    "package": "ပက်ကေ့ချ်",
+    "addsOn": "ထပ်ဆောင်းဝန်ဆောင်မှုများ",
+    "months": "လ",
+    "year": "နှစ်",
+    "OtherService": "အခြားဝန်ဆောင်မှုများ"
   },
   "news": {
     "title": "သတင်းနှင့် မွမ်းမံမှုများ",
