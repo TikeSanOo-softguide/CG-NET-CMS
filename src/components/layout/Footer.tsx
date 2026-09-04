@@ -121,6 +121,14 @@ export function Footer() {
                 <li key={to}>
                   <Link
                     to={to}
+                    onClick={() => {
+                      if (to === '/') {
+                        window.scrollTo({
+                          top: 0,
+                          behavior: 'smooth',
+                        })
+                      }
+                    }}
                     className="text-sm text-slate-400 hover:text-white transition-colors"
                   >
                     {t(labelKey)}
@@ -139,7 +147,7 @@ export function Footer() {
               {SUPPORT_LINKS.map(({ to, labelKey }) => (
                 <li key={labelKey}>
                   <Link
-                    to={to}
+                    to={to}                   
                     className="text-sm text-slate-400 hover:text-white transition-colors"
                   >
                     {t(labelKey)}

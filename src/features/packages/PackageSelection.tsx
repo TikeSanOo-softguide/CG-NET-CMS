@@ -162,7 +162,7 @@ export default function PackageSelection({
       : 0
 
   return (
-    <section className="px-4 py-1">
+    <section className="px-4 mb-5">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
           <div className="min-w-0">
