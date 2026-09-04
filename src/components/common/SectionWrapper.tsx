@@ -8,7 +8,7 @@ interface SectionWrapperProps {
 
 export function SectionWrapper({ children, className, id }: SectionWrapperProps) {
   return (
-    <section id={id} className={cn('py-8 md:py-15', className)}>
+    <section id={id} className={cn('py-20 md:py-24', className)}>
       <div className="container">{children}</div>
     </section>
   )
@@ -16,15 +16,36 @@ export function SectionWrapper({ children, className, id }: SectionWrapperProps)
 
 interface SectionHeadingProps {
   title: string
+  eyebrow?: string
   subtitle?: string
-  centered?: boolean
+  align?: "center" | "left"
 }
 
-export function SectionHeading({ title, subtitle, centered = true }: SectionHeadingProps) {
+export function SectionHeading({ 
+  eyebrow,
+  title,
+  subtitle,
+  align = "center",
+}: SectionHeadingProps) {
   return (
-    <div className={cn('mb-6 md:mb-10', centered && 'text-center')}>
-      <h2 className="text-xl sm:text-2xl md:text-3xl text-font-black font-bold mb-2 md:mb-3">{title}</h2>
-      {subtitle && <p className="text-font-muted max-w-2xl mx-auto">{subtitle}</p>}
+    <div
+      className={
+        align === "center"
+          ? "mx-auto max-w-2xl text-center mb-6 md:mb-10"
+          : "max-w-2xl text-left"
+      }
+    >
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
+        {eyebrow}
+      </p>
+      <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head">
+        {title}
+      </h2>
+      {subtitle ? (
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+          {subtitle}
+        </p>
+      ) : null}
     </div>
   )
 }

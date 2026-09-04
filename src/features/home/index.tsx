@@ -7,7 +7,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { SectionWrapper, SectionHeading } from '@/components/common/SectionWrapper'
 import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
-import { BorderBeam } from '@/components/magicui/border-beam'
 import { PackageCarousel } from '@/components/cards/PackageCarousel'
 import { NewsCard } from '@/components/cards/NewsCard'
 import { HeroBanner } from './HeroBanner'
@@ -79,60 +78,48 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us */}
-      <SectionWrapper>
-        <SectionHeading title={t('home.whyChooseUs')} />
-        <div className="font-heading grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
-          {homeContent.features.map(
-            ({ icon: Icon, titleKey, descKey, color, hoverColor, iconBg, hoverBg, variant }, i) => (
-              <AnimatedCard
-                key={titleKey}
-                delay={i * 90}
-                variant={variant}
-                hoverClass=""
-                className="rounded-lg"
-              >
-                <Card className="group relative flex h-[180px] flex-col overflow-hidden text-center border border-border/70 shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
-                  <CardHeader className="pb-2 pt-5">
-                    <div
-                      className={`mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 ${iconBg} ${hoverBg} ${color} ${hoverColor} group-hover:scale-110 group-hover:shadow-[0_0_18px_currentColor]`}
-                      aria-hidden="true"
-                    >
-                      <Icon className="h-5 w-5 transition-colors duration-300" />
-                    </div>
-                    <CardTitle className="text-sm font-semibold leading-tight">
-                      {t(titleKey)}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-4 pb-4 pt-0">
-                    <CardDescription className="text-xs leading-snug">{t(descKey)}</CardDescription>
-                  </CardContent>
-                  <BorderBeam
-                    size={80}
-                    duration={8}
-                    delay={i * 1.2}
-                    borderWidth={2}
-                    colorFrom="var(--color-primary)"
-                    colorTo="var(--color-primary)"
-                  />
-                  <BorderBeam
-                    size={80}
-                    duration={8}
-                    delay={i * 1.2 + 4}
-                    reverse
-                    borderWidth={2}
-                    colorFrom="var(--color-primary)"
-                    colorTo="var(--color-primary)"
-                  />
-                </Card>
-              </AnimatedCard>
-            )
-          )}
+      <SectionWrapper className="bg-muted/40">
+        <SectionHeading
+          eyebrow={t('home.whyChooseUs')}
+          title={t('home.whyChooseUsTitle')}
+          subtitle={t('home.whyChooseUsDesc')}
+        />
+      <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
+          {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
+            <AnimatedCard
+              key={titleKey}
+              delay={i * 90}
+              className="rounded-lg"
+            >
+              <article className="group bg-font-white relative flex h-[180px] flex-col overflow-hidden border border-border/70 text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
+                <CardHeader className="pb-2 pt-5">
+                  <div
+                    className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary transition-all duration-300 group-hover:scale-110"
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </div>
+
+                  <CardTitle className="text-sm font-semibold leading-tight text-foreground">
+                    {t(titleKey)}
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="px-4 pb-4 pt-0">
+                  <CardDescription className="text-xs leading-snug text-muted-foreground">
+                    {t(descKey)}
+                  </CardDescription>
+                </CardContent>
+              </article>
+            </AnimatedCard>
+          ))}
         </div>
       </SectionWrapper>
 
       {/* Featured Packages */}
-      <SectionWrapper className="bg-muted/40">
+      <SectionWrapper>
         <SectionHeading
+          eyebrow={t('home.featuredEyebrow')}
           title={t('home.featuredPackages')}
           subtitle={t('home.featuredPackagesDesc')}
         />
@@ -155,9 +142,9 @@ export default function HomePage() {
           </div>
         )}
 
-        {pkgError && <ErrorMessage onRetry={() => void pkgRefetch()} />}
+        {pkgError && <ErrorMessage />}
 
-        {(!recommendedPackages || recommendedPackages.length === 0) && (
+        {(!recommendedPackages && !pkgError && recommendedPackages?.length === 0) && (
           <EmptyState
             title={t('common.noData')}
             description={t('common.emptyStateDesc')}
@@ -186,8 +173,12 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Latest News */}
-      <SectionWrapper>
-        <SectionHeading title={t('home.whatsNew')} />
+      <SectionWrapper className="bg-muted/40">
+      <SectionHeading
+          eyebrow={t('home.whatsNew')}
+          title={t('home.latestTitle')}
+          subtitle={t('home.latestNewsDesc')}
+        />
 
         {/* Tabs */}
         <CommonTab
@@ -204,7 +195,6 @@ export default function HomePage() {
                 {[1, 2, 3].map((i) => (
                   <Card key={i} className="h-[300px] overflow-hidden rounded-[20px]">
                     <Skeleton className="h-[150px] w-full rounded-none" />
-
                     <CardHeader className="px-4 pt-3">
                       <Skeleton className="h-4 w-2/3" />
                       <Skeleton className="h-3 w-full mt-2" />
@@ -249,7 +239,12 @@ export default function HomePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                 {[1, 2, 3].map((i) => (
                   <Card key={i} className="h-[300px] overflow-hidden rounded-[20px]">
-                    <Skeleton className="h-full w-full rounded-none" />
+                    <Skeleton className="h-[150px] w-full rounded-none" />
+                    <CardHeader className="px-4 pt-3">
+                      <Skeleton className="h-4 w-2/3" />
+                      <Skeleton className="h-3 w-full mt-2" />
+                      <Skeleton className="h-3 w-4/5" />
+                    </CardHeader>
                   </Card>
                 ))}
               </div>
@@ -289,11 +284,29 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Photo Gallery */}
-      <SectionWrapper className="bg-muted/30">
-        <SectionHeading title={t('home.galleryTitle')} subtitle={t('home.galleryDesc')} />
-        {!galleryData?.data || galleryData.data.length === 0 ? (
-          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
-        ) : (
+      <SectionWrapper>
+        <SectionHeading 
+          eyebrow={t('home.galleryEyebrow')}
+          title={t('home.galleryTitle')} 
+          subtitle={t('home.galleryDesc')} 
+        />
+
+        {isError && <ErrorMessage />}
+
+        {!isLoading &&
+          !isError &&
+          (!galleryData?.data || galleryData.data.length === 0) && (
+            <EmptyState
+              title={t('common.noData')}
+              description={t('common.emptyStateDesc')}
+            />
+          )}
+
+
+        {!isLoading &&
+          !isError &&
+          galleryData?.data &&
+          galleryData.data.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
             {galleryData.data.slice(0, 5).map((item, i) => {
               const isMoreCard = i === 4 && hasMore
@@ -358,9 +371,9 @@ export default function HomePage() {
           </div>
         )}
       </SectionWrapper>
+      
       {/* Download Section */}
-      <SectionWrapper className="bg-muted/30">
-        <SectionHeading title={t('home.downloadTitle')} subtitle={t('home.downloadDesc')} />
+      <SectionWrapper className="bg-muted/40">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
           <div className="space-y-6 text-left relative">
             <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
