@@ -87,6 +87,8 @@ const config: Config = {
           footer: 'var(--color-footer)', //footer
           card: 'var(--color-card-bg)', //card bg
           yellow: 'var(--color-yellow)',
+          'accent-bg': 'var(--color-app-accent-bg)',
+          surface: 'var(--surface)',
         },
         font: {
           black: 'var(--color-font-black)',
