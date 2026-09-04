@@ -157,12 +157,14 @@ export default function PackagesPage() {
   return (
     <main>
       <PageHeader title={t('packages.title')} subtitle={t('packages.subtitle')} />
-        <SectionWrapper>
-          <CommonTab
-            filters={FILTERS}
-            activeValue={activeFilter}
-            onValueChange={handleFilterChange}
-          />
+        <SectionWrapper spacing="compact">
+          <div className="mt-5">
+            <CommonTab
+              filters={FILTERS}
+              activeValue={activeFilter}
+              onValueChange={handleFilterChange}
+            />
+          </div>
           <div className="mt-6">
             {renderPackageContent()}
           </div>

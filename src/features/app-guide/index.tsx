@@ -21,7 +21,7 @@ export default function AppGuidePage() {
     <main>
       <PageHeader title={t('appGuide.title')} subtitle={t('appGuide.subtitle')} />
 
-      <SectionWrapper>
+      <SectionWrapper spacing="compact">
         {/* App download links */}
         <div className="mb-10 flex flex-row flex-nowrap gap-3 justify-start sm:justify-center items-center overflow-x-auto px-4 sm:px-6 py-2 scrollbar-none">
           {appGuideContent.downloadLinks.map((link) => (

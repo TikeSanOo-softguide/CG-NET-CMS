@@ -58,25 +58,38 @@ export default function HomePage() {
       <HeroBanner lang={lang} />
 
       {/* Stats */}
-      <section className="bg-app-bar h-[70px] flex items-center" aria-label="Company statistics">
-        <div className="container">
-          <dl className="font-heading grid grid-cols-5 gap-1 sm:gap-4 text-center items-center">
-            {homeContent.stats.map(({ value, labelKey }) => (
-              <div key={labelKey} className="min-w-0 px-1">
-                <dt className="text-[6px] xs:text-xs sm:text-xs text-font-light-blue leading-[1.6] whitespace-nowrap overflow-visible font-normal">
-                  {t(labelKey)}
-                </dt>
-                <dd className="text-[9px] xs:text-xs sm:text-base text-font-white font-bold leading-tight">
-                  {value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+      <div className="bg-muted/40">
+      <section
+        className="relative z-10 -mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head md:-mt-8"
+        aria-label="Company statistics"
+      >
+        <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)] sm:grid-cols-3 lg:grid-cols-5">
+          {homeContent.stats.map(({ value, labelKey }) => (
+            <div
+              key={labelKey}
+              className="
+                flex min-h-[90px] flex-col items-center justify-center
+                border-b border-border px-3 py-3 text-center
+                last:col-span-2 last:border-b-0
+                sm:min-h-[90px] sm:last:col-span-1
+                lg:border-b-0 lg:border-r lg:last:border-r-0
+              "
+            >
+              <p className="text-xl font-extrabold tracking-tight text-font-blue sm:text-2xl">
+                {value}
+              </p>
+
+              <p className="mt-0.5 text-[11px] font-medium text-muted-foreground sm:text-xs">
+                {t(labelKey)}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
+    </div>
 
       {/* Why Choose Us */}
-      <SectionWrapper className="bg-muted/40">
+      <SectionWrapper className="bg-muted/40" spacing="default">
         <SectionHeading
           eyebrow={t('home.whyChooseUs')}
           title={t('home.whyChooseUsTitle')}
@@ -88,7 +101,7 @@ export default function HomePage() {
               <article className="group bg-app-surface relative rounded-xl flex h-[180px] flex-col overflow-hidden border border-border/70 text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
                 <CardHeader className="pb-2 pt-5">
                   <div
-                    className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary transition-all duration-300 group-hover:scale-110"
+                    className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-font-blue transition-all duration-300 group-hover:scale-110"
                     aria-hidden="true"
                   >
                     <Icon className="h-5 w-5" />
@@ -211,7 +224,7 @@ export default function HomePage() {
             )}
 
             {(news?.length ?? 0) > 0 && (
-              <div className="text-center mt-8">
+              <div className="text-center mt-5">
                 <Button variant="outline" className="bg-font-white" asChild>
                   <Link to="/news">
                     {t('common.viewAll')} {t('nav.news')}
@@ -261,7 +274,7 @@ export default function HomePage() {
             )}
 
             {(promotions?.length ?? 0) > 0 && (
-              <div className="text-center mt-8">
+              <div className="text-center mt-5">
                 <Button variant="outline" className="bg-font-white" asChild>
                   <Link to="/promotion">
                     {t('promotions.viewAllPromotions')}

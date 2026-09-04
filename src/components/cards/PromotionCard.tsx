@@ -19,10 +19,10 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-[20px] h-full">
+    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-[20px] bg-app-card',
+          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl bg-app-surface',
           compact ? 'h-[360px]' : 'h-full'
         )}
       >
@@ -44,51 +44,62 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </Link>
 
-        {/* 2. Title Section */}
-        <CardHeader className="pb-3 pt-4 px-5">
-          <CardTitle className="text-base font-bold leading-relaxed text-font-black min-h-[4rem] flex items-center">
-            <Link
-              to={`/promotion/${promotion.slug}`}
-              className="hover:text-font-blue transition-colors line-clamp-2 py-1"
-            >
-              {getLocalized(promotion.title, lang)}
-            </Link>
-          </CardTitle>
-        </CardHeader>
-
-        {/* Divider Line */}
-        <div className="px-5">
-          <div className="h-[1px] w-full  bg-border/60" />
-        </div>
-
-        {/* 3. Metadata Content Rows (Periode Promo / Details) */}
-        <CardContent className="flex-1 py-3 px-5 space-y-2 text-xs ">
-          <div className="flex items-center justify-between">
-            <span className="font-medium text-font-muted">{t('promotions.periodLabel')}</span>
-            <span className="text-font-black font-medium text-right">
-              {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
-              {formatDate(promotion.endDate, getDateLocale(lang))}
-            </span>
-          </div>
-        </CardContent>
-
-        {/* 4. Footer Section (Date & Read More) */}
-        <CardFooter
-          className={cn('flex items-center justify-end gap-2 pt-0', compact && 'px-4 pb-3')}
+        <CardHeader className="pb-2 pt-3">
+        <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
+          {t('nav.promotion')}
+        </span>
+        <CardTitle
+          className={cn(
+            'leading-[1.7]',
+            compact ? 'text-sm' : 'text-base'
+          )}
         >
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="h-8 gap-1 px-2 text-font-blue hover:text-font-blue"
+          <Link
+            to={`/promotion/${promotion.slug}`}
+            className="transition-colors hover:text-primary"
           >
-            <Link to={`/promotion/${promotion.slug}`} className="flex items-center gap-1.5">
-              <span>{t('promotions.viewDetail')}</span>
+            {getLocalized(promotion.title, lang)}
+          </Link>
+        </CardTitle>
+      </CardHeader>
 
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </Link>
-          </Button>
-        </CardFooter>
+      <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-muted-foreground">
+            {t('promotions.periodLabel')}
+          </span>
+
+          <span className="text-right font-medium text-font-black">
+            {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
+            {formatDate(promotion.endDate, getDateLocale(lang))}
+          </span>
+        </div>
+      </CardContent>
+
+      <CardFooter
+        className={cn(
+          'relative flex items-center justify-end gap-2 pt-3',
+          compact && 'px-4 pb-3'
+        )}
+      >
+        {/* Shorter top border */}
+        <div className="absolute left-1/2 top-0 h-px w-[90%] -translate-x-1/2 bg-border" />
+
+        <Button
+          variant="ghost"
+          size="sm"
+          asChild
+          className="h-8 gap-1 px-2 text-font-blue hover:text-font-blue"
+        >
+          <Link
+            to={`/promotion/${promotion.slug}`}
+            className="flex items-center gap-1.5"
+          >
+            {t('promotions.viewDetail')}
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
+        </Button>
+      </CardFooter>
       </Card>
     </AnimatedCard>
   )

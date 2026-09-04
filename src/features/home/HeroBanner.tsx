@@ -162,7 +162,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
         <div
           role="tablist"
           aria-label="Slide navigation"
-          className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5"
+          className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-10"
         >
           {slides.map((_, i) => (
             <button
