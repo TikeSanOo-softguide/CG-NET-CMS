@@ -1,4 +1,12 @@
-import { useEffect, useMemo, useRef, useState, useCallback, type CSSProperties, type TouchEvent } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+  type CSSProperties,
+  type TouchEvent,
+} from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -30,13 +38,7 @@ function getCardWidth(width: number) {
   return '88%'
 }
 
-function PackageCarouselCard({
-  pkg,
-  lang,
-}: {
-  pkg: Package
-  lang: SupportedLanguage
-}) {
+function PackageCarouselCard({ pkg, lang }: { pkg: Package; lang: SupportedLanguage }) {
   return (
     <Card
       className={[
@@ -52,7 +54,7 @@ function PackageCarouselCard({
           className="h-full w-full object-cover"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+
         <div className="absolute inset-x-0 bottom-[14%] flex justify-center px-4 sm:bottom-[12%]">
           <Button
             asChild
@@ -181,7 +183,8 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
 
     const normalized = viewport.scrollLeft - segmentWidth
     const rawIndex = Math.round(normalized / cardStep)
-    const index = ((rawIndex % orderedPackages.length) + orderedPackages.length) % orderedPackages.length
+    const index =
+      ((rawIndex % orderedPackages.length) + orderedPackages.length) % orderedPackages.length
     setActiveIndex(index)
   }, [orderedPackages.length])
 
@@ -243,10 +246,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
         onTouchEnd={onTouchEnd}
         onScroll={syncInfinitePosition}
       >
-        <div
-          className="flex gap-4 will-change-transform"
-          style={trackStyle}
-        >
+        <div className="flex gap-4 will-change-transform" style={trackStyle}>
           {repeatedPackages.map((pkg, index) => (
             <div
               key={`${pkg.id}-${index}`}
@@ -270,7 +270,9 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
               aria-label={`Go to package slide ${index + 1}`}
               className={[
                 'h-2.5 rounded-full transition-all duration-300',
-                activeIndex === index ? 'w-6 bg-app-primary' : 'w-2.5 bg-border hover:bg-app-primary/40',
+                activeIndex === index
+                  ? 'w-6 bg-app-primary'
+                  : 'w-2.5 bg-border hover:bg-app-primary/40',
               ].join(' ')}
             />
           ))}

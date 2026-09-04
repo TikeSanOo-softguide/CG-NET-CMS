@@ -33,6 +33,8 @@
   --color-icon-award: #a855f7;
   --color-icon-user: #22d3ee;
   --color-yellow: #ffcf62;
+  --color-app-accent-bg: oklch(0.955 0.02 273 / 0.5);
+  --surface: oklch(1 0 0);
 
   --color-icon-a-bg: rgb(249 115 22 / 15%);
   --color-icon-b-bg: rgb(34 197 94 / 15%);

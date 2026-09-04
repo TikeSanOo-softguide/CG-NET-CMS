@@ -10,10 +10,11 @@ interface SearchBarProps {
   value?: string
   onChange?: (value: string) => void
   onSearch?: (value: string) => void
+  onFilterClick?: () => void
 }
 
 export function SearchBar({
-  placeholder = 'Search...',
+  placeholder = 'Search anything...',
   value,
   onChange,
   onSearch,
@@ -54,10 +55,9 @@ export function SearchBar({
   }
 
   return (
-    <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl ">
-      {/* Search Icon */}
+    <div className="relative flex items-center w-full  bg-white rounded-full shadow-sm  border border-slate-100 hover:border-font-blue">
       <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-font-blue">
-        <Search className="h-4 w-4 sm:h-5 sm:w-5 transition-all" />
+        <Search className="h-4 w-4 sm:h-4 sm:w-4 transition-all" />
       </div>
 
       <Input
@@ -67,45 +67,35 @@ export function SearchBar({
         onChange={handleChange}
         placeholder={placeholder}
         className="
-            w-full
-            h-8 sm:h-10
-            pl-10 sm:pl-12
-            pr-10 sm:pr-12
-            rounded-full
+        w-full
+        h-8 sm:h-10     
+        pl-10 sm:pl-11
+        pr-16
+        rounded-full
 
-            border-2
-            border-font-blue
-            bg-transparent
+        border-none
+        bg-transparent
 
-            text-app-primary
-            placeholder:text-font-blue      
+        text-gray-900
+        placeholder:text-gray-400
 
-            shadow-none
-            outline-none
+        shadow-none
+        outline-none
 
-            focus-visible:border-font-blue
-            focus-visible:ring-0
-            focus-visible:ring-offset-0
-
-            transition-colors
-            "
+        focus-visible:ring-0
+        focus-visible:ring-offset-0
+        transition-colors
+        text-sm        
+      "
       />
 
-      {/* Clear Button */}
-      <div className="absolute inset-y-0 right-3 flex items-center">
+      <div className="absolute inset-y-0 right-1 flex items-center gap-1">
         {query && (
           <Button
             type="button"
             variant="ghost"
             size="icon"
-            className="
-                h-7
-                w-7
-                rounded-full
-                text-font-blue
-                hover:text-font-blue
-                hover:bg-transparent
-                "
+            className="h-7 w-7 sm:h-8 sm:w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 mr-1"
             onClick={handleClear}
           >
             <X className="h-4 w-4" />
