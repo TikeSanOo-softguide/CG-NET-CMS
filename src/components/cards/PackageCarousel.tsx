@@ -8,7 +8,6 @@ import {
   type TouchEvent,
 } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { getLocalized } from '@/lib/utils'
