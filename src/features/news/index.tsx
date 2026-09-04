@@ -54,7 +54,7 @@ export default function NewsPage() {
 
     return nameMap[i18n.language as keyof typeof nameMap] || category.name.en
   }
-  
+
   const newsFilterOptions = [
     {
       label: t('common.viewAll'),
@@ -84,17 +84,18 @@ export default function NewsPage() {
       <SectionWrapper>
         <div className="max-w-6xl w-full mb-6 sm:mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0">
-              <div className="w-full sm:max-w-[600px]">
-                <SearchBar
-                  value={searchInput}
-                  onChange={setSearchInput}
-                  onSearch={handleSearch}
-                />
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-2">
+              {/* w-full အစား w-auto သို့မဟုတ် သင့်တော်သည့် max-w ကို သုံးပါ */}
+              <div className="w-full max-w-[440px]">
+                <SearchBar value={searchInput} onChange={setSearchInput} onSearch={handleSearch} />
               </div>
 
               {/* Filter Icon Button (Dropdown Menu) */}
-              <CommonFilter options={newsFilterOptions} value={filter} onChange={handleFilterChange} />
+              <CommonFilter
+                options={newsFilterOptions}
+                value={filter}
+                onChange={handleFilterChange}
+              />
             </div>
           </div>
         </div>

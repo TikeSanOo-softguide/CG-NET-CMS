@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -28,7 +28,6 @@ export default function HomePage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
   usePageTitle()
-  const navigate = useNavigate()
   const {
     data: recommendedPackages,
     isLoading: pkgLoading,
@@ -40,7 +39,7 @@ export default function HomePage() {
   const initialCategory = searchParams.get('category') ?? 'news'
   const [activeFilter, setActiveFilter] = useState(initialCategory)
   const { data: galleryData } = useGallery()
-  const hasMore = (galleryData?.data?.length ?? 0) > 5
+
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   const FILTERS = [
     { value: 'news', labelKey: 'home.latestNews' },
@@ -83,13 +82,9 @@ export default function HomePage() {
           title={t('home.whyChooseUsTitle')}
           subtitle={t('home.whyChooseUsDesc')}
         />
-      <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
           {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
-            <AnimatedCard
-              key={titleKey}
-              delay={i * 90}
-              className="rounded-lg"
-            >
+            <AnimatedCard key={titleKey} delay={i * 90} className="rounded-lg">
               <article className="group bg-font-white relative flex h-[180px] flex-col overflow-hidden border border-border/70 text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
                 <CardHeader className="pb-2 pt-5">
                   <div
@@ -143,11 +138,8 @@ export default function HomePage() {
 
         {pkgError && <ErrorMessage />}
 
-        {(!recommendedPackages && !pkgError && recommendedPackages?.length === 0) && (
-          <EmptyState
-            title={t('common.noData')}
-            description={t('common.emptyStateDesc')}
-          />
+        {!pkgLoading && !pkgError && recommendedPackages?.length === 0 && (
+          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
         )}
 
         {recommendedPackages &&
@@ -173,7 +165,7 @@ export default function HomePage() {
 
       {/* Latest News */}
       <SectionWrapper className="bg-muted/40">
-      <SectionHeading
+        <SectionHeading
           eyebrow={t('home.whatsNew')}
           title={t('home.latestTitle')}
           subtitle={t('home.latestNewsDesc')}
@@ -284,31 +276,37 @@ export default function HomePage() {
 
       {/* Photo Gallery */}
       <SectionWrapper>
-        <SectionHeading 
+        <SectionHeading
           eyebrow={t('home.galleryEyebrow')}
-          title={t('home.galleryTitle')} 
-          subtitle={t('home.galleryDesc')} 
+          title={t('home.galleryTitle')}
+          subtitle={t('home.galleryDesc')}
         />
 
         {isError && <ErrorMessage />}
 
-        {!isLoading &&
-          !isError &&
-          (!galleryData?.data || galleryData.data.length === 0) && (
-            <EmptyState
-              title={t('common.noData')}
-              description={t('common.emptyStateDesc')}
-            />
-          )}
+        {!isLoading && !isError && (!galleryData?.data || galleryData.data.length === 0) && (
+          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+        )}
+        {isLoading && (
+          <div className="grid grid-cols-1 gap-4 auto-rows-[190px] sm:grid-cols-2 md:grid-cols-4">
+            {Array.from({ length: 5 }).map((_, i) => {
+              const cardClass =
+                i === 0
+                  ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
+                  : 'md:col-span-1 rounded-[28px]'
 
+              return (
+                <div key={i} className={`${cardClass} overflow-hidden`}>
+                  <Skeleton className="h-full w-full rounded-[28px]" />
+                </div>
+              )
+            })}
+          </div>
+        )}
 
-        {!isLoading &&
-          !isError &&
-          galleryData?.data &&
-          galleryData.data.length > 0 && (
+        {!isLoading && !isError && galleryData?.data && galleryData.data.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
             {galleryData.data.slice(0, 5).map((item, i) => {
-              const isMoreCard = i === 4 && hasMore
               const cardClass =
                 i === 0
                   ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
@@ -322,112 +320,75 @@ export default function HomePage() {
 
               return (
                 <AnimatedCard key={item.id} delay={i * 90} variant="rise" className={cardClass}>
-                  {isMoreCard ? (
-                    <button
-                      type="button"
-                      onClick={() => navigate('/about#gallery')}
-                      className="group relative h-full w-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40"
-                    >
+                  <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
+                    <div className="card-media h-full">
                       <img
                         src={imageUrl}
-                        alt="View More"
+                        alt={displayTitle || 'Gallery image'}
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
                         loading="lazy"
                       />
-
-                      <div className="absolute inset-0 bg-black/60 transition-all duration-500 group-hover:bg-black/70" />
-
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                        <span className="text-2xl font-bold">+ {t('home.more')}</span>
-                        <span className="mt-1 text-sm opacity-80">{t('home.viewAllGallery')}</span>
-                      </div>
-                    </button>
-                  ) : (
-                    <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
-                      <div className="card-media h-full">
-                        <img
-                          src={imageUrl}
-                          alt={displayTitle}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-                          loading="lazy"
-                        />
-                      </div>
-
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
-
-                      {displayTitle && (
-                        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                          <p className="text-white text-sm sm:text-base font-semibold tracking-wide drop-shadow-sm">
-                            {displayTitle}
-                          </p>
-                        </div>
-                      )}
                     </div>
-                  )}
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
+
+                    {displayTitle && (
+                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                        <p className="text-white text-sm sm:text-base font-semibold tracking-wide drop-shadow-sm">
+                          {displayTitle}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </AnimatedCard>
               )
             })}
           </div>
         )}
       </SectionWrapper>
-      
+
       {/* Download Section */}
-      <SectionWrapper className="bg-muted/40">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
-          <div className="space-y-6 text-left relative">
-            <h3 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
-              <span className="bg-gradient-font bg-clip-text text-transparent">
+      <SectionWrapper id="app" className="py-20 md:py-24 bg-muted/40">
+        <div className="w-full overflow-hidden rounded-3xl border border-border bg-app-accent-bg">
+          <div className="grid items-center gap-8 p-8 md:grid-cols-2 md:p-12">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
+                {t('home.downloadTitle')}
+              </p>
+
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-font-black sm:text-4xl">
                 {t('home.downloadHead')}
-              </span>
-            </h3>
-            <div className="border-l-4 border-primary/50 pl-4 py-1">
-              <p className="text-muted-foreground leading-relaxed text-sm md:text-base font-medium">
+              </h2>
+
+              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-[17px]">
                 {t('home.downloadSub1')}
                 <br />
                 {t('home.downloadSub2')}
                 <br />
-                {t('home.downloadSub3')}
               </p>
+
+              <button
+                type="button"
+                className="mt-8 inline-flex items-center gap-2 rounded-[10px] bg-app-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+              >
+                <Download className="h-4 w-4" />
+                {t('downloadCard.downloadApp')}
+              </button>
             </div>
-            <button
-              type="button"
-              className="
-                mt-3 inline-flex
-                items-center justify-center gap-2
-                rounded-full
-                bg-app-primary
-                px-5 py-2
-                text-xs font-semibold text-white
-                shadow-md
-                transition-all duration-200
-                hover:scale-[1.03]
-                hover:opacity-90
-                active:scale-95
-                sm:text-sm
-              "
-            >
-              <Download className="h-4 w-4" />
-              {t('downloadCard.downloadApp')}
-            </button>
-          </div>
-          {homeContent.downloadItems.map((item, i) => (
-            <AnimatedCard
-              key={item.key}
-              delay={i * 90}
-              className="'md:col-span-2 md:row-span-2 rounded-[28px]"
-            >
-              <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
-                <div className="card-media h-full">
+
+            <div className="relative flex justify-center md:justify-end items-center h-full">
+              {homeContent.downloadItems.map((item, i) => (
+                <AnimatedCard key={item.key} delay={i * 90} className="w-full">
                   <img
                     src={item.imageUrl}
                     alt={t(item.key)}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                    className="h-auto w-full rounded-2xl drop-shadow-xl"
                     loading="lazy"
                   />
-                </div>
-              </div>
-            </AnimatedCard>
-          ))}
+                </AnimatedCard>
+              ))}
+            </div>
+          </div>
         </div>
       </SectionWrapper>
     </main>

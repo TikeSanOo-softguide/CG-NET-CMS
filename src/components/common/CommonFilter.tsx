@@ -1,4 +1,4 @@
-import { Filter } from 'lucide-react'
+import { SlidersHorizontal } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -68,7 +68,7 @@ export function CommonFilter({
             "
             aria-hidden="true"
           >
-            <Filter className="h-5 w-5 transition-colors duration-300" />
+            <SlidersHorizontal className="h-5 w-5 transition-colors duration-300" />
           </div>
 
           <span className="sr-only">{ariaLabel}</span>
@@ -76,8 +76,9 @@ export function CommonFilter({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        align="end"
-        side="bottom"
+        align="start"
+        side="right"
+        sideOffset={8}
         className="
           z-50
           w-40

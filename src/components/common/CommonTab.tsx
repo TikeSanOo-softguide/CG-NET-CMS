@@ -13,72 +13,62 @@ interface CommonTabProps {
   onValueChange: (value: string) => void
 }
 
-export default function CommonTab({
-  filters,
-  activeValue,
-  onValueChange,
-}: CommonTabProps) {
+export default function CommonTab({ filters, activeValue, onValueChange }: CommonTabProps) {
   const { t } = useTranslation()
 
   return (
-    <div className="mb-8 overflow-x-auto pb-0">
+    <div className="mb-8 overflow-x-auto pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <Tabs value={activeValue} onValueChange={onValueChange}>
-        <TabsList
-          className="
-            flex
-            w-max
-            min-w-full
-            justify-center
-            sm:justify-center
-            h-auto
-            gap-0
-            rounded-none
-            bg-transparent
-            p-0
-          "
-        >
-          {filters.map(({ value, labelKey, label }) => (
-            <TabsTrigger
-              key={value}
-              value={value}
-              className="
-                border-b
-                border-app-primary
-                relative
-                h-[58px]
-                min-w-[140px]
-                rounded-t-[16px]
-                rounded-b-none
-                bg-transparent
-                px-8
-                text-base
-                font-medium
-                text-font-black
-                shadow-none
-                transition-all
+        <div className="flex justify-center sm:justify-center min-w-max px-1">
+          <TabsList
+            className="
+              inline-flex
+              items-center
+              justify-center
+              h-auto
+              gap-1
+              rounded-full
+              bg-white
+              border
+              border-slate-100
+              p-1.5
+              shadow-sm
+            "
+          >
+            {filters.map(({ value, labelKey, label }) => (
+              <TabsTrigger
+                key={value}
+                value={value}
+                className="
+                  relative
+                  flex
+                  items-center
+                  justify-center
+                  h-10 sm:h-12
+                  min-w-[120px] sm:min-w-[140px]
+                  rounded-full
+                  px-6
+                  text-sm sm:text-base
+                  font-medium
+                  text-gray-500
+                  transition-all
+                  outline-none
 
-                data-[state=active]:bg-app-card
-                data-[state=active]:text-font-blue
-                data-[state=active]:font-semibold
+                  data-[state=active]:bg-blue-50
+                  data-[state=active]:text-font-blue
+                  data-[state=active]:font-semibold
+                  data-[state=active]:shadow-none
 
-                data-[state=active]:after:absolute
-                data-[state=active]:after:bottom-0
-                data-[state=active]:after:left-0
-                data-[state=active]:after:right-0
-                data-[state=active]:after:h-[4px]
-                data-[state=active]:after:bg-font-blue
-
-                hover:bg-white/10
-                hover:text-font-blue
-
-                data-[state=active]:hover:bg-[#DCE9FF]
-                data-[state=active]:hover:text-font-blue
-              "
-            >
-              {label ?? t(labelKey ?? '')}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+                  hover:text-font-blue
+                  hover:bg-gray-50
+                  data-[state=active]:hover:bg-blue-50
+                "
+              >
+                {label ?? t(labelKey ?? '')}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
       </Tabs>
     </div>
   )
