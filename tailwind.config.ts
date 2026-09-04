@@ -162,6 +162,7 @@ const config: Config = {
         chinese: ['"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
         sans: ['Satoshi', 'Inter', 'system-ui', 'sans-serif'],
         heading: ['Inter', 'system-ui', 'sans-serif'],
+        head: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
     },
   },

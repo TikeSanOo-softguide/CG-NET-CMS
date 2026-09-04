@@ -31,7 +31,7 @@ export function Footer() {
   const { data: contacts } = useContact()
 
   return (
-    <footer className="bg-app-footer text-slate-300">
+    <footer className="bg-app-footer text-slate-300" id="footer">
       <div className="container py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-1">
