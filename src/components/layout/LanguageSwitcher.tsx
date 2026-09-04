@@ -43,7 +43,6 @@ export function LanguageSwitcher() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          size="sm"
           className="
             gap-1.5 
             shrink-0
@@ -56,14 +55,18 @@ export function LanguageSwitcher() {
           aria-label={`Language: ${active.nativeLabel}. Click to switch language`}
           aria-haspopup="menu"
         >
-          <Globe className="h-4 w-4 shrink-0" aria-hidden="true" />
-          <span className="hidden sm:inline">{active.nativeLabel}</span>
-          <span className="sm:hidden">{active.code.toUpperCase()}</span>
+          <Globe className="h-4 w-4 shrink-0 text-font-muted" aria-hidden="true" />
+          <span className="hidden sm:inline text-font-muted text-base font-medium">
+            {active.nativeLabel}
+          </span>
+          <span className="sm:hidden text-base text-font-muted font-medium">
+            {active.code.toUpperCase()}
+          </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        align="end" 
-        side="bottom" 
+      <DropdownMenuContent
+        align="end"
+        side="bottom"
         className="
           w-44
           outline-none
@@ -71,7 +74,7 @@ export function LanguageSwitcher() {
           focus:outline-none
           focus:ring-0
           focus:ring-offset-0"
-        >
+      >
         {LANGUAGES.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
@@ -80,8 +83,8 @@ export function LanguageSwitcher() {
               cursor-pointer
               rounded-md
               border-0
-              px-2 py-1.5
-              text-xs
+              px-3 py-2      
+              text-base
               outline-none
               ring-0
               focus:outline-none
@@ -92,7 +95,8 @@ export function LanguageSwitcher() {
               focus-visible:ring-offset-0
               sm:px-3
               sm:py-2
-              sm:text-sm
+              text-font-muted
+             
               ${
                 currentLang === lang.code
                   ? 'text-transparent bg-clip-text bg-gradient-font font-semibold'
@@ -100,7 +104,9 @@ export function LanguageSwitcher() {
               }
             `}
           >
-            <span className="mr-2 w-5 text-center" aria-hidden="true">{lang.flag}</span>
+            <span className="mr-2 w-5 text-center" aria-hidden="true">
+              {lang.flag}
+            </span>
             {lang.nativeLabel}
           </DropdownMenuItem>
         ))}

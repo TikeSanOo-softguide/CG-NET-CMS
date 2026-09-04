@@ -9,15 +9,12 @@ export function Header() {
       <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 md:h-16 items-center justify-between gap-2 sm:gap-4 overflow-visible">
           {/* Logo */}
-          <Link
-            to="/"
-            className="flex h-full shrink-0 items-center"
-            aria-label="CG-NET Home"
-          >
+          <Link to="/" className="flex h-full shrink-0 items-center" aria-label="CG-NET Home">
             <img
               src="/assets/logo/logo.svg"
               alt="CG-NET logo"
-              className="block h-[38px] w-auto object-cover"
+
+              className="block h-[38px] w-auto object-cover -translate-y-1"
               loading="lazy"
             />
           </Link>

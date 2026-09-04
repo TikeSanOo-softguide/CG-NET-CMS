@@ -82,10 +82,10 @@ export default function HomePage() {
           title={t('home.whyChooseUsTitle')}
           subtitle={t('home.whyChooseUsDesc')}
         />
-        <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5 ">
           {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
-            <AnimatedCard key={titleKey} delay={i * 90} className="rounded-lg">
-              <article className="group bg-font-white relative flex h-[180px] flex-col overflow-hidden border border-border/70 text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
+            <AnimatedCard key={titleKey} delay={i * 90} className="rounded-2xl">
+              <article className="group bg-app-surface relative rounded-xl flex h-[180px] flex-col overflow-hidden border border-border/70 text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
                 <CardHeader className="pb-2 pt-5">
                   <div
                     className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary transition-all duration-300 group-hover:scale-110"
@@ -320,7 +320,7 @@ export default function HomePage() {
 
               return (
                 <AnimatedCard key={item.id} delay={i * 90} variant="rise" className={cardClass}>
-                  <div className="group relative h-full overflow-hidden rounded-[28px] border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
+                  <div className="group relative h-full overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
                     <div className="card-media h-full">
                       <img
                         src={imageUrl}
@@ -349,7 +349,7 @@ export default function HomePage() {
 
       {/* Download Section */}
       <SectionWrapper id="app" className="py-20 md:py-24 bg-muted/40">
-        <div className="w-full overflow-hidden rounded-3xl border border-border bg-app-accent-bg">
+        <div className="w-full overflow-hidden rounded-xl border border-border bg-app-accent-bg">
           <div className="grid items-center gap-8 p-8 md:grid-cols-2 md:p-12">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
@@ -382,7 +382,7 @@ export default function HomePage() {
                   <img
                     src={item.imageUrl}
                     alt={t(item.key)}
-                    className="h-auto w-full rounded-2xl drop-shadow-xl"
+                    className="h-auto w-full rounded-xl drop-shadow-xl"
                     loading="lazy"
                   />
                 </AnimatedCard>

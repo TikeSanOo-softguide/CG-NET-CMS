@@ -41,14 +41,13 @@ export function NavBar() {
         <NavLink
           to="/"
           end
-          className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+          className="px-2 xl:px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
         >
           {({ isActive }) => (
             <span className="relative inline-block">
               {/* Normal text - always exists */}
-              <span className="text-foreground">{t('nav.home')}</span>
+              <span className="text-font-muted">{t('nav.home')}</span>
 
-              {/* Gradient text - always exists, only opacity changes */}
               <span
                 className={cn(
                   'absolute inset-0 bg-gradient-font bg-clip-text text-transparent transition-opacity duration-150',
@@ -58,6 +57,12 @@ export function NavBar() {
               >
                 {t('nav.home')}
               </span>
+              <span
+                className={cn(
+                  'absolute inset-x-0 -bottom-[6px] h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
+                  isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                )}
+              />
             </span>
           )}
         </NavLink>
@@ -65,11 +70,11 @@ export function NavBar() {
         {/* Services */}
         <NavLink
           to="/services"
-          className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+          className="px-2 xl:px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
         >
           {({ isActive }) => (
             <span className="relative inline-block">
-              <span className="text-foreground">{t('nav.services')}</span>
+              <span className="text-font-muted">{t('nav.services')}</span>
 
               <span
                 className={cn(
@@ -80,6 +85,12 @@ export function NavBar() {
               >
                 {t('nav.services')}
               </span>
+              <span
+                className={cn(
+                  'absolute inset-x-0 -bottom-[6px] h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
+                  isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                )}
+              />
             </span>
           )}
         </NavLink>
@@ -87,11 +98,11 @@ export function NavBar() {
         {/* Packages */}
         <NavLink
           to="/packages?category=mm-broadband"
-          className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+          className="px-2 xl:px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
         >
           {({ isActive }) => (
             <span className="relative inline-block">
-              <span className="text-foreground">{t('nav.packages')}</span>
+              <span className="text-font-muted">{t('nav.packages')}</span>
 
               <span
                 className={cn(
@@ -102,6 +113,12 @@ export function NavBar() {
               >
                 {t('nav.packages')}
               </span>
+              <span
+                className={cn(
+                  'absolute inset-x-0 -bottom-[6px] h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
+                  isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                )}
+              />
             </span>
           )}
         </NavLink>
@@ -111,12 +128,12 @@ export function NavBar() {
           <NavLink
             key={to}
             to={to}
-            className="px-2 xl:px-3 py-2 rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+            className="px-2 xl:px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
           >
             {({ isActive }) => (
               <span className="relative inline-block">
                 {/* Normal text */}
-                <span className="text-foreground">{t(labelKey)}</span>
+                <span className="text-font-muted">{t(labelKey)}</span>
 
                 {/* Gradient text */}
                 <span
@@ -128,6 +145,12 @@ export function NavBar() {
                 >
                   {t(labelKey)}
                 </span>
+                <span
+                  className={cn(
+                    'absolute inset-x-0 -bottom-[6px] h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
+                    isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                  )}
+                />
               </span>
             )}
           </NavLink>

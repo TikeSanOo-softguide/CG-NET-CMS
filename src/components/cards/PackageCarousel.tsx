@@ -42,35 +42,37 @@ function PackageCarouselCard({ pkg, lang }: { pkg: Package; lang: SupportedLangu
   return (
     <Card
       className={[
-        'group relative h-[320px] sm:h-[340px] xl:h-[350px] overflow-hidden rounded-[20px] border-0 bg-transparent shadow-none z-0',
+        'group relative h-[320px] sm:h-[340px] xl:h-[350px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
         'transition-all duration-300 ease-out',
         'hover:z-10 hover:scale-[1.02]',
       ].join(' ')}
     >
-      <div className="card-media relative h-full overflow-hidden rounded-[25px] border border-white/80 shadow-[0_18px_42px_-20px_rgba(15,23,42,0.42)]">
-        <img
-          src={typeof pkg.imageUrl === 'string' ? pkg.imageUrl : ''}
-          alt={getLocalized(pkg.title, lang)}
-          className="h-full w-full object-cover"
-          loading="lazy"
-        />
+      <div className="card-media relative h-full overflow-hidden rounded-xl border border-white/80 ">
+        {pkg.imageUrl && typeof pkg.imageUrl === 'string' ? (
+          <img
+            src={pkg.imageUrl}
+            alt={getLocalized(pkg.title, lang)}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div className="h-full w-full rounded-xl border border-white/80 bg-muted/40" />
+        )}
+        <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
 
         <div className="absolute inset-x-0 bottom-[14%] flex justify-center px-4 sm:bottom-[12%]">
           <Button
             asChild
             className={[
-              'w-[190px] gap-2 rounded-[6px] border border-white/10 bg-app-primary px-4 text-sm text-font-white shadow-[0_14px_30px_-16px_rgba(0,74,198,0.9)] backdrop-blur-sm',
-              'hover:-translate-y-0.5 hover:bg-app-hover hover:text-font-hover hover:shadow-[0_18px_36px_-16px_rgba(0,74,198,0.95)]',
+              'w-[190px] gap-2 rounded-xl border border-app-white bg-transparent px-4 text-sm text-font-white backdrop-blur-sm',
+              'hover:-translate-y-0.5 hover:bg-white/10 hover:text-font-hover',
               'focus-visible:ring-[#004AC6]/60',
               'transition-all duration-300 ease-out',
               'opacity-100 translate-y-0',
               'sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0',
             ].join(' ')}
           >
-            <Link to={`/packages?category=${pkg.slug}`}>
-              {t('common.viewAll')}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
+            <Link to={`/packages?category=${pkg.slug}`}>{t('common.viewAll')}</Link>
           </Button>
         </div>
       </div>
