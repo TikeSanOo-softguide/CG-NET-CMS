@@ -33,7 +33,6 @@ export default function HomePage() {
     data: recommendedPackages,
     isLoading: pkgLoading,
     isError: pkgError,
-    refetch: pkgRefetch,
   } = useRecommendPackage()
   const { data: news, isLoading: newsLoading, isError: newsError } = useLatestNews(3)
   const { data: promotions, isLoading, isError } = useLatestPromotions(3)

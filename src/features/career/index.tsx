@@ -76,7 +76,7 @@ export default function CareerPage() {
 
       {/* Open Positions */}
       <SectionWrapper>
-        <SectionHeading title={t('career.openPositions')} centered={false} />
+        <SectionHeading title={t('career.openPositions')} />
 
         {isLoading && (
           <div className="space-y-4">
