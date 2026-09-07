@@ -22,6 +22,7 @@ export interface Service {
 }
 
 export interface Package {
+  network: any
   id: string
   slug: string
   category: string

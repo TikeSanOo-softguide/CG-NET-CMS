@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
@@ -13,11 +12,12 @@ import { Users, Gem, ShieldCheck, Megaphone } from 'lucide-react'
 import { useHashScroll } from '@/hooks/useHashScroll'
 import { useGallery } from '@/hooks/useGallery'
 import { EmptyState } from '@/components/common/EmptyState'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function AboutPage() {
   const { t } = useTranslation()
   useHashScroll()
-  const { data: galleryData } = useGallery()
+  const { data: galleryData, isLoading: galleryLoading } = useGallery()
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   usePageTitle(t('about.pageTitle'))
@@ -26,7 +26,7 @@ export default function AboutPage() {
       <PageHeader title={t('about.title')} subtitle={t('about.tagline')} />
 
       {/* Our Story */}
-      <SectionWrapper className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0">
+      <SectionWrapper className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0 ">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,11 +42,11 @@ export default function AboutPage() {
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>
             </div>
 
-            <p className="text-font-muted text-sm md:text-base leading-relaxed">
+            <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
               {t('about.storyText1')}
             </p>
 
-            <p className="text-font-muted text-sm md:text-base leading-relaxed">
+            <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
               {t('about.storyText2')}
             </p>
           </div>
@@ -93,8 +93,6 @@ export default function AboutPage() {
         </motion.div>
       </SectionWrapper>
 
-      <Separator />
-
       {/* Mission & Vision */}
       <SectionWrapper className="bg-muted/40">
         <div className="max-w-6xl mx-auto">
@@ -106,8 +104,8 @@ export default function AboutPage() {
             <div className="h-1.5 w-24 bg-app-primary rounded-full mx-auto"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatedCard variant="fade-right" delay={0} className="rounded-lg">
-              <Card className="h-full card-shine card-glow border">
+            <AnimatedCard variant="fade-right" delay={0} className="rounded-lg bg-app-surface">
+              <Card className="h-full card-shine card-glow border bg-app-surface">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
@@ -121,7 +119,7 @@ export default function AboutPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-font-muted text-sm md:text-base leading-relaxed">
+                  <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
                     {t('about.mission')}
                   </p>
                 </CardContent>
@@ -144,8 +142,8 @@ export default function AboutPage() {
                 />
               </Card>
             </AnimatedCard>
-            <AnimatedCard variant="fade-left" delay={100} className="rounded-lg">
-              <Card className="h-full card-shine card-glow border">
+            <AnimatedCard variant="fade-left" delay={100} className="rounded-lg bg-app-surface">
+              <Card className="h-full card-shine card-glow border bg-app-surface">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/25 to-pink-500/20 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-500/10 transition-transform duration-300 group-hover:scale-105">
@@ -159,7 +157,7 @@ export default function AboutPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-font-muted text-sm md:text-base leading-relaxed">
+                  <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
                     {t('about.vision')}
                   </p>
                 </CardContent>
@@ -187,10 +185,10 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Brand Guideline Section */}
-      <SectionWrapper id="brand-guideline" className="bg-background pt-8 pb-4 sm:pb-16">
+      <SectionWrapper id="brand-guideline" className="bg-background pt-8 pb-4 sm:pb-16 bg-muted/40">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
           {/* Left Side: Features Card */}
-          <div className="bg-white border-2 border-font-blue shadow-xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-[28px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="bg-app-surface border-2 border-font-blue shadow-xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex flex-col">
               {/* Item 1: Brand Personality */}
               <div className="flex items-start sm:items-center gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-primary/10">
@@ -198,10 +196,10 @@ export default function AboutPage() {
                   <Users className="w-5 h-5 sm:w-6 sm:h-6 text-icon-user " />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 ">
                     {t('about.personalityTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug !leading-[1.8]">
                     {t('about.personalityDesc')}
                   </p>
                 </div>
@@ -216,7 +214,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
                     {t('about.coreValuesTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug  !leading-[1.8]">
                     {t('about.coreValuesDesc')}
                   </p>
                 </div>
@@ -231,7 +229,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
                     {t('about.brandPromiseTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug  !leading-[1.8]">
                     {t('about.brandPromiseDesc')}
                   </p>
                 </div>
@@ -246,7 +244,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue  text-base sm:text-lg font-bold mb-0.5">
                     {t('about.toneOfVoiceTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug  !leading-[1.8]">
                     {t('about.toneOfVoiceDesc')}
                   </p>
                 </div>
@@ -262,7 +260,7 @@ export default function AboutPage() {
                 {t('about.brandGuidelineTitle')}
               </h2>
             </div>
-            <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg">
+            <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg  !leading-[1.8]">
               {t('about.brandGuidelineDesc')}
             </p>
           </div>
@@ -281,20 +279,24 @@ export default function AboutPage() {
             </div>
 
             <h3 className="text-xl md:text-4xl font-black tracking-tight leading-tight">
-              <span className="bg-gradient-font bg-clip-text text-transparent">
+              <span className="bg-gradient-font bg-clip-text text-transparent !leading-[1.8]">
                 {t(aboutContent.culture.titleKey1)}
               </span>
               <br />
               <span className="text-font-black">{t(aboutContent.culture.titleKey2)}</span>
             </h3>
             <div className="border-l-4 border-app-primary/50 pl-4 py-1">
-              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium">
+              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium !leading-[1.8]">
                 {t(aboutContent.culture.descriptionKey)}
               </p>
             </div>
           </div>
 
-          {!galleryData?.data || galleryData.data.length === 0 ? (
+          {galleryLoading ? (
+            <div className="w-full h-[350px] flex items-center justify-center">
+              <Skeleton className="w-full h-full rounded-2xl" />
+            </div>
+          ) : !galleryData?.data || galleryData.data.length === 0 ? (
             <div className="flex justify-center items-center h-full min-h-[300px]">
               <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
             </div>
@@ -314,7 +316,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Team */}
-      <SectionWrapper>
+      <SectionWrapper className="bg-muted/40">
         <div className="text-center max-w-2xl mx-auto mb-5 space-y-3">
           <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight bg-gradient-font bg-clip-text text-transparent pb-3 pt-3 leading-relaxed py-2">
             {t('about.ourTeam')}
@@ -332,7 +334,7 @@ export default function AboutPage() {
                 variant="zoom-in"
                 className="rounded-xl group"
               >
-                <Card className="text-center h-full  border border-border/60 bg-gradient-to-b from-card via-card/50 to-muted/20 p-4 transition-all duration-300 hover:translate-y-0 hover:border-primary/50 hover:shadow-none">
+                <Card className="text-center h-full bg-app-surface  border border-border/60 bg-gradient-to-b from-card via-card/50 to-muted/20 p-4 transition-all duration-300 hover:translate-y-0 hover:border-primary/50 hover:shadow-none">
                   <CardHeader className="space-y-4 pt-6 flex flex-col items-center">
                     <div className="relative flex items-center justify-center">
                       <div

@@ -38,14 +38,11 @@ export default function PackagesPage() {
   usePageTitle(t('packages.pageTitle'))
 
   const FILTERS = useMemo(() => {
-  const networkFilters =
-    networks?.map((network) => ({
-      value: String(network.id),
-      label:
-        network.name[
-          i18n.language as 'en' | 'zh' | 'my'
-        ] ?? network.name.en,
-    })) ?? []
+    const networkFilters =
+      networks?.map((network) => ({
+        value: String(network.id),
+        label: network.name[i18n.language as 'en' | 'zh' | 'my'] ?? network.name.en,
+      })) ?? []
 
     return [
       ...networkFilters,
@@ -58,32 +55,29 @@ export default function PackagesPage() {
 
   const DEFAULT_CATEGORY = FILTERS[0]?.value ?? ''
 
-  useEffect(() => { if (!FILTERS.length) { return } 
-  const category = searchParams.get('category') 
-  const validCategory = FILTERS.some( 
-    (filter) => filter.value === category ) ? category! : DEFAULT_CATEGORY 
-    if (activeFilter !== validCategory) { setActiveFilter(validCategory) } 
-    if (category !== validCategory) { 
-      setSearchParams( 
-        { category: validCategory }, 
-        { replace: true } 
-      ) 
-    } 
-  }, [ 
-    searchParams, 
-    FILTERS, 
-    DEFAULT_CATEGORY, 
-    activeFilter, 
-    setSearchParams, 
-  ])
+  useEffect(() => {
+    if (!FILTERS.length) {
+      return
+    }
+    const category = searchParams.get('category')
+    const validCategory = FILTERS.some((filter) => filter.value === category)
+      ? category!
+      : DEFAULT_CATEGORY
+    if (activeFilter !== validCategory) {
+      setActiveFilter(validCategory)
+    }
+    if (category !== validCategory) {
+      setSearchParams({ category: validCategory }, { replace: true })
+    }
+  }, [searchParams, FILTERS, DEFAULT_CATEGORY, activeFilter, setSearchParams])
 
-  function handleFilterChange(value: string) { 
-    setActiveFilter(value) 
-    if (value) { 
-      setSearchParams({ category: value }) 
-    } else { 
-      setSearchParams({}) 
-    } 
+  function handleFilterChange(value: string) {
+    setActiveFilter(value)
+    if (value) {
+      setSearchParams({ category: value })
+    } else {
+      setSearchParams({})
+    }
   }
 
   function renderPackageContent() {
@@ -91,37 +85,24 @@ export default function PackagesPage() {
       return <OtherPackage addons={addons ?? []} />
     }
 
-    const selectedNetwork = networks?.find(
-      (network) => String(network.id) === activeFilter
-    )
+    const selectedNetwork = networks?.find((network) => String(network.id) === activeFilter)
 
-    const selectedPackages =
-      packages?.filter(
-        (pkg) => pkg.network.id === selectedNetwork?.id
-      ) ?? []
+    const selectedPackages = packages?.filter((pkg) => pkg.network.id === selectedNetwork?.id) ?? []
 
     if (!selectedNetwork) {
       return null
     }
 
     return (
-      <PackageSelection
-        key={activeFilter}
-        network={selectedNetwork}
-        packages={selectedPackages}
-      />
+      <PackageSelection key={activeFilter} network={selectedNetwork} packages={selectedPackages} />
     )
   }
 
   const isLoading =
-  networksLoading ||
-  packagesLoading ||
-  (activeFilter === 'other-service' && addonsLoading)
+    networksLoading || packagesLoading || (activeFilter === 'other-service' && addonsLoading)
 
   const isError =
-    networksError ||
-    packagesError ||
-    (activeFilter === 'other-service' && addonsError)
+    networksError || packagesError || (activeFilter === 'other-service' && addonsError)
 
   const handleRetry = () => {
     void refetchNetworks()
@@ -153,21 +134,19 @@ export default function PackagesPage() {
       </SectionWrapper>
     )
   }
-  
+
   return (
     <main>
       <PageHeader title={t('packages.title')} subtitle={t('packages.subtitle')} />
-        <SectionWrapper spacing="compact">
-          <div className="mt-5">
-            <CommonTab
-              filters={FILTERS}
-              activeValue={activeFilter}
-              onValueChange={handleFilterChange}
-            />
-          </div>
-          <div className="mt-6">
-            {renderPackageContent()}
-          </div>
+      <SectionWrapper spacing="compact" bg-app-surface className="bg-muted/40">
+        <div className="mt-5">
+          <CommonTab
+            filters={FILTERS}
+            activeValue={activeFilter}
+            onValueChange={handleFilterChange}
+          />
+        </div>
+        <div className="mt-6">{renderPackageContent()}</div>
       </SectionWrapper>
     </main>
   )

@@ -15,16 +15,11 @@ export default function ServicesPage() {
     <main>
       <PageHeader title={t('services.title')} subtitle={t('services.subtitle')} />
 
-      <SectionWrapper spacing="tight">
+      <SectionWrapper spacing="tight" className="bg-muted/40">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {serviceContent.services.map((service, i) => (
             <div key={service.id} className={i === 3 ? 'lg:col-span-3' : ''}>
-              <ServiceCard
-                service={service}
-                lang={lang}
-                delay={i * 80}
-                featured={i === 3}
-              />
+              <ServiceCard service={service} lang={lang} delay={i * 80} featured={i === 3} />
             </div>
           ))}
         </div>

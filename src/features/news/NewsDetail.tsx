@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft, Calendar} from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -17,12 +17,7 @@ export default function NewsDetailPage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
-  const {
-    data: article,
-    isLoading,
-    isError,
-    refetch,
-  } = useNewsBySlug(slug)
+  const { data: article, isLoading, isError, refetch } = useNewsBySlug(slug)
 
   usePageTitle(article ? getLocalized(article.title, lang) : t('news.detailPageTitle'))
 
@@ -33,7 +28,9 @@ export default function NewsDetailPage() {
         <Skeleton className="h-10 w-3/4 mb-3" />
         <Skeleton className="h-5 w-1/2 mb-6" />
         <div className="space-y-3 max-w-3xl">
-          {[1, 2, 3, 4, 5].map((i) => <Skeleton key={i} className="h-4 w-full" />)}
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Skeleton key={i} className="h-4 w-full" />
+          ))}
         </div>
       </SectionWrapper>
     )
@@ -43,14 +40,12 @@ export default function NewsDetailPage() {
 
   return (
     <main>
-      <SectionWrapper>
-        <div className="max-w-3xl mx-auto">     
+      <SectionWrapper className="bg-muted/40">
+        <div className="max-w-3xl mx-auto">
           <article>
             <header className="mb-6">
               <div className="mb-6 flex items-center justify-between gap-3">
-                <Badge variant="secondary">
-                  {getLocalized(article.category.name, lang)}
-                </Badge>
+                <Badge variant="secondary">{getLocalized(article.category.name, lang)}</Badge>
 
                 <Button variant="ghost" asChild className="gap-2">
                   <Link to="/news">

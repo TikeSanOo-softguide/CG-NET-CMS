@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { getLocalized } from '@/lib/utils'
+import { cn, getLocalized } from '@/lib/utils'
 import type { Package } from '@/types'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import { t } from 'i18next'
@@ -71,7 +71,7 @@ function PackageCarouselCard({ pkg, lang }: { pkg: Package; lang: SupportedLangu
               'sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0',
             ].join(' ')}
           >
-            <Link to={`/packages?category=${pkg.slug}`}>{t('common.viewAll')}</Link>
+            <Link to={`/packages?category=${pkg.network.id}`}>{t('common.choosePlan')}</Link>
           </Button>
         </div>
       </div>
@@ -100,12 +100,15 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
       return scoreB - scoreA
     })
   }, [packages])
+  const isSingleOrFew = orderedPackages.length < cardsToShow
 
   const repeatedPackages = useMemo(
-    () => [...orderedPackages, ...orderedPackages, ...orderedPackages],
-    [orderedPackages]
+    () =>
+      isSingleOrFew
+        ? orderedPackages
+        : [...orderedPackages, ...orderedPackages, ...orderedPackages],
+    [orderedPackages, isSingleOrFew]
   )
-
   const dotCount = orderedPackages.length
 
   useEffect(() => {
@@ -245,15 +248,21 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
         className="overflow-x-auto overflow-y-hidden scrollbar-none overscroll-x-contain"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        onScroll={syncInfinitePosition}
+        onScroll={isSingleOrFew ? undefined : syncInfinitePosition}
       >
-        <div className="flex gap-4 will-change-transform" style={trackStyle}>
+        <div
+          className={cn('flex gap-4 will-change-transform', isSingleOrFew && 'justify-center')}
+          style={trackStyle}
+        >
           {repeatedPackages.map((pkg, index) => (
             <div
               key={`${pkg.id}-${index}`}
               data-package-card
               className="shrink-0 py-2"
-              style={{ flex: '0 0 var(--card-width)' }}
+              style={{
+                flex: isSingleOrFew ? '0 0 auto' : '0 0 var(--card-width)',
+                width: isSingleOrFew ? '280px' : undefined,
+              }}
             >
               <PackageCarouselCard pkg={pkg} lang={lang} />
             </div>
@@ -261,7 +270,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
         </div>
       </div>
 
-      {dotCount > 1 && (
+      {dotCount > 5 && (
         <div className="mt-6 flex items-center justify-center gap-2">
           {Array.from({ length: dotCount }).map((_, index) => (
             <button
