@@ -8,14 +8,11 @@ const ServicesPage = lazy(() => import('@/features/services'))
 const PackagesPage = lazy(() => import('@/features/packages'))
 const NewsPage = lazy(() => import('@/features/news'))
 const NewsDetailPage = lazy(() => import('@/features/news/NewsDetail'))
-const CareerPage = lazy(() => import('@/features/career'))
-const CareerDetailPage = lazy(() => import('@/features/career/CareerDetail'))
 const PromotionPage = lazy(() => import('@/features/promotion'))
 const PromotionDetailPage = lazy(() => import('@/features/promotion/PromotionDetail'))
 const AppGuidePage = lazy(() => import('@/features/app-guide'))
 const PrivacyPage = lazy(() => import('@/features/privacy-policy'))
 const AboutPage = lazy(() => import('@/features/about'))
-const ContactPage = lazy(() => import('@/features/contact'))
 const NotFoundPage = lazy(() => import('@/features/not-found'))
 
 function PageLoader() {
@@ -42,13 +39,10 @@ export function AppRoutes() {
         <Route path="/packages" element={<PackagesPage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/news/:slug" element={<NewsDetailPage />} />
-        <Route path="/career" element={<CareerPage />} />
-        <Route path="/career/:slug" element={<CareerDetailPage />} />
         <Route path="/promotion" element={<PromotionPage />} />
         <Route path="/promotion/:slug" element={<PromotionDetailPage />} />
         <Route path="/app-guide" element={<AppGuidePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

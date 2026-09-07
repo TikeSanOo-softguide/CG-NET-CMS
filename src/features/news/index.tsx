@@ -42,7 +42,7 @@ export default function NewsPage() {
   const [page, setPage] = useState(1)
   const [filter, setFilter] = useState('')
   usePageTitle(t('news.pageTitle'))
-  const { data: news, isLoading, isError, refetch } = useNews(page, PAGE_SIZE, search, filter)
+  const { data: news, isLoading, isFetching, isError, refetch } = useNews(page, PAGE_SIZE, search, filter)
   const { data: categories = [] } = useNewsCategories()
 
   const getCategoryName = (category: NewsCategory) => {
@@ -65,7 +65,7 @@ export default function NewsPage() {
       value: category.slug,
     })),
   ]
-  const totalPages = news ? Math.ceil(news.total / PAGE_SIZE) : 1
+  const totalPages = news ? Math.max(1, Math.ceil(news.total / PAGE_SIZE)) : 1
 
   const handleSearch = (value: string) => {
     setPage(1)
@@ -110,6 +110,14 @@ export default function NewsPage() {
 
         {isError && <ErrorMessage onRetry={() => void refetch()} />}
 
+        {isFetching && !isLoading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <NewsSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
         {news && news.data.length === 0 && (
           <EmptyState title={t('news.noNews')} description={t('news.noNewsDesc')} />
         )}
@@ -122,7 +130,7 @@ export default function NewsPage() {
               ))}
             </div>
 
-            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} />
+            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} disabled={isFetching} />
           </>
         )}
       </SectionWrapper>

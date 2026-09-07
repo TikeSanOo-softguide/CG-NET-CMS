@@ -28,7 +28,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
   )
   const next = useCallback(() => goTo(current + 1), [current, goTo])
   const prev = useCallback(() => goTo(current - 1), [current, goTo])
-  const getImageUrl = (slide: Banner) => {
+  const getImageUrl = useCallback((slide: Banner) => {
     const imageMap = {
       en: slide.image_url_en,
       zh: slide.image_url_zh,
@@ -36,7 +36,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
     }
     const imagePath = imageMap[lang as keyof typeof imageMap] ?? slide.image_url_en
     return `${STORAGE_URL}/${imagePath}`
-  }
+  }, [lang, STORAGE_URL])
   useEffect(() => {
     if (!total || paused) return
     timerRef.current = setTimeout(next, AUTOPLAY_MS)

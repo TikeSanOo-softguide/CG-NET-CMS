@@ -51,7 +51,7 @@ export default function PackagesPage() {
         label: t('packages.OtherService'),
       },
     ]
-  }, [networks, i18n.language])
+  }, [networks, i18n.language, t])
 
   const DEFAULT_CATEGORY = FILTERS[0]?.value ?? ''
 

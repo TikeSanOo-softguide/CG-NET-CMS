@@ -3,7 +3,7 @@ import { BilingualString } from '.'
 export interface Gallery {
   id: string
   label: BilingualString
-  imageUrl: string
+  imageUrl: string | null
 }
 
 export interface GalleryResponse {

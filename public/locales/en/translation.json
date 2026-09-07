@@ -213,6 +213,7 @@
     "publishedOn": "Published on",
     "category": "Category",
     "backToNews": "Back to News",
+    "viewAllNews": "View All News",
     "relatedArticles": "Related Articles",
     "noNews": "No articles found",
     "noNewsDesc": "Check back later for the latest news and updates."
@@ -250,7 +251,9 @@
     "viewDetail": "View Detail",
     "periodLabel": "Periode Promo:",
     "back": "Back to Promotions",
-    "viewAllPromotions": "View All Promotions"
+    "viewAllPromotions": "View All Promotions",
+    "noPromotion": "No promotions found",
+    "noPromotionDesc": "Check back later for the latest promotions."
   },
 
   "appGuide": {

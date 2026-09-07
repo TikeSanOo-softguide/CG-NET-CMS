@@ -31,16 +31,20 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           to={`/promotion/${promotion.slug}`}
           className={cn('card-media relative block', compact ? 'h-[140px]' : 'h-44')}
         >
-          <img
-            src={
-              promotion.imageUrl.startsWith('http')
-                ? promotion.imageUrl
-                : `${STORAGE_URL}/${promotion.imageUrl}`
-            }
-            alt={getLocalized(promotion.title, lang)}
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
+            {promotion.imageUrl ? (
+              <img
+                src={
+                  promotion.imageUrl.startsWith('http')
+                    ? promotion.imageUrl
+                    : `${STORAGE_URL}/${promotion.imageUrl}`
+                }
+                alt={getLocalized(promotion.title, lang)}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+            )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </Link>
 

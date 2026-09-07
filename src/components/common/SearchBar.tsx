@@ -22,6 +22,7 @@ export function SearchBar({
   const isControlled = value !== undefined
   const [internalQuery, setInternalQuery] = React.useState('')
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const searchTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
   const query = isControlled ? value : internalQuery
 
   React.useEffect(() => {
@@ -36,6 +37,7 @@ export function SearchBar({
   }, [])
 
   const handleClear = () => {
+    if (searchTimerRef.current) clearTimeout(searchTimerRef.current)
     const nextValue = ''
     if (!isControlled) {
       setInternalQuery(nextValue)
@@ -51,7 +53,10 @@ export function SearchBar({
       setInternalQuery(val)
     }
     onChange?.(val)
-    onSearch?.(val)
+    if (onSearch) {
+      if (searchTimerRef.current) clearTimeout(searchTimerRef.current)
+      searchTimerRef.current = setTimeout(() => onSearch(val), 350)
+    }
   }
 
   return (

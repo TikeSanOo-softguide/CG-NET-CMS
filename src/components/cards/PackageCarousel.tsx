@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { cn, getLocalized } from '@/lib/utils'
-import type { Package } from '@/types'
+import { RecommendedPackage } from '@/lib/api/packages.api'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import { t } from 'i18next'
 
@@ -19,7 +19,7 @@ const SWIPE_THRESHOLD = 40
 const SCROLL_PX_PER_MS = 0.035
 
 interface PackageCarouselProps {
-  packages: Package[]
+  packages: RecommendedPackage[]
   lang: SupportedLanguage
 }
 
@@ -37,7 +37,7 @@ function getCardWidth(width: number) {
   return '88%'
 }
 
-function PackageCarouselCard({ pkg, lang }: { pkg: Package; lang: SupportedLanguage }) {
+function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: SupportedLanguage }) {
   return (
     <Card
       className={[

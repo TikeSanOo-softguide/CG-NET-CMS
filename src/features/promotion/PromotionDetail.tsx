@@ -6,30 +6,45 @@ import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { normalizeLanguage } from '@/lib/i18n'
 import { usePromotionBySlug } from '@/hooks/usePromotion'
 import { formatDate, getDateLocale, getLocalized } from '@/lib/utils'
+import { Skeleton } from '@/components/ui/skeleton'
+import { EmptyState } from '@/components/common/EmptyState'
 
 export default function PromotionDetail() {
   const { slug } = useParams()
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
-  const { data: promotion, isLoading } = usePromotionBySlug(slug as string)
-
-  if (isLoading) {
-    return <div className="container py-16 text-center">Loading...</div>
-  }
+  const { data: promotion, isLoading, isError} = usePromotionBySlug(slug ?? '')
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+
   if (isLoading) {
-    return <div className="container py-16 text-center">Loading...</div>
+    return (
+      <SectionWrapper>
+        <Skeleton className="h-8 w-40 mb-6" />
+        <Skeleton className="h-10 w-3/4 mb-3" />
+        <Skeleton className="h-5 w-1/2 mb-6" />
+        <div className="space-y-3 max-w-3xl">
+          {[1, 2, 3, 4, 5].map((i) => <Skeleton key={i} className="h-4 w-full" />)}
+        </div>
+      </SectionWrapper>
+    )
   }
 
-  if (!promotion) {
+  if (isError || !promotion) {
     return (
-      <div className="container py-16 text-center space-y-4">
-        <h2 className="text-2xl font-bold">Promotion not found</h2>
-        <Button asChild>
-          <Link to="/promotion">{t('common.goBack')}</Link>
-        </Button>
-      </div>
-    )
+        <SectionWrapper className="bg-muted/40">
+          <EmptyState
+            title={t('promotions.noPromotion')}
+            description={t('promotions.noPromotionDesc')}
+            action={
+              <Button variant="outline">
+                <Link to="/promotion">
+                  {t('common.goBack')}
+                </Link>
+              </Button>
+            }
+          />
+        </SectionWrapper>
+      )
   }
 
   return (
@@ -68,16 +83,20 @@ export default function PromotionDetail() {
 
           {/* Banner Image with modern shadow and zoom on hover */}
           <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-lg shadow-black/5 aspect-[16/10] sm:aspect-[16/9] w-full transition-all duration-300 hover:shadow-xl hover:border-primary/30">
-            <img
-              src={
-                promotion.imageUrl.startsWith('http')
-                  ? promotion.imageUrl
-                  : `${STORAGE_URL}/${promotion.imageUrl}`
-              }
-              alt={getLocalized(promotion.title, lang)}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-            />
+            {promotion.imageUrl ? (
+              <img
+                src={
+                  promotion.imageUrl.startsWith('http')
+                    ? promotion.imageUrl
+                    : `${STORAGE_URL}/${promotion.imageUrl}`
+                }
+                alt={getLocalized(promotion.title, lang)}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            ) : (
+              <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60" />
           </div>
 

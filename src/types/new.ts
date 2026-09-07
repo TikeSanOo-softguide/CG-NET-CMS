@@ -13,9 +13,9 @@ export interface NewsArticle {
   slug: string
   title: BilingualString
   description: BilingualString
-  image_url: string
+  image_url: string | null
   status: 'published' | 'draft' | string
-  category: NewsCategory
+  category: NewsCategory | null
   created_at: string
   updated_at: string
 }

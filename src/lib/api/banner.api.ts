@@ -1,5 +1,6 @@
 import { apiClient } from './client'
 import type { Banner } from '@/types'
+import { bannerResponseSchema, parseApiResponse } from './validation'
 
 interface BannerResponse {
   success: boolean
@@ -9,5 +10,5 @@ interface BannerResponse {
 export async function getBanners(): Promise<Banner[]> {
   const response = await apiClient.get<BannerResponse>('/web-app/banners')
 
-  return response.data.data
+  return parseApiResponse<BannerResponse>(bannerResponseSchema, response.data, 'banners').data
 }

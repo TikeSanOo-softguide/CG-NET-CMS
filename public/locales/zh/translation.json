@@ -212,6 +212,7 @@
     "publishedOn": "发布于",
     "category": "分类",
     "backToNews": "返回新闻",
+    "viewAllNews": "查看所有新闻",
     "relatedArticles": "相关文章",
     "noNews": "暂无文章",
     "noNewsDesc": "请稍后再来查看最新新闻与动态。"
@@ -223,7 +224,9 @@
     "viewDetail": "查看详情",
     "periodLabel": "促销期间：",
     "back": "返回促销页面",
-    "viewAllPromotions": "查看所有促销活动"
+    "viewAllPromotions": "查看所有促销活动",
+    "noPromotion": "暂无促销活动",
+    "noPromotionDesc": "请稍后回来查看最新的促销活动。"
   },
   "career": {
     "title": "加入我们",

@@ -38,8 +38,8 @@ export default function PromotionPage() {
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
   usePageTitle(t('promotions.pageTitle'))
-  const { data, isLoading, isError, refetch } = usePromotion(page, PAGE_SIZE, search)
-  const totalPages = data?.meta?.last_page ?? 1
+  const { data, isLoading, isFetching, isError, refetch } = usePromotion(page, PAGE_SIZE, search)
+  const totalPages = Math.max(1, data?.meta?.last_page ?? 1)
   const handleSearch = (value: string) => {
     setPage(1)
     setSearch(value.trim())
@@ -70,6 +70,14 @@ export default function PromotionPage() {
 
         {isError && <ErrorMessage onRetry={() => void refetch()} />}
 
+        {isFetching && !isLoading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: PAGE_SIZE }).map((_, i) => (
+              <PromotionSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
         {data && data.data.length === 0 && (
           <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
         )}
@@ -87,7 +95,7 @@ export default function PromotionPage() {
               ))}
             </div>
 
-            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} />
+            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} disabled={isFetching} />
           </>
         )}
       </SectionWrapper>

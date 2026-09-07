@@ -14,12 +14,14 @@ import { analytics } from '@/lib/analytics'
 import ScrollToTop from './components/common/ScrollToTop'
 import AppDownloadCard from './components/common/AppDownloadCard'
 import PromotionModal from './components/common/PromotionModal'
+import { ApiError } from '@/lib/api/errors'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
-      retry: 2,
+      staleTime: 60_000,
+      retry: (failureCount, error) =>
+        error instanceof ApiError && error.retryable ? failureCount < 2 : false,
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
     },
@@ -29,12 +31,10 @@ const queryClient = new QueryClient({
 function AppContent() {
   const { i18n } = useTranslation()
 
-  // Sync html[lang] on language change (drives Myanmar and Chinese font CSS)
   useEffect(() => {
     document.documentElement.lang = normalizeLanguage(i18n.language)
   }, [i18n.language])
 
-  // Analytics — track initial page view on mount
   useEffect(() => {
     analytics.trackPageView(window.location.pathname)
   }, [])
@@ -63,10 +63,12 @@ export default function App() {
             v7_relativeSplatPath: true,
           }}
         >
-          <PromotionModal />
-          <AppDownloadCard />
-          <AppContent />
-          <ScrollToTop />
+          <ErrorBoundary>
+            <PromotionModal />
+            <AppDownloadCard />
+            <AppContent />
+            <ScrollToTop />
+          </ErrorBoundary>
         </BrowserRouter>
         {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
       </QueryClientProvider>

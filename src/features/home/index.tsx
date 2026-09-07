@@ -38,7 +38,12 @@ export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialCategory = searchParams.get('category') ?? 'news'
   const [activeFilter, setActiveFilter] = useState(initialCategory)
-  const { data: galleryData } = useGallery()
+  const {
+    data: galleryData,
+    isLoading: galleryLoading,
+    isError: galleryError,
+    refetch: refetchGallery,
+  } = useGallery()
 
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   const FILTERS = [
@@ -158,7 +163,7 @@ export default function HomePage() {
         {recommendedPackages &&
           (() => {
             const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
-            const formattedPackages = recommendedPackages.map((pkg: any) => {
+            const formattedPackages = recommendedPackages.map((pkg) => {
               const rawImg = pkg.image_url || pkg.imageUrl
               const fullImageUrl = rawImg
                 ? rawImg.startsWith('http')
@@ -227,7 +232,7 @@ export default function HomePage() {
               <div className="text-center mt-5">
                 <Button variant="outline" className="bg-font-white" asChild>
                   <Link to="/news">
-                    {t('common.viewAll')} {t('nav.news')}
+                    {t('news.viewAllNews')}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -295,29 +300,30 @@ export default function HomePage() {
           subtitle={t('home.galleryDesc')}
         />
 
-        {isError && <ErrorMessage />}
+        {galleryError && <ErrorMessage onRetry={() => void refetchGallery()} />}
 
-        {!isLoading && !isError && (!galleryData?.data || galleryData.data.length === 0) && (
-          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
-        )}
-        {isLoading && (
+        {galleryLoading && (
           <div className="grid grid-cols-1 gap-4 auto-rows-[190px] sm:grid-cols-2 md:grid-cols-4">
             {Array.from({ length: 5 }).map((_, i) => {
               const cardClass =
                 i === 0
                   ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
                   : 'md:col-span-1 rounded-[28px]'
-
-              return (
-                <div key={i} className={`${cardClass} overflow-hidden`}>
-                  <Skeleton className="h-full w-full rounded-[28px]" />
-                </div>
-              )
-            })}
+                return (
+                  <div key={i} className={`${cardClass} overflow-hidden`}>
+                    <Skeleton className="h-full w-full rounded-[28px]" />
+                  </div>
+                )
+              })
+            }
           </div>
         )}
 
-        {!isLoading && !isError && galleryData?.data && galleryData.data.length > 0 && (
+        {!galleryLoading && !galleryError && (!galleryData?.data || galleryData.data.length === 0) && (
+          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+        )}
+
+        {!galleryLoading && !galleryError && galleryData?.data && galleryData.data.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
             {galleryData.data.slice(0, 5).map((item, i) => {
               const cardClass =
@@ -325,9 +331,11 @@ export default function HomePage() {
                   ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
                   : 'md:col-span-1 rounded-[28px]'
 
-              const imageUrl = item.imageUrl?.startsWith('http')
-                ? item.imageUrl
-                : `${STORAGE_URL}/${item.imageUrl}`
+              const imageUrl = item.imageUrl
+                ? item.imageUrl.startsWith('http')
+                  ? item.imageUrl
+                  : `${STORAGE_URL}/${item.imageUrl}`
+                : null
 
               const displayTitle = getLocalized(item.label, lang)
 
@@ -335,12 +343,16 @@ export default function HomePage() {
                 <AnimatedCard key={item.id} delay={i * 90} variant="rise" className={cardClass}>
                   <div className="group relative h-full overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
                     <div className="card-media h-full">
-                      <img
-                        src={imageUrl}
-                        alt={displayTitle || 'Gallery image'}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-                        loading="lazy"
-                      />
+                      {imageUrl ? (
+                        <img
+                          src={imageUrl}
+                          alt={displayTitle || 'Gallery image'}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+                      )}
                     </div>
 
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />

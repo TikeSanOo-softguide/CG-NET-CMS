@@ -6,18 +6,18 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
-import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { useNewsBySlug } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { getLocalized, formatDate, getDateLocale } from '@/lib/utils'
 import { normalizeLanguage } from '@/lib/i18n'
+import { EmptyState } from '@/components/common/EmptyState'
 
 export default function NewsDetailPage() {
   const { slug = '' } = useParams()
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
-  const { data: article, isLoading, isError, refetch } = useNewsBySlug(slug)
+  const { data: article, isLoading, isError } = useNewsBySlug(slug)
 
   usePageTitle(article ? getLocalized(article.title, lang) : t('news.detailPageTitle'))
 
@@ -36,7 +36,23 @@ export default function NewsDetailPage() {
     )
   }
 
-  if (isError || !article) return <ErrorMessage onRetry={() => void refetch()} />
+  if (isError || !article) {
+  return (
+      <SectionWrapper className="bg-muted/40">
+        <EmptyState
+          title={t('news.noNews')}
+          description={t('news.noNewsDesc')}
+          action={
+            <Button variant="outline">
+              <Link to="/news">
+                {t('common.goBack')}
+              </Link>
+            </Button>
+          }
+        />
+      </SectionWrapper>
+    )
+  }
 
   return (
     <main>
@@ -45,8 +61,9 @@ export default function NewsDetailPage() {
           <article>
             <header className="mb-6">
               <div className="mb-6 flex items-center justify-between gap-3">
-                <Badge variant="secondary">{getLocalized(article.category.name, lang)}</Badge>
-
+                <Badge variant="secondary">
+                  {article.category ? getLocalized(article.category.name, lang) : t('common.noData')}
+                </Badge>
                 <Button variant="ghost" asChild className="gap-2">
                   <Link to="/news">
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />

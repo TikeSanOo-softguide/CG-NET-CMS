@@ -1,12 +1,6 @@
 import type { BilingualString } from './index'
 
 export interface Promotion {
-  excerpt(
-    excerpt: any,
-    lang: string
-  ): import('react').ReactNode | Iterable<import('react').ReactNode>
-  features: boolean
-  viewDetail(viewDetail: any): import('react').ReactNode | Iterable<import('react').ReactNode>
   id: string
   slug: string
   title: BilingualString
@@ -14,5 +8,5 @@ export interface Promotion {
   startDate: string
   endDate: string
   isActive: boolean
-  imageUrl: string
+  imageUrl: string | null
 }

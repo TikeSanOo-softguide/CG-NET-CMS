@@ -1,5 +1,6 @@
 import { apiClient } from './client'
 import type { Contact, ContactSubmission } from '@/types'
+import { contactResponseSchema, parseApiResponse } from './validation'
 
 interface ContactResponse {
   success: boolean
@@ -17,5 +18,5 @@ export async function submitContactForm(submission: ContactSubmission): Promise<
 
 export async function getContact(): Promise<Contact[]> {
   const response = await apiClient.get<ContactResponse>('/web-app/contacts')
-  return response.data.data
+  return parseApiResponse<ContactResponse>(contactResponseSchema, response.data, 'contacts').data
 }

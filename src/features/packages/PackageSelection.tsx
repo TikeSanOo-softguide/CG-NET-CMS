@@ -411,14 +411,6 @@ export default function PackageSelection({
                     {installationFee.toLocaleString()} 元
                   </span>
                 </div>
-
-                <div className="mt-2 flex items-center justify-between text-xs">
-                  <span className="text-neutral-500">{t('packages.addsOn')}</span>
-
-                  <span className="font-medium text-neutral-800">
-                    {installationFee.toLocaleString()} 元
-                  </span>
-                </div>
               </div>
             </div>
           </aside>

@@ -1,5 +1,6 @@
 import { apiClient } from './client'
 import type { Promotion } from '@/types/promotion'
+import { parseApiResponse, promotionResponseSchema, promotionSchema } from './validation'
 
 interface PromotionResponse {
   data: Promotion[]
@@ -30,13 +31,15 @@ export async function getPromotions(page = 1, limit = 5, search = ''): Promise<P
     },
   })
 
-  return data
+  return parseApiResponse<PromotionResponse>(promotionResponseSchema, data, 'promotions')
 }
 
 export async function getPromotionBySlug(slug: string): Promise<Promotion> {
-  const { data } = await apiClient.get<{ data: Promotion }>(`/web-app/promotions/${slug}`)
+  const { data } = await apiClient.get<{ data: Promotion }>(
+    `/web-app/promotions/${encodeURIComponent(slug)}`
+  )
 
-  return data.data
+  return parseApiResponse<Promotion>(promotionSchema, data.data, 'promotion')
 }
 
 export async function getLatestPromotions(limit = 3): Promise<Promotion[]> {
@@ -47,5 +50,5 @@ export async function getLatestPromotions(limit = 3): Promise<Promotion[]> {
     },
   })
 
-  return data.data
+  return parseApiResponse<PromotionResponse>(promotionResponseSchema, data, 'latest promotions').data
 }

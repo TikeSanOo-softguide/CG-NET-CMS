@@ -1,5 +1,6 @@
 import { NewsArticle, NewsArticleResponse } from '@/types/new'
 import { apiClient } from './client'
+import { newsArticleSchema, newsResponseSchema, parseApiResponse } from './validation'
 
 type NewsResponse = {
   data: NewsArticle[]
@@ -42,10 +43,8 @@ export async function getNews(
     }
   )
 
-  return {
-    data: data.data,
-    total: data.meta.total,
-  }
+  const parsed = parseApiResponse<NewsResponse>(newsResponseSchema, data, 'news')
+  return { data: parsed.data, total: parsed.meta.total }
 }
 
 export async function getNewsBySlug(
@@ -54,7 +53,9 @@ export async function getNewsBySlug(
   const { data } = await apiClient.get<NewsArticleResponse>(
     `/web-app/news/${encodeURIComponent(slug)}`
   )
-  return data
+  return {
+    data: parseApiResponse<NewsArticle>(newsArticleSchema, data.data, 'news article'),
+  }
 }
 
 export async function getLatestNews(
@@ -69,5 +70,5 @@ export async function getLatestNews(
       },
     }
   )
-  return data.data
+  return parseApiResponse<NewsResponse>(newsResponseSchema, data, 'latest news').data
 }

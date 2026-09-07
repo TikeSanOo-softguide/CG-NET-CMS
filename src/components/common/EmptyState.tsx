@@ -11,7 +11,7 @@ export function EmptyState({ title, description, action }: EmptyStateProps) {
   const { t } = useTranslation()
 
   return (
-    <div className="flex flex-col items-center justify-center -mt-10 px-4 text-center">
+    <div className="flex flex-col items-center justify-center -mt-10 px-4 mb-5 text-center">
       <img 
         src="/assets/error/nodata.svg" 
         className="mx-auto w-[320px] h-[320px] object-contain" 

@@ -1,5 +1,6 @@
 import { NewsCategory } from '@/types/new'
 import { apiClient } from './client'
+import { newsCategoriesResponseSchema, parseApiResponse } from './validation'
 
 type NewsCategoriesResponse = {
   data: NewsCategory[]
@@ -10,5 +11,9 @@ export async function getNewsCategories(): Promise<NewsCategory[]> {
     '/web-app/categories'
   )
 
-  return data.data
+  return parseApiResponse<NewsCategoriesResponse>(
+    newsCategoriesResponseSchema,
+    data,
+    'news categories'
+  ).data
 }

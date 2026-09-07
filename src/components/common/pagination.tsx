@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -6,9 +7,14 @@ interface PaginationProps {
   totalPages: number
   setPage: React.Dispatch<React.SetStateAction<number>>
   t: (key: string) => string
+  disabled?: boolean
 }
 
-export default function Pagination({ page, totalPages, setPage, t }: PaginationProps) {
+export default function Pagination({ page, totalPages, setPage, t, disabled = false }: PaginationProps) {
+  useEffect(() => {
+    if (page > totalPages) setPage(Math.max(1, totalPages))
+  }, [page, setPage, totalPages])
+
   if (totalPages <= 1) {
     return null
   }
@@ -28,7 +34,7 @@ export default function Pagination({ page, totalPages, setPage, t }: PaginationP
         variant="outline"
         size="sm"
         onClick={() => handlePageChange(Math.max(1, page - 1))}
-        disabled={page === 1}
+        disabled={disabled || page === 1}
         aria-label={t('common.previous')}
         className="text-font-blue"
       >
@@ -47,7 +53,7 @@ export default function Pagination({ page, totalPages, setPage, t }: PaginationP
         variant="outline"
         size="sm"
         onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
-        disabled={page === totalPages}
+        disabled={disabled || page === totalPages}
         aria-label={t('common.next')}
         className="text-font-blue"
       >
