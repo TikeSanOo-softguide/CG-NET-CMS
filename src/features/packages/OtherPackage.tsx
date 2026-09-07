@@ -54,7 +54,7 @@ export default function OtherPackage({
   }
 
   return (
-    <section className="px-4 py-1">
+    <section className="px-4 mb-5">
       <div className="mx-auto max-w-[1400px]">
         {/* MAIN LAYOUT */}
         <div className="flex justify-center">
@@ -82,12 +82,12 @@ export default function OtherPackage({
                 >
                   <div className="pr-8">
                     <p className="text-sm font-bold">
-                      {getAddonName(addon)}
+                      {getAddonName(addon)}                  
                     </p>
                   </div>
                   <div className="mt-4">
                     <p className="text-2xl font-bold">
-                      {addon.price}
+                      {Math.round(addon.price)}
                       <span className="ml-1 text-sm font-medium">
                         元
                       </span>

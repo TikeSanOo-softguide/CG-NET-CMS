@@ -1,45 +1,105 @@
 import { useEffect, useState } from 'react'
 import { X } from 'lucide-react'
 
+const STORAGE_KEY = 'cgnet-promotion-modal-dismissed-at'
+
+// Show again after 24 hours
+const DISMISS_DURATION = 24 * 60 * 60 * 1000
+
+const shouldShowModal = (): boolean => {
+  const dismissedAt = localStorage.getItem(STORAGE_KEY)
+
+  // Never dismissed before
+  if (!dismissedAt) {
+    return true
+  }
+
+  const dismissedTime = Number(dismissedAt)
+
+  // Invalid localStorage value
+  if (Number.isNaN(dismissedTime)) {
+    localStorage.removeItem(STORAGE_KEY)
+    return true
+  }
+
+  // Show again after 24 hours
+  if (Date.now() - dismissedTime >= DISMISS_DURATION) {
+    localStorage.removeItem(STORAGE_KEY)
+    return true
+  }
+
+  return false
+}
+
 export default function PromotionModal() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
 
   useEffect(() => {
-    setIsOpen(true)
+    // Don't show if dismissed within the last 24 hours
+    if (!shouldShowModal()) {
+      return
+    }
+
+    // Show modal after 1 second
+    const timer = window.setTimeout(() => {
+      setIsOpen(true)
+    }, 1000)
+
+    return () => {
+      window.clearTimeout(timer)
+    }
   }, [])
 
-  if (!isOpen) return null
+  const handleClose = () => {
+    setIsClosing(true)
+
+    // Save dismissal time
+    localStorage.setItem(STORAGE_KEY, Date.now().toString())
+
+    // Wait for closing animation
+    window.setTimeout(() => {
+      setIsOpen(false)
+      setIsClosing(false)
+    }, 300)
+  }
+
+  if (!isOpen) {
+    return null
+  }
 
   return (
     <div
-      className="
+      className={`
         fixed inset-0 z-[9999]
         flex items-center justify-center
         bg-black/50
         p-4
         backdrop-blur-sm
-      "
-      onClick={() => setIsOpen(false)}
+        transition-opacity duration-300
+        ${isClosing ? 'opacity-0' : 'opacity-100'}
+      `}
+      onClick={handleClose}
     >
-      {/* Promotion Card */}
       <div
-        className="
+        className={`
           relative
-         w-[90vw]            
-          sm:w-[70vw]      
-          md:w-[60vw]         
+          w-[90vw]
+          sm:w-[70vw]
+          md:w-[60vw]
           max-w-[800px]
           overflow-hidden
           rounded-xl
           bg-white
           shadow-2xl
-        "
+          transition-transform duration-300
+          ${isClosing ? 'scale-95' : 'scale-100'}
+        `}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
           type="button"
-          onClick={() => setIsOpen(false)}
+          onClick={handleClose}
           aria-label="Close promotion"
           className="
             absolute
@@ -65,7 +125,10 @@ export default function PromotionModal() {
           className="
             block
             w-full
-            aspect-[16/7]
+            h-[400px]
+            sm:h-[260px]
+            md:h-auto
+            md:aspect-[16/7]
             object-cover
           "
         />

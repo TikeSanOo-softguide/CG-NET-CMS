@@ -49,11 +49,11 @@ export default function PromotionPage() {
     <main>
       <PageHeader title={t('promotions.title')} subtitle={t('promotions.subtitle')} />
 
-      <SectionWrapper>
+      <SectionWrapper spacing="compact">
         <div className="max-w-6xl w-full mb-6 sm:mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0">
-              <div className="w-full sm:max-w-[600px]">
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0 mt-5">
+              <div className="w-full max-w-[440px]">
                 <SearchBar
                   value={searchInput}
                   onChange={setSearchInput}

@@ -4,12 +4,25 @@ interface SectionWrapperProps {
   children: React.ReactNode
   className?: string
   id?: string
+  spacing?: 'default' | 'compact' | 'tight'
 }
 
-export function SectionWrapper({ children, className, id }: SectionWrapperProps) {
+export function SectionWrapper({ children, className, id,  spacing = 'tight' }: SectionWrapperProps) {
   return (
-    <section id={id} className={cn('py-20 md:py-24', className)}>
-      <div className="container">{children}</div>
+    <section
+      id={id}
+      className={cn(
+        {
+          'py-20 md:py-22': spacing === 'default',
+          'py-15 md:py-19': spacing === 'compact',
+          'py-10 md:py-14': spacing === 'tight',
+        },
+        className
+      )}
+    >
+      <div className="container">
+        {children}
+      </div>
     </section>
   )
 }
