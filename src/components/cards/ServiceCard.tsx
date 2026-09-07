@@ -17,7 +17,7 @@ export function ServiceCard({ service, lang, delay = 0, featured = false }: Serv
   return (
     <AnimatedCard delay={delay} variant="rise" className="h-full rounded-xl">
       <Card
-        className={`bg-app-card group flex h-full flex-col overflow-hidden border shadow-sm card-glow ${
+        className={`!bg-app-surface  group flex h-full flex-col overflow-hidden border shadow-sm card-glow ${
           featured ? 'lg:flex-row' : ''
         }`}
       >

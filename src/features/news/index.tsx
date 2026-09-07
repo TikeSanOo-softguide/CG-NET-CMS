@@ -81,7 +81,7 @@ export default function NewsPage() {
     <main>
       <PageHeader title={t('news.title')} subtitle={t('news.subtitle')} />
 
-      <SectionWrapper spacing="compact">
+      <SectionWrapper spacing="compact" className="bg-muted/40">
         <div className="max-w-6xl w-full mb-6 sm:mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-2 mt-5">

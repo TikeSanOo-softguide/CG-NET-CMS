@@ -21,7 +21,7 @@ export default function AppGuidePage() {
     <main>
       <PageHeader title={t('appGuide.title')} subtitle={t('appGuide.subtitle')} />
 
-      <SectionWrapper spacing="compact">
+      <SectionWrapper spacing="compact" className="bg-muted/40">
         {/* App download links */}
         <div className="mb-10 flex flex-row flex-nowrap gap-3 justify-start sm:justify-center items-center overflow-x-auto px-4 sm:px-6 py-2 scrollbar-none">
           {appGuideContent.downloadLinks.map((link) => (
@@ -49,7 +49,7 @@ export default function AppGuidePage() {
 
         <>
           {/* Overview cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 ">
             {appGuideContent.guides.map((guide, index) => {
               const IconComp = guide.icon
               return (
@@ -59,7 +59,7 @@ export default function AppGuidePage() {
                   variant="zoom-in"
                   className="rounded-2xl"
                 >
-                  <div className="h-full group relative overflow-hidden bg-app-card backdrop-blur-sm border border-border/40  rounded-2xl transition-all duration-700 hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-1 cursor-pointer">
+                  <div className="h-full group relative overflow-hidden bg-app-surface backdrop-blur-sm border border-border/40  rounded-2xl transition-all duration-700 hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-1 cursor-pointer">
                     <div className="p-6 sm:p-8 flex flex-col h-full">
                       <div className="flex items-start justify-between mb-8">
                         <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center transition-all duration-500 group-hover:bg-font-blue group-hover:shadow-lg group-hover:shadow-app-blue/20 group-hover:scale-105">
@@ -105,7 +105,7 @@ export default function AppGuidePage() {
                 <AccordionItem
                   key={guide.id}
                   value={guide.id}
-                  className="bg-card border border-border/60 rounded-xl px-5 shadow-sm transition-all duration-300 data-[state=open]:border-font-blue data-[state=open]:shadow-md overflow-hidden relative"
+                  className="bg-app-surface border border-border/60 rounded-xl px-5 shadow-sm transition-all duration-300 data-[state=open]:border-font-blue data-[state=open]:shadow-md overflow-hidden relative"
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-font-blue data-[state=open]:bg-border-font-blue transition-colors duration-300" />
 
@@ -164,7 +164,7 @@ export default function AppGuidePage() {
                 <AccordionItem
                   key={faq.id}
                   value={`faq-${faq.id}`}
-                  className="bg-card border border-border/60 rounded-xl px-5 shadow-sm transition-all duration-300 data-[state=open]:border-font-blue data-[state=open]:shadow-md overflow-hidden relative"
+                  className="bg-app-surface border border-border/60 rounded-xl px-5 shadow-sm transition-all duration-300 data-[state=open]:border-font-blue data-[state=open]:shadow-md overflow-hidden relative"
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-font-blue transition-colors duration-300" />
 

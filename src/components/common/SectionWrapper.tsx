@@ -7,7 +7,12 @@ interface SectionWrapperProps {
   spacing?: 'default' | 'compact' | 'tight'
 }
 
-export function SectionWrapper({ children, className, id,  spacing = 'tight' }: SectionWrapperProps) {
+export function SectionWrapper({
+  children,
+  className,
+  id,
+  spacing = 'tight',
+}: SectionWrapperProps) {
   return (
     <section
       id={id}
@@ -20,9 +25,7 @@ export function SectionWrapper({ children, className, id,  spacing = 'tight' }: 
         className
       )}
     >
-      <div className="container">
-        {children}
-      </div>
+      <div className="container">{children}</div>
     </section>
   )
 }
@@ -31,27 +34,25 @@ interface SectionHeadingProps {
   title: string
   eyebrow?: string
   subtitle?: string
-  align?: "center" | "left"
+  align?: 'center' | 'left'
 }
 
-export function SectionHeading({ 
+export function SectionHeading({
   eyebrow,
   title,
   subtitle,
-  align = "center",
+  align = 'center',
 }: SectionHeadingProps) {
   return (
     <div
       className={
-        align === "center"
-          ? "mx-auto max-w-2xl text-center mb-6 md:mb-10"
-          : "max-w-2xl text-left"
+        align === 'center' ? 'mx-auto max-w-2xl text-center mb-6 md:mb-10' : 'max-w-2xl text-left'
       }
     >
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head">
+      <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head !leading-[1.7]">
         {title}
       </h2>
       {subtitle ? (

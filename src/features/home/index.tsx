@@ -59,34 +59,34 @@ export default function HomePage() {
 
       {/* Stats */}
       <div className="bg-muted/40">
-      <section
-        className="relative z-10 -mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head md:-mt-8"
-        aria-label="Company statistics"
-      >
-        <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)] sm:grid-cols-3 lg:grid-cols-5">
-          {homeContent.stats.map(({ value, labelKey }) => (
-            <div
-              key={labelKey}
-              className="
+        <section
+          className="relative z-10 -mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head md:-mt-8"
+          aria-label="Company statistics"
+        >
+          <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)] sm:grid-cols-3 lg:grid-cols-5">
+            {homeContent.stats.map(({ value, labelKey }) => (
+              <div
+                key={labelKey}
+                className="
                 flex min-h-[90px] flex-col items-center justify-center
                 border-b border-border px-3 py-3 text-center
                 last:col-span-2 last:border-b-0
                 sm:min-h-[90px] sm:last:col-span-1
                 lg:border-b-0 lg:border-r lg:last:border-r-0
               "
-            >
-              <p className="text-xl font-extrabold tracking-tight text-font-blue sm:text-2xl">
-                {value}
-              </p>
+              >
+                <p className="text-xl font-extrabold tracking-tight text-font-blue sm:text-2xl">
+                  {value}
+                </p>
 
-              <p className="mt-0.5 text-[11px] font-medium text-muted-foreground sm:text-xs">
-                {t(labelKey)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+                <p className="mt-0.5 text-[11px] font-medium text-muted-foreground sm:text-xs">
+                  {t(labelKey)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
 
       {/* Why Choose Us */}
       <SectionWrapper className="bg-muted/40" spacing="default">
@@ -113,7 +113,7 @@ export default function HomePage() {
                 </CardHeader>
 
                 <CardContent className="px-4 pb-4 pt-0">
-                  <CardDescription className="text-xs leading-snug text-muted-foreground">
+                  <CardDescription className="text-xs leading-snug text-muted-foreground ">
                     {t(descKey)}
                   </CardDescription>
                 </CardContent>
@@ -375,7 +375,7 @@ export default function HomePage() {
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-[17px]">
                 {t('home.downloadSub1')}
-                <br />
+
                 {t('home.downloadSub2')}
                 <br />
               </p>

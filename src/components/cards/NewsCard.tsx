@@ -2,7 +2,14 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { cn, getLocalized, formatDate, getDateLocale } from '@/lib/utils'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
@@ -20,10 +27,10 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full">
+    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full  ">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl bg-app-surface',
+          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl !bg-app-surface',
           compact ? 'h-[300px]' : 'h-full'
         )}
       >
@@ -42,7 +49,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
 
         <CardHeader className="pb-2 pt-3">
           <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
-            {getLocalized(article.category.name, lang)}
+            {article.category ? getLocalized(article.category.name, lang) : t('common.noData')}
           </span>
           <CardTitle className={cn('leading-[1.7]', compact ? 'text-sm' : 'text-base')}>
             <Link to={`/news/${article.slug}`} className="hover:text-primary transition-colors">
@@ -52,7 +59,9 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
         </CardHeader>
 
         <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
-          <CardDescription className={cn('leading-[1.7]', compact ? 'line-clamp-1 text-xs' : 'line-clamp-2')}>
+          <CardDescription
+            className={cn('leading-[1.7]', compact ? 'line-clamp-1 text-xs' : 'line-clamp-2')}
+          >
             {getLocalized(article.description, lang)}
           </CardDescription>
         </CardContent>

@@ -13,16 +13,16 @@ export default function Pagination({ page, totalPages, setPage, t }: PaginationP
     return null
   }
 
-  const handlePageChange = (newPage: number) => { 
-    setPage(newPage) 
-    window.scrollTo({ 
-      top: 0, 
-      behavior: 'smooth', 
-    }) 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }
 
   return (
-    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap">
+    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap mb-4">
       {/* Previous */}
       <Button
         variant="outline"

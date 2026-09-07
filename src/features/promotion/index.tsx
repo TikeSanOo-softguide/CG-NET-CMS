@@ -49,16 +49,12 @@ export default function PromotionPage() {
     <main>
       <PageHeader title={t('promotions.title')} subtitle={t('promotions.subtitle')} />
 
-      <SectionWrapper spacing="compact">
+      <SectionWrapper spacing="compact" className="bg-muted/40">
         <div className="max-w-6xl w-full mb-6 sm:mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0 mt-5">
               <div className="w-full max-w-[440px]">
-                <SearchBar
-                  value={searchInput}
-                  onChange={setSearchInput}
-                  onSearch={handleSearch}
-                />
+                <SearchBar value={searchInput} onChange={setSearchInput} onSearch={handleSearch} />
               </div>
             </div>
           </div>
@@ -75,10 +71,7 @@ export default function PromotionPage() {
         {isError && <ErrorMessage onRetry={() => void refetch()} />}
 
         {data && data.data.length === 0 && (
-          <EmptyState
-            title={t('common.noData')}
-            description={t('common.emptyStateDesc')}
-          />
+          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
         )}
 
         {data && data.data.length > 0 && (
