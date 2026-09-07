@@ -71,7 +71,7 @@ function PackageCarouselCard({ pkg, lang }: { pkg: Package; lang: SupportedLangu
               'sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0',
             ].join(' ')}
           >
-            <Link to={`/packages?category=${pkg.slug}`}>{t('common.choosePlan')}</Link>
+            <Link to={`/packages?category=${pkg.network.id}`}>{t('common.choosePlan')}</Link>
           </Button>
         </div>
       </div>
