@@ -43,7 +43,8 @@ export function Footer() {
               <Wifi className="h-6 w-6 text-primary" aria-hidden="true" />
               <span>{t('footer.company')}</span>
             </Link>
-            <p className="text-sm text-slate-400 leading-relaxed">{t('footer.tagline')}</p>
+            <p className="text-sm text-slate-400 leading-relaxed font-bold">{t('footer.line1')}</p>
+            <p className="text-sm text-slate-400 leading-relaxed font-bold">{t('footer.line2')}</p>
 
             <div className="flex gap-3 mt-4">
               {/* Facebook links */}
@@ -109,6 +110,8 @@ export function Footer() {
                 <SiViber className="h-5 w-5" aria-hidden="true" />
               </a>
             </div>
+            <Separator className="my-5 bg-slate-700" />
+            <p className="text-sm text-slate-400 leading-relaxed">{t('footer.copyright', { year })}</p>
           </div>
 
           {/* Quick links */}
@@ -168,12 +171,6 @@ export function Footer() {
               ))}
             </address>
           </div>
-        </div>
-
-        <Separator className="my-8 bg-slate-700" />
-
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-500 text-center sm:text-left pb-[env(safe-area-inset-bottom)]">
-          <p>{t('footer.copyright', { year })}</p>
         </div>
       </div>
     </footer>

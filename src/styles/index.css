@@ -2,6 +2,9 @@
 
 @tailwind base;
 @tailwind components;
+
+@import "@c15t/react/styles.tw3.css";
+
 @tailwind utilities;
 
 /* ── Myanmar Unicode fonts (self-hosted) ── */
@@ -262,4 +265,14 @@ html[lang='zh'] body {
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+.c15t-consent-banner a[href="/privacy-policy"] {
+  color: var(--color-primary) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+.c15t-consent-banner a[href="/privacy-policy"]:hover {
+  color: var(--color-hover) !important;
 }

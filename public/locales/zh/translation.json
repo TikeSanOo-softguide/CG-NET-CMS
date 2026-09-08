@@ -444,6 +444,8 @@
   "footer": {
     "company": "CG-NET",
     "tagline": "以快速、可靠的光纤宽带连接缅甸。",
+    "line1": "总部位于缅甸勐拉市", 
+    "line2": "服务遍及全球。",
     "quickLinks": "快速链接",
     "services": "服务",
     "support": "支持",
@@ -642,5 +644,11 @@
 
     "contactUs": "联系我们",
     "contactUsDesc": "如果您对本隐私政策有任何疑问，您可以联系我们："
+  },
+  "cookieConsent": {
+    "description": "点击“好的”即表示您同意在设备上存储 Cookie，以改善网站导航、分析网站使用情况并协助我们的营销工作。",
+    "privacyPolicy": "隐私政策",
+    "accept": "好的",
+    "reject": "拒绝"
   }
 }
