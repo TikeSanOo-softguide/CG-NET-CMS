@@ -5,7 +5,6 @@ import {
   networkResponseSchema,
   packageResponseSchema,
   parseApiResponse,
-  recommendedPackagesResponseSchema,
 } from './validation'
 
 export interface RecommendedPackage {
@@ -14,9 +13,7 @@ export interface RecommendedPackage {
   slug: string
   title: { en: string; my: string; zh: string }
   imageUrl: string | null
-  image_url: string | null
   isFeatured: boolean
-  isPopular: boolean
 }
 
 interface PackageResponse {
@@ -42,9 +39,23 @@ export async function getOtherPackages(): Promise<Addon[]> {
 
   return parseApiResponse<AddonResponse>(addonResponseSchema, data, 'addons').data
 }
+
 export async function getRecommendPackage(): Promise<RecommendedPackage[]> {
-  const { data } = await apiClient.get('/web-app/packages/recommended')
-  return parseApiResponse<RecommendedPackage[]>(recommendedPackagesResponseSchema, data, 'recommended packages')
+  const { data } = await apiClient.get<PackageResponse>('/web-app/packages/recommended')
+  const packages = parseApiResponse<PackageResponse>(
+    packageResponseSchema,
+    data,
+    'recommended packages',
+  ).data
+
+  return packages.map((pkg) => ({
+    id: String(pkg.id),
+    network: pkg.network,
+    slug: `${pkg.network.id}-${pkg.speed.mbps}-${pkg.term.months}`,
+    title: pkg.network.name,
+    imageUrl: pkg.image_url,
+    isFeatured: pkg.recommended,
+  }))
 }
 
 export async function getNetworks(): Promise<Network[]> {

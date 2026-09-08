@@ -164,7 +164,7 @@ export default function HomePage() {
           (() => {
             const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
             const formattedPackages = recommendedPackages.map((pkg) => {
-              const rawImg = pkg.image_url || pkg.imageUrl
+              const rawImg = pkg.imageUrl
               const fullImageUrl = rawImg
                 ? rawImg.startsWith('http')
                   ? rawImg
@@ -172,7 +172,6 @@ export default function HomePage() {
                 : ''
               return {
                 ...pkg,
-                image_url: fullImageUrl,
                 imageUrl: fullImageUrl,
               }
             })
