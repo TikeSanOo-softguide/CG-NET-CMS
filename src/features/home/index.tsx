@@ -23,6 +23,7 @@ import CommonTab from '@/components/common/CommonTab'
 import { useGallery } from '@/hooks/useGallery'
 import { getLocalized } from '@/lib/utils'
 import { useRecommendPackage } from '@/hooks/usePackages'
+import AnimatedStat from '@/components/common/AnimatedStat'
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
@@ -81,7 +82,7 @@ export default function HomePage() {
               "
               >
                 <p className="text-xl font-extrabold tracking-tight text-font-blue sm:text-2xl">
-                  {value}
+                  <AnimatedStat value={value} />
                 </p>
 
                 <p className="mt-0.5 text-[11px] font-medium text-muted-foreground sm:text-xs">

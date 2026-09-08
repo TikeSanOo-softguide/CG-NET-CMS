@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { HelmetProvider } from 'react-helmet-async'
@@ -15,6 +15,8 @@ import ScrollToTop from './components/common/ScrollToTop'
 import AppDownloadCard from './components/common/AppDownloadCard'
 import PromotionModal from './components/common/PromotionModal'
 import { ApiError } from '@/lib/api/errors'
+import { ConsentProvider } from './components/common/ConsentProvider'
+import { useConsentManager } from '@c15t/react'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,14 +32,18 @@ const queryClient = new QueryClient({
 
 function AppContent() {
   const { i18n } = useTranslation()
+  const { consents } = useConsentManager()
+  const location = useLocation()
 
   useEffect(() => {
     document.documentElement.lang = normalizeLanguage(i18n.language)
   }, [i18n.language])
 
   useEffect(() => {
-    analytics.trackPageView(window.location.pathname)
-  }, [])
+    if (consents.measurement) {
+      analytics.trackPageView(location.pathname)
+    }
+  }, [consents.measurement, location.pathname])
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-clip">
@@ -56,22 +62,24 @@ function AppContent() {
 export default function App() {
   return (
     <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter
-          future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
-        >
-          <ErrorBoundary>
-            <PromotionModal />
-            <AppDownloadCard />
-            <AppContent />
-            <ScrollToTop />
-          </ErrorBoundary>
-        </BrowserRouter>
-        {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
-      </QueryClientProvider>
+      <ConsentProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
+            <ErrorBoundary>
+              <PromotionModal />
+              <AppDownloadCard />
+              <AppContent />
+              <ScrollToTop />
+            </ErrorBoundary>
+          </BrowserRouter>
+          {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+        </QueryClientProvider>
+      </ConsentProvider>
     </HelmetProvider>
   )
 }

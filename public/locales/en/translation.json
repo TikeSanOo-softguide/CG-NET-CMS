@@ -255,7 +255,6 @@
     "noPromotion": "No promotions found",
     "noPromotionDesc": "Check back later for the latest promotions."
   },
-
   "appGuide": {
     "title": "App Guide",
     "detailStep": "Detailed Steps",
@@ -446,6 +445,8 @@
   "footer": {
     "company": "CG-NET",
     "tagline": "Connecting Myanmar with fast, reliable fiber internet.",
+    "line1": "Based in Mongla City, Myanmar",
+    "line2": "Working Local and Worldwide.",
     "quickLinks": "Quick Links",
     "services": "Services",
     "support": "Support",
@@ -643,5 +644,11 @@
 
     "contactUs": "Contact Us",
     "contactUsDesc": "If you have any questions about this Privacy Policy, You can contact us:"
+  },
+  "cookieConsent": {
+    "description": "By clicking \"Accept\", you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.",
+    "privacyPolicy": "Privacy Policy",
+    "accept": "Accept",
+    "reject": "Reject"
   }
 }

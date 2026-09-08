@@ -73,7 +73,7 @@ export default function AppDownloadCard() {
     // Show card after 3 seconds
     const timer = window.setTimeout(() => {
       setIsVisible(true)
-    }, 3000)
+    }, 10000)
 
     return () => {
       window.clearTimeout(timer)
