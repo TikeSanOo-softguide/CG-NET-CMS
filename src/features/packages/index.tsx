@@ -14,6 +14,7 @@ import { ErrorMessage } from '@/components/common/ErrorMessage'
 
 export default function PackagesPage() {
   const { t } = useTranslation()
+  const language = i18n.language as 'en' | 'zh' | 'my'
   const [searchParams, setSearchParams] = useSearchParams()
   const initialCategory = searchParams.get('category') ?? ''
   const [activeFilter, setActiveFilter] = useState(initialCategory)
@@ -41,7 +42,7 @@ export default function PackagesPage() {
     const networkFilters =
       networks?.map((network) => ({
         value: String(network.id),
-        label: network.name[i18n.language as 'en' | 'zh' | 'my'] ?? network.name.en,
+        label: network.name[language] ?? network.name.en,
       })) ?? []
 
     return [
@@ -51,7 +52,7 @@ export default function PackagesPage() {
         label: t('packages.OtherService'),
       },
     ]
-  }, [networks, i18n.language, t])
+  }, [networks, t, , language])
 
   const DEFAULT_CATEGORY = FILTERS[0]?.value ?? ''
 

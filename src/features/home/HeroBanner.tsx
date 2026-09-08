@@ -51,7 +51,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
       img.src = getImageUrl(s)
       img.onload = () => setLoaded((prev) => ({ ...prev, [s.id]: true }))
     })
-  }, [slides, lang])
+  }, [slides, getImageUrl])
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'ArrowRight') next()
