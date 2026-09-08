@@ -14,6 +14,7 @@ const AppGuidePage = lazy(() => import('@/features/app-guide'))
 const PrivacyPage = lazy(() => import('@/features/privacy-policy'))
 const AboutPage = lazy(() => import('@/features/about'))
 const NotFoundPage = lazy(() => import('@/features/not-found'))
+const AviliableLocationPage = lazy(() => import('@/features/availiable-location'))
 
 function PageLoader() {
   return (
@@ -44,6 +45,7 @@ export function AppRoutes() {
         <Route path="/app-guide" element={<AppGuidePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
+        <Route path="/availiable-location" element={<AviliableLocationPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
