@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Search, X } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { useTranslation } from 'react-i18next'
 
 interface SearchBarProps {
   placeholder?: string
@@ -13,17 +14,14 @@ interface SearchBarProps {
   onFilterClick?: () => void
 }
 
-export function SearchBar({
-  placeholder = 'Search anything...',
-  value,
-  onChange,
-  onSearch,
-}: SearchBarProps) {
+export function SearchBar({ placeholder, value, onChange, onSearch }: SearchBarProps) {
+  const { t } = useTranslation()
   const isControlled = value !== undefined
   const [internalQuery, setInternalQuery] = React.useState('')
   const inputRef = React.useRef<HTMLInputElement>(null)
   const searchTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
   const query = isControlled ? value : internalQuery
+  const searchPlaceholder = placeholder ?? t('common.searchPlaceholder')
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,7 +68,7 @@ export function SearchBar({
         type="text"
         value={query}
         onChange={handleChange}
-        placeholder={placeholder}
+        placeholder={searchPlaceholder}
         className="
         w-full
         h-8 sm:h-10     
@@ -100,7 +98,7 @@ export function SearchBar({
             type="button"
             variant="ghost"
             size="icon"
-            className="h-7 w-7 sm:h-8 sm:w-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 mr-1"
+            className="h-7 w-7 sm:h-8 sm:w-8 rounded-full  bg-app-surface text-gray-600  hover:text-gray-600 hover:bg-gray-100 mr-1"
             onClick={handleClear}
           >
             <X className="h-4 w-4" />
