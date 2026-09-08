@@ -13,7 +13,7 @@ export default function PromotionDetail() {
   const { slug } = useParams()
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
-  const { data: promotion, isLoading, isError} = usePromotionBySlug(slug ?? '')
+  const { data: promotion, isLoading, isError } = usePromotionBySlug(slug ?? '')
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   if (isLoading) {
@@ -23,7 +23,9 @@ export default function PromotionDetail() {
         <Skeleton className="h-10 w-3/4 mb-3" />
         <Skeleton className="h-5 w-1/2 mb-6" />
         <div className="space-y-3 max-w-3xl">
-          {[1, 2, 3, 4, 5].map((i) => <Skeleton key={i} className="h-4 w-full" />)}
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Skeleton key={i} className="h-4 w-full" />
+          ))}
         </div>
       </SectionWrapper>
     )
@@ -31,20 +33,18 @@ export default function PromotionDetail() {
 
   if (isError || !promotion) {
     return (
-        <SectionWrapper className="bg-muted/40">
-          <EmptyState
-            title={t('promotions.noPromotion')}
-            description={t('promotions.noPromotionDesc')}
-            action={
-              <Button variant="outline">
-                <Link to="/promotion">
-                  {t('common.goBack')}
-                </Link>
-              </Button>
-            }
-          />
-        </SectionWrapper>
-      )
+      <SectionWrapper className="bg-muted/40">
+        <EmptyState
+          title={t('promotions.noPromotion')}
+          description={t('promotions.noPromotionDesc')}
+          action={
+            <Button variant="outline">
+              <Link to="/promotion">{t('common.goBack')}</Link>
+            </Button>
+          }
+        />
+      </SectionWrapper>
+    )
   }
 
   return (
@@ -55,11 +55,50 @@ export default function PromotionDetail() {
             <div className="flex items-center justify-between gap-3 py-3 sm:py-0">
               {/* Date Badge */}
               <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 px-3 pt-2 pb-1.5 sm:py-1.5 rounded-full bg-font-blue/10 text-primary text-[11px] sm:text-xs font-medium border border-font-blue/20 max-w-full text-center sm:text-left">
-                <Calendar className="h-3 w-3 shrink-0" />
-                <span className="break-words">
-                  {formatDate(promotion.startDate, getDateLocale(lang))} —{' '}
-                  {formatDate(promotion.endDate, getDateLocale(lang))}
-                </span>
+                {(() => {
+                  const hasStart =
+                    promotion.startDate &&
+                    typeof promotion.startDate === 'string' &&
+                    promotion.startDate.trim() !== ''
+                  const hasEnd =
+                    promotion.endDate &&
+                    typeof promotion.endDate === 'string' &&
+                    promotion.endDate.trim() !== ''
+
+                  if (hasStart && hasEnd) {
+                    return (
+                      <>
+                        <Calendar className="h-3 w-3 shrink-0" />
+                        <span className="break-words">
+                          {formatDate(promotion.startDate, getDateLocale(lang))} —{' '}
+                          {formatDate(promotion.endDate, getDateLocale(lang))}
+                        </span>
+                      </>
+                    )
+                  }
+
+                  if ((!hasStart && !hasEnd) || (hasStart && !hasEnd)) {
+                    return (
+                      <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
+                        <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                        Active
+                      </span>
+                    )
+                  }
+
+                  if (!hasStart && hasEnd) {
+                    return (
+                      <>
+                        <Calendar className="h-3 w-3 shrink-0" />
+                        <span className="break-words">
+                          Expires: {formatDate(promotion.endDate, getDateLocale(lang))}
+                        </span>
+                      </>
+                    )
+                  }
+
+                  return null
+                })()}
               </div>
 
               {/* Back Button */}

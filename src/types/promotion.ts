@@ -5,8 +5,8 @@ export interface Promotion {
   slug: string
   title: BilingualString
   description: BilingualString
-  startDate: string
-  endDate: string
+  startDate: string | null
+  endDate: string | null
   isActive: boolean
   imageUrl: string | null
 }

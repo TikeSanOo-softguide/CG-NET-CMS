@@ -64,8 +64,8 @@ export const promotionSchema = z.object({
   slug: z.string().default(''),
   title: bilingualStringSchema,
   description: bilingualStringSchema,
-  startDate: z.string().default(''),
-  endDate: z.string().default(''),
+  startDate: z.string().nullable().default(null),
+  endDate: z.string().nullable().default(null),
   isActive: z.coerce.boolean().default(false),
   imageUrl: z.string().nullable().default(null),
 })
@@ -73,10 +73,12 @@ export const promotionSchema = z.object({
 export const promotionResponseSchema = z.object({
   data: z.array(promotionSchema).default([]),
   links: paginationLinksSchema.default({}),
-  meta: paginationMetaSchema.extend({
-    from: z.coerce.number().nullable().default(null),
-    to: z.coerce.number().nullable().default(null),
-  }).default({}),
+  meta: paginationMetaSchema
+    .extend({
+      from: z.coerce.number().nullable().default(null),
+      to: z.coerce.number().nullable().default(null),
+    })
+    .default({}),
 })
 
 export const networkSchema = z.object({
@@ -142,38 +144,52 @@ export const recommendedPackageSchema = z.object({
   isPopular: z.coerce.boolean().default(false),
 })
 
-export const recommendedPackagesResponseSchema = z.union([
-  z.array(recommendedPackageSchema),
-  z.object({ data: z.array(recommendedPackageSchema).default([]) }),
-]).transform((value) => Array.isArray(value) ? value : value.data)
+export const recommendedPackagesResponseSchema = z
+  .union([
+    z.array(recommendedPackageSchema),
+    z.object({ data: z.array(recommendedPackageSchema).default([]) }),
+  ])
+  .transform((value) => (Array.isArray(value) ? value : value.data))
 
 export const bannerResponseSchema = z.object({
   success: z.boolean().default(true),
-  data: z.array(z.object({
-    id: z.union([z.number(), z.string()]).transform(Number),
-    image_url_en: z.string().default(''),
-    image_url_zh: z.string().default(''),
-    image_url_my: z.string().default(''),
-  })).default([]),
+  data: z
+    .array(
+      z.object({
+        id: z.union([z.number(), z.string()]).transform(Number),
+        image_url_en: z.string().default(''),
+        image_url_zh: z.string().default(''),
+        image_url_my: z.string().default(''),
+      })
+    )
+    .default([]),
 })
 
 export const contactResponseSchema = z.object({
   success: z.boolean().default(true),
-  data: z.array(z.object({
-    id: z.union([z.number(), z.string()]).transform(Number),
-    contact_point: z.string().default(''),
-  })).default([]),
+  data: z
+    .array(
+      z.object({
+        id: z.union([z.number(), z.string()]).transform(Number),
+        contact_point: z.string().default(''),
+      })
+    )
+    .default([]),
 })
 
 export const apiArraySchema = z.array(z.record(z.string(), z.unknown()))
 export const apiObjectSchema = z.record(z.string(), z.unknown())
 
 export const galleryResponseSchema = z.object({
-  data: z.array(z.object({
-    id: z.union([z.string(), z.number()]).transform(String),
-    label: bilingualStringSchema,
-    imageUrl: z.string().nullable().default(null),
-  })).default([]),
+  data: z
+    .array(
+      z.object({
+        id: z.union([z.string(), z.number()]).transform(String),
+        label: bilingualStringSchema,
+        imageUrl: z.string().nullable().default(null),
+      })
+    )
+    .default([]),
 })
 
 export function parseApiResponse<T>(schema: z.ZodTypeAny, value: unknown, resource: string): T {

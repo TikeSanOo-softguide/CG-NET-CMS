@@ -52,25 +52,45 @@ export default function PackagesPage() {
         label: t('packages.OtherService'),
       },
     ]
-  }, [networks, t, , language])
+  }, [networks, t, language])
 
-  const DEFAULT_CATEGORY = FILTERS[0]?.value ?? ''
+  const DEFAULT_CATEGORY = useMemo(() => {
+    if (networksLoading) return initialCategory || ''
+
+    if (initialCategory && FILTERS.some((filter) => filter.value === initialCategory)) {
+      return initialCategory
+    }
+
+    const hasCategoryOne = networks?.some((network) => String(network.id) === '1')
+    return hasCategoryOne ? '1' : 'other-service'
+  }, [networks, networksLoading, FILTERS, initialCategory])
 
   useEffect(() => {
-    if (!FILTERS.length) {
+    if (networksLoading || !FILTERS.length) {
       return
     }
-    const category = searchParams.get('category')
-    const validCategory = FILTERS.some((filter) => filter.value === category)
-      ? category!
+
+    const currentCategory = searchParams.get('category') ?? ''
+    const validCategory = FILTERS.some((filter) => filter.value === currentCategory)
+      ? currentCategory
       : DEFAULT_CATEGORY
+
     if (activeFilter !== validCategory) {
       setActiveFilter(validCategory)
     }
-    if (category !== validCategory) {
+
+    if (currentCategory !== validCategory) {
       setSearchParams({ category: validCategory }, { replace: true })
     }
-  }, [searchParams, FILTERS, DEFAULT_CATEGORY, activeFilter, setSearchParams])
+  }, [
+    searchParams,
+    FILTERS,
+    DEFAULT_CATEGORY,
+    activeFilter,
+    setSearchParams,
+    networksLoading,
+    networks,
+  ])
 
   function handleFilterChange(value: string) {
     setActiveFilter(value)

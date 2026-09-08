@@ -95,7 +95,13 @@ export default function PromotionPage() {
               ))}
             </div>
 
-            <Pagination page={page} totalPages={totalPages} setPage={setPage} t={t} disabled={isFetching} />
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              setPage={setPage}
+              t={t}
+              disabled={isFetching}
+            />
           </>
         )}
       </SectionWrapper>

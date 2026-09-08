@@ -50,9 +50,13 @@ export function getLocalizedArray(
 /**
  * Formats a date string to a human-readable format.
  */
-export function formatDate(dateString: string, locale: string = 'en-US'): string {
+export function formatDate(dateString: string | null, locale: string = 'en-US'): string {
+  if (!dateString) return ''
+
   const date = new Date(dateString)
+
   if (Number.isNaN(date.getTime())) return ''
+
   return date.toLocaleDateString(locale, {
     year: 'numeric',
     month: 'long',

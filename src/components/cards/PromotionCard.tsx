@@ -31,20 +31,20 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           to={`/promotion/${promotion.slug}`}
           className={cn('card-media relative block', compact ? 'h-[140px]' : 'h-44')}
         >
-            {promotion.imageUrl ? (
-              <img
-                src={
-                  promotion.imageUrl.startsWith('http')
-                    ? promotion.imageUrl
-                    : `${STORAGE_URL}/${promotion.imageUrl}`
-                }
-                alt={getLocalized(promotion.title, lang)}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            ) : (
-              <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
-            )}
+          {promotion.imageUrl ? (
+            <img
+              src={
+                promotion.imageUrl.startsWith('http')
+                  ? promotion.imageUrl
+                  : `${STORAGE_URL}/${promotion.imageUrl}`
+              }
+              alt={getLocalized(promotion.title, lang)}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         </Link>
 
@@ -67,8 +67,44 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
             <span className="text-muted-foreground">{t('promotions.periodLabel')}</span>
 
             <span className="text-right font-medium text-font-black">
-              {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
-              {formatDate(promotion.endDate, getDateLocale(lang))}
+              {(() => {
+                const hasStart =
+                  promotion.startDate &&
+                  typeof promotion.startDate === 'string' &&
+                  promotion.startDate.trim() !== ''
+                const hasEnd =
+                  promotion.endDate &&
+                  typeof promotion.endDate === 'string' &&
+                  promotion.endDate.trim() !== ''
+
+                if (hasStart && hasEnd) {
+                  return (
+                    <>
+                      {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
+                      {formatDate(promotion.endDate, getDateLocale(lang))}
+                    </>
+                  )
+                }
+
+                if ((!hasStart && !hasEnd) || (hasStart && !hasEnd)) {
+                  return (
+                    <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
+                      <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                      Active
+                    </span>
+                  )
+                }
+
+                if (!hasStart && hasEnd) {
+                  return (
+                    <span className="text-muted-foreground">
+                      Expires: {formatDate(promotion.endDate, getDateLocale(lang))}
+                    </span>
+                  )
+                }
+
+                return null
+              })()}
             </span>
           </div>
         </CardContent>
