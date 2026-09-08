@@ -95,8 +95,8 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
 
   const orderedPackages = useMemo(() => {
     return [...packages].sort((a, b) => {
-      const scoreA = Number(a.isFeatured) * 2 + Number(a.isPopular)
-      const scoreB = Number(b.isFeatured) * 2 + Number(b.isPopular)
+      const scoreA = Number(a.isFeatured) * 2
+      const scoreB = Number(b.isFeatured) * 2
       return scoreB - scoreA
     })
   }, [packages])
