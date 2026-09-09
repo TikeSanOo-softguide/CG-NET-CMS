@@ -21,7 +21,7 @@ import { PromotionCard } from '@/components/cards/PromotionCard'
 import { EmptyState } from '@/components/common/EmptyState'
 import CommonTab from '@/components/common/CommonTab'
 import { useGallery } from '@/hooks/useGallery'
-import { getLocalized } from '@/lib/utils'
+import { cn, getLocalized } from '@/lib/utils'
 import { useRecommendPackage } from '@/hooks/usePackages'
 import AnimatedStat from '@/components/common/AnimatedStat'
 
@@ -66,30 +66,37 @@ export default function HomePage() {
       {/* Stats */}
       <div className="bg-muted/40">
         <section
-          className="relative z-10 -mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head md:-mt-8"
+          className="relative z-30 -mt-3 sm:-mt-8 lg:-mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head"
           aria-label="Company statistics"
         >
-          <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)] sm:grid-cols-3 lg:grid-cols-5">
-            {homeContent.stats.map(({ value, labelKey }) => (
-              <div
-                key={labelKey}
-                className="
-                flex min-h-[90px] flex-col items-center justify-center
-                border-b border-border px-3 py-3 text-center
-                last:col-span-2 last:border-b-0
-                sm:min-h-[90px] sm:last:col-span-1
-                lg:border-b-0 lg:border-r lg:last:border-r-0
-              "
-              >
-                <p className="text-xl font-extrabold tracking-tight text-font-blue sm:text-2xl">
-                  <AnimatedStat value={value} />
-                </p>
+          <div className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)]">
+            <div className="grid grid-cols-6 lg:grid-cols-5">
+              {homeContent.stats.map(({ value, labelKey }, index) => (
+                <div
+                  key={labelKey}
+                  className={cn(
+                    // AFTER
+                    'flex flex-col items-center justify-center border-b border-r border-border py-1.5 sm:py-3 lg:h-[100px] px-1 text-center transition-all',
 
-                <p className="mt-0.5 text-[11px] font-medium text-muted-foreground sm:text-xs">
-                  {t(labelKey)}
-                </p>
-              </div>
-            ))}
+                    index < 3 ? 'col-span-2 lg:col-span-1' : 'col-span-3 lg:col-span-1',
+
+                    index === 3 ? 'sm:col-span-3' : '',
+                    index === 4 ? 'sm:col-span-3 border-b-0 sm:border-b-0' : '',
+
+                    index === 4 ? 'border-b-0 lg:border-b-0' : '',
+                    'lg:border-b-0 lg:last:border-r-0'
+                  )}
+                >
+                  <p className="text-[10px] sm:text-base md:text-lg lg:text-2xl font-extrabold tracking-tight text-font-blue">
+                    {value}
+                  </p>
+
+                  <p className="text-[9px] sm:text-xs font-medium text-muted-foreground truncate w-full">
+                    {t(labelKey)}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>
@@ -309,19 +316,20 @@ export default function HomePage() {
                 i === 0
                   ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
                   : 'md:col-span-1 rounded-[28px]'
-                return (
-                  <div key={i} className={`${cardClass} overflow-hidden`}>
-                    <Skeleton className="h-full w-full rounded-[28px]" />
-                  </div>
-                )
-              })
-            }
+              return (
+                <div key={i} className={`${cardClass} overflow-hidden`}>
+                  <Skeleton className="h-full w-full rounded-[28px]" />
+                </div>
+              )
+            })}
           </div>
         )}
 
-        {!galleryLoading && !galleryError && (!galleryData?.data || galleryData.data.length === 0) && (
-          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
-        )}
+        {!galleryLoading &&
+          !galleryError &&
+          (!galleryData?.data || galleryData.data.length === 0) && (
+            <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+          )}
 
         {!galleryLoading && !galleryError && galleryData?.data && galleryData.data.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">

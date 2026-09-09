@@ -28,15 +28,18 @@ export function HeroBanner({ lang }: HeroBannerProps) {
   )
   const next = useCallback(() => goTo(current + 1), [current, goTo])
   const prev = useCallback(() => goTo(current - 1), [current, goTo])
-  const getImageUrl = useCallback((slide: Banner) => {
-    const imageMap = {
-      en: slide.image_url_en,
-      zh: slide.image_url_zh,
-      my: slide.image_url_my,
-    }
-    const imagePath = imageMap[lang as keyof typeof imageMap] ?? slide.image_url_en
-    return `${STORAGE_URL}/${imagePath}`
-  }, [lang, STORAGE_URL])
+  const getImageUrl = useCallback(
+    (slide: Banner) => {
+      const imageMap = {
+        en: slide.image_url_en,
+        zh: slide.image_url_zh,
+        my: slide.image_url_my,
+      }
+      const imagePath = imageMap[lang as keyof typeof imageMap] ?? slide.image_url_en
+      return `${STORAGE_URL}/${imagePath}`
+    },
+    [lang, STORAGE_URL]
+  )
   useEffect(() => {
     if (!total || paused) return
     timerRef.current = setTimeout(next, AUTOPLAY_MS)
@@ -74,7 +77,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
     else prev()
   }
 
-  const frameClass = 'relative overflow-hidden text-white select-none h-[320px] sm:h-[375px]'
+  const frameClass = 'relative aspect-[1920/550] w-full overflow-hidden text-white select-none'
 
   if (isLoading) {
     return (
@@ -122,9 +125,9 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             <img
               src={getImageUrl(s)}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-[82%_50%] sm:object-center transition-transform duration-[8000ms] ease-linear"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[8000ms] ease-linear"
               style={{
-                transform: isActive ? 'scale(1.06)' : 'scale(1)',
+                transform: isActive ? 'scale(1.02)' : 'scale(1)',
               }}
               aria-hidden="true"
             />
@@ -162,7 +165,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
         <div
           role="tablist"
           aria-label="Slide navigation"
-          className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-10"
+          className="absolute hidden sm:flex bottom-12 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-10"
         >
           {slides.map((_, i) => (
             <button
