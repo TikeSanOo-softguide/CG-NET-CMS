@@ -88,7 +88,7 @@ export default function HomePage() {
                   )}
                 >
                   <p className="text-[10px] sm:text-base md:text-lg lg:text-2xl font-extrabold tracking-tight text-font-blue">
-                    {value}
+                    <AnimatedStat value={value} />
                   </p>
 
                   <p className="text-[9px] sm:text-xs font-medium text-muted-foreground truncate w-full">
