@@ -22,7 +22,8 @@ export async function getNews(
   page = 1,
   limit = 6,
   search = '',
-  category = ''
+  category = '',
+  lang = 'en'
 ): Promise<{
   data: NewsArticle[]
   total: number
@@ -33,6 +34,7 @@ export async function getNews(
       params: {
         page,
         per_page: limit,
+        lang,
         ...(search.trim() && {
           search: search.trim(),
         }),
@@ -43,8 +45,16 @@ export async function getNews(
     }
   )
 
-  const parsed = parseApiResponse<NewsResponse>(newsResponseSchema, data, 'news')
-  return { data: parsed.data, total: parsed.meta.total }
+  const parsed = parseApiResponse<NewsResponse>(
+    newsResponseSchema, 
+    data, 
+    'news'
+  )
+  
+  return { 
+    data: parsed.data, 
+    total: parsed.meta.total 
+  }
 }
 
 export async function getNewsBySlug(

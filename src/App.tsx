@@ -21,9 +21,10 @@ import { useConsentManager } from '@c15t/react'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60_000,
+      staleTime: 0,
       retry: (failureCount, error) =>
         error instanceof ApiError && error.retryable ? failureCount < 2 : false,
+      refetchOnMount: true,
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
     },

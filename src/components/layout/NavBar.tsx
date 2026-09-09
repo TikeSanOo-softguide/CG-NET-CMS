@@ -46,7 +46,7 @@ export function NavBar() {
           {({ isActive }) => (
             <span className="relative inline-block">
               {/* Normal text - always exists */}
-              <span className="text-font-muted">{t('nav.home')}</span>
+              <span className="text-font-black">{t('nav.home')}</span>
 
               <span
                 className={cn(
@@ -74,7 +74,7 @@ export function NavBar() {
         >
           {({ isActive }) => (
             <span className="relative inline-block">
-              <span className="text-font-muted">{t('nav.services')}</span>
+              <span className="text-font-black">{t('nav.services')}</span>
 
               <span
                 className={cn(
@@ -102,7 +102,7 @@ export function NavBar() {
         >
           {({ isActive }) => (
             <span className="relative inline-block">
-              <span className="text-font-muted">{t('nav.packages')}</span>
+              <span className="text-font-black">{t('nav.packages')}</span>
 
               <span
                 className={cn(
@@ -133,7 +133,7 @@ export function NavBar() {
             {({ isActive }) => (
               <span className="relative inline-block">
                 {/* Normal text */}
-                <span className="text-font-muted">{t(labelKey)}</span>
+                <span className="text-font-black">{t(labelKey)}</span>
 
                 {/* Gradient text */}
                 <span
@@ -177,7 +177,7 @@ export function NavBar() {
                 <Link
                   to="/"
                   onClick={() => setMobileOpen(false)}
-                  className="text-xl font-bold text-primary"
+                  className="text-xl font-bold text-font-blue"
                 >
                   CG-NET
                 </Link>

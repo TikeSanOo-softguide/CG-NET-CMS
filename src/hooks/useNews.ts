@@ -1,12 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
 import { getNews, getNewsBySlug, getLatestNews } from '@/lib/api/news.api'
+import { useTranslation } from 'react-i18next'
 
-export function useNews(page = 1, limit = 6,search = '', category = '') {
-  return useQuery({
-    queryKey: ['news', page, limit, search, category],
-    queryFn: () => getNews(page, limit, search, category),
-    placeholderData: (previousData) => previousData,
-  })
+export function useNews(
+    page = 1, 
+    limit = 6,
+    search = '', 
+    category = ''
+  ) {
+    const { i18n } = useTranslation()
+    const lang = i18n.language.split('-')[0]
+    return useQuery({
+      queryKey: ['news', page, limit, search, category, lang],
+      queryFn: () => getNews(
+        page, 
+        limit, 
+        search, 
+        category,
+        lang
+      ),
+      placeholderData: (previousData) => previousData,
+    })
 }
 
 export function useNewsBySlug(slug: string) {

@@ -160,7 +160,7 @@ export default function PackagesPage() {
     <main>
       <PageHeader title={t('packages.title')} subtitle={t('packages.subtitle')} />
       <SectionWrapper spacing="compact" bg-app-surface className="bg-muted/40">
-        <div className="mt-5">
+        <div className="pt-5">
           <CommonTab
             filters={FILTERS}
             activeValue={activeFilter}

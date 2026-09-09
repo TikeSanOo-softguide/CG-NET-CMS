@@ -20,18 +20,31 @@ interface PromotionResponse {
   }
 }
 
-export async function getPromotions(page = 1, limit = 5, search = ''): Promise<PromotionResponse> {
-  const { data } = await apiClient.get<PromotionResponse>('/web-app/promotions', {
-    params: {
-      page,
-      per_page: limit,
-      ...(search.trim() && {
-          search: search.trim(),
-        }),
-    },
-  })
+export async function getPromotions(
+    page = 1, 
+    limit = 5, 
+    search = '', 
+    lang = 'en'
+  ): Promise<PromotionResponse> {
+    const { data } = await apiClient.get<PromotionResponse>(
+      '/web-app/promotions', 
+      {
+        params: {
+          page,
+          per_page: limit,
+          lang,
+          ...(search.trim() && {
+              search: search.trim(),
+            }),
+        },
+      }
+    )
 
-  return parseApiResponse<PromotionResponse>(promotionResponseSchema, data, 'promotions')
+    return parseApiResponse<PromotionResponse>(
+      promotionResponseSchema,
+      data, 
+      'promotions'
+    )
 }
 
 export async function getPromotionBySlug(slug: string): Promise<Promotion> {

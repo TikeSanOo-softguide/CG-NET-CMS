@@ -79,7 +79,7 @@ export default function PromotionPage() {
         )}
 
         {data && data.data.length === 0 && (
-          <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+          <EmptyState title={t('promotions.noPromotion')} description={t('promotions.noPromotionDesc')} className='pb-20' />
         )}
 
         {data && data.data.length > 0 && (

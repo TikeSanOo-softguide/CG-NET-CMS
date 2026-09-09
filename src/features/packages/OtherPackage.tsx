@@ -49,12 +49,13 @@ export default function OtherPackage({
       <EmptyState
         title={t('common.noData')}
         description={t('common.emptyStateDesc')}
+        className='pb-20'
       />
     )
   }
 
   return (
-    <section className="px-4 mb-5">
+    <section className="px-4 pb-20">
       <div className="mx-auto max-w-[1400px]">
         {/* MAIN LAYOUT */}
         <div className="flex justify-center">
@@ -77,7 +78,7 @@ export default function OtherPackage({
                   key={addon.id}
                   type="button"
                   className={[
-                    "relative min-w-0 rounded-2xl border p-5 text-left transition-all duration-200",
+                    "relative min-w-0 rounded-xl border p-5 text-left transition-all duration-200 bg-white/90",
                   ].join(" ")}
                 >
                   <div className="pr-8">

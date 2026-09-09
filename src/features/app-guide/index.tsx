@@ -22,30 +22,59 @@ export default function AppGuidePage() {
       <PageHeader title={t('appGuide.title')} subtitle={t('appGuide.subtitle')} />
 
       <SectionWrapper spacing="compact" className="bg-muted/40">
-        {/* App download links */}
-        <div className="mb-10 flex flex-row flex-nowrap gap-3 justify-start sm:justify-center items-center overflow-x-auto px-4 sm:px-6 py-2 scrollbar-none">
-          {appGuideContent.downloadLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              className="inline-flex items-center gap-2.5 bg-font-black text-font-white px-4 py-2.5 rounded-xl hover:bg-gray-800 transition-colors shrink-0"
-              aria-label={link.ariaLabel}
-            >
-              <svg
-                viewBox={link.viewBox}
-                fill="currentColor"
-                className="w-6 h-6 shrink-0 text-app-yellow"
-                aria-hidden="true"
-              >
-                <path d={link.iconPath} />
-              </svg>
-              <div className="text-left">
-                <p className="text-[10px] text-font-muted leading-tight">{t(link.subtitleKey)}</p>
-                <p className="text-sm font-semibold leading-tight">{t(link.titleKey)}</p>
-              </div>
-            </a>
-          ))}
-        </div>
+      {/* App download links */}
+      <div
+        className="
+          mb-10
+          grid grid-cols-2
+          gap-3
+          px-4
+          py-2
+          justify-items-center
+          min-[660px]:flex
+          min-[660px]:justify-center
+          min-[660px]:gap-2
+        "
+      >
+        {/* App Store */}
+        <a
+          href="#"
+          aria-label="App Store"
+          className="flex w-full items-center justify-center min-[660px]:w-auto"
+        >
+          <img
+            src="/assets/download/AppStore.svg"
+            alt="App Store"
+            className="h-12 w-auto"
+          />
+        </a>
+
+        {/* Google Play */}
+        <a
+          href="#"
+          aria-label="Google Play"
+          className="flex w-full items-center justify-center min-[660px]:w-auto"
+        >
+          <img
+            src="/assets/download/PlayStore.svg"
+            alt="Google Play"
+            className="h-12 w-auto"
+          />
+        </a>
+
+        {/* AppGallery */}
+        <a
+          href="#"
+          aria-label="AppGallery"
+          className="col-span-2 flex w-full items-center justify-center min-[660px]:col-span-1 min-[660px]:w-auto"
+        >
+          <img
+            src="/assets/download/AppGallery.svg"
+            alt="AppGallery"
+            className="h-12 w-auto"
+          />
+        </a>
+      </div>
 
         <>
           {/* Overview cards */}

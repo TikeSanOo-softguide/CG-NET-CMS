@@ -108,29 +108,31 @@ export default function HomePage() {
           title={t('home.whyChooseUsTitle')}
           subtitle={t('home.whyChooseUsDesc')}
         />
-        <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5 ">
+        <div className="font-heading grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
           {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
-            <AnimatedCard key={titleKey} delay={i * 90} className="rounded-2xl">
-              <article className="group bg-app-surface relative rounded-xl flex h-[180px] flex-col overflow-hidden border border-border/70 text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]">
-                <CardHeader className="pb-2 pt-5">
-                  <div
-                    className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-font-blue transition-all duration-300 group-hover:scale-110"
-                    aria-hidden="true"
-                  >
-                    <Icon className="h-5 w-5" />
-                  </div>
+            <AnimatedCard
+              key={titleKey}
+              delay={i * 90}
+              className="group relative flex h-[180px] flex-col overflow-hidden rounded-xl border border-border/70 bg-app-surface text-center shadow-sm card-shine transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]"
+            >
+              <CardHeader className="pb-2 pt-5">
+                <div
+                  className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-font-blue transition-all duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                >
+                  <Icon className="h-5 w-5" />
+                </div>
 
-                  <CardTitle className="text-sm font-semibold leading-tight text-foreground">
-                    {t(titleKey)}
-                  </CardTitle>
-                </CardHeader>
+                <CardTitle className="text-sm font-semibold leading-tight text-foreground">
+                  {t(titleKey)}
+                </CardTitle>
+              </CardHeader>
 
-                <CardContent className="px-4 pb-4 pt-0">
-                  <CardDescription className="text-xs leading-snug text-muted-foreground ">
-                    {t(descKey)}
-                  </CardDescription>
-                </CardContent>
-              </article>
+              <CardContent className="px-4 pb-4 pt-0">
+                <CardDescription className="text-xs leading-snug text-muted-foreground">
+                  {t(descKey)}
+                </CardDescription>
+              </CardContent>
             </AnimatedCard>
           ))}
         </div>
@@ -269,7 +271,7 @@ export default function HomePage() {
             {isError && <ErrorMessage />}
 
             {!isLoading && !isError && promotions?.length === 0 && (
-              <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+              <EmptyState title={t('promotions.noPromotion')} description={t('promotions.noPromotionDesc')} />
             )}
 
             {!isLoading && !isError && promotions && (
@@ -332,51 +334,57 @@ export default function HomePage() {
           )}
 
         {!galleryLoading && !galleryError && galleryData?.data && galleryData.data.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[190px] gap-4">
-            {galleryData.data.slice(0, 5).map((item, i) => {
-              const cardClass =
-                i === 0
-                  ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
-                  : 'md:col-span-1 rounded-[28px]'
+        <div className="grid grid-cols-1 gap-4 auto-rows-[190px] sm:grid-cols-2 md:grid-cols-4">
+          {galleryData.data.slice(0, 5).map((item, i) => {
+            const cardClass =
+              i === 0
+                ? 'md:col-span-2 md:row-span-2 rounded-xl'
+                : 'md:col-span-1 rounded-rounded-xl'
 
-              const imageUrl = item.imageUrl
-                ? item.imageUrl.startsWith('http')
-                  ? item.imageUrl
-                  : `${STORAGE_URL}/${item.imageUrl}`
-                : null
+            const imageUrl = item.imageUrl
+              ? item.imageUrl.startsWith('http')
+                ? item.imageUrl
+                : `${STORAGE_URL}/${item.imageUrl}`
+              : null
 
-              const displayTitle = getLocalized(item.label, lang)
+            const displayTitle = getLocalized(item.label, lang)
 
-              return (
-                <AnimatedCard key={item.id} delay={i * 90} variant="rise" className={cardClass}>
-                  <div className="group relative h-full overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:border-primary/40">
-                    <div className="card-media h-full">
-                      {imageUrl ? (
-                        <img
-                          src={imageUrl}
-                          alt={displayTitle || 'Gallery image'}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
-                      )}
-                    </div>
+            return (
+              <AnimatedCard
+                key={item.id}
+                delay={i * 90}
+                variant="rise"
+                className={`group relative h-full overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl ${cardClass}`}
+              >
+                <div className="card-media h-full">
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt={displayTitle || 'Gallery image'}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      className="h-full w-full bg-muted"
+                      aria-label={t('common.noData')}
+                    />
+                  )}
+                </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
 
-                    {displayTitle && (
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                        <p className="text-white text-sm sm:text-base font-semibold tracking-wide drop-shadow-sm">
-                          {displayTitle}
-                        </p>
-                      </div>
-                    )}
+                {displayTitle && (
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                    <p className="text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:text-base">
+                      {displayTitle}
+                    </p>
                   </div>
-                </AnimatedCard>
-              )
-            })}
-          </div>
+                )}
+              </AnimatedCard>
+            )
+          })}
+        </div>
         )}
       </SectionWrapper>
 
@@ -402,7 +410,7 @@ export default function HomePage() {
 
               <button
                 type="button"
-                className="mt-8 inline-flex items-center gap-2 rounded-[10px] bg-app-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-app-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
               >
                 <Download className="h-4 w-4" />
                 {t('downloadCard.downloadApp')}
@@ -411,7 +419,7 @@ export default function HomePage() {
 
             <div className="relative flex justify-center md:justify-end items-center h-full">
               {homeContent.downloadItems.map((item, i) => (
-                <AnimatedCard key={item.key} delay={i * 90} className="w-full">
+                <AnimatedCard key={item.key} delay={i * 90} className="w-full rounded-xl">
                   <img
                     src={item.imageUrl}
                     alt={t(item.key)}

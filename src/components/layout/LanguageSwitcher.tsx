@@ -55,11 +55,11 @@ export function LanguageSwitcher() {
           aria-label={`Language: ${active.nativeLabel}. Click to switch language`}
           aria-haspopup="menu"
         >
-          <Globe className="h-4 w-4 shrink-0 text-font-muted" aria-hidden="true" />
-          <span className="hidden sm:inline text-font-muted text-base font-medium">
+          <Globe className="h-4 w-4 shrink-0 text-font-black" aria-hidden="true" />
+          <span className="hidden sm:inline text-font-black text-base font-medium">
             {active.nativeLabel}
           </span>
-          <span className="sm:hidden text-base text-font-muted font-medium">
+          <span className="sm:hidden text-base text-font-black font-medium">
             {active.code.toUpperCase()}
           </span>
         </Button>
@@ -95,8 +95,7 @@ export function LanguageSwitcher() {
               focus-visible:ring-offset-0
               sm:px-3
               sm:py-2
-              text-font-muted
-             
+              text-font-black
               ${
                 currentLang === lang.code
                   ? 'text-transparent bg-clip-text bg-gradient-font font-semibold'
