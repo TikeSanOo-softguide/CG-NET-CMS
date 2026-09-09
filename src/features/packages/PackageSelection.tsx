@@ -126,6 +126,7 @@ export default function PackageSelection({
       <EmptyState
         title={t('common.noData')}
         description={t('common.emptyStateDesc')}
+        className='pb-20'
       />
     )
   }
@@ -162,7 +163,7 @@ export default function PackageSelection({
       : 0
 
   return (
-    <section className="px-4 mb-5">
+    <section className="px-4 pb-20">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
           <div className="min-w-0">
@@ -189,7 +190,7 @@ export default function PackageSelection({
                       type="button"
                       onClick={() => selectPackage(pkg)}
                       className={[
-                        'relative min-w-0 rounded-2xl border p-5 text-left transition-all duration-200',
+                        'relative min-w-0 rounded-xl border p-5 text-left transition-all duration-200',
                         active
                           ? 'border-app-primary bg-white shadow-lg ring-2 ring-sky-100'
                           : 'border-neutral-200 bg-white/80 shadow-sm hover:-translate-y-0.5 hover:shadow-md',
@@ -269,7 +270,7 @@ export default function PackageSelection({
             )}
 
             <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
-              <div className="rounded-2xl border border-neutral-200 bg-white/80 p-5 shadow-sm">
+              <div className="rounded-xl border border-neutral-200 bg-white/80 p-5 shadow-sm">
                 <div className="mb-5">
                   <h2 className="text-sm font-semibold text-neutral-800">
                     {t('packages.durationHead')}
@@ -325,7 +326,7 @@ export default function PackageSelection({
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-neutral-200 bg-white/80 p-5 shadow-sm">
+              <div className="rounded-xl border border-neutral-200 bg-white/80 p-5 shadow-sm">
                 <div className="flex h-full items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-neutral-600">
@@ -347,7 +348,7 @@ export default function PackageSelection({
             </div>
           </div>
 
-          <aside className="h-fit rounded-2xl border border-neutral-200 bg-white/90 p-5 shadow-lg xl:sticky xl:top-5">
+          <aside className="h-fit rounded-xl border border-neutral-200 bg-white/90 p-5 shadow-lg xl:sticky xl:top-5">
             <div className="border-b border-neutral-200 pb-4">
               <h2 className="text-lg font-bold text-neutral-900">
                 {t('packages.yourSelection')}

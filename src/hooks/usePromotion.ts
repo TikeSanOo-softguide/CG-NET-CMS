@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { getPromotions, getPromotionBySlug, getLatestPromotions } from '@/lib/api/promotion.api'
+import { useTranslation } from 'react-i18next'
 
 export function usePromotion(page = 1, limit = 5, search = '') {
+  const { i18n } = useTranslation()
+  const lang = i18n.language.split('-')[0]
   return useQuery({
-    queryKey: ['promotions', page, limit, search],
-    queryFn: () => getPromotions(page, limit, search),
+    queryKey: ['promotions', page, limit, search, lang],
+    queryFn: () => getPromotions(page, limit, search, lang),
     placeholderData: (previousData) => previousData,
   })
 }

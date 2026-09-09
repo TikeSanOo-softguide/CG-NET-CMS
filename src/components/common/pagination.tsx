@@ -28,7 +28,7 @@ export default function Pagination({ page, totalPages, setPage, t, disabled = fa
   }
 
   return (
-    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap mb-4">
+    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap mb-8">
       {/* Previous */}
       <Button
         variant="outline"
