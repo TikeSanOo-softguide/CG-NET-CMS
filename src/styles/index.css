@@ -1,10 +1,8 @@
 @import "./colors.css";
+@import "@c15t/react/styles.tw3.css";
 
 @tailwind base;
 @tailwind components;
-
-@import "@c15t/react/styles.tw3.css";
-
 @tailwind utilities;
 
 /* ── Myanmar Unicode fonts (self-hosted) ── */
