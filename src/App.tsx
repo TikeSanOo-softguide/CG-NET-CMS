@@ -17,6 +17,7 @@ import PromotionModal from './components/common/PromotionModal'
 import { ApiError } from '@/lib/api/errors'
 import { ConsentProvider } from './components/common/ConsentProvider'
 import { useConsentManager } from '@c15t/react'
+import DotBackgroundDemo from './components/ui/dot-background'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,11 +50,13 @@ function AppContent() {
   return (
     <div className="flex min-h-screen flex-col overflow-x-clip">
       <Header />
-      <div className="flex-1">
-        <ErrorBoundary>
-          <AppRoutes />
-        </ErrorBoundary>
-      </div>
+      <DotBackgroundDemo>
+        <div className="flex-1">
+          <ErrorBoundary>
+            <AppRoutes />
+          </ErrorBoundary>
+        </div>
+      </DotBackgroundDemo>
       <Footer />
       <Toaster />
     </div>

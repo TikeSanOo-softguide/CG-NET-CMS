@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Skeleton } from '@/components/ui/skeleton'
 
-// Lazy-loaded route components — code split per route for performance
 const HomePage = lazy(() => import('@/features/home'))
 const ServicesPage = lazy(() => import('@/features/services'))
 const PackagesPage = lazy(() => import('@/features/packages'))
@@ -14,6 +13,7 @@ const AppGuidePage = lazy(() => import('@/features/app-guide'))
 const PrivacyPage = lazy(() => import('@/features/privacy-policy'))
 const AboutPage = lazy(() => import('@/features/about'))
 const NotFoundPage = lazy(() => import('@/features/not-found'))
+const AvailableLocationPage = lazy(() => import('@/features/available-location'))
 
 function PageLoader() {
   return (
@@ -44,6 +44,10 @@ export function AppRoutes() {
         <Route path="/app-guide" element={<AppGuidePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
+        <Route
+          path="/available-location"
+          element={<AvailableLocationPage state={null} area={null} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

@@ -29,7 +29,7 @@ export default function AppGuidePage() {
           grid grid-cols-2
           gap-3
           px-4
-          py-2
+          pt-5
           justify-items-center
           min-[660px]:flex
           min-[660px]:justify-center

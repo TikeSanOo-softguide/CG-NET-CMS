@@ -7,7 +7,7 @@ const baseURL = import.meta.env.DEV
   : import.meta.env.VITE_API_BASE_URL || ''
 
 if (import.meta.env.PROD && (!isHttpsUrl(baseURL) || baseURL.startsWith('/'))) {
-  throw new Error('[CG-NET] VITE_API_BASE_URL must be an HTTPS URL in production')
+  throw new Error('[Yaung Ni Oo] VITE_API_BASE_URL must be an HTTPS URL in production')
 }
 
 export const apiClient = axios.create({
