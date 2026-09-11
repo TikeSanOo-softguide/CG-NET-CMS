@@ -1,8 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import type { SupportedLanguage } from './i18n/languages'
-import { CoverageArea } from '@/types/coverage'
-import { COVERAGE } from './content/location'
 
 /**
  * Merges Tailwind classes safely.
@@ -108,13 +106,3 @@ export function localizedName(
   return name[locale] || name.en;
 }
 
-/** Find an area by id (searches all cities/regions) */
-export function findAreaById(id: number): CoverageArea | undefined {
-  for (const city of COVERAGE) {
-    for (const region of city.regions) {
-      const area = region.areas.find((a) => a.id === id);
-      if (area) return area;
-    }
-  }
-  return undefined;
-}
