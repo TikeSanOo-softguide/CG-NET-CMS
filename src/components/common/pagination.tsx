@@ -10,7 +10,13 @@ interface PaginationProps {
   disabled?: boolean
 }
 
-export default function Pagination({ page, totalPages, setPage, t, disabled = false }: PaginationProps) {
+export default function Pagination({
+  page,
+  totalPages,
+  setPage,
+  t,
+  disabled = false,
+}: PaginationProps) {
   useEffect(() => {
     if (page > totalPages) setPage(Math.max(1, totalPages))
   }, [page, setPage, totalPages])
@@ -28,7 +34,7 @@ export default function Pagination({ page, totalPages, setPage, t, disabled = fa
   }
 
   return (
-    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap mb-8">
+    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap mb-12">
       {/* Previous */}
       <Button
         variant="outline"

@@ -202,3 +202,25 @@ export function parseApiResponse<T>(schema: z.ZodTypeAny, value: unknown, resour
   }
   return result.data as T
 }
+
+export const serviceSchema = z.object({
+  id: z.union([z.number(), z.string()]).transform(Number),
+  slug: z.string().default(''),
+  title: bilingualStringSchema,
+  description: bilingualStringSchema,
+  image_url: z.string().nullable().default(null),
+  status: z.string().default('published'),
+  created_at: z.string().default(''),
+  updated_at: z.string().default(''),
+})
+
+export const serviceResponseSchema = z.object({
+  data: z.array(serviceSchema).default([]),
+  links: paginationLinksSchema.default({}),
+  meta: paginationMetaSchema
+    .extend({
+      from: z.coerce.number().nullable().default(null),
+      to: z.coerce.number().nullable().default(null),
+    })
+    .default({}),
+})

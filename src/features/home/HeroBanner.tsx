@@ -165,7 +165,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
         <div
           role="tablist"
           aria-label="Slide navigation"
-          className="absolute hidden sm:flex bottom-12 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-10"
+          className="absolute hidden sm:flex bottom-10 sm:bottom-12 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-10"
         >
           {slides.map((_, i) => (
             <button

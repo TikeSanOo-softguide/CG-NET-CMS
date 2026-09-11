@@ -1,15 +1,33 @@
+// services.api.ts
 import { apiClient } from './client'
-import type { Service } from '@/types'
-import { apiArraySchema, parseApiResponse } from './validation'
+import type { Service } from '@/types/service'
+import { parseApiResponse, serviceResponseSchema } from './validation'
 
-export async function getServices(): Promise<Service[]> {
-  const { data } = await apiClient.get<Service[]>('/services')
-  return parseApiResponse<Service[]>(apiArraySchema, data, 'services')
+export interface ServiceResponse {
+  data: Service[]
+  links: {
+    first: string | null
+    last: string | null
+    prev: string | null
+    next: string | null
+  }
+  meta: {
+    current_page: number
+    from: number | null
+    last_page: number
+    per_page: number
+    to: number | null
+    total: number
+  }
 }
 
-export async function getServiceBySlug(slug: string): Promise<Service> {
-  const { data } = await apiClient.get<Service[]>(`/services?slug=${slug}`)
-  const services = parseApiResponse<Service[]>(apiArraySchema, data, 'service lookup')
-  if (!services.length) throw new Error('Service not found')
-  return services[0]
+export async function getServices(page = 1, limit = 6): Promise<ServiceResponse> {
+  const { data } = await apiClient.get<ServiceResponse>('/web-app/services', {
+    params: {
+      page,
+      per_page: limit,
+    },
+  })
+
+  return parseApiResponse<ServiceResponse>(serviceResponseSchema, data, 'services')
 }

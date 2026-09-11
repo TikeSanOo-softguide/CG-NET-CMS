@@ -1,15 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
+
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -21,16 +16,20 @@ const NAV_LINKS = [
   { to: '/about', labelKey: 'nav.about' },
 ]
 
-const MOBILE_PACKAGE_LINKS = [
-  { to: '/packages?category=mm-broadband', labelKey: 'services.mmBroadband.title' },
-  { to: '/packages?category=cg-broadband', labelKey: 'services.cgBroadband.title' },
-  { to: '/packages?category=cg-net-broadband', labelKey: 'services.cgNetBroadband.title' },
-  { to: '/packages?category=other-service', labelKey: 'services.iptv.title' },
-]
-
 export function NavBar() {
   const { t } = useTranslation()
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 1024) {
+        setMobileOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <nav role="navigation" aria-label="Main navigation" className="flex items-center font-heading">
@@ -214,32 +213,18 @@ export function NavBar() {
               </NavLink>
 
               {/* Packages expandable accordion */}
-              <Accordion type="single" collapsible>
-                <AccordionItem value="packages" className="border-none">
-                  <AccordionTrigger className="px-3 py-2.5 text-sm font-medium hover:no-underline">
-                    {t('nav.packages')}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="pl-4 flex flex-col gap-1">
-                      {MOBILE_PACKAGE_LINKS.map(({ to, labelKey }) => (
-                        <NavLink
-                          key={to}
-                          to={to}
-                          onClick={() => setMobileOpen(false)}
-                          className={({ isActive }) =>
-                            cn(
-                              'px-3 py-2 rounded-md text-sm transition-colors hover:bg-accent',
-                              isActive && 'text-transparent bg-clip-text bg-gradient-font'
-                            )
-                          }
-                        >
-                          {t(labelKey)}
-                        </NavLink>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+              <NavLink
+                to="/packages?category=mm-broadband"
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  cn(
+                    'px-3 py-3 rounded-md text-sm font-medium transition-colors hover:bg-accent min-h-11 flex items-center',
+                    isActive && 'text-transparent bg-clip-text bg-gradient-font'
+                  )
+                }
+              >
+                {t('nav.packages')}
+              </NavLink>
 
               {NAV_LINKS.slice(2).map(({ to, labelKey }) => (
                 <NavLink

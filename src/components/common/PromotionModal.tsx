@@ -81,57 +81,59 @@ export default function PromotionModal() {
       `}
       onClick={handleClose}
     >
-      <div
-        className={`
-          relative
-          w-[90vw]
-          sm:w-[70vw]
-          md:w-[60vw]
-          max-w-[800px]
-          overflow-hidden
-          rounded-xl
-          bg-white
-          shadow-2xl
-          transition-transform duration-300
-          ${isClosing ? 'scale-95' : 'scale-100'}
-        `}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          type="button"
-          onClick={handleClose}
-          aria-label="Close promotion"
-          className="
-            absolute
-            right-3
-            top-3
-            z-10
-            flex h-9 w-9
-            items-center justify-center
-            rounded-full
-            bg-black/50
-            text-white
-            backdrop-blur-sm
-            transition
-            hover:bg-black/70
-          "
+      <div className="relative overflow-visible">
+        <div
+          className={`
+            relative
+            w-[90vw]
+            sm:w-[70vw]
+            md:w-[60vw]
+            max-w-[800px]
+            overflow-hidden
+            rounded-xl
+            bg-white
+            shadow-2xl
+            transition-transform duration-300
+            ${isClosing ? 'scale-95' : 'scale-100'}
+          `}
+          onClick={(e) => e.stopPropagation()}
         >
-          <X size={18} />
-        </button>
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop"
+            alt="Promotion"
+            className="
+              block
+              w-full
+              h-auto
+              aspect-[16/7]
+              object-cover
+            "
+          />
+        </div>
 
-        <img
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop"
-          alt="Promotion"
-          className="
-            block
-            w-full
-            h-[400px]
-            sm:h-[260px]
-            md:h-auto
-            md:aspect-[16/7]
-            object-cover
-          "
-        />
+        <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 z-30">
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label="Close promotion"
+            className="
+              flex h-10 w-10
+              items-center justify-center
+              rounded-full
+              bg-white
+              text-neutral-800
+              shadow-xl
+              border border-neutral-200
+              transition-transform
+              hover:scale-110
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-primary
+            "
+          >
+            <X size={22} strokeWidth={2.5} />
+          </button>
+        </div>
       </div>
     </div>
   )

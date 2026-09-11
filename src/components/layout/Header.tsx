@@ -9,7 +9,7 @@ export function Header() {
       <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 md:h-16 items-center justify-between gap-2 sm:gap-4 overflow-visible">
           {/* Logo */}
-          <Link to="/" className="flex h-full shrink-0 items-center" aria-label="CG-NET Home">
+          <Link to="/" className="flex h-full shrink-0 items-center" aria-label="Yaung Ni Oo Home">
             <img
               src="/assets/logo/logo.svg"
               alt="CG-NET logo"
