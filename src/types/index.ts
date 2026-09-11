@@ -9,18 +9,6 @@ export interface BilingualStringArray {
   my: string[]
   zh: string[]
 }
-
-export interface Service {
-  id: string
-  slug: string
-  title: BilingualString
-  description: BilingualString
-  icon: string
-  features: BilingualStringArray
-  category: string
-  imageUrl: string
-}
-
 export interface Package {
   network: any
   id: string

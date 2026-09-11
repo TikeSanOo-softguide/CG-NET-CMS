@@ -1,17 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
-import { getServices, getServiceBySlug } from '@/lib/api/services.api'
+import { getServices } from '@/lib/api/services.api'
+import { useTranslation } from 'react-i18next'
 
-export function useServices() {
-  return useQuery({
-    queryKey: ['services'],
-    queryFn: getServices,
-  })
-}
+export function useServices(page = 1, limit = 6) {
+  const { i18n } = useTranslation()
+  const lang = i18n.language.split('-')[0]
 
-export function useServiceBySlug(slug: string) {
   return useQuery({
-    queryKey: ['service', slug],
-    queryFn: () => getServiceBySlug(slug),
-    enabled: Boolean(slug),
+    queryKey: ['services', page, limit, lang],
+    queryFn: () => getServices(page, limit),
+    placeholderData: (previousData) => previousData,
   })
 }

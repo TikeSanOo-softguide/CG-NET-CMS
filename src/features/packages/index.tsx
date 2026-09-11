@@ -107,15 +107,23 @@ export default function PackagesPage() {
     }
 
     const selectedNetwork = networks?.find((network) => String(network.id) === activeFilter)
-
     const selectedPackages = packages?.filter((pkg) => pkg.network.id === selectedNetwork?.id) ?? []
 
     if (!selectedNetwork) {
       return null
     }
 
+    const initialSpeed = searchParams.get('speed')
+    const initialTerm = searchParams.get('term')
+
     return (
-      <PackageSelection key={activeFilter} network={selectedNetwork} packages={selectedPackages} />
+      <PackageSelection
+        key={activeFilter}
+        network={selectedNetwork}
+        packages={selectedPackages}
+        initialSpeed={initialSpeed ? Number(initialSpeed) : undefined}
+        initialTerm={initialTerm ? Number(initialTerm) : undefined}
+      />
     )
   }
 

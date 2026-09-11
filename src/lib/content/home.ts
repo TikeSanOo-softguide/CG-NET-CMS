@@ -1,4 +1,4 @@
-import { Clock, Database, Router, Shield, Zap } from 'lucide-react'
+import { Clock, Languages, Shield, Users, Zap } from 'lucide-react'
 
 export const homeContent = {
   features: [
@@ -33,7 +33,7 @@ export const homeContent = {
       variant: 'zoom-in' as const,
     },
     {
-      icon: Database,
+      icon: Users,
       titleKey: 'home.feature4Title',
       descKey: 'home.feature4Desc',
       color: 'text-icon-data',
@@ -43,7 +43,7 @@ export const homeContent = {
       variant: 'fade-right' as const,
     },
     {
-      icon: Router,
+      icon: Languages,
       titleKey: 'home.feature5Title',
       descKey: 'home.feature5Desc',
       color: 'text-icon-router',
@@ -62,16 +62,5 @@ export const homeContent = {
     { value: '24/7', labelKey: 'home.stat5Label' },
   ],
 
-  galleryItems: [
-    { key: 'home.galleryItem1', imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop'},
-    { key: 'home.galleryItem2', imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&fit=crop'},
-    { key: 'home.galleryItem3', imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&fit=crop'},
-    { key: 'home.galleryItem4', imageUrl: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=80&fit=crop'},
-    { key: 'home.galleryItem5', imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80&fit=crop'},
-    { key: 'home.galleryItem5', imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80&fit=crop'},
-  ],
-
-  downloadItems: [
-    { key: 'home.downloadItem', imageUrl: '/assets/download/download-app.svg' },
-  ],
+  downloadItems: [{ key: 'home.downloadItem', imageUrl: '/assets/download/download-app.svg' }],
 } as const

@@ -11,6 +11,7 @@
     "contactUs": "联系我们",
     "viewAll": "查看全部",
     "choosePlan": "选择计划",
+    "knowMore": "了解更多",
     "searchPlaceholder": "按标题搜索...",
     "submit": "提交",
     "sending": "发送中...",
@@ -51,7 +52,7 @@
     "business": "企业",
     "fiber": "光纤",
     "enterprise": "政企",
-    "cgNetCard": "CG-NET 数据卡",
+    "cgNetCard": "晨光 数据卡",
     "viewAllPackages": "查看全部套餐",
     "toggleMenu": "打开导航菜单",
     "packagesMenu": "套餐菜单"
@@ -63,12 +64,12 @@
     "heroSecondary": "了解更多",
     "featuredEyebrow": "精选套餐",
     "featuredPackages": "选择适合您的套餐",
-    "featuredPackagesDesc": "价格透明、无限流量，每一个 CG-NET 套餐都没有隐藏费用。",
+    "featuredPackagesDesc": "价格透明、无限流量，每一个 晨光 套餐都没有隐藏费用。",
     "latestNews": "最新资讯",
     "whatsNew": "最新消息",
     "latestTitle": "新闻与优惠活动",
-    "latestNewsDesc": "及时了解 CG-NET 网络升级信息及季节性优惠活动。",
-    "whyChooseUs": "为什么选择 CG-NET",
+    "latestNewsDesc": "及时了解 晨光 网络升级信息及季节性优惠活动。",
+    "whyChooseUs": "为什么选择 晨光",
     "whyChooseUsTitle": "为缅甸的网络连接方式而打造",
     "whyChooseUsDesc": "为您提供优质网络服务所需的一切——高速、稳定，以及随时愿意为您提供帮助的服务团队。",
     "stat1Label": "满意客户",
@@ -79,36 +80,36 @@
     "feature1Title": "闪电般的网速",
     "feature1Desc": "高达 1Gbps 光纤宽带，畅享流畅观影、游戏与办公。",
     "feature2Title": "始终可靠",
-    "feature2Desc": "99.9% 可用性 SLA，关键时刻始终在线。",
+    "feature2Desc": "稳定、高速的网络连接。",
     "feature3Title": "全天候支持",
     "feature3Desc": "专业团队全天候为您提供帮助。",
-    "feature4Title": "无流量限制",
-    "feature4Desc": "所有套餐均为不限流量。尽情浏览、观影与下载。",
-    "feature5Title": "现代 Wi‑Fi 设备",
-    "feature5Desc": "专业安装路由设备，并优化室内覆盖范围，确保连接稳定顺畅。",
+    "feature4Title": "全内部团队",
+    "feature4Desc": "从安装到支持，绝不外包给第三方。",
+    "feature5Title": "多语言支持",
+    "feature5Desc": "以多种本地语言提供友好的服务。",
     "galleryEyebrow": "照片画廊",
-    "galleryTitle": "CG-NET 的生活点滴",
-    "galleryDesc": "近距离了解 CG-NET 的网络、服务空间，以及与网络相连的生活瞬间。",
+    "galleryTitle": "晨光 的生活点滴",
+    "galleryDesc": "近距离了解 晨光 的网络、服务空间，以及与网络相连的生活瞬间。",
     "galleryItem1": "光纤驱动的家庭连接",
     "galleryItem2": "稳定网络下的智能办公空间",
     "galleryItem3": "客户应用使用体验",
     "galleryItem4": "覆盖全城的网络能力",
     "galleryItem5": "始终在线的数字生活方式",
-    "downloadTitle": "CG-NET App",
+    "downloadTitle": "晨光 App",
     "downloadDesc": "通过手机即可管理您的账户、支付账单并获取支持服务。",
-    "downloadSub1": "CG-NET 是您完善的宽带管理助手 — 可实时跟踪使用情况、查看账单、在线支付以及监控您的网络连接状态。",
+    "downloadSub1": "晨光 是您完善的宽带管理助手 — 可实时跟踪使用情况、查看账单、在线支付以及监控您的网络连接状态。",
     "downloadItem": "随时随地保持连接。",
-    "downloadHead": "下载 CG-NET 应用程序",
+    "downloadHead": "下载 晨光 应用程序",
     "downloadSub2": "旨在跟踪使用情况、查看账单并监控您的连接。",
     "downloadSub3": "状态，并提供实时更新。",
     "ctaTitle": "准备好接入网络了吗？",
     "ctaDesc": "加入缅甸超过 20 万满意客户的行列。",
-    "ctaButton": "联系 CG-NET",
+    "ctaButton": "联系 晨光",
     "more": "更多",
     "viewAllGallery": "查看全部图库"
   },
   "downloadCard": {
-    "title": "下载 CG-NET 应用程序",
+    "title": "下载 Yaung Ni Oo 应用程序",
     "description": "实时管理您的宽带、查看账单、追踪使用情况并监控网络连接状态。",
     "downloadApp": "下载应用",
     "downloadAndroid": "下载 Android 版",
@@ -118,62 +119,16 @@
   "services": {
     "title": "我们的服务",
     "subtitle": "提供多种互联网套餐，满足不同客户的多样化需求。",
-    "pageTitle": "服务 - CG-NET",
+    "pageTitle": "服务 - Yaung Ni Oo",
     "learnMore": "了解更多",
-    "mmBroadband": {
-      "title": "缅甸网络",
-      "description": "缅甸宽带服务，提供 20Mbps、50Mbps、100Mbps 和 150Mbps 多种速率套餐，满足稳定的家庭上网需求。",
-      "features": {
-        "speed": "20Mbps、50Mbps、100Mbps 和 150Mbps 套餐",
-        "uptime": "99.9% 網路穩定度保證",
-        "installation": "免費安裝（適用於 6 個月和 1 年方案）",
-        "support": "全天候技术支持"
-      }
-    },
-    "cgBroadband": {
-      "title": "晨光网",
-      "description": "晨光网宽带服务，提供 50Mbps 和 100Mbps 速率套餐，满足稳定的网络连接需求。",
-      "features": {
-        "bandwidth": "50Mbps 和 100Mbps 套餐",
-        "staticIp": "静态 IP 地址",
-        "sla": "SLA 保障",
-        "support": "全天候技术支持"
-      }
-    },
-    "cgNetBroadband": {
-      "title": "CG-NET 家庭网",
-      "description": "可靠的 CG-NET 家庭宽带服务，提供 20Mbps 套餐，为家庭提供便捷的网络连接。",
-      "features": {
-        "speedTiers": "20Mbps 家庭宽带套餐",
-        "unlimitedData": "不限流量",
-        "freeRouter": "包含接收器",
-        "easySetup": "免費安裝（適用於 6 個月和 1 年方案）"
-      }
-    },
-    "iptv": {
-      "title": "其他服务",
-      "description": "提供288个频道的数字电视服务，并搭配CG-NET附加网络加速和扩展服务。",
-      "features": {
-        "channels": "288 个频道",
-        "resolution": "高清数字电视内容",
-        "service": "IPTV 服务",
-        "easySetup": "轻松安装"
-      }
-    },
-    "cgNetAddon": {
-      "title": "CG-NET 附加服务",
-      "description": "为您的 CG-NET 连接提供额外的网络加速和扩展服务。",
-      "features": {
-        "feature1": "高速网络扩展",
-        "feature2": "借助 CG Net 附加服务，轻松进行配置与设置"
-      }
-    }
+    "noService": "未找到服务",
+    "noServiceDesc": "请稍后查看最新服务。"
   },
   "packages": {
     "title": "宽带套餐",
     "subtitle": "简单透明的定价，满足各种需求",
-    "pageTitle": "套餐 - CG-NET",
-    "detailPageTitle": "套餐详情 - CG-NET",
+    "pageTitle": "套餐 - Yaung Ni Oo",
+    "detailPageTitle": "套餐详情 - Yaung Ni Oo",
     "download": "下载",
     "upload": "上传",
     "fup": "流量政策",
@@ -207,9 +162,9 @@
   },
   "news": {
     "title": "新闻与动态",
-    "subtitle": "了解 CG-NET 最新资讯",
-    "pageTitle": "新闻 - CG-NET",
-    "detailPageTitle": "新闻 - CG-NET",
+    "subtitle": "了解 Yaung Ni Oo 最新资讯",
+    "pageTitle": "新闻 - Yaung Ni Oo",
+    "detailPageTitle": "新闻 - Yaung Ni Oo",
     "publishedOn": "发布于",
     "category": "分类",
     "backToNews": "返回新闻",
@@ -219,7 +174,7 @@
     "noNewsDesc": "请稍后再来查看最新新闻与动态。"
   },
   "promotions": {
-    "pageTitle": "促销 - CG-NET",
+    "pageTitle": "促销 - Yaung Ni Oo",
     "title": "特别促销",
     "subtitle": "享受我们为您量身定制的独家网络套餐和特别奖励，为您带来最佳的连接体验。",
     "viewDetail": "查看详情",
@@ -232,8 +187,8 @@
   "career": {
     "title": "加入我们",
     "subtitle": "共建缅甸互联未来",
-    "pageTitle": "招聘 - CG-NET",
-    "detailPageTitle": "职位详情 - CG-NET",
+    "pageTitle": "招聘 - Yaung Ni Oo",
+    "detailPageTitle": "职位详情 - Yaung Ni Oo",
     "openPositions": "在招职位",
     "department": "部门",
     "location": "地点",
@@ -245,7 +200,7 @@
     "responsibilities": "工作职责",
     "noPositions": "目前暂无空缺职位",
     "noPositionsDesc": "我们始终欢迎优秀人才。请将简历发送至 careers@cgnet.com.mm",
-    "whyJoin": "为什么加入 CG-NET？",
+    "whyJoin": "为什么加入 Yaung Ni Oo？",
     "benefit1": "有竞争力的薪资",
     "benefit1Desc": "市场化薪酬，并提供绩效奖金。",
     "benefit2": "成长机会",
@@ -259,8 +214,8 @@
     "title": "應用程式指南",
     "detailStep": "詳細步驟",
     "faqs": "常見問題",
-    "subtitle": "幾分鐘內即可開始使用 CG-NET 應用程式",
-    "pageTitle": "應用程式指南 - CG-NET",
+    "subtitle": "幾分鐘內即可開始使用 Yaung Ni Oo 應用程式",
+    "pageTitle": "應用程式指南 - Yaung Ni Oo",
     "downloadApp": "下載應用程式",
     "iosApp": "App Store",
     "androidApp": "Google Play",
@@ -275,11 +230,11 @@
     "faqTitle": "常見問題",
     "guides": {
       "1": {
-        "title": "下載 CG-NET 應用",
-        "description": "從 App Store（iOS）或 Google Play（Android）下載 CG-NET 移動應用。",
+        "title": "下載 Yaung Ni Oo 應用",
+        "description": "從 App Store（iOS）或 Google Play（Android）下載 Yaung Ni Oo 移動應用。",
         "steps": [
           "在設備上打開 App Store 或 Google Play",
-          "搜索“CG-NET”",
+          "搜索“Yaung Ni Oo”",
           "點擊“安裝”或“獲取”",
           "等待下載完成"
         ]
@@ -288,7 +243,7 @@
         "title": "創建您的賬戶",
         "description": "使用訂閱賬單上的賬號進行註冊。",
         "steps": [
-          "打開 CG-NET 應用",
+          "打開 Yaung Ni Oo 應用",
           "在歡迎頁點擊“註冊”",
           "輸入賬單上的賬號",
           "創建安全密碼",
@@ -299,7 +254,7 @@
         "title": "查詢您的用量",
         "description": "在儀表盤實時查看流量、網速與服務狀態。",
         "steps": [
-          "登錄 CG-NET 應用",
+          "登錄 Yaung Ni Oo 應用",
           "在儀表盤查看實時用量統計",
           "點擊“用量詳情”查看明細",
           "設置用量提醒，避免超額"
@@ -363,7 +318,7 @@
       },
       "9": {
         "question": "如何更改我的 Wi-Fi 網路名稱或密碼？",
-        "answer": "您可以直接透過 CG Net 行動應用程式或客戶網路入口網站輕鬆管理路由器設定、更新 Wi-Fi 密碼並檢視已連線的裝置。"
+        "answer": "您可以直接透過 晨光 行動應用程式或客戶網路入口網站輕鬆管理路由器設定、更新 Wi-Fi 密碼並檢視已連線的裝置。"
       },
       "10": {
         "question": "訂閱維護或流量累積方案有什麼好處？",
@@ -372,13 +327,13 @@
     }
   },
   "about": {
-    "title": "关于 CG-NET",
+    "title": "关于 Yaung Ni Oo",
     "subtitle": "自 2015 年起，缅甸值得信赖的互联网服务商",
-    "pageTitle": "关于我们 - CG-NET",
+    "pageTitle": "关于我们 - Yaung Ni Oo",
     "ourMission": "我们的使命",
     "ourVision": "我们的愿景",
     "ourTeam": "认识我们的团队",
-    "ourStats": "CG-NET 数据一览",
+    "ourStats": "Yaung Ni Oo 数据一览",
     "ourStory": "我们的历程",
     "tagline": "我們致力於為家庭和企業提供可靠的高速互聯網服務",
     "mission": "我們的使命是透過無縫的在線體驗、尖端技術和卓越的客戶服務，將您與最重要的人和事連接起來。",
@@ -411,7 +366,7 @@
   "contact": {
     "title": "联系我们",
     "subtitle": "我们随时为您提供帮助。",
-    "pageTitle": "联系我们 - CG-NET",
+    "pageTitle": "联系我们 - Yaung Ni Oo",
     "form": {
       "name": "姓名",
       "namePlaceholder": "请输入您的姓名",
@@ -442,10 +397,21 @@
       "social": "关注我们"
     }
   },
+  "location": {
+    "title": "可用位置",
+    "subtitle": "选择州、地区和区域，以检查您附近是否有 WiFi 覆盖。",
+    "pageTitle": "网络覆盖 - Yaung Ni Oo",
+    "selectState": "选择州/邦",
+    "selectRegion": "选择地区",
+    "selectArea": "选择区域",
+    "noOption": "暂无选项",
+    "selectOption": "请选择",
+    "loading": "加载中..."
+  },
   "footer": {
-    "company": "CG-NET",
+    "company": "Yaung Ni Oo",
     "tagline": "以快速、可靠的光纤宽带连接缅甸。",
-    "line1": "总部位于缅甸勐拉市", 
+    "line1": "总部位于缅甸勐拉市",
     "line2": "服务遍及全球。",
     "quickLinks": "快速链接",
     "services": "服务",

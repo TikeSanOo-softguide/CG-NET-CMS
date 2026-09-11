@@ -19,7 +19,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full">
+    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full relative">
       <Card
         className={cn(
           'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl !bg-app-surface',
@@ -52,10 +52,16 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
           <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
             {t('nav.promotion')}
           </span>
-          <CardTitle className={cn('leading-[1.7]', compact ? 'text-sm' : 'text-base')}>
+          <CardTitle
+            className={cn(
+              'leading-[1.7] line-clamp-2 overflow-hidden text-ellipsis',
+              'min-h-[3.4em]',
+              compact ? 'text-sm' : 'text-base'
+            )}
+          >
             <Link
               to={`/promotion/${promotion.slug}`}
-              className="transition-colors hover:text-primary"
+              className="transition-colors hover:text-primary block"
             >
               {getLocalized(promotion.title, lang)}
             </Link>
@@ -63,50 +69,42 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
         </CardHeader>
 
         <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-muted-foreground">{t('promotions.periodLabel')}</span>
+          {(() => {
+            const hasStart =
+              promotion.startDate &&
+              typeof promotion.startDate === 'string' &&
+              promotion.startDate.trim() !== ''
+            const hasEnd =
+              promotion.endDate &&
+              typeof promotion.endDate === 'string' &&
+              promotion.endDate.trim() !== ''
 
-            <span className="text-right font-medium text-font-black">
-              {(() => {
-                const hasStart =
-                  promotion.startDate &&
-                  typeof promotion.startDate === 'string' &&
-                  promotion.startDate.trim() !== ''
-                const hasEnd =
-                  promotion.endDate &&
-                  typeof promotion.endDate === 'string' &&
-                  promotion.endDate.trim() !== ''
+            return (
+              <div className="flex items-center justify-between text-xs">
+                {hasStart && hasEnd && (
+                  <span className="text-muted-foreground">{t('promotions.periodLabel')}</span>
+                )}
 
-                if (hasStart && hasEnd) {
-                  return (
+                <span className="text-right font-medium text-font-black">
+                  {hasStart && hasEnd ? (
                     <>
                       {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
                       {formatDate(promotion.endDate, getDateLocale(lang))}
                     </>
-                  )
-                }
-
-                if ((!hasStart && !hasEnd) || (hasStart && !hasEnd)) {
-                  return (
+                  ) : (!hasStart && !hasEnd) || (hasStart && !hasEnd) ? (
                     <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
                       <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                       Active
                     </span>
-                  )
-                }
-
-                if (!hasStart && hasEnd) {
-                  return (
+                  ) : !hasStart && hasEnd ? (
                     <span className="text-muted-foreground">
                       Expires: {formatDate(promotion.endDate, getDateLocale(lang))}
                     </span>
-                  )
-                }
-
-                return null
-              })()}
-            </span>
-          </div>
+                  ) : null}
+                </span>
+              </div>
+            )
+          })()}
         </CardContent>
 
         <CardFooter

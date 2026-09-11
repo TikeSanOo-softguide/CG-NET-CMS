@@ -58,13 +58,25 @@ export default function HomePage() {
     else setSearchParams({})
   }
 
+  const formattedRecommendedPackages = recommendedPackages
+    ?.filter((pkg) => typeof pkg.imageUrl === 'string' && pkg.imageUrl.trim().length > 0)
+    .map((pkg) => {
+      const rawImg = pkg.imageUrl?.trim() ?? ''
+      const fullImageUrl = rawImg.startsWith('http') ? rawImg : `${STORAGE_URL}/${rawImg}`
+
+      return {
+        ...pkg,
+        imageUrl: fullImageUrl,
+      }
+    })
+
   return (
     <main>
       {/* Hero Banner Slider */}
       <HeroBanner lang={lang} />
 
       {/* Stats */}
-      <div className="bg-muted/40">
+      <div className="bg-muted/40 mb-8">
         <section
           className="relative z-30 -mt-3 sm:-mt-8 lg:-mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head"
           aria-label="Company statistics"
@@ -166,28 +178,13 @@ export default function HomePage() {
 
         {pkgError && <ErrorMessage />}
 
-        {!pkgLoading && !pkgError && recommendedPackages?.length === 0 && (
+        {!pkgLoading && !pkgError && formattedRecommendedPackages?.length === 0 && (
           <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
         )}
 
-        {recommendedPackages &&
-          (() => {
-            const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
-            const formattedPackages = recommendedPackages.map((pkg) => {
-              const rawImg = pkg.imageUrl
-              const fullImageUrl = rawImg
-                ? rawImg.startsWith('http')
-                  ? rawImg
-                  : `${STORAGE_URL}/${rawImg}`
-                : ''
-              return {
-                ...pkg,
-                imageUrl: fullImageUrl,
-              }
-            })
-
-            return <PackageCarousel packages={formattedPackages} lang={lang} />
-          })()}
+        {formattedRecommendedPackages && formattedRecommendedPackages.length > 0 && (
+          <PackageCarousel packages={formattedRecommendedPackages} lang={lang} />
+        )}
       </SectionWrapper>
 
       {/* Latest News */}
@@ -271,7 +268,10 @@ export default function HomePage() {
             {isError && <ErrorMessage />}
 
             {!isLoading && !isError && promotions?.length === 0 && (
-              <EmptyState title={t('promotions.noPromotion')} description={t('promotions.noPromotionDesc')} />
+              <EmptyState
+                title={t('promotions.noPromotion')}
+                description={t('promotions.noPromotionDesc')}
+              />
             )}
 
             {!isLoading && !isError && promotions && (
@@ -334,57 +334,54 @@ export default function HomePage() {
           )}
 
         {!galleryLoading && !galleryError && galleryData?.data && galleryData.data.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 auto-rows-[190px] sm:grid-cols-2 md:grid-cols-4">
-          {galleryData.data.slice(0, 5).map((item, i) => {
-            const cardClass =
-              i === 0
-                ? 'md:col-span-2 md:row-span-2 rounded-xl'
-                : 'md:col-span-1 rounded-rounded-xl'
+          <div className="grid grid-cols-1 gap-4 auto-rows-[190px] sm:grid-cols-2 md:grid-cols-4">
+            {galleryData.data.slice(0, 5).map((item, i) => {
+              const cardClass =
+                i === 0
+                  ? 'md:col-span-2 md:row-span-2 rounded-xl'
+                  : 'md:col-span-1 rounded-rounded-xl'
 
-            const imageUrl = item.imageUrl
-              ? item.imageUrl.startsWith('http')
-                ? item.imageUrl
-                : `${STORAGE_URL}/${item.imageUrl}`
-              : null
+              const imageUrl = item.imageUrl
+                ? item.imageUrl.startsWith('http')
+                  ? item.imageUrl
+                  : `${STORAGE_URL}/${item.imageUrl}`
+                : null
 
-            const displayTitle = getLocalized(item.label, lang)
+              const displayTitle = getLocalized(item.label, lang)
 
-            return (
-              <AnimatedCard
-                key={item.id}
-                delay={i * 90}
-                variant="rise"
-                className={`group relative h-full overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl ${cardClass}`}
-              >
-                <div className="card-media h-full">
-                  {imageUrl ? (
-                    <img
-                      src={imageUrl}
-                      alt={displayTitle || 'Gallery image'}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="h-full w-full bg-muted"
-                      aria-label={t('common.noData')}
-                    />
-                  )}
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
-
-                {displayTitle && (
-                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                    <p className="text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:text-base">
-                      {displayTitle}
-                    </p>
+              return (
+                <AnimatedCard
+                  key={item.id}
+                  delay={i * 90}
+                  variant="rise"
+                  className={`group relative h-full overflow-hidden rounded-xl border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl ${cardClass}`}
+                >
+                  <div className="card-media h-full">
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt={displayTitle || 'Gallery image'}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+                    )}
                   </div>
-                )}
-              </AnimatedCard>
-            )
-          })}
-        </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
+
+                  {displayTitle && (
+                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                      <p className="text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:text-base">
+                        {displayTitle}
+                      </p>
+                    </div>
+                  )}
+                </AnimatedCard>
+              )
+            })}
+          </div>
         )}
       </SectionWrapper>
 

@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { cn, getLocalized } from '@/lib/utils'
+import { getLocalized } from '@/lib/utils'
 import { RecommendedPackage } from '@/lib/api/packages.api'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import { t } from 'i18next'
@@ -41,12 +41,12 @@ function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: Sup
   return (
     <Card
       className={[
-        'group relative h-[320px] sm:h-[340px] xl:h-[350px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
+        'group relative h-[370px] sm:h-[370px] xl:h-[370px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
         'transition-all duration-300 ease-out',
-        'hover:z-10 hover:scale-[1.02]',
+        'hover:z-10 ',
       ].join(' ')}
     >
-      <div className="card-media relative h-full overflow-hidden rounded-xl border border-white/80 ">
+      <div className="card-media no-image-zoom relative h-full overflow-hidden rounded-xl border border-white/80 ">
         {pkg.imageUrl && typeof pkg.imageUrl === 'string' ? (
           <img
             src={pkg.imageUrl}
@@ -71,7 +71,11 @@ function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: Sup
               'sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0',
             ].join(' ')}
           >
-            <Link to={`/packages?category=${pkg.network.id}`}>{t('common.choosePlan')}</Link>
+            <Link
+              to={`/packages?category=${pkg.network.id}&speed=${pkg.speed?.id ?? ''}&term=${pkg.term?.id ?? ''}`}
+            >
+              {t('common.knowMore')}
+            </Link>
           </Button>
         </div>
       </div>
@@ -100,16 +104,20 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
       return scoreB - scoreA
     })
   }, [packages])
-  const isSingleOrFew = orderedPackages.length < cardsToShow
 
-  const repeatedPackages = useMemo(
-    () =>
-      isSingleOrFew
-        ? orderedPackages
-        : [...orderedPackages, ...orderedPackages, ...orderedPackages],
-    [orderedPackages, isSingleOrFew]
-  )
   const dotCount = orderedPackages.length
+
+  const repeatedPackages = useMemo(() => {
+    if (!orderedPackages.length) return []
+
+    let base = [...orderedPackages]
+
+    while (base.length < cardsToShow) {
+      base = [...base, ...orderedPackages]
+    }
+
+    return [...base, ...base, ...base]
+  }, [orderedPackages, cardsToShow])
 
   useEffect(() => {
     function onResize() {
@@ -127,13 +135,13 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     const viewport = viewportRef.current
     if (!viewport || !orderedPackages.length) return
 
-    const segmentWidth = viewport.scrollWidth / 3
+    const segmentWidth = (viewport.scrollWidth + 16) / 3
     viewport.scrollLeft = segmentWidth
   }, [orderedPackages.length, cardWidth])
 
   useEffect(() => {
     const viewport = viewportRef.current
-    if (!viewport || orderedPackages.length <= cardsToShow) return
+    if (!viewport || !orderedPackages.length) return
     const viewportEl = viewport
 
     function step(timestamp: number) {
@@ -142,7 +150,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
       lastFrameRef.current = timestamp
 
       if (!paused) {
-        const segmentWidth = viewportEl.scrollWidth / 3
+        const segmentWidth = (viewportEl.scrollWidth + 16) / 3
         viewportEl.scrollLeft += delta * SCROLL_PX_PER_MS
 
         if (viewportEl.scrollLeft >= segmentWidth * 2) {
@@ -168,14 +176,15 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     if (!viewport || !firstCard) return 0
 
     const gap = 16
-    return firstCard.offsetWidth + gap
+
+    return firstCard.getBoundingClientRect().width + gap
   }
 
   const syncInfinitePosition = useCallback(() => {
     const viewport = viewportRef.current
     if (!viewport || !orderedPackages.length) return
 
-    const segmentWidth = viewport.scrollWidth / 3
+    const segmentWidth = (viewport.scrollWidth + 16) / 3
     if (viewport.scrollLeft <= 0) {
       viewport.scrollLeft += segmentWidth
     } else if (viewport.scrollLeft >= segmentWidth * 2) {
@@ -187,16 +196,15 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
 
     const normalized = viewport.scrollLeft - segmentWidth
     const rawIndex = Math.round(normalized / cardStep)
-    const index =
-      ((rawIndex % orderedPackages.length) + orderedPackages.length) % orderedPackages.length
+    const index = ((rawIndex % dotCount) + dotCount) % dotCount
     setActiveIndex(index)
-  }, [orderedPackages.length])
+  }, [dotCount, orderedPackages.length])
 
   function goTo(index: number) {
     const viewport = viewportRef.current
     if (!viewport || !orderedPackages.length) return
 
-    const segmentWidth = viewport.scrollWidth / 3
+    const segmentWidth = (viewport.scrollWidth + 16) / 3
     const cardStep = getCardStep()
     if (!cardStep) return
 
@@ -208,11 +216,11 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
   }
 
   function next() {
-    goTo((activeIndex + 1) % orderedPackages.length)
+    goTo((activeIndex + 1) % dotCount)
   }
 
   function prev() {
-    goTo((activeIndex - 1 + orderedPackages.length) % orderedPackages.length)
+    goTo((activeIndex - 1 + dotCount) % dotCount)
   }
 
   function onTouchStart(event: TouchEvent<HTMLDivElement>) {
@@ -248,20 +256,16 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
         className="overflow-x-auto overflow-y-hidden scrollbar-none overscroll-x-contain"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        onScroll={isSingleOrFew ? undefined : syncInfinitePosition}
+        onScroll={syncInfinitePosition}
       >
-        <div
-          className={cn('flex gap-4 will-change-transform', isSingleOrFew && 'justify-center')}
-          style={trackStyle}
-        >
+        <div className="flex gap-4 will-change-transform" style={trackStyle}>
           {repeatedPackages.map((pkg, index) => (
             <div
               key={`${pkg.id}-${index}`}
               data-package-card
               className="shrink-0 py-2"
               style={{
-                flex: isSingleOrFew ? '0 0 auto' : '0 0 var(--card-width)',
-                width: isSingleOrFew ? '280px' : undefined,
+                flex: '0 0 var(--card-width)',
               }}
             >
               <PackageCarouselCard pkg={pkg} lang={lang} />
@@ -270,7 +274,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
         </div>
       </div>
 
-      {dotCount > 5 && (
+      {dotCount > 1 && (
         <div className="mt-6 flex items-center justify-center gap-2">
           {Array.from({ length: dotCount }).map((_, index) => (
             <button

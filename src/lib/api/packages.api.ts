@@ -8,6 +8,8 @@ import {
 } from './validation'
 
 export interface RecommendedPackage {
+  term: any
+  speed: any
   id: string
   network: Network
   slug: string
@@ -45,12 +47,14 @@ export async function getRecommendPackage(): Promise<RecommendedPackage[]> {
   const packages = parseApiResponse<PackageResponse>(
     packageResponseSchema,
     data,
-    'recommended packages',
+    'recommended packages'
   ).data
 
   return packages.map((pkg) => ({
     id: String(pkg.id),
     network: pkg.network,
+    speed: pkg.speed,
+    term: pkg.term,
     slug: `${pkg.network.id}-${pkg.speed.mbps}-${pkg.term.months}`,
     title: pkg.network.name,
     imageUrl: pkg.image_url,

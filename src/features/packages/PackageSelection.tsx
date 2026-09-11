@@ -1,18 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  Check,
-  ChevronLeft,
-  ChevronRight,
-  Coins,
-  Globe,
-} from 'lucide-react'
+import { Check, ChevronLeft, ChevronRight, Coins, Globe } from 'lucide-react'
 
 import type { Network, Package } from '@/types/package'
 import { EmptyState } from '@/components/common/EmptyState'
 import { t } from 'i18next'
 
 type PackageSelectionProps = {
+  initialSpeed?: number
+  initialTerm?: number
   network: Network
   packages: Package[]
 }
@@ -25,6 +21,8 @@ type DurationOption = {
 export default function PackageSelection({
   network,
   packages,
+  initialSpeed,
+  initialTerm,
 }: PackageSelectionProps) {
   const { i18n } = useTranslation()
   const currentLocale = (i18n.language as 'en' | 'zh' | 'my') || 'en'
@@ -33,36 +31,23 @@ export default function PackageSelection({
   const VISIBLE_PACKAGES = 4
 
   const speedOptions = useMemo(
-    () =>
-      Array.from(
-        new Set(packages.map((pkg) => pkg.speed.mbps))
-      ).sort((a, b) => a - b),
+    () => Array.from(new Set(packages.map((pkg) => pkg.speed.mbps))).sort((a, b) => a - b),
     [packages]
   )
 
-  const [selectedSpeed, setSelectedSpeed] = useState<number>(
-    speedOptions[0] ?? 0
-  )
-
-  const [selectedDuration, setSelectedDuration] = useState<number>(1)
-
-  useEffect(() => {
-    if (!speedOptions.length) return
-
-    setSelectedSpeed((current) => {
-      if (speedOptions.includes(current)) {
-        return current
-      }
-      return speedOptions[0]
-    })
-  }, [speedOptions])
+  const [selectedSpeed, setSelectedSpeed] = useState<number>(() => {
+    if (initialSpeed) {
+      const targetSpeed = Number(initialSpeed)
+      const match = packages.find((p) => p.speed.mbps === targetSpeed || p.speed.id === targetSpeed)
+      return match ? match.speed.mbps : (speedOptions[0] ?? 0)
+    }
+    return speedOptions[0] ?? 0
+  })
 
   const durationOptions = useMemo<DurationOption[]>(() => {
     const availableMonths = Array.from(
       new Set(
-        packages
-          .filter((pkg) => pkg.speed.mbps === selectedSpeed)
-          .map((pkg) => pkg.term.months)
+        packages.filter((pkg) => pkg.speed.mbps === selectedSpeed).map((pkg) => pkg.term.months)
       )
     ).sort((a, b) => a - b)
 
@@ -72,36 +57,62 @@ export default function PackageSelection({
     }))
   }, [packages, selectedSpeed])
 
+  const [selectedDuration, setSelectedDuration] = useState<number>(() => {
+    if (initialTerm) {
+      const targetTerm = Number(initialTerm)
+      const matchTerm = durationOptions.find((opt) => opt.months === targetTerm)
+      if (matchTerm) return matchTerm.months
+
+      const matchPkg = packages.find(
+        (p) =>
+          (p.term.months === targetTerm || p.term.id === targetTerm) &&
+          p.speed.mbps === selectedSpeed
+      )
+      if (matchPkg) return matchPkg.term.months
+    }
+    return durationOptions[0]?.months ?? 1
+  })
+
   useEffect(() => {
-    if (!durationOptions.length) return
+    if (!packages.length) return
 
-    setSelectedDuration((current) => {
-      if (durationOptions.some((option) => option.months === current)) {
-        return current
-      }
+    const targetSpeed = initialSpeed ? Number(initialSpeed) : undefined
+    const targetTerm = initialTerm ? Number(initialTerm) : undefined
 
-      return durationOptions[0].months
-    })
-  }, [durationOptions])
+    const exactMatch = packages.find(
+      (pkg) =>
+        targetSpeed !== undefined &&
+        targetTerm !== undefined &&
+        pkg.speed.id === targetSpeed &&
+        pkg.term.id === targetTerm
+    )
 
+    const matchingPackage =
+      exactMatch ??
+      packages.find(
+        (pkg) =>
+          (targetSpeed === undefined ||
+            pkg.speed.id === targetSpeed ||
+            pkg.speed.mbps === targetSpeed) &&
+          (targetTerm === undefined || pkg.term.id === targetTerm || pkg.term.months === targetTerm)
+      )
+
+    if (matchingPackage) {
+      setSelectedSpeed(matchingPackage.speed.mbps)
+      setSelectedDuration(matchingPackage.term.months)
+    }
+  }, [initialSpeed, initialTerm, packages])
 
   const allPackageCards = useMemo(
     () =>
       speedOptions
-        .map(
-          (speed) =>
-            packages.find((pkg) => pkg.speed.mbps === speed) ?? null
-        )
+        .map((speed) => packages.find((pkg) => pkg.speed.mbps === speed) ?? null)
         .filter((pkg): pkg is Package => pkg !== null),
     [packages, speedOptions]
   )
 
   const packageCards = useMemo(
-    () =>
-      allPackageCards.slice(
-        packageStartIndex,
-        packageStartIndex + VISIBLE_PACKAGES
-      ),
+    () => allPackageCards.slice(packageStartIndex, packageStartIndex + VISIBLE_PACKAGES),
     [allPackageCards, packageStartIndex]
   )
 
@@ -111,9 +122,7 @@ export default function PackageSelection({
   const selectedPackage = useMemo(
     () =>
       packages.find(
-        (pkg) =>
-          pkg.speed.mbps === selectedSpeed &&
-          pkg.term.months === selectedDuration
+        (pkg) => pkg.speed.mbps === selectedSpeed && pkg.term.months === selectedDuration
       ) ??
       packages.find((pkg) => pkg.speed.mbps === selectedSpeed) ??
       packages[0] ??
@@ -126,7 +135,7 @@ export default function PackageSelection({
       <EmptyState
         title={t('common.noData')}
         description={t('common.emptyStateDesc')}
-        className='pb-20'
+        className="pb-20"
       />
     )
   }
@@ -146,10 +155,7 @@ export default function PackageSelection({
 
   const nextPackage = () => {
     setPackageStartIndex((current) =>
-      Math.min(
-        allPackageCards.length - VISIBLE_PACKAGES,
-        current + 1
-      )
+      Math.min(allPackageCards.length - VISIBLE_PACKAGES, current + 1)
     )
   }
 
@@ -178,7 +184,6 @@ export default function PackageSelection({
                   <ChevronLeft size={19} />
                 </button>
               )}
-              
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {packageCards.map((pkg) => {
@@ -206,9 +211,7 @@ export default function PackageSelection({
                         <p
                           className={[
                             'text-sm font-bold',
-                            active
-                              ? 'text-font-blue'
-                              : 'text-neutral-800',
+                            active ? 'text-font-blue' : 'text-neutral-800',
                           ].join(' ')}
                         >
                           {networkName}
@@ -219,15 +222,11 @@ export default function PackageSelection({
                         <p
                           className={[
                             'text-2xl font-bold',
-                            active
-                              ? 'text-font-blue'
-                              : 'text-neutral-900',
+                            active ? 'text-font-blue' : 'text-neutral-900',
                           ].join(' ')}
                         >
                           {pkg.speed.mbps}
-                          <span className="ml-1 text-sm font-medium">
-                            Mbps
-                          </span>
+                          <span className="ml-1 text-sm font-medium">Mbps</span>
                         </p>
                       </div>
                     </button>
@@ -250,8 +249,7 @@ export default function PackageSelection({
             {packageCards.length > 1 && (
               <div className="mt-4 flex justify-center gap-1.5">
                 {packageCards.map((pkg) => {
-                  const active =
-                    selectedPackage.speed.mbps === pkg.speed.mbps
+                  const active = selectedPackage.speed.mbps === pkg.speed.mbps
 
                   return (
                     <button
@@ -276,9 +274,7 @@ export default function PackageSelection({
                     {t('packages.durationHead')}
                   </h2>
 
-                  <p className="mt-1 text-xs text-neutral-400">
-                    {t('packages.durationDec')}
-                  </p>
+                  <p className="mt-1 text-xs text-neutral-400">{t('packages.durationDec')}</p>
                 </div>
 
                 <div className="relative px-2">
@@ -305,9 +301,7 @@ export default function PackageSelection({
                           <span
                             className={[
                               'h-4 w-4 rounded-full border-2 bg-white transition-all',
-                              active
-                                ? 'border-app-primary bg-app-primary'
-                                : 'border-neutral-300',
+                              active ? 'border-app-primary bg-app-primary' : 'border-neutral-300',
                             ].join(' ')}
                           />
 
@@ -350,13 +344,9 @@ export default function PackageSelection({
 
           <aside className="h-fit rounded-xl border border-neutral-200 bg-white/90 p-5 shadow-lg xl:sticky xl:top-5">
             <div className="border-b border-neutral-200 pb-4">
-              <h2 className="text-lg font-bold text-neutral-900">
-                {t('packages.yourSelection')}
-              </h2>
+              <h2 className="text-lg font-bold text-neutral-900">{t('packages.yourSelection')}</h2>
 
-              <p className="mt-1 text-xs text-neutral-400">
-                {t('packages.reviewYourPackage')}
-              </p>
+              <p className="mt-1 text-xs text-neutral-400">{t('packages.reviewYourPackage')}</p>
             </div>
 
             <div className="space-y-5 pt-5">
@@ -386,9 +376,7 @@ export default function PackageSelection({
 
               <div className="border-t border-neutral-200 pt-1">
                 <div className="mt-1 flex items-end justify-between gap-3">
-                  <span className="text-sm text-neutral-500">
-                    {t('packages.totalPrice')}
-                  </span>
+                  <span className="text-sm text-neutral-500">{t('packages.totalPrice')}</span>
 
                   <span className="text-2xl font-bold text-neutral-900">
                     {totalPrice.toLocaleString()} 元
