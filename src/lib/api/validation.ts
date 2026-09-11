@@ -192,6 +192,49 @@ export const galleryResponseSchema = z.object({
     .default([]),
 })
 
+const coverageCoordinatesSchema = z.object({
+  id: z.union([z.number(), z.string()]).transform(Number),
+  name: bilingualStringSchema,
+  latitude: z.coerce.number().nullable(),
+  longitude: z.coerce.number().nullable(),
+})
+
+export const coverageAreaSchema = coverageCoordinatesSchema
+
+export const coverageRegionSchema = coverageCoordinatesSchema.extend({
+  areas: z.array(coverageAreaSchema).default([]),
+})
+
+export const coverageStateSchema = coverageCoordinatesSchema.extend({
+  regions: z.array(coverageRegionSchema).default([]),
+})
+
+export const coverageCitySchema = coverageStateSchema
+
+export const statesResponseSchema = z.object({
+  data: z.array(coverageStateSchema).default([]),
+  links: paginationLinksSchema.default({}),
+  meta: paginationMetaSchema.default({}),
+})
+
+export const regionsResponseSchema = z.object({
+  data: z.array(coverageRegionSchema).default([]),
+  links: paginationLinksSchema.default({}),
+  meta: paginationMetaSchema.default({}),
+})
+
+export const areasResponseSchema = z.object({
+  data: z.array(coverageAreaSchema).default([]),
+  links: paginationLinksSchema.default({}),
+  meta: paginationMetaSchema.default({}),
+})
+
+export const locationsResponseSchema = z.object({
+  data: z.array(coverageStateSchema).default([]),
+  links: paginationLinksSchema.default({}),
+  meta: paginationMetaSchema.default({}),
+})
+
 export function parseApiResponse<T>(schema: z.ZodTypeAny, value: unknown, resource: string): T {
   const result = schema.safeParse(value)
   if (!result.success) {

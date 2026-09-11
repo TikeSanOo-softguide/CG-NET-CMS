@@ -98,3 +98,11 @@ export function devLog(...args: unknown[]): void {
     console.warn('[CG-NET DEV]', ...args)
   }
 }
+
+export function localizedName(
+  name: { en: string; my: string; zh: string },
+  locale: 'en' | 'my' | 'zh' = 'en'
+): string {
+  return name[locale] || name.en;
+}
+

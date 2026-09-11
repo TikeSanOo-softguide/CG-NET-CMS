@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Wifi } from 'lucide-react'
 import { SiFacebook, SiWechat, SiTelegram, SiViber } from 'react-icons/si'
 import { Separator } from '@/components/ui/separator'
 import { useState } from 'react'
@@ -22,6 +21,7 @@ const SUPPORT_LINKS = [
   { to: '/app-guide#detail-step', labelKey: 'appGuide.detailStep' },
   { to: '/about#brand-guideline', labelKey: 'footer.brandGuideLine' },
   { to: '/privacy-policy', labelKey: 'footer.privacyPolicy' },
+  { to: '/available-location', labelKey: 'footer.availableLocation' },
 ]
 
 export function Footer() {
@@ -33,87 +33,7 @@ export function Footer() {
   return (
     <footer className="bg-app-footer text-slate-300" id="footer">
       <div className="container py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-white font-bold text-xl mb-3"
-              aria-label="CG-NET"
-            >
-              <Wifi className="h-6 w-6 text-primary" aria-hidden="true" />
-              <span>{t('footer.company')}</span>
-            </Link>
-            <p className="text-sm text-slate-400 leading-relaxed font-bold">{t('footer.line1')}</p>
-            <p className="text-sm text-slate-400 leading-relaxed font-bold">{t('footer.line2')}</p>
-
-            <div className="flex gap-3 mt-4">
-              {/* Facebook links */}
-              <a
-                href="https://www.facebook.com/Chenguangnet/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="CG-NET Facebook"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <SiFacebook className="h-5 w-5" aria-hidden="true" />
-              </a>
-
-              {/* WeChat links */}
-              <button
-                type="button"
-                onClick={() => setShowWechatQR(true)}
-                aria-label="CG-NET WeChat"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <SiWechat className="h-5 w-5" aria-hidden="true" />
-              </button>
-
-              {showWechatQR && (
-                <div
-                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
-                  onClick={() => setShowWechatQR(false)}
-                >
-                  <div
-                    className="relative  max-w-sm rounded-2xl bg-white p-2 shadow-2xl"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div className="text-center">
-                      <img
-                        src="/assets/QR/wechat-QR.png"
-                        alt="CG-NET WeChat QR Code"
-                        className="mx-auto w-64 h-64 object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Telegram links */}
-              <a
-                href="https://t.me/mlchenguang"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="CG-NET Telegram"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <SiTelegram className="h-5 w-5" aria-hidden="true" />
-              </a>
-
-              {/* WeChat links */}
-              <a
-                href="https://invite.viber.com/?g2=AQBGl7W57yWMA1OpCYCHfNKUzmB%2FaVyeSWFlu8QAaPZRNt%2F8Ow%2FGrdAG7jfDY2D%2F&lang=en"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="CG-NET Viber"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <SiViber className="h-5 w-5" aria-hidden="true" />
-              </a>
-            </div>
-            <Separator className="my-5 bg-slate-700" />
-            <p className="text-sm text-slate-400 leading-relaxed">{t('footer.copyright', { year })}</p>
-          </div>
-
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Quick links */}
           <div>
             <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">
@@ -170,6 +90,72 @@ export function Footer() {
                 <p key={contact.id}>{contact.contact_point}</p>
               ))}
             </address>
+          </div>
+        </div>
+
+        <Separator className="my-5 bg-slate-700" />
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-slate-500 text-center sm:text-left pb-[env(safe-area-inset-bottom)]">
+          <p>{t('footer.copyright', { year })}</p>
+          <div className="flex items-center justify-center gap-4">
+            <a
+              href="https://www.facebook.com/Chenguangnet/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Yaung-Ni-Oo Facebook"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              <SiFacebook className="h-5 w-5" aria-hidden="true" />
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setShowWechatQR(true)}
+              aria-label="Yaung-Ni-Oo WeChat"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              <SiWechat className="h-5 w-5" aria-hidden="true" />
+            </button>
+
+            {showWechatQR && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+                onClick={() => setShowWechatQR(false)}
+              >
+                <div
+                  className="relative  max-w-sm rounded-2xl bg-white p-2 shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="text-center">
+                    <img
+                      src="/assets/QR/wechat-QR.png"
+                      alt="Yaung-Ni-Oo WeChat QR Code"
+                      className="mx-auto w-64 h-64 object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <a
+              href="https://t.me/mlchenguang"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Yaung-Ni-Oo Telegram"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              <SiTelegram className="h-5 w-5" aria-hidden="true" />
+            </a>
+
+            <a
+              href="https://invite.viber.com/?g2=AQBGl7W57yWMA1OpCYCHfNKUzmB%2FaVyeSWFlu8QAaPZRNt%2F8Ow%2FGrdAG7jfDY2D%2F&lang=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Yaung-Ni-Oo Viber"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              <SiViber className="h-5 w-5" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </div>

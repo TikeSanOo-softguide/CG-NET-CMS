@@ -76,7 +76,7 @@ export default function HomePage() {
       <HeroBanner lang={lang} />
 
       {/* Stats */}
-      <div className="bg-muted/40 mb-8">
+      <div className="bg-muted/40 pb-5">
         <section
           className="relative z-30 -mt-3 sm:-mt-8 lg:-mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head"
           aria-label="Company statistics"

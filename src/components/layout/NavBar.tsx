@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { to: '/promotion', labelKey: 'nav.promotion' },
   { to: '/app-guide', labelKey: 'nav.appGuide' },
   { to: '/about', labelKey: 'nav.about' },
+  { to: '/available-location', labelKey: 'nav.locations' },
 ]
 
 export function NavBar() {
