@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Wifi } from 'lucide-react'
 import { SiFacebook, SiWechat, SiTelegram, SiViber } from 'react-icons/si'
 import { Separator } from '@/components/ui/separator'
 import { useState } from 'react'
