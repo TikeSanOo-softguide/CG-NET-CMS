@@ -55,7 +55,8 @@
     "cgNetCard": "晨光 数据卡",
     "viewAllPackages": "查看全部套餐",
     "toggleMenu": "打开导航菜单",
-    "packagesMenu": "套餐菜单"
+    "packagesMenu": "套餐菜单",
+    "locations": "城市"
   },
   "home": {
     "heroTitle": "超高速光纤宽带",
@@ -423,7 +424,8 @@
     "privacyPolicy": "隐私政策",
     "followUs": "关注我们",
     "copyright": "© {{year}} Chen Guang Co., Ltd。保留所有权利。",
-    "madeWith": "用心打造于缅甸 ❤️"
+    "madeWith": "用心打造于缅甸 ❤️",
+    "availableLocation": "可用地点"
   },
   "language": {
     "switch": "切换语言",

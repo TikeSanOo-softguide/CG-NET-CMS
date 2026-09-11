@@ -56,7 +56,8 @@
     "cgNetCard": "Yaung Ni Oo Data Card",
     "viewAllPackages": "View All Packages",
     "toggleMenu": "Toggle navigation menu",
-    "packagesMenu": "Packages menu"
+    "packagesMenu": "Packages menu",
+    "locations": "Cities"
   },
   "home": {
     "heroTitle": "Ultra-Fast Fiber Internet",
@@ -424,7 +425,8 @@
     "privacyPolicy": "Privacy Policy",
     "followUs": "Follow Us",
     "copyright": "© {{year}} Chen Guang Co., Ltd. All rights reserved.",
-    "madeWith": "Made with ❤️ in Myanmar"
+    "madeWith": "Made with ❤️ in Myanmar",
+    "availableLocation": "Available Location"
   },
   "language": {
     "switch": "Switch Language",
