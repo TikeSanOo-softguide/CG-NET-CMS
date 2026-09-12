@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
   DropdownMenu,
@@ -8,7 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
 import { ChevronDown, MapPin, MessageCircle, ShieldCheck, Smartphone } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -25,29 +24,46 @@ interface SupportDropdownProps {
 
 export function SupportDropdown({ onClose }: SupportDropdownProps) {
   const { t } = useTranslation()
+  const location = useLocation()
+  const isSupportRoute = SUPPORT_CATEGORIES.some(({ to }) => location.pathname === to)
+    
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="
-            gap-1
-            font-heading text-base font-medium
-            data-[state=open]:bg-accent
-            focus:ring-0
-            focus:ring-offset-0
-            focus-visible:outline-none
-            focus-visible:ring-0
-            focus-visible:ring-offset-0
-          "
-          aria-label={t('nav.support')}
-          aria-haspopup="menu"
-        >
-          {t('nav.support')}
-          <ChevronDown className="h-3.5 w-3.5 opacity-60 shrink-0" aria-hidden="true" />
-        </Button>
+        <span
+            className={cn(
+              "relative inline-flex cursor-pointer items-center gap-1",
+              "font-heading text-base font-medium",
+              "focus-visible:outline-none",
+              isSupportRoute && "text-transparent bg-clip-text bg-gradient-font"
+            )}
+            role="button"
+            tabIndex={0}
+          >
+          <span
+            className={cn(
+              isSupportRoute && "text-transparent bg-clip-text bg-gradient-font"
+            )}
+          >
+            {t("nav.support")}
+          </span>
+
+          <ChevronDown
+            className={cn(
+              "h-3.5 w-3.5 shrink-0 opacity-60",
+              isSupportRoute ? "text-font-blue" : "text-current"
+            )}
+            aria-hidden="true"
+          />
+          
+          <span
+            className={cn(
+              'absolute inset-x-0 -bottom-[6px] h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
+              isSupportRoute ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+            )}
+          />
+        </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
@@ -63,27 +79,15 @@ export function SupportDropdown({ onClose }: SupportDropdownProps) {
             <NavLink
               to={to}
               onClick={onClose}
-              className="flex cursor-pointer items-center gap-2 rounded-md border-0 px-3 py-2 text-base font-heading font-medium outline-none ring-0 transition-colors hover:bg-transparent focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+              className={({ isActive }) =>
+                cn(
+                  'flex cursor-pointer items-center gap-2 rounded-md border-0 px-3 py-2 text-base font-heading font-medium outline-none ring-0 transition-colors hover:bg-transparent focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+                  isActive ? 'bg-gradient-font bg-clip-text text-transparent' : 'text-font-black'
+                )
+              }
             >
-              {({ isActive }) => (
-                <>
-                  <Icon
-                    className="h-4 w-4 shrink-0 text-font-blue"
-                    aria-hidden="true"
-                  />
-
-                  <span
-                    className={cn(
-                      'transition-colors',
-                      isActive
-                        ? 'bg-gradient-font bg-clip-text text-transparent'
-                        : 'text-font-black'
-                    )}
-                  >
-                    {t(labelKey)}
-                  </span>
-                </>
-              )}
+              <Icon className="h-4 w-4 shrink-0 text-font-blue" aria-hidden="true" />
+              {t(labelKey)}
             </NavLink>
           </DropdownMenuItem>
         ))}

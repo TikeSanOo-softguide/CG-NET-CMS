@@ -170,7 +170,7 @@ export function NavBar() {
                   </AccordionTrigger>
                   <AccordionContent className="pb-1 pt-1">
                     <div className="ml-3 border-l border-border/80 pl-3">
-                      {SUPPORT_CATEGORIES.map(({ key, labelKey, icon: Icon, to }) => (
+                      {SUPPORT_CATEGORIES.map(({ key, labelKey, to }) => (
                         <NavLink
                           key={key}
                           to={to}
@@ -183,13 +183,7 @@ export function NavBar() {
                             )
                           }
                         >
-                          <>
-                            <Icon
-                              className="h-4 w-4 mx-2 text-font-blue"
-                              aria-hidden="true"
-                            />
-                            {t(labelKey)}
-                          </>
+                          {t(labelKey)}
                         </NavLink>
                       ))}
                     </div>
