@@ -131,10 +131,9 @@ export default function AppDownloadCard() {
           relative overflow-hidden
           rounded-2xl
           border border-white/50
-          bg-background/95
+          bg-background
           p-4
           shadow-2xl
-          backdrop-blur-xl
           dark:border-white/10
         "
       >

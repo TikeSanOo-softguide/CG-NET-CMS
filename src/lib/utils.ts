@@ -95,7 +95,7 @@ export function isHttpsUrl(url: string): boolean {
  */
 export function devLog(...args: unknown[]): void {
   if (import.meta.env.DEV) {
-    console.warn('[CG-NET DEV]', ...args)
+    console.warn('[Yaung Ni Oo DEV]', ...args)
   }
 }
 

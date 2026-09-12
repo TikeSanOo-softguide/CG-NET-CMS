@@ -33,7 +33,8 @@
     "free": "Free",
     "popular": "Most Popular",
     "featured": "Featured",
-    "goBack": "Go Back"
+    "goBack": "Go Back",
+    "language": "LANGUAGE"
   },
   "announcement": {
     "serviceInterruption": "🔔 Service Interruption: Internet service is temporarily unavailable. Our team is working to restore the connection."
@@ -47,7 +48,8 @@
     "promotion": "Promotion",
     "appGuide": "App Guide",
     "about": "About",
-    "contact": "Contact",
+    "contact": "Contact Us",
+    "support": "Support",
     "homeBroadband": "Home Broadband",
     "business": "Business",
     "fiber": "Fiber",
@@ -329,7 +331,7 @@
     }
   },
   "about": {
-    "title": "About Yaung Ni Oo",
+    "title": "About Us",
     "subtitle": "Myanmar's trusted internet service provider since 2015",
     "pageTitle": "About Us - Yaung Ni Oo",
     "ourMission": "Our Mission",

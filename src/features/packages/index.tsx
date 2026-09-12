@@ -142,32 +142,10 @@ export default function PackagesPage() {
     }
   }
 
-  if (isLoading) {
-    return (
-      <SectionWrapper>
-        <Skeleton className="h-8 w-40 mb-6" />
-        <Skeleton className="h-10 w-full max-w-2xl mb-3" />
-        <Skeleton className="h-5 w-1/2 mb-6" />
-        <div className="space-y-4">
-          <Skeleton className="h-32 w-full rounded-xl" />
-          <Skeleton className="h-32 w-full rounded-xl" />
-        </div>
-      </SectionWrapper>
-    )
-  }
-
-  if (isError) {
-    return (
-      <SectionWrapper>
-        <ErrorMessage onRetry={handleRetry} />
-      </SectionWrapper>
-    )
-  }
-
   return (
     <main>
       <PageHeader title={t('packages.title')} subtitle={t('packages.subtitle')} />
-      <SectionWrapper spacing="compact" bg-app-surface className="bg-muted/40">
+      <SectionWrapper spacing="compact" className="bg-muted/40">
         <div className="pt-5">
           <CommonTab
             filters={FILTERS}
@@ -175,7 +153,24 @@ export default function PackagesPage() {
             onValueChange={handleFilterChange}
           />
         </div>
-        <div className="mt-6">{renderPackageContent()}</div>
+
+        <div className="mt-6">
+          {isLoading && (
+            <div className="space-y-4">
+              <Skeleton className="h-8 w-40 mb-6" />
+              <Skeleton className="h-10 w-full max-w-2xl mb-3" />
+              <Skeleton className="h-5 w-1/2 mb-6" />
+              <div className="space-y-4">
+                <Skeleton className="h-32 w-full rounded-xl" />
+                <Skeleton className="h-32 w-full rounded-xl" />
+              </div>
+            </div>
+          )}
+
+          {isError && <ErrorMessage onRetry={handleRetry} />}
+
+          {!isLoading && !isError && renderPackageContent()}
+        </div>
       </SectionWrapper>
     </main>
   )

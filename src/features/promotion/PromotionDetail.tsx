@@ -49,7 +49,7 @@ export default function PromotionDetail() {
 
   return (
     <main className="bg-gradient-to-b from-background via-muted/30 to-background  sm:pt-6 md:pt-14 pb-10 sm:pb-14">
-      <SectionWrapper className="py-0  bg-muted/40">
+      <SectionWrapper className="py-0 bg-muted/40">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="space-y-3">
             <div className="flex items-center justify-between gap-3 py-3 sm:py-0">
