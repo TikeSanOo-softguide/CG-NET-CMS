@@ -153,7 +153,7 @@ export default function AppGuidePage() {
                   </AccordionTrigger>
 
                   <AccordionContent className="pb-5 pt-1 pl-2">
-                    <p className="text-sm text-font-muted mb-4 pl-0 sm:pl-11 leading-relaxed leading-[2.0]">
+                    <p className="text-sm text-font-muted mb-4 pl-0 sm:pl-11 leading-[2.0]">
                       {t(guide.descriptionKey)}
                     </p>
 
@@ -212,7 +212,7 @@ export default function AppGuidePage() {
                   </AccordionTrigger>
 
                   <AccordionContent className="pb-5 pt-1 pl-2">
-                    <p className="text-sm text-font-muted  pl-0 sm:pl-11 leading-relaxed leading-[1.8]">
+                    <p className="text-sm text-font-muted  pl-0 sm:pl-11 leading-[1.8]">
                       {t(faq.answerKey)}
                     </p>
                   </AccordionContent>

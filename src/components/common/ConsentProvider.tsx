@@ -62,7 +62,7 @@ export function ConsentProvider({
                             'c15t-consent-banner fixed inset-x-0 bottom-0 z-[9999] w-full',
 
                         consentBannerCard:
-                            'flex w-full max-w-none flex-col rounded-none border-0 bg-background shadow-none sm:flex-row sm:items-center',
+                            'flex w-full max-w-none flex-col rounded-xl border-0 bg-background shadow-none sm:flex-row sm:items-center',
 
                         consentBannerHeader: 'min-w-0 flex-1 px-4 py-2 sm:px-6',
 

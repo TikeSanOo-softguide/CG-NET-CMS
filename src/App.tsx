@@ -48,18 +48,16 @@ function AppContent() {
   }, [consents.measurement, location.pathname])
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-clip">
+    <DotBackgroundDemo className="flex flex-col overflow-x-clip">
       <Header />
-      <DotBackgroundDemo>
-        <div className="flex-1">
-          <ErrorBoundary>
-            <AppRoutes />
-          </ErrorBoundary>
-        </div>
-      </DotBackgroundDemo>
+      <div className="flex flex-1 flex-col">
+        <ErrorBoundary>
+          <AppRoutes />
+        </ErrorBoundary>
+      </div>
       <Footer />
       <Toaster />
-    </div>
+    </DotBackgroundDemo>
   )
 }
 

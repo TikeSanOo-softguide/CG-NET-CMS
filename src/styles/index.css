@@ -85,8 +85,15 @@
   html {
     scroll-behavior: smooth;
   }
-  body {
+  html,
+  body,
+  #root {
     @apply bg-background text-foreground font-sans;
+    background-color: hsl(var(--background));
+    min-height: 100vh;
+  }
+
+  body {
     word-break: break-word;
   }
   h1,
