@@ -39,12 +39,7 @@ export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialCategory = searchParams.get('category') ?? 'news'
   const [activeFilter, setActiveFilter] = useState(initialCategory)
-  const {
-    data: galleryData,
-    isLoading: galleryLoading,
-    isError: galleryError,
-    refetch: refetchGallery,
-  } = useGallery()
+  const { data: galleryData, isLoading: galleryLoading, isError: galleryError } = useGallery()
 
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   const FILTERS = [
@@ -309,7 +304,7 @@ export default function HomePage() {
           subtitle={t('home.galleryDesc')}
         />
 
-        {galleryError && <ErrorMessage onRetry={() => void refetchGallery()} />}
+        {galleryError && <ErrorMessage />}
 
         {galleryLoading && (
           <div className="grid grid-cols-1 gap-4 auto-rows-[190px] sm:grid-cols-2 md:grid-cols-4">
@@ -386,7 +381,7 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Download Section */}
-      <SectionWrapper id="app" className="py-20 md:py-24 bg-muted/40">
+      <SectionWrapper id="app" className="py-10 md:py-10 bg-muted/40">
         <div className="w-full overflow-hidden rounded-xl border border-border bg-app-accent-bg">
           <div className="grid items-center gap-8 p-8 md:grid-cols-2 md:p-12">
             <div>
@@ -414,16 +409,16 @@ export default function HomePage() {
               </button>
             </div>
 
-            <div className="relative flex justify-center md:justify-end items-center h-full">
-              {homeContent.downloadItems.map((item, i) => (
-                <AnimatedCard key={item.key} delay={i * 90} className="w-full rounded-xl">
-                  <img
-                    src={item.imageUrl}
-                    alt={t(item.key)}
-                    className="h-auto w-full rounded-xl drop-shadow-xl"
-                    loading="lazy"
-                  />
-                </AnimatedCard>
+            <div className="relative flex h-full items-center justify-center md:justify-end">
+              {homeContent.downloadItems.map((item) => (
+                  <div key={item.key} className="w-full rounded-xl">
+                    <img
+                      src={item.imageUrl}
+                      alt={t(item.key)}
+                      className="h-auto w-full rounded-xl drop-shadow-xl"
+                      loading="lazy"
+                    />
+                  </div>
               ))}
             </div>
           </div>
