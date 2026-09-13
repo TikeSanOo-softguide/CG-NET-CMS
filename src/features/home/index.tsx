@@ -28,7 +28,7 @@ import AnimatedStat from '@/components/common/AnimatedStat'
 export default function HomePage() {
   const { t, i18n } = useTranslation()
   const lang = normalizeLanguage(i18n.language)
-  usePageTitle()
+  usePageTitle(t('home.pageTitle'))
   const {
     data: recommendedPackages,
     isLoading: pkgLoading,

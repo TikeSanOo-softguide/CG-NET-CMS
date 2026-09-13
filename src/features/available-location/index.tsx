@@ -14,6 +14,7 @@ import { t } from 'i18next'
 import CommonDropdown from '@/components/common/CommonDropDown'
 import { localizedName } from '@/lib/utils'
 import type { CoverageArea } from '@/types/coverage'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 type Props = {
   state: string | null
@@ -50,6 +51,7 @@ export default function AvailableLocationPage({ state, area }: Props) {
   const regions = regionsQuery.data ?? []
   const selectedStateData = states.find((item) => item.id === stateId)
   const selectedRegionData = regions.find((item) => item.id === regionId)
+  usePageTitle(t('location.pageTitle'))
 
   useEffect(() => {
     if (!holder.current || mapRef.current) return

@@ -20,7 +20,7 @@ const PAGE_SIZE = 6
 
 function NewsSkeleton() {
   return (
-    <Card className="overflow-hidden border-border/60 rounded-[24px]">
+    <Card className="overflow-hidden border-border/60 rounded-xl">
       <Skeleton className="h-44 w-full rounded-none" />
       <CardHeader>
         <Skeleton className="h-5 w-1/3 mb-2" />
@@ -98,7 +98,7 @@ export default function NewsPage() {
         </div>
 
         {isLoading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <NewsSkeleton key={i} />
             ))}
