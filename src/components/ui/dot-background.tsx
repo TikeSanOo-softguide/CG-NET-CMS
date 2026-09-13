@@ -22,7 +22,7 @@ export default function DotBackgroundDemo({ className, children }: DotBackground
         }}
       />
 
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 flex min-h-screen flex-col">{children}</div>
     </div>
   )
 }

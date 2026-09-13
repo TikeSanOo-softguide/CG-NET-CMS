@@ -48,13 +48,13 @@ function AppContent() {
   }, [consents.measurement, location.pathname])
 
   return (
-    <DotBackgroundDemo className="flex flex-col overflow-x-clip">
+    <DotBackgroundDemo className="overflow-x-clip">
       <Header />
-      <div className="flex flex-1 flex-col">
+      <main className="flex flex-1 flex-col">
         <ErrorBoundary>
           <AppRoutes />
         </ErrorBoundary>
-      </div>
+      </main>
       <Footer />
       <Toaster />
     </DotBackgroundDemo>

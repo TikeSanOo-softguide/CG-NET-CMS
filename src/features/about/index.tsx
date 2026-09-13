@@ -1,14 +1,13 @@
 import { useTranslation } from 'react-i18next'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { motion } from 'framer-motion'
-import { BorderBeam } from '@/components/magicui/border-beam'
 import { aboutContent } from '@/lib/content/about'
 import { StackedCards } from '@/components/common/StackedCards'
-import { Users, Gem, ShieldCheck, Megaphone } from 'lucide-react'
+import { Users, Gem, ShieldCheck, Megaphone, Target, Eye } from 'lucide-react'
 import { useHashScroll } from '@/hooks/useHashScroll'
 import { useGallery } from '@/hooks/useGallery'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -20,13 +19,26 @@ export default function AboutPage() {
   const { data: galleryData, isLoading: galleryLoading } = useGallery()
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
+  const MISSION_VISION = [
+    {
+      icon: Target,
+      label: t('about.ourMission'),
+      text: t('about.mission'),
+    },
+    {
+      icon: Eye,
+      label: t('about.ourVision'),
+      text: t('about.vision'),
+    },
+  ];
+
   usePageTitle(t('about.pageTitle'))
   return (
     <main>
       <PageHeader title={t('about.title')} subtitle={t('about.tagline')} />
 
       {/* Our Story */}
-      <SectionWrapper className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0 ">
+      <SectionWrapper className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0 bg-muted/40">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +106,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Mission & Vision */}
-      <SectionWrapper className="bg-muted/40">
+      <SectionWrapper>
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-5 ">
             <h2 className="text-xl sm:text-3xl md:text-[35px] font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-3">
@@ -103,17 +115,15 @@ export default function AboutPage() {
 
             <div className="h-1.5 w-24 bg-app-primary rounded-full mx-auto"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatedCard variant="fade-right" delay={0} className="rounded-lg bg-app-surface">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <AnimatedCard variant="fade-right" delay={0} className="rounded-xl bg-app-surface">
               <Card className="h-full card-shine card-glow border bg-app-surface">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
-                      <span className="text-xl" aria-hidden="true">
-                        🎯
-                      </span>
+                      <Target className="h-6 w-6 text-primary" />
                     </div>
-                    <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font text-font-muted  bg-clip-text text-transparent pt-3">
+                    <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font text-font-muted bg-clip-text pt-3">
                       {t('about.ourMission')}
                     </span>
                   </CardTitle>
@@ -123,33 +133,14 @@ export default function AboutPage() {
                     {t('about.mission')}
                   </p>
                 </CardContent>
-                <BorderBeam
-                  size={80}
-                  duration={6}
-                  delay={0}
-                  borderWidth={2}
-                  colorFrom="#004AC6"
-                  colorTo="#004AC6"
-                />
-                <BorderBeam
-                  size={80}
-                  duration={6}
-                  delay={4}
-                  reverse
-                  borderWidth={2}
-                  colorFrom="#004AC6"
-                  colorTo="#004AC6"
-                />
               </Card>
             </AnimatedCard>
-            <AnimatedCard variant="fade-left" delay={100} className="rounded-lg bg-app-surface">
+            <AnimatedCard variant="fade-left" delay={100} className="rounded-xl bg-app-surface">
               <Card className="h-full card-shine card-glow border bg-app-surface">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/25 to-pink-500/20 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-500/10 transition-transform duration-300 group-hover:scale-105">
-                      <span className="text-xl" aria-hidden="true">
-                        🔭
-                      </span>
+                      <Eye className="h-6 w-6 text-primary" />
                     </div>
                     <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font bg-clip-text text-transparent pt-3">
                       {t('about.ourVision')}
@@ -161,31 +152,32 @@ export default function AboutPage() {
                     {t('about.vision')}
                   </p>
                 </CardContent>
-                <BorderBeam
-                  size={80}
-                  duration={6}
-                  delay={0}
-                  borderWidth={2}
-                  colorFrom="#004AC6"
-                  colorTo="#004AC6"
-                />
-                <BorderBeam
-                  size={80}
-                  duration={6}
-                  delay={4}
-                  reverse
-                  borderWidth={2}
-                  colorFrom="#004AC6"
-                  colorTo="#004AC6"
-                />
               </Card>
             </AnimatedCard>
+          </div> */}
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {MISSION_VISION.map(({ icon: Icon, label, text }) => (
+              <article
+                key={label}
+                className="rounded-xl border border-border bg-white p-7 text-left shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift sm:p-8"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent">
+                    <Icon className="h-6 w-6 text-font-blue" />
+                  </span>
+                  <h3 className="text-xl font-bold text-foreground">{label}</h3>
+                </div>
+                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
+                  {text}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </SectionWrapper>
 
       {/* Brand Guideline Section */}
-      <SectionWrapper id="brand-guideline" className="bg-background pt-8 pb-4 sm:pb-16 bg-muted/40">
+      <SectionWrapper id="brand-guideline" className="pt-8 pb-4 sm:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
           {/* Left Side: Features Card */}
           <div className="bg-app-surface border-2 border-font-blue shadow-xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
@@ -199,7 +191,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 ">
                     {t('about.personalityTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug !leading-[1.8]">
+                  <p className="text-font-muted text-xs sm:text-sm!leading-[1.8]">
                     {t('about.personalityDesc')}
                   </p>
                 </div>
@@ -214,7 +206,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
                     {t('about.coreValuesTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug  !leading-[1.8]">
+                  <p className="text-font-muted text-xs sm:text-sm !leading-[1.8]">
                     {t('about.coreValuesDesc')}
                   </p>
                 </div>
@@ -229,7 +221,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
                     {t('about.brandPromiseTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug  !leading-[1.8]">
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
                     {t('about.brandPromiseDesc')}
                   </p>
                 </div>
@@ -244,7 +236,7 @@ export default function AboutPage() {
                   <h4 className="text-font-blue  text-base sm:text-lg font-bold mb-0.5">
                     {t('about.toneOfVoiceTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug  !leading-[1.8]">
+                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
                     {t('about.toneOfVoiceDesc')}
                   </p>
                 </div>
@@ -254,13 +246,18 @@ export default function AboutPage() {
 
           {/* Right Side: Text Content */}
           <div className="space-y-6">
-            <div className="flex gap-4 sm:gap-6">
-              <div className="w-2 sm:w-3 rounded-full bg-app-yellow shrink-0"></div>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-font-blue uppercase leading-[1.1] whitespace-pre-line ">
-                {t('about.brandGuidelineTitle')}
-              </h2>
+            <div className="mx-auto inline-block rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 px-3 py-6 lg:mx-0">
+              <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl">
+                BRAND
+              </p>
+              <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl">
+                GUIDELINE
+              </p>
             </div>
-            <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg  !leading-[1.8]">
+            <h3 className="mt-6 text-2xl font-bold text-foreground sm:text-3xl">
+              How we present CG-NET
+            </h3>
+            <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg">
               {t('about.brandGuidelineDesc')}
             </p>
           </div>
@@ -268,7 +265,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Activities Gallery*/}
-      <SectionWrapper id="gallery">
+      <SectionWrapper id="gallery" className="bg-muted/40">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
           <div className="space-y-6 text-left relative">
             <div className="absolute -left-4 -top-4 w-32 h-32 bg-app-primary/10 rounded-full blur-2xl pointer-events-none"></div>
@@ -286,7 +283,7 @@ export default function AboutPage() {
               <span className="text-font-black">{t(aboutContent.culture.titleKey2)}</span>
             </h3>
             <div className="border-l-4 border-app-primary/50 pl-4 py-1">
-              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium !leading-[1.8]">
+              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium">
                 {t(aboutContent.culture.descriptionKey)}
               </p>
             </div>
