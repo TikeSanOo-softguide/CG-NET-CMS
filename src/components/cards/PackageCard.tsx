@@ -27,7 +27,7 @@ export function PackageCard({ pkg, lang }: PackageCardProps) {
         pkg.isPopular ? 'border-primary/50' : 'border-border/80',
       ].join(' ')}
     >
-      <div className="card-media relative h-44 overflow-hidden">
+      <div className="card-media relative aspect-[260/348] overflow-hidden">
         <img
           src={pkg.imageUrl}
           alt={getLocalized(pkg.title, lang)}
@@ -38,9 +38,7 @@ export function PackageCard({ pkg, lang }: PackageCardProps) {
         <Badge variant="secondary" className="absolute left-3 top-3 bg-white/90 text-foreground">
           {getLocalized(pkg.categoryLabel, lang)}
         </Badge>
-        {pkg.isPopular && (
-          <Badge className="absolute right-3 top-3">{t('common.popular')}</Badge>
-        )}
+        {pkg.isPopular && <Badge className="absolute right-3 top-3">{t('common.popular')}</Badge>}
         <p className="absolute bottom-3 left-3 text-lg font-bold text-white drop-shadow">
           {pkg.speed}
         </p>
@@ -73,7 +71,11 @@ export function PackageCard({ pkg, lang }: PackageCardProps) {
         </ul>
 
         <div className="mt-auto pt-5">
-          <Button asChild className="w-full gap-2 rounded-[12px]" variant={pkg.isPopular ? 'default' : 'outline'}>
+          <Button
+            asChild
+            className="w-full gap-2 rounded-[12px]"
+            variant={pkg.isPopular ? 'default' : 'outline'}
+          >
             <Link to={`/packages/${pkg.slug}`}>
               {getLocalized(pkg.cta, lang)}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

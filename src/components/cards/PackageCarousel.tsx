@@ -22,36 +22,45 @@ interface PackageCarouselProps {
   packages: RecommendedPackage[]
   lang: SupportedLanguage
 }
-
 function getCardsToShow(width: number) {
-  if (width >= 1280) return 5
-  if (width >= 768) return 3
-  if (width >= 640) return 2
+  if (width >= 1536) return 6 // 2xl
+  if (width >= 1280) return 5 // xl
+  if (width >= 1024) return 4 // lg
+  if (width >= 768) return 3 // md
+  if (width >= 640) return 2 // sm
   return 1
 }
 
 function getCardWidth(width: number) {
-  if (width >= 1280) return 'calc((100% - (4 * 1rem)) / 5)'
-  if (width >= 768) return 'calc((100% - (2 * 1rem)) / 3)'
-  if (width >= 640) return 'calc((100% - 1rem) / 2)'
-  return '88%'
-}
+  if (width >= 1280) {
+    return 'calc((100% - (4 * 1rem)) / 5)'
+  }
 
+  if (width >= 768) {
+    return 'calc((100% - (2 * 1rem)) / 3)'
+  }
+
+  if (width >= 640) {
+    return 'calc((100% - 1rem) / 2)'
+  }
+
+  return '100%'
+}
 function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: SupportedLanguage }) {
   return (
     <Card
       className={[
-        'group relative h-[370px] sm:h-[370px] xl:h-[370px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
+        'group relative h-[min(370px,calc(100svh_-_32px))] sm:h-[370px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
         'transition-all duration-300 ease-out',
-        'hover:z-10 ',
+        'hover:z-10',
       ].join(' ')}
     >
-      <div className="card-media no-image-zoom relative h-full overflow-hidden rounded-xl border border-white/80 ">
+      <div className="card-media no-image-zoom relative h-full overflow-hidden rounded-xl border border-white/80 bg-muted/20 ">
         {pkg.imageUrl && typeof pkg.imageUrl === 'string' ? (
           <img
             src={pkg.imageUrl}
             alt={getLocalized(pkg.title, lang)}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain object-center"
             loading="lazy"
           />
         ) : (
@@ -266,6 +275,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
               className="shrink-0 py-2"
               style={{
                 flex: '0 0 var(--card-width)',
+                maxWidth: '260px',
               }}
             >
               <PackageCarouselCard pkg={pkg} lang={lang} />

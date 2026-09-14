@@ -1,3 +1,4 @@
+export type BannerType = 'web_background' | 'web_popup' | 'app_entry' | 'app_popup'
 export interface BilingualString {
   en: string
   my: string
@@ -124,6 +125,7 @@ export interface Banner {
   image_url_en: string
   image_url_zh: string
   image_url_my: string
+  type: BannerType
 }
 
 export interface Contact {

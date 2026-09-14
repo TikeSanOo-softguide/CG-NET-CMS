@@ -12,7 +12,8 @@ interface HeroBannerProps {
 }
 
 export function HeroBanner({ lang }: HeroBannerProps) {
-  const { data: slides, isLoading } = useBanners()
+  const { data: allBanners, isLoading } = useBanners()
+  const slides = allBanners?.filter((banner) => banner.type === 'web_background')
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
   const [, setLoaded] = useState<Record<string, boolean>>({})

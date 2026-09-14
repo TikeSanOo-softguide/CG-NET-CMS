@@ -73,7 +73,7 @@ export default function App() {
             }}
           >
             <ErrorBoundary>
-              <PromotionModal />
+              <PromotionModal lang={''} />
               <AppDownloadCard />
               <AppContent />
               <ScrollToTop />

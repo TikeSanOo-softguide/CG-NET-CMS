@@ -30,7 +30,7 @@ export default function AboutPage() {
       label: t('about.ourVision'),
       text: t('about.vision'),
     },
-  ];
+  ]
 
   usePageTitle(t('about.pageTitle'))
   return (
@@ -115,46 +115,7 @@ export default function AboutPage() {
 
             <div className="h-1.5 w-24 bg-app-primary rounded-full mx-auto"></div>
           </div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatedCard variant="fade-right" delay={0} className="rounded-xl bg-app-surface">
-              <Card className="h-full card-shine card-glow border bg-app-surface">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 via-blue-500/20 to-purple-500/20 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
-                      <Target className="h-6 w-6 text-primary" />
-                    </div>
-                    <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font text-font-muted bg-clip-text pt-3">
-                      {t('about.ourMission')}
-                    </span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
-                    {t('about.mission')}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimatedCard>
-            <AnimatedCard variant="fade-left" delay={100} className="rounded-xl bg-app-surface">
-              <Card className="h-full card-shine card-glow border bg-app-surface">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/25 to-pink-500/20 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-500/10 transition-transform duration-300 group-hover:scale-105">
-                      <Eye className="h-6 w-6 text-primary" />
-                    </div>
-                    <span className="text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-font bg-clip-text text-transparent pt-3">
-                      {t('about.ourVision')}
-                    </span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
-                    {t('about.vision')}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimatedCard>
-          </div> */}
+
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {MISSION_VISION.map(({ icon: Icon, label, text }) => (
               <article
@@ -167,9 +128,7 @@ export default function AboutPage() {
                   </span>
                   <h3 className="text-xl font-bold text-foreground">{label}</h3>
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-                  {text}
-                </p>
+                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">{text}</p>
               </article>
             ))}
           </div>
@@ -247,15 +206,15 @@ export default function AboutPage() {
           {/* Right Side: Text Content */}
           <div className="space-y-6">
             <div className="mx-auto inline-block rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 px-3 py-6 lg:mx-0">
-              <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl">
-                BRAND
+              <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl mb-4">
+                {t('about.brandText')}
               </p>
               <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl">
-                GUIDELINE
+                {t('about.guidelineText')}
               </p>
             </div>
             <h3 className="mt-6 text-2xl font-bold text-foreground sm:text-3xl">
-              How we present CG-NET
+              {t('about.brandGuidelineTitle')}
             </h3>
             <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg">
               {t('about.brandGuidelineDesc')}
