@@ -229,6 +229,9 @@ export default function PackageSelection({
                           <span className="ml-1 text-sm font-medium">Mbps</span>
                         </p>
                       </div>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {Number(pkg.price).toLocaleString()} 元/mo
+                      </p>
                     </button>
                   )
                 })}
@@ -311,7 +314,9 @@ export default function PackageSelection({
                               active ? 'text-neutral-900' : 'text-neutral-500',
                             ].join(' ')}
                           >
-                            {option.label}
+                            {option.months === 1
+                              ? option.label.replace(/months/i, 'Month')
+                              : option.label}
                           </span>
                         </button>
                       )
@@ -366,11 +371,10 @@ export default function PackageSelection({
                 <p className="text-xs text-neutral-400">{t('packages.duration')}</p>
 
                 <p className="mt-2 text-sm font-medium text-neutral-800">
-                  {selectedDuration === 12
-                    ? `1 ${t('packages.year')}`
-                    : `${selectedDuration} ${t('packages.months')}${
-                        selectedDuration > 1 ? 's' : ''
-                      }`}
+                  {selectedDuration}{' '}
+                  {selectedDuration === 1
+                    ? t('packages.months').replace(/months/i, 'Month')
+                    : t('packages.months')}
                 </p>
               </div>
 

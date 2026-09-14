@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { X } from 'lucide-react'
+import { Banner } from '@/types'
+import { useBanners } from '@/hooks/useBanner'
 
 const STORAGE_KEY = 'cgnet-promotion-modal-dismissed-at'
 
 // Show again after 24 hours
 const DISMISS_DURATION = 24 * 60 * 60 * 1000
+
+// Auto slide every 5 seconds
+const AUTOPLAY_MS = 3000
 
 const shouldShowModal = (): boolean => {
   const dismissedAt = localStorage.getItem(STORAGE_KEY)
@@ -31,10 +36,46 @@ const shouldShowModal = (): boolean => {
   return false
 }
 
-export default function PromotionModal() {
+export default function PromotionModal({ lang }: { lang: string }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
+  const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+
+  const { data: allBanners } = useBanners()
+
+  // Get ALL web_popup banners
+  const popupBanners = allBanners?.filter((banner) => banner.type === 'web_popup') ?? []
+
+  /**
+   * Get localized image URL
+   */
+  const getImageUrl = useCallback(
+    (slide: Banner) => {
+      const imageMap = {
+        en: slide.image_url_en,
+        zh: slide.image_url_zh,
+        my: slide.image_url_my,
+      }
+
+      const imagePath = imageMap[lang as keyof typeof imageMap] ?? slide.image_url_en
+
+      return `${STORAGE_URL}/${imagePath}`
+    },
+    [lang, STORAGE_URL]
+  )
+
+  /**
+   * Reset current slide when language or banners change
+   */
+  useEffect(() => {
+    setCurrentIndex(0)
+  }, [lang, popupBanners.length])
+
+  /**
+   * Show modal after 1 second
+   */
   useEffect(() => {
     // Don't show if dismissed within the last 24 hours
     if (!shouldShowModal()) {
@@ -51,6 +92,28 @@ export default function PromotionModal() {
     }
   }, [])
 
+  /**
+   * Auto slide
+   */
+  useEffect(() => {
+    // Don't autoplay if modal is closed
+    // Don't autoplay if there is only one banner
+    if (!isOpen || popupBanners.length <= 1) {
+      return
+    }
+
+    const interval = window.setInterval(() => {
+      setCurrentIndex((prev) => (prev === popupBanners.length - 1 ? 0 : prev + 1))
+    }, AUTOPLAY_MS)
+
+    return () => {
+      window.clearInterval(interval)
+    }
+  }, [isOpen, popupBanners.length])
+
+  /**
+   * Close modal
+   */
   const handleClose = () => {
     setIsClosing(true)
 
@@ -64,9 +127,12 @@ export default function PromotionModal() {
     }, 300)
   }
 
-  if (!isOpen) {
+  // - there are no popup banners
+  if (!isOpen || popupBanners.length === 0) {
     return null
   }
+
+  const currentBanner = popupBanners[currentIndex]
 
   return (
     <div
@@ -82,6 +148,7 @@ export default function PromotionModal() {
       onClick={handleClose}
     >
       <div className="relative overflow-visible">
+        {/* Modal */}
         <div
           className={`
             relative
@@ -98,8 +165,10 @@ export default function PromotionModal() {
           `}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Image */}
           <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop"
+            key={currentBanner.id}
+            src={getImageUrl(currentBanner)}
             alt="Promotion"
             className="
               block
@@ -111,19 +180,24 @@ export default function PromotionModal() {
           />
         </div>
 
-        <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 z-30">
+        {/* Close Button */}
+        <div className="absolute -bottom-14 left-1/2 z-30 -translate-x-1/2">
           <button
             type="button"
             onClick={handleClose}
             aria-label="Close promotion"
             className="
-              flex h-10 w-10
-              items-center justify-center
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
               rounded-full
+              border
+              border-neutral-200
               bg-white
               text-neutral-800
               shadow-xl
-              border border-neutral-200
               transition-transform
               hover:scale-110
               focus-visible:outline-none

@@ -160,6 +160,7 @@ export const bannerResponseSchema = z.object({
         image_url_en: z.string().default(''),
         image_url_zh: z.string().default(''),
         image_url_my: z.string().default(''),
+        type: z.string(),
       })
     )
     .default([]),
