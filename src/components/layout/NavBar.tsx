@@ -54,31 +54,31 @@ function DesktopNavItem({ to, labelKey }: { to: string; labelKey: string }) {
 }
 
 function MobileNavLink({
-  to,
-  labelKey,
-  onNavigate,
-}: {
-  to: string
-  labelKey: string
-  onNavigate: () => void
-}) {
-  const { t } = useTranslation()
+    to,
+    labelKey,
+    onNavigate,
+  }: {
+    to: string
+    labelKey: string
+    onNavigate: () => void
+  }) {
+    const { t } = useTranslation()
 
-  return (
-    <NavLink
-      to={to}
-      end={to === '/'}
-      onClick={onNavigate}
-      className={({ isActive }) =>
-        cn(
-          'flex min-h-12 items-center rounded-md px-3 py-2.5 text-[15px] font-medium text-font-black transition-colors hover:bg-accent/60',
-          isActive && 'text-transparent bg-clip-text bg-gradient-font'
-        )
-      }
-    >
-      {t(labelKey)}
-    </NavLink>
-  )
+    return (
+      <NavLink
+        to={to}
+        end={to === '/'}
+        onClick={onNavigate}
+        className={({ isActive }) =>
+          cn(
+            'flex min-h-12 items-center rounded-md px-3 py-2.5 text-[15px] font-medium text-font-black transition-colors hover:bg-accent/60',
+            isActive && 'text-transparent bg-clip-text bg-gradient-font'
+          )
+        }
+      >
+        {t(labelKey)}
+      </NavLink>
+    )
 }
 
 export function NavBar() {

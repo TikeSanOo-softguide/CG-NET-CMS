@@ -34,7 +34,7 @@ export default function Pagination({
   }
 
   return (
-    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap mb-12">
+    <nav aria-label="Pagination" className="flex items-center justify-center gap-2 flex-wrap pb-12">
       {/* Previous */}
       <Button
         variant="outline"

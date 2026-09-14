@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   Icon,
   LatLng,
@@ -12,48 +12,44 @@ import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { useTranslation } from 'react-i18next'
-import { Clock, Headphones, Mail, MapPin, Phone } from 'lucide-react'
-
-const CONTACT_DETAILS = [
-  {
-    icon: MapPin,
-    label: "Office Address",
-    value: "No. 12, Kabar Aye Pagoda Road, Yangon, Myanmar",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "09 8872 88882 · 09 42 182 3339",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "support@cg-net.com.mm",
-  },
-  {
-    icon: Clock,
-    label: "Working Hours",
-    value: "Mon – Sat: 9:00 AM – 6:00 PM",
-  },
-];
+import { Headphones } from 'lucide-react'
+import { useContact } from '@/hooks/useContact'
+import DirectionAwareButton from '@/components/common/DirectionAwareButton'
+import { SiFacebook, SiTelegram, SiViber } from 'react-icons/si'
 
 const SOCIAL_LINKS = [
-  { icon: Phone, label: "Facebook", href: "#" },
-  { icon: Phone, label: "Messenger", href: "#" },
-  { icon: Phone, label: "Telegram", href: "#" },
-  { icon: Phone, label: "Viber", href: "#" },
-];
+  {
+    icon: SiFacebook,
+    label: 'Facebook',
+    href: 'https://www.facebook.com/Chenguangnet/',
+    color: '#1877F2',
+  },
+  {
+    icon: SiTelegram,
+    label: 'Telegram',
+    href: 'https://t.me/mlchenguang',
+    color: '#229ED9',
+  },
+  {
+    icon: SiViber,
+    label: 'Viber',
+    href: 'https://invite.viber.com/?g2=AQBGl7W57yWMA1OpCYCHfNKUzmB%2FaVyeSWFlu8QAaPZRNt%2F8Ow%2FGrdAG7jfDY2D%2F&lang=en',
+    color: '#7360F2',
+  },
+]
 
 const COMPANY_LOCATION = {
   name: 'Yaung Ni Oo',
-  lat: 16.8661,
-  lng: 96.1951,
+  lat: 20.450060,
+  lng: 99.902774,
 }
+
 
 export default function ContactUsPage() {
   const { t } = useTranslation()
   const mapRef = useRef<HTMLDivElement | null>(null)
   const leafletMapRef = useRef<LeafletMap | null>(null)
+  const { data: contacts } = useContact()
 
   usePageTitle(t('contact.pageTitle'))
 
@@ -97,59 +93,30 @@ export default function ContactUsPage() {
       leafletMapRef.current = null
     }
   }, [])
-
-  const [copied, setCopied] = useState(false);
-
-  const copyPhone = () => {
-    navigator.clipboard.writeText("0987288882").then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    });
-  };
+  
 
   return (
     <>
       <PageHeader title={t('contact.title')} subtitle={t('contact.subtitle')} />
       <SectionWrapper spacing="compact" className="py-10 bg-muted/40">
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
-          {/* Left column: contact info, QR, social */}
           <div className="flex flex-col gap-6">
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+            <div className="rounded-xl border border-border bg-card p-6 shadow-soft sm:p-8">
               <h2 className="text-xl font-bold text-foreground">
-                Contact Information
+                {t('contact.contactInfoTitle')}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Reach us through any of the channels below.
+                {t('contact.contactInfoSubtitle')}
               </p>
 
               <ul className="mt-6 space-y-5">
-                {CONTACT_DETAILS.map(({ icon: Icon, label, value }) => (
-                  <li key={label} className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent">
-                      <Icon className="h-5 w-5 text-primary" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                        {label}
-                      </p>
-                      <p className="mt-0.5 text-[15px] font-medium text-foreground">
-                        {value}
-                      </p>
-                    </div>
-                  </li>
+                {contacts?.map((contact) => (
+                  <p key={contact.id} className="mt-0.5 text-[15px] font-medium text-foreground">{contact.contact_point}</p>
                 ))}
               </ul>
-
-              <button
-                onClick={copyPhone}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-all hover:brightness-110 active:scale-[0.98] sm:w-auto"
-              >
-                <Phone className="h-4 w-4" />
-                {copied ? "Phone number copied" : "Copy support number"}
-              </button>
             </div>
 
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+            <div className="rounded-xl border border-border bg-card p-6 shadow-soft sm:p-8">
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
                 <div className="shrink-0">
                   <div className="overflow-hidden rounded-xl  flex items-center  justify-center border border-border bg-white p-2">
@@ -164,87 +131,61 @@ export default function ContactUsPage() {
                 </div>
                 <div>
                   <h3 className="flex items-center gap-2 text-lg font-bold text-foreground">
-                    <Headphones className="h-5 w-5 text-primary" />
-                    Complaint & Support QR
+                    <Headphones className="h-5 w-5 text-font-blue" />
+                    {t('contact.complaintQrTitle')}
                   </h3>
                   <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                    Scan this code with your phone camera to open our complaint
-                    channel. Share your issue, account details, and contact
-                    number — our support team will follow up within 24 hours.
+                    {t('contact.complaintQrDesc')}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+            <div className="rounded-xl border border-border bg-card p-6 shadow-soft sm:p-8">
               <h3 className="text-lg font-bold text-foreground">
-                Follow Yaung Ni Oo on Social Media
+                {t('contact.socialMediaTitle')}
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Stay updated with news, promotions, and service alerts.
+                {t('contact.socialMediaSubtitle')}
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className="flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/30 hover:bg-accent hover:text-primary"
-                  >
-                    <Icon className="h-4 w-4" />
-                    {label}
-                  </a>
-                ))}
+                <div className="mt-5 flex flex-wrap gap-3"> 
+                  {SOCIAL_LINKS.map(({ icon: Icon, label, href, color }) => (
+                    <DirectionAwareButton
+                      key={label}
+                      icon={Icon}
+                      label={label}
+                      href={href}
+                      color={color}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
           {/* Right column: gradient map card */}
-          <div className="relative flex flex-col">
-            <div className="relative flex-1 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/10 via-violet/10 to-primary/5 p-1.5 shadow-soft">
-              <div className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-2xl bg-card">
+          <div className="flex flex-col gap-6">
+            {/* Map Container */}
+            <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/10 via-violet/10 to-primary/5 p-1.5 shadow-soft">
+              <div className="flex h-full min-h-[575px] flex-col overflow-hidden rounded-2xl bg-card">
                 <div className="flex items-center justify-between border-b border-border px-5 py-4">
                   <div>
                     <h2 className="text-lg font-bold text-foreground">
-                      Company Location
+                      {t('contact.companyLocationTitle')}
                     </h2>
-                    <p className="text-sm text-muted-foreground">
-                      No. 12, Kabar Aye Pagoda Road, Yangon
-                    </p>
                   </div>
                 </div>
-                <div className="relative flex-1">
-                  {/* <ClientOnly fallback={<MapSkeleton />}> */}
-                    {/* <Suspense fallback={<MapSkeleton />}> */}
-                      <div className="overflow-hidden rounded-xl border border-border/70 bg-background shadow-sm">
-                        <div ref={mapRef} className="h-[600px] w-full" />
-                      </div>
-                    {/* </Suspense> */}
-                  {/* </ClientOnly> */}
+                <div className="relative min-h-[350px] flex-1">
+                    <div className="h-full min-h-[350px] w-full overflow-hidden rounded-xl border border-border/70 bg-background shadow-sm">
+                      <div ref={mapRef} className="relative z-10 h-full min-h-[350px] w-full" />
+                    </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
-              <h3 className="text-lg font-bold text-foreground">
-                How to find us
-              </h3>
-              <ul className="mt-4 space-y-3 text-[15px] text-muted-foreground">
-                <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  Located on Kabar Aye Pagoda Road, near the junction with
-                  Pyay Road.
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  Free customer parking is available in front of the building.
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  For urgent technical issues, please call our 24/7 hotline
-                  instead of visiting.
-                </li>
-              </ul>
+            {/* Bottom Card */}
+            <div className="p-6 shadow-soft sm:p-8">
             </div>
           </div>
         </div>
