@@ -8,7 +8,7 @@ interface DotBackgroundDemoProps {
 
 export default function DotBackgroundDemo({ className, children }: DotBackgroundDemoProps) {
   return (
-    <div className={cn('relative min-h-screen w-full overflow-hidden bg-background', className)}>
+    <div className={cn('relative min-h-screen w-full bg-background', className)}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0"
@@ -19,6 +19,8 @@ export default function DotBackgroundDemo({ className, children }: DotBackground
           backgroundSize: '28px 28px',
           backgroundRepeat: 'repeat',
           opacity: 0.45,
+          maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)', 
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'
         }}
       />
 
