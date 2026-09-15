@@ -46,10 +46,10 @@ export default function PromotionPage() {
   }
 
   return (
-    <main>
+    <main className="flex flex-1 flex-col">
       <PageHeader title={t('promotions.title')} subtitle={t('promotions.subtitle')} />
 
-      <SectionWrapper spacing="compact" className="bg-muted/40">
+      <SectionWrapper spacing="compact" className="flex-1 bg-muted/40">
         <div className="max-w-6xl w-full mb-6 sm:mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="col-span-1 sm:col-span-2 lg:col-span-2 flex items-center gap-0 mt-5">

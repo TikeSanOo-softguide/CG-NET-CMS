@@ -78,7 +78,7 @@ export default function AppGuidePage() {
 
         <>
           {/* Overview cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 ">
+          <div className="grid auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {appGuideContent.guides.map((guide, index) => {
               const IconComp = guide.icon
               return (
@@ -86,9 +86,9 @@ export default function AppGuidePage() {
                   key={guide.id}
                   delay={index * 80}
                   variant="zoom-in"
-                  className="rounded-2xl"
+                  className="h-full rounded-2xl"
                 >
-                  <div className="h-full group relative overflow-hidden bg-app-surface backdrop-blur-sm border border-border/40  rounded-2xl transition-all duration-700 hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-1 cursor-pointer">
+                  <div className="h-full group relative overflow-hidden bg-app-surface backdrop-blur-sm border border-border/40 rounded-2xl transition-all duration-700 hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] cursor-pointer">
                     <div className="p-6 sm:p-8 flex flex-col h-full">
                       <div className="flex items-start justify-between mb-8">
                         <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center transition-all duration-500 group-hover:bg-font-blue group-hover:shadow-lg group-hover:shadow-app-blue/20 group-hover:scale-105">

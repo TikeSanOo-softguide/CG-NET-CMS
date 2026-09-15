@@ -36,7 +36,7 @@ const renderTextList = (items: readonly string[]) => (
       <SectionWrapper>
         <div className="mx-auto max-w-5xl">
           {/* Hero */}
-          <div className="mb-12 border-b border-border/60 pb-10">
+          <div className="border-b border-border/60 pb-5">
             <div className="mb-5 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
               <span className="text-sm font-semibold text-primary">
                 {t('privacy.lastUpdated')}:{' '}
@@ -80,12 +80,11 @@ const renderTextList = (items: readonly string[]) => (
                 (item) => (
                   <div
                     key={item.termKey}
-                    className="rounded-2xl border border-border/60 bg-background/40 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                    className="rounded-2xl border border-border/60 bg-app-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
                   >
                     <h3 className="mb-2 text-lg font-bold text-foreground">
                       {t(item.termKey)}
                     </h3>
-
                     <p className="text-sm leading-7 text-font-muted">
                       {t(item.definitionKey)}
                     </p>
@@ -120,7 +119,7 @@ const renderTextList = (items: readonly string[]) => (
                     (key) => (
                       <li
                         key={key}
-                        className="flex items-center gap-3 rounded-xl border border-border/50 bg-muted/20 px-4 py-3 text-font-muted"
+                        className="flex items-center gap-3 rounded-xl border border-border/50 bg-app-surface px-4 py-3 text-font-muted"
                       >
                         <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
                         {t(key)}
@@ -166,7 +165,7 @@ const renderTextList = (items: readonly string[]) => (
                     (item) => (
                       <div
                         key={item.nameKey}
-                        className="rounded-2xl border border-border/60 p-5"
+                        className="rounded-2xl bg-app-surface border border-border/60 p-5"
                       >
                         <h5 className="mb-2 font-bold text-foreground">
                           {t(item.nameKey)}
@@ -194,7 +193,7 @@ const renderTextList = (items: readonly string[]) => (
                     (cookie) => (
                       <div
                         key={cookie.nameKey}
-                        className="rounded-2xl border border-border/60 bg-card/50 p-6"
+                        className="rounded-2xl border border-border/60 bg-app-surface p-6"
                       >
                         <h5 className="text-lg font-bold">
                           {t(cookie.nameKey)}
@@ -248,7 +247,7 @@ const renderTextList = (items: readonly string[]) => (
                   (item, index) => (
                     <div
                       key={item.titleKey}
-                      className="flex gap-4 rounded-2xl border border-border/60 p-5"
+                      className="flex gap-4 rounded-2xl border bg-app-surface border-border/60 p-5"
                     >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
                         {String(index + 1).padStart(2, '0')}
@@ -278,7 +277,7 @@ const renderTextList = (items: readonly string[]) => (
                   (item) => (
                     <div
                       key={item.titleKey}
-                      className="border-l-2 border-primary/40 pl-5"
+                      className="border-l-2 border-primary/40 bg-app-surface pl-5"
                     >
                       <h4 className="mb-2 font-bold">
                         {t(item.titleKey)}
@@ -418,18 +417,18 @@ const renderTextList = (items: readonly string[]) => (
           </PrivacySection>
 
           {/* Contact */}
-          <section className="mt-16 overflow-hidden rounded-3xl border border-primary/20 bg-primary/5 p-6 md:p-10">
-            <h2 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">
+          <section className="mt-16 overflow-hidden rounded-3xl border border-primary/20 bg-app-primary p-6 md:p-10">
+            <h2 className="mt-3 text-3xl text-font-white tracking-tight md:text-4xl">
               {t(privacyContent.contactUs.titleKey)}
             </h2>
 
-            <p className="mt-4 max-w-3xl text-base leading-8 text-font-muted md:text-lg">
+            <p className="mt-4 max-w-3xl text-base leading-8 text-font-white md:text-lg">
               {t(privacyContent.contactUs.descriptionKey)}
             </p>
 
             <a
               href={`mailto:${privacyContent.contactUs.email}`}
-              className="mt-6 inline-flex rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              className="mt-6 inline-flex rounded-xl bg-app-yellow px-5 py-3 font-semibold text-font-black transition-transform hover:-translate-y-0.5"
             >
               {privacyContent.contactUs.email}
             </a>
@@ -492,7 +491,7 @@ function PrivacyInfoBlock({
   description: string
 }) {
   return (
-    <div className="mb-8 rounded-2xl border border-border/60 bg-muted/20 p-6">
+    <div className="mb-8 rounded-2xl border border-border/60 bg-app-surface p-6">
       <h4 className="mb-3 text-xl font-bold">{title}</h4>
 
       <p className="leading-8 text-font-muted">{description}</p>

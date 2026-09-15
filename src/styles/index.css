@@ -30,17 +30,6 @@
   font-display: swap;
 }
 
-.footer-title {
-  font-family: 'Bebas Neue', sans-serif;
-  src: url('/fonts/BebasNeue.otf') format('opentype');
-  font-weight: 900;
-  font-size: clamp(6rem, 15vw, 12rem);
-  text-transform: uppercase;
-  color: transparent;
-  background-clip: text;
-  background-image: linear-gradient(to bottom, #ffffff, #cbd5e1);
-  opacity: 0.1;
-}
 
 /* ── CSS custom properties (shadcn/ui) ── */
 @layer base {
