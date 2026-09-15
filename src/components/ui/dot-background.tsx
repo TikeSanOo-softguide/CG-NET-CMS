@@ -17,10 +17,9 @@ export default function DotBackgroundDemo({ className, children }: DotBackground
           backgroundImage:
             'radial-gradient(circle at 1px 1px, var(--color-primary) 1.2px, transparent 0)',
           backgroundSize: '28px 28px',
-          backgroundRepeat: 'repeat',
           opacity: 0.45,
-          maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)', 
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'
+          maskImage: "radial-gradient(ellipse at center, black 0%, transparent 85%)", 
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 0%, transparent 85%)",
         }}
       />
 

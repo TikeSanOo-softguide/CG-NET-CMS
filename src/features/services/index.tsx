@@ -67,10 +67,10 @@ export default function ServicesPage() {
   }
 
   return (
-    <main>
+    <main className="flex flex-1 flex-col">
       <PageHeader title={t('services.title')} subtitle={t('services.subtitle')} />
 
-      <SectionWrapper spacing="tight" className="bg-muted/40">
+      <SectionWrapper spacing="tight" className="flex-1 bg-muted/40">
         {/* 1. Loading */}
         {isLoading && (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
