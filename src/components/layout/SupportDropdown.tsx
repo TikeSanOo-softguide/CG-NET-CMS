@@ -42,32 +42,35 @@ export function SupportDropdown({ onClose }: SupportDropdownProps) {
       <DropdownMenuTrigger asChild>
         <span
           className={cn(
-            'relative inline-flex cursor-pointer items-center gap-1 pb-1',
+            'inline-flex cursor-pointer items-center rounded-md px-2 py-2 text-base font-medium hover:bg-accent hover:text-accent-foreground xl:px-3',
             'font-heading text-base font-medium',
             'focus-visible:outline-none',
-            isSupportRoute && 'text-transparent bg-clip-text bg-gradient-font'
           )}
           role="button"
           tabIndex={0}
         >
-          <span className={cn(isSupportRoute && 'text-transparent bg-clip-text bg-gradient-font')}>
-            {t('nav.support')}
-          </span>
-
-          <ChevronDown
-            className={cn(
-              'h-3.5 w-3.5 shrink-0 opacity-60',
-              isSupportRoute ? 'text-font-blue' : 'text-current'
-            )}
-            aria-hidden="true"
-          />
-
           <span
-            className={cn(
-              'absolute inset-x-0 -bottom-2 h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
-              isSupportRoute ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-            )}
-          />
+            className="relative inline-flex items-center gap-1"
+          >
+            <span className={cn(isSupportRoute && 'text-transparent bg-clip-text bg-gradient-font')}>
+              {t('nav.support')}
+            </span>
+
+            <ChevronDown
+              className={cn(
+                'h-3.5 w-3.5 shrink-0 opacity-60',
+                isSupportRoute ? 'text-font-blue' : 'text-current'
+              )}
+              aria-hidden="true"
+            />
+
+            <span
+              className={cn(
+                'absolute inset-x-0 -bottom-[6px] h-0.5 origin-left transform rounded-full bg-gradient-font transition-all duration-300',
+                isSupportRoute ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+              )}
+            />
+          </span>
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent

@@ -14,7 +14,6 @@ import { analytics } from '@/lib/analytics'
 import ScrollToTop from './components/common/ScrollToTop'
 import AppDownloadCard from './components/common/AppDownloadCard'
 import PromotionModal from './components/common/PromotionModal'
-import { ApiError } from '@/lib/api/errors'
 import { ConsentProvider } from './components/common/ConsentProvider'
 import { useConsentManager } from '@c15t/react'
 import DotBackgroundDemo from './components/ui/dot-background'
@@ -22,11 +21,11 @@ import DotBackgroundDemo from './components/ui/dot-background'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
-      retry: (failureCount, error) =>
-        error instanceof ApiError && error.retryable ? failureCount < 2 : false,
+      staleTime: 5 * 60 * 1000,
+      gcTime: 30 * 60 * 1000,
+      retry: 1,
       refetchOnMount: true,
-      refetchOnWindowFocus: true,
+      refetchOnWindowFocus: false,
       refetchOnReconnect: true,
     },
   },
