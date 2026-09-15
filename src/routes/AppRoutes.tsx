@@ -18,15 +18,30 @@ const ContactPage = lazy(() => import('@/features/contact-us'))
 
 function PageLoader() {
   return (
-    <div className="container py-16 space-y-4 max-w-4xl">
-      <Skeleton className="h-10 w-2/3" />
-      <Skeleton className="h-5 w-full" />
-      <Skeleton className="h-5 w-5/6" />
-      <div className="grid grid-cols-3 gap-4 pt-4">
-        {[1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-48" />
-        ))}
+    <div className="container py-12 md:py-16 space-y-12 max-w-5xl mx-auto px-4 animate-fade-in">
+      <div className="space-y-4 text-center max-w-2xl mx-auto flex flex-col items-center">
+        <Skeleton className="h-6 w-32 rounded-full" />
+        <Skeleton className="h-10 w-3/4 sm:w-1/2 rounded-lg" />
+        <Skeleton className="h-4 w-full sm:w-4/5 rounded-md" />
       </div>
+      {[1, 2].map((section) => (
+        <div key={section} className="space-y-6">
+          <div className="space-y-2">
+            <Skeleton className="h-8 w-1/3 rounded-lg" />
+            <Skeleton className="h-4 w-2/3 rounded-md" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((card) => (
+              <div key={card} className="p-4 border border-border/50 rounded-xl space-y-3">
+                <Skeleton className="h-40 w-full rounded-lg" />
+                <Skeleton className="h-5 w-3/4 rounded" />
+                <Skeleton className="h-4 w-1/2 rounded" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
