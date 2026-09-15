@@ -10,11 +10,12 @@ import 'leaflet/dist/leaflet.css'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { useAreas, useRegions, useStates } from '@/hooks/uselocation'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 import CommonDropdown from '@/components/common/CommonDropDown'
 import { localizedName } from '@/lib/utils'
 import type { CoverageArea } from '@/types/coverage'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { normalizeLanguage } from '@/lib/i18n'
 
 type Props = {
   state: string | null
@@ -36,6 +37,8 @@ type CoveragePoint = {
 }
 
 export default function AvailableLocationPage({ state, area }: Props) {
+  const { t, i18n } = useTranslation()
+  const currentLang = normalizeLanguage(i18n.language)
   const holder = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<LeafletMap | null>(null)
   const markersRef = useRef<Marker[]>([])
@@ -131,7 +134,7 @@ export default function AvailableLocationPage({ state, area }: Props) {
         },
       )
         .bindPopup(
-          `<strong>${localizedName(point.name)}</strong><br />${point.popupLabel}`,
+          `<strong>${localizedName(point.name, currentLang)}</strong><br />${point.popupLabel}`,
         )
         .addTo(map)
 
@@ -179,20 +182,20 @@ export default function AvailableLocationPage({ state, area }: Props) {
       padding: [50, 50],
       maxZoom,
     })
-  }, [areasQuery.data, selectedArea, selectedRegion, selectedRegionData, selectedState, selectedStateData])
+  }, [areasQuery.data, currentLang, selectedArea, selectedRegion, selectedRegionData, selectedState, selectedStateData])
 
   const stateOptions = states.map((item) => ({
-    label: localizedName(item.name),
+    label: localizedName(item.name, currentLang),
     value: item.id.toString(),
   }))
 
   const regionOptions = regions.map((item) => ({
-    label: localizedName(item.name),
+    label: localizedName(item.name, currentLang),
     value: item.id.toString(),
   }))
 
   const areaOptions = (areasQuery.data ?? []).map((item) => ({
-    label: localizedName(item.name),
+    label: localizedName(item.name, currentLang),
     value: item.id.toString(),
   }))
 

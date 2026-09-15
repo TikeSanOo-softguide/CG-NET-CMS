@@ -101,8 +101,10 @@ export function devLog(...args: unknown[]): void {
 
 export function localizedName(
   name: { en: string; my: string; zh: string },
-  locale: 'en' | 'my' | 'zh' = 'en'
+  locale: string = 'en'
 ): string {
-  return name[locale] || name.en;
+  const normalizedLocale = (locale.split('-')[0] ?? 'en') as 'en' | 'my' | 'zh'
+  const label = name[normalizedLocale] ?? name.en ?? ''
+  return label || ''
 }
 
