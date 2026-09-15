@@ -24,23 +24,22 @@ export function ServiceCard({ service, lang, delay = 0, featured = false }: Serv
   return (
     <AnimatedCard delay={delay} variant="rise" className="h-full rounded-xl">
       <Card
-        className={`!bg-app-surface  group flex h-full flex-col overflow-hidden border shadow-sm card-glow ${
+        className={`!bg-app-surface group flex h-full flex-col overflow-hidden border shadow-sm card-glow ${
           featured ? 'lg:flex-row' : ''
         }`}
       >
         {/* Image / Icon */}
         <div
-          className={`relative h-40 overflow-hidden bg-muted ${
-            featured ? 'lg:h-auto lg:min-h-64 lg:w-2/5 lg:shrink-0' : ''
+          className={`relative overflow-hidden bg-muted flex items-center justify-center ${
+            featured ? 'lg:w-2/5 lg:shrink-0 lg:min-h-64' : 'w-full'
           }`}
         >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img
-              src={imageUrl || '/images/service-placeholder.jpg'}
-              alt={title}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
+          <img
+            src={imageUrl || '/images/service-placeholder.jpg'}
+            alt={title}
+
+            className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
         </div>
 
         {/* Content */}

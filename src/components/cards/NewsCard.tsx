@@ -27,24 +27,30 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full  ">
+    <AnimatedCard delay={delay} variant="rise" className="h-full min-w-0 max-w-full rounded-xl">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl !bg-app-surface',
+          'group flex min-w-0 max-w-full flex-col overflow-hidden rounded-xl border shadow-sm card-glow !bg-app-surface',
           compact ? 'h-[300px]' : 'h-full'
         )}
       >
         <Link
           to={`/news/${article.slug}`}
-          className={cn('card-media relative block', compact ? 'h-[150px]' : 'h-44')}
+          className={cn(
+            'card-media relative block w-full overflow-hidden',
+            compact ? 'h-[150px]' : 'h-auto'
+          )}
         >
           <img
             src={`${STORAGE_URL}/${article.image_url}`}
             alt={getLocalized(article.title, lang)}
-            className="h-full w-full object-cover"
+            className={cn(
+              'w-full transition-transform duration-300 group-hover:scale-105',
+              compact ? 'h-full object-cover' : 'h-auto block'
+            )}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
 
         <CardHeader className="pb-2 pt-3">

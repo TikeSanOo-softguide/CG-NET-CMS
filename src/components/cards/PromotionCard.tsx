@@ -14,6 +14,7 @@ interface PromotionCardProps {
   delay?: number
   compact?: boolean
 }
+
 export function PromotionCard({ promotion, lang, delay = 0, compact = false }: PromotionCardProps) {
   const { t } = useTranslation()
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
@@ -23,13 +24,15 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
       <Card
         className={cn(
           'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl !bg-app-surface',
-          compact ? 'h-[360px]' : 'h-full'
+
+          'h-auto'
         )}
       >
         {/* 1. Top Image Header */}
         <Link
           to={`/promotion/${promotion.slug}`}
-          className={cn('card-media relative block', compact ? 'h-[140px]' : 'h-44')}
+
+          className="card-media relative block w-full h-auto overflow-hidden"
         >
           {promotion.imageUrl ? (
             <img
@@ -39,13 +42,14 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
                   : `${STORAGE_URL}/${promotion.imageUrl}`
               }
               alt={getLocalized(promotion.title, lang)}
-              className="h-full w-full object-cover"
+
+              className="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
             />
           ) : (
-            <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+            <div className="aspect-video w-full bg-muted" aria-label={t('common.noData')} />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
 
         <CardHeader className="pb-2 pt-3">
