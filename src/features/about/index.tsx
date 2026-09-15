@@ -33,6 +33,7 @@ export default function AboutPage() {
   ]
 
   usePageTitle(t('about.pageTitle'))
+
   return (
     <main>
       <PageHeader title={t('about.title')} subtitle={t('about.tagline')} />
@@ -48,17 +49,17 @@ export default function AboutPage() {
         >
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <h2 className="text-xl md:text-[35px] font-black tracking-tight bg-gradient-font  bg-clip-text text-transparent leading-normal pt-3 pb-3">
+              <h2 className="text-xl md:text-[35px] font-black tracking-tight bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
                 {t('about.ourStory')}
               </h2>
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>
             </div>
 
-            <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
+            <p className="text-font-muted text-sm md:text-base leading-relaxed py-1">
               {t('about.storyText1')}
             </p>
 
-            <p className="text-font-muted text-sm md:text-base !leading-[1.8]">
+            <p className="text-font-muted text-sm md:text-base leading-relaxed py-1">
               {t('about.storyText2')}
             </p>
           </div>
@@ -68,7 +69,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto  my-1"
+            className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto my-1"
           >
             {aboutContent.stats.map((stat, i) => {
               const IconComponent = stat.icon
@@ -81,7 +82,7 @@ export default function AboutPage() {
                   style={{
                     transform: `translate(-60%, -50%) rotate(${angle}deg) var(--orbit-translate) rotate(-${angle}deg)`,
                   }}
-                  className={`absolute left-1/2 top-1/2  [--orbit-translate:translate(110px)] sm:[--orbit-translate:translate(170px)] w-24 h-24 sm:w-36 sm:h-36 bg-card border-2 border-border hover:border-app-primary rounded-full flex flex-col items-center justify-center text-center p-3 shadow-2xl transition-all duration-300 hover:scale-110 hover:z-20 cursor-pointer group`}
+                  className="absolute left-1/2 top-1/2 [--orbit-translate:translate(110px)] sm:[--orbit-translate:translate(170px)] w-24 h-24 sm:w-36 sm:h-36 bg-card border-2 border-border hover:border-app-primary rounded-full flex flex-col items-center justify-center text-center p-3 shadow-2xl transition-all duration-300 hover:scale-110 hover:z-20 cursor-pointer group"
                 >
                   <div
                     className={`w-8 h-8 sm:w-10 sm:h-10 rounded-2xl ${stat.iconBg} ${stat.hoverBg} flex items-center justify-center ${stat.color} ${stat.hoverColor} mb-0.5 sm:mb-1 transition-all duration-300`}
@@ -90,12 +91,12 @@ export default function AboutPage() {
                   </div>
 
                   <p
-                    className={`text-sm sm:text-base font-black tracking-tight text-foreground ${stat.color} leading-none`}
+                    className={`text-sm sm:text-base font-black tracking-tight text-foreground ${stat.color} leading-relaxed py-0.5`}
                   >
                     {stat.value}
                   </p>
 
-                  <p className="text-[10px] sm:text-[10px] font-medium text-font-muted mt-0.5 sm:mt-1 px-1 text-center leading-tight">
+                  <p className="text-[10px] sm:text-[10px] font-medium text-font-muted mt-0.5 sm:mt-1 px-1 text-center leading-relaxed py-0.5">
                     {t(stat.labelKey)}
                   </p>
                 </div>
@@ -108,7 +109,7 @@ export default function AboutPage() {
       {/* Mission & Vision */}
       <SectionWrapper>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-5 ">
+          <div className="text-center max-w-2xl mx-auto mb-5">
             <h2 className="text-xl sm:text-3xl md:text-[35px] font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-3">
               {t('about.purpose')}
             </h2>
@@ -126,9 +127,9 @@ export default function AboutPage() {
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent">
                     <Icon className="h-6 w-6 text-font-blue" />
                   </span>
-                  <h3 className="text-xl font-bold text-foreground">{label}</h3>
+                  <h3 className="text-xl font-bold text-foreground leading-relaxed">{label}</h3>
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">{text}</p>
+                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground py-1">{text}</p>
               </article>
             ))}
           </div>
@@ -139,18 +140,18 @@ export default function AboutPage() {
       <SectionWrapper id="brand-guideline" className="pt-8 pb-4 sm:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
           {/* Left Side: Features Card */}
-          <div className="bg-app-surface border-2 border-font-blue shadow-xl p-8 sm:p-6 w-full max-w-[600px]  overflow-y-auto overflow-x-hidden rounded-xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="bg-app-surface border-2 border-font-blue shadow-xl p-8 sm:p-6 w-full max-w-[600px] overflow-y-auto overflow-x-hidden rounded-xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <div className="flex flex-col">
               {/* Item 1: Brand Personality */}
               <div className="flex items-start sm:items-center gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-primary/10">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-ebg  flex items-center justify-center shrink-0">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-icon-user " />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-ebg flex items-center justify-center shrink-0">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-icon-user" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 ">
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
                     {t('about.personalityTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm!leading-[1.8]">
+                  <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
                     {t('about.personalityDesc')}
                   </p>
                 </div>
@@ -158,14 +159,14 @@ export default function AboutPage() {
 
               {/* Item 2: Core Values */}
               <div className="flex items-start sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-b border-primary/10">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-cbg  flex items-center justify-center shrink-0">
-                  <Gem className="w-5 h-5 sm:w-6 sm:h-6 text-icon-map " />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-cbg flex items-center justify-center shrink-0">
+                  <Gem className="w-5 h-5 sm:w-6 sm:h-6 text-icon-map" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
                     {t('about.coreValuesTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm !leading-[1.8]">
+                  <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
                     {t('about.coreValuesDesc')}
                   </p>
                 </div>
@@ -173,14 +174,14 @@ export default function AboutPage() {
 
               {/* Item 3: Brand Promise */}
               <div className="flex items-start sm:items-center gap-3 sm:gap-4 py-3 sm:py-4 border-b border-primary/10">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-bbg  flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-icon-activity " />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-bbg flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-icon-activity" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5">
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
                     {t('about.brandPromiseTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                  <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
                     {t('about.brandPromiseDesc')}
                   </p>
                 </div>
@@ -188,14 +189,14 @@ export default function AboutPage() {
 
               {/* Item 4: Tone of Voice */}
               <div className="flex items-start sm:items-center gap-3 sm:gap-4 pt-3 sm:pt-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-dbg  flex items-center justify-center shrink-0">
-                  <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-icon-award  duration-300" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-icon-dbg flex items-center justify-center shrink-0">
+                  <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-icon-award duration-300" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue  text-base sm:text-lg font-bold mb-0.5">
+                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
                     {t('about.toneOfVoiceTitle')}
                   </h4>
-                  <p className="text-font-muted text-xs sm:text-sm leading-snug">
+                  <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
                     {t('about.toneOfVoiceDesc')}
                   </p>
                 </div>
@@ -206,26 +207,26 @@ export default function AboutPage() {
           {/* Right Side: Text Content */}
           <div className="space-y-6">
             <div className="mx-auto inline-block rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 px-3 py-6 lg:mx-0">
-              <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl mb-4">
+              <p className="text-3xl font-extrabold leading-relaxed text-navy sm:text-4xl mb-4 py-1">
                 {t('about.brandText')}
               </p>
-              <p className="text-3xl font-extrabold leading-none text-navy sm:text-4xl">
+              <p className="text-3xl font-extrabold leading-relaxed text-navy sm:text-4xl py-1">
                 {t('about.guidelineText')}
               </p>
             </div>
-            <h3 className="mt-6 text-2xl font-bold text-foreground sm:text-3xl">
+            <h3 className="mt-6 text-2xl font-bold text-foreground sm:text-3xl leading-relaxed py-1">
               {t('about.brandGuidelineTitle')}
             </h3>
-            <p className="text-font-muted text-sm md:text-base leading-[1.7] max-w-lg">
+            <p className="text-font-muted text-sm md:text-base leading-relaxed max-w-lg py-1">
               {t('about.brandGuidelineDesc')}
             </p>
           </div>
         </div>
       </SectionWrapper>
 
-      {/* Activities Gallery*/}
+      {/* Activities Gallery */}
       <SectionWrapper id="gallery" className="bg-muted/40">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
           <div className="space-y-6 text-left relative">
             <div className="absolute -left-4 -top-4 w-32 h-32 bg-app-primary/10 rounded-full blur-2xl pointer-events-none"></div>
 
@@ -234,15 +235,17 @@ export default function AboutPage() {
               {t(aboutContent.culture.badgeKey)}
             </div>
 
-            <h3 className="text-xl md:text-4xl font-black tracking-tight leading-tight">
-              <span className="bg-gradient-font bg-clip-text text-transparent !leading-[1.8]">
+            <h3 className="text-xl md:text-4xl font-black tracking-tight leading-relaxed py-1">
+              <span className="bg-gradient-font bg-clip-text text-transparent inline-block leading-relaxed py-1">
                 {t(aboutContent.culture.titleKey1)}
               </span>
               <br />
-              <span className="text-font-black">{t(aboutContent.culture.titleKey2)}</span>
+              <span className="text-font-black inline-block leading-relaxed py-1">
+                {t(aboutContent.culture.titleKey2)}
+              </span>
             </h3>
             <div className="border-l-4 border-app-primary/50 pl-4 py-1">
-              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium">
+              <p className="text-font-muted leading-relaxed text-sm md:text-base font-medium py-1">
                 {t(aboutContent.culture.descriptionKey)}
               </p>
             </div>
@@ -290,7 +293,7 @@ export default function AboutPage() {
                 variant="zoom-in"
                 className="rounded-xl group"
               >
-                <Card className="text-center h-full bg-app-surface  border border-border/60 bg-gradient-to-b from-card via-card/50 to-muted/20 p-4 transition-all duration-300 hover:translate-y-0 hover:border-primary/50 hover:shadow-none">
+                <Card className="text-center h-full bg-app-surface border border-border/60 bg-gradient-to-b from-card via-card/50 to-muted/20 p-4 transition-all duration-300 hover:translate-y-0 hover:border-primary/50 hover:shadow-none">
                   <CardHeader className="space-y-4 pt-6 flex flex-col items-center">
                     <div className="relative flex items-center justify-center">
                       <div
@@ -301,7 +304,7 @@ export default function AboutPage() {
                       </div>
                     </div>
 
-                    <CardTitle className="text-sm md:text-base font-bold tracking-tight text-font-secondary group-hover:text-font-blue transition-colors duration-300">
+                    <CardTitle className="text-sm md:text-base font-bold tracking-tight text-font-secondary group-hover:text-font-blue transition-colors duration-300 leading-relaxed py-0.5">
                       {t(member.nameKey)}
                     </CardTitle>
                   </CardHeader>
