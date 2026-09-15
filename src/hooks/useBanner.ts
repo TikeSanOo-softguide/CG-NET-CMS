@@ -5,5 +5,6 @@ export function useBanners() {
   return useQuery({
     queryKey: ['banners'],
     queryFn: getBanners,
+    staleTime: 30 * 60 * 1000,
   })
 }

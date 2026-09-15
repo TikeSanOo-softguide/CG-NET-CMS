@@ -19,6 +19,7 @@ export function useNews(
         category,
         lang
       ),
+      staleTime: 5 * 60 * 1000,
       placeholderData: (previousData) => previousData,
     })
 }
@@ -31,6 +32,7 @@ export function useNewsBySlug(slug: string) {
       return response.data
     },
     enabled: Boolean(slug),
+    staleTime: 5 * 60 * 1000,
   })
 }
 
@@ -38,5 +40,6 @@ export function useLatestNews(limit = 3) {
   return useQuery({
     queryKey: ['news', 'latest', limit],
     queryFn: () => getLatestNews(limit),
+    staleTime: 5 * 60 * 1000,
   })
 }

@@ -8,6 +8,7 @@ export function usePromotion(page = 1, limit = 5, search = '') {
   return useQuery({
     queryKey: ['promotions', page, limit, search, lang],
     queryFn: () => getPromotions(page, limit, search, lang),
+    staleTime: 5 * 60 * 1000,
     placeholderData: (previousData) => previousData,
   })
 }
@@ -17,6 +18,7 @@ export function usePromotionBySlug(slug: string) {
     queryKey: ['promotion-detail', slug],
     queryFn: () => getPromotionBySlug(slug),
     enabled: Boolean(slug),
+    staleTime: 5 * 60 * 1000,
   })
 }
 
@@ -24,5 +26,6 @@ export function useLatestPromotions(limit = 3) {
   return useQuery({
     queryKey: ['promotions', 'latest', limit],
     queryFn: () => getLatestPromotions(limit),
+    staleTime: 5 * 60 * 1000,
   })
 }
