@@ -37,16 +37,14 @@ export default function NewsDetailPage() {
   }
 
   if (isError || !article) {
-  return (
+    return (
       <SectionWrapper className="bg-muted/40">
         <EmptyState
           title={t('news.noNews')}
           description={t('news.noNewsDesc')}
           action={
             <Button variant="outline">
-              <Link to="/news">
-                {t('common.goBack')}
-              </Link>
+              <Link to="/news">{t('common.goBack')}</Link>
             </Button>
           }
         />
@@ -62,7 +60,9 @@ export default function NewsDetailPage() {
             <header className="mb-6">
               <div className="mb-6 flex items-center justify-between gap-3">
                 <Badge variant="secondary">
-                  {article.category ? getLocalized(article.category.name, lang) : t('common.noData')}
+                  {article.category
+                    ? getLocalized(article.category.name, lang)
+                    : t('common.noData')}
                 </Badge>
                 <Button variant="ghost" asChild className="gap-2">
                   <Link to="/news">
@@ -85,11 +85,12 @@ export default function NewsDetailPage() {
               </div>
             </header>
 
-            <div className="card-media rounded-xl overflow-hidden mb-6 h-52 sm:h-72">
+            <div className="card-media rounded-xl overflow-hidden mb-6 w-full bg-muted">
               <img
                 src={`${STORAGE_URL}/${article.image_url}`}
                 alt={getLocalized(article.title, lang)}
-                className="h-full w-full object-cover"
+                className="block h-auto w-full object-contain"
+                loading="lazy"
               />
             </div>
 

@@ -63,7 +63,7 @@
   "home": {
     "heroTitle": "超高速光纤宽带",
     "heroSubtitle": "体验高达 1Gbps 的网速，选择缅甸最可靠的互联网服务商。立即为您的家庭或企业开通。",
-    "pageTitle": "首页 - Yaung Ni Oo",
+    "pageTitle": "首页 - 晨光",
     "heroCta": "查看套餐",
     "heroSecondary": "了解更多",
     "featuredEyebrow": "精选套餐",
@@ -123,7 +123,7 @@
   "services": {
     "title": "我们的服务",
     "subtitle": "提供多种互联网套餐，满足不同客户的多样化需求。",
-    "pageTitle": "服务 - Yaung Ni Oo",
+    "pageTitle": "服务 - 晨光",
     "learnMore": "了解更多",
     "noService": "未找到服务",
     "noServiceDesc": "请稍后查看最新服务。"
@@ -131,7 +131,7 @@
   "packages": {
     "title": "宽带套餐",
     "subtitle": "简单透明的定价，满足各种需求",
-    "pageTitle": "套餐 - Yaung Ni Oo",
+    "pageTitle": "套餐 - 晨光",
     "detailPageTitle": "套餐详情 - Yaung Ni Oo",
     "download": "下载",
     "upload": "上传",
@@ -167,7 +167,7 @@
   "news": {
     "title": "新闻与动态",
     "subtitle": "了解 Yaung Ni Oo 最新资讯",
-    "pageTitle": "新闻 - Yaung Ni Oo",
+    "pageTitle": "新闻 - 晨光",
     "detailPageTitle": "新闻 - Yaung Ni Oo",
     "publishedOn": "发布于",
     "category": "分类",
@@ -178,7 +178,7 @@
     "noNewsDesc": "请稍后再来查看最新新闻与动态。"
   },
   "promotions": {
-    "pageTitle": "促销 - Yaung Ni Oo",
+    "pageTitle": "促销 - 晨光",
     "title": "特别促销",
     "subtitle": "享受我们为您量身定制的独家网络套餐和特别奖励，为您带来最佳的连接体验。",
     "viewDetail": "查看详情",
@@ -191,7 +191,7 @@
   "career": {
     "title": "加入我们",
     "subtitle": "共建缅甸互联未来",
-    "pageTitle": "招聘 - Yaung Ni Oo",
+    "pageTitle": "招聘 - 晨光",
     "detailPageTitle": "职位详情 - Yaung Ni Oo",
     "openPositions": "在招职位",
     "department": "部门",
@@ -219,7 +219,7 @@
     "detailStep": "詳細步驟",
     "faqs": "常見問題",
     "subtitle": "幾分鐘內即可開始使用 Yaung Ni Oo 應用程式",
-    "pageTitle": "應用程式指南 - Yaung Ni Oo",
+    "pageTitle": "應用程式指南 - 晨光",
     "downloadApp": "下載應用程式",
     "iosApp": "App Store",
     "androidApp": "Google Play",
@@ -298,7 +298,7 @@
       },
       "3": {
         "question": "支援哪些付款方式？",
-        "answer": "您可以使用 CG Wallet、KBZPay、WavePay、AYA Pay 和 CB Pay 安全地購買上網方案並為帳戶儲值。"
+        "answer": "您可以使用 CG Wallet 安全地购买数据套餐并为您的账户充值。"
       },
       "4": {
         "question": "未用完的流量可以累積到下期嗎？",
@@ -333,7 +333,7 @@
   "about": {
     "title": "关于我们",
     "subtitle": "自 2015 年起，缅甸值得信赖的互联网服务商",
-    "pageTitle": "关于我们 - Yaung Ni Oo",
+    "pageTitle": "关于我们 - 晨光",
     "ourMission": "我们的使命",
     "ourVision": "我们的愿景",
     "ourTeam": "认识我们的团队",
@@ -372,7 +372,7 @@
   "contact": {
     "title": "联系我们",
     "subtitle": "我们随时为您提供帮助。",
-    "pageTitle": "联系我们 - Yaung Ni Oo",
+    "pageTitle": "联系我们 - 晨光",
     "contactInfoTitle": "联系方式",
     "contactInfoSubtitle": "您可以通过以下任何渠道联系我们。",
     "complaintQrTitle": "投诉与支持 QR 码",
@@ -413,7 +413,7 @@
   "location": {
     "title": "可用位置",
     "subtitle": "选择州、地区和区域，以检查您附近是否有 WiFi 覆盖。",
-    "pageTitle": "网络覆盖 - Yaung Ni Oo",
+    "pageTitle": "网络覆盖 - 晨光",
     "selectState": "选择州/邦",
     "selectRegion": "选择地区",
     "selectArea": "选择区域",
@@ -446,7 +446,7 @@
     "zh": "中文"
   },
   "privacy": {
-    "pageTitle": "隐私政策",
+    "pageTitle": "隐私政策 - 晨光",
     "pageSubtitle": "说明您使用本服务时，我们对您的信息进行收集、使用和披露的相关政策与流程",
     "title": "隐私政策",
     "lastUpdatedDate": "2025年7月3日",

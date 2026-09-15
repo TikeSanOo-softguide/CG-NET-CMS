@@ -13,9 +13,19 @@ import { cn } from '@/lib/utils'
 
 export const SUPPORT_CATEGORIES = [
   { key: 'app-guide', labelKey: 'nav.appGuide', icon: Smartphone, to: '/app-guide' },
-  { key: 'available-location', labelKey: 'footer.availableLocation', icon: MapPin, to: '/available-location' },
+  {
+    key: 'available-location',
+    labelKey: 'footer.availableLocation',
+    icon: MapPin,
+    to: '/available-location',
+  },
   { key: 'contact-us', labelKey: 'nav.contact', icon: MessageCircle, to: '/contact-us' },
-  { key: 'privacy-policy', labelKey: 'footer.privacyPolicy', icon: ShieldCheck, to: '/privacy-policy' },
+  {
+    key: 'privacy-policy',
+    labelKey: 'footer.privacyPolicy',
+    icon: ShieldCheck,
+    to: '/privacy-policy',
+  },
 ] as const
 
 interface SupportDropdownProps {
@@ -26,40 +36,35 @@ export function SupportDropdown({ onClose }: SupportDropdownProps) {
   const { t } = useTranslation()
   const location = useLocation()
   const isSupportRoute = SUPPORT_CATEGORIES.some(({ to }) => location.pathname === to)
-    
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <span
-            className={cn(
-              "relative inline-flex cursor-pointer items-center gap-1",
-              "font-heading text-base font-medium",
-              "focus-visible:outline-none",
-              isSupportRoute && "text-transparent bg-clip-text bg-gradient-font"
-            )}
-            role="button"
-            tabIndex={0}
-          >
-          <span
-            className={cn(
-              isSupportRoute && "text-transparent bg-clip-text bg-gradient-font"
-            )}
-          >
-            {t("nav.support")}
+          className={cn(
+            'relative inline-flex cursor-pointer items-center gap-1 pb-1',
+            'font-heading text-base font-medium',
+            'focus-visible:outline-none',
+            isSupportRoute && 'text-transparent bg-clip-text bg-gradient-font'
+          )}
+          role="button"
+          tabIndex={0}
+        >
+          <span className={cn(isSupportRoute && 'text-transparent bg-clip-text bg-gradient-font')}>
+            {t('nav.support')}
           </span>
 
           <ChevronDown
             className={cn(
-              "h-3.5 w-3.5 shrink-0 opacity-60",
-              isSupportRoute ? "text-font-blue" : "text-current"
+              'h-3.5 w-3.5 shrink-0 opacity-60',
+              isSupportRoute ? 'text-font-blue' : 'text-current'
             )}
             aria-hidden="true"
           />
-          
+
           <span
             className={cn(
-              'absolute inset-x-0 -bottom-[6px] h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
+              'absolute inset-x-0 -bottom-2 h-0.5 rounded-full bg-gradient-font transition-all duration-300 transform origin-left',
               isSupportRoute ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
             )}
           />

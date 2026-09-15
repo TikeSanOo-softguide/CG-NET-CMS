@@ -299,7 +299,7 @@
       },
       "3": {
         "question": "What payment methods are supported?",
-        "answer": "You can purchase data packages and top up your account securely using CG Wallet, KBZPay, WavePay, AYA Pay, and CB Pay."
+        "answer": "You can purchase data packages and top up your account securely using CG Wallet."
       },
       "4": {
         "question": "Can my unused data be carried forward?",
@@ -425,7 +425,7 @@
     "zh": "中文"
   },
   "privacy": {
-    "pageTitle": "Privacy & Policy",
+    "pageTitle": "Privacy & Policy - Yaung Ni Oo",
     "pageSubtitle": "Describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service ",
     "title": "Privacy & Policy",
     "lastUpdatedDate": "July 03, 2025",

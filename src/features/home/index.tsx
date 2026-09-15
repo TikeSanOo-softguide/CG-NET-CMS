@@ -98,7 +98,7 @@ export default function HomePage() {
                     <AnimatedStat value={value} />
                   </p>
 
-                  <p className="text-[9px] sm:text-xs font-medium text-muted-foreground truncate w-full">
+                  <p className="text-[9px] sm:text-xs font-medium text-muted-foreground truncate w-full !leading-[1.7] ">
                     {t(labelKey)}
                   </p>
                 </div>
@@ -411,14 +411,14 @@ export default function HomePage() {
 
             <div className="relative flex h-full items-center justify-center md:justify-end">
               {homeContent.downloadItems.map((item) => (
-                  <div key={item.key} className="w-full rounded-xl">
-                    <img
-                      src={item.imageUrl}
-                      alt={t(item.key)}
-                      className="h-auto w-full rounded-xl drop-shadow-xl"
-                      loading="lazy"
-                    />
-                  </div>
+                <div key={item.key} className="w-full rounded-xl">
+                  <img
+                    src={item.imageUrl}
+                    alt={t(item.key)}
+                    className="h-auto w-full rounded-xl drop-shadow-xl"
+                    loading="lazy"
+                  />
+                </div>
               ))}
             </div>
           </div>
