@@ -121,7 +121,7 @@ export default function PromotionDetail() {
           </div>
 
           {/* Banner Image with modern shadow and zoom on hover */}
-          <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-lg shadow-black/5 aspect-[16/10] sm:aspect-[16/9] w-full transition-all duration-300 hover:shadow-xl hover:border-primary/30">
+          <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-lg shadow-black/5 w-full transition-all duration-300 hover:shadow-xl hover:border-primary/30">
             {promotion.imageUrl ? (
               <img
                 src={
@@ -130,7 +130,7 @@ export default function PromotionDetail() {
                     : `${STORAGE_URL}/${promotion.imageUrl}`
                 }
                 alt={getLocalized(promotion.title, lang)}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
             ) : (
