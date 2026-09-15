@@ -115,6 +115,10 @@ html[lang='my'] body,
 html[lang='my'] .font-myanmar {
   font-family: 'Noto Sans Myanmar', 'Pyidaungsu', 'Padauk', sans-serif;
 }
+html[lang='my'] .font-heading {
+  font-family: 'Noto Sans Myanmar', 'Pyidaungsu', 'Padauk', sans-serif;
+  line-height: 1.65;
+}
 
 /* ── Simplified Chinese font — applied when <html lang="zh"> ── */
 html[lang='zh'] {
