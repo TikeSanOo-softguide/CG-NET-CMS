@@ -50,7 +50,7 @@ function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: Sup
   return (
     <Card
       className={[
-        'group relative h-[min(370px,calc(100svh_-_32px))] sm:h-[370px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
+        'group relative h-[min(360px,calc(100svh_-_32px))]   sm:h-[360px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
         'transition-all duration-300 ease-out',
         'hover:z-10',
       ].join(' ')}
@@ -60,7 +60,7 @@ function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: Sup
           <img
             src={pkg.imageUrl}
             alt={getLocalized(pkg.title, lang)}
-            className="h-full w-full object-contain object-center"
+            className="h-full w-full object-cover object-center"
             loading="lazy"
           />
         ) : (
