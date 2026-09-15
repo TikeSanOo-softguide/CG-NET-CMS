@@ -13,21 +13,13 @@ interface CommonTabProps {
   onValueChange: (value: string) => void
 }
 
-export default function CommonTab({
-  filters,
-  activeValue,
-  onValueChange,
-}: CommonTabProps) {
+export default function CommonTab({ filters, activeValue, onValueChange }: CommonTabProps) {
   const { t } = useTranslation()
 
   return (
     <div className="mb-5 w-full max-w-full overflow-x-auto overscroll-x-contain pb-1">
-      <Tabs
-        value={activeValue}
-        onValueChange={onValueChange}
-        className="w-max min-w-full"
-      >
-        <div className="flex w-max min-w-full justify-start px-1 sm:justify-center">
+      <Tabs value={activeValue} onValueChange={onValueChange} className="w-max min-w-full">
+        <div className="flex w-max min-w-full justify-center px-1 sm:justify-center">
           <TabsList
             className="
               inline-flex

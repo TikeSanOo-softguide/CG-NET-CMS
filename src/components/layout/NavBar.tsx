@@ -5,7 +5,12 @@ import { ChevronDown, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@radix-ui/react-accordion'
 import { SupportDropdown, SUPPORT_CATEGORIES } from './SupportDropdown'
 import { LanguageSwitcher } from './LanguageSwitcher'
 
@@ -54,31 +59,31 @@ function DesktopNavItem({ to, labelKey }: { to: string; labelKey: string }) {
 }
 
 function MobileNavLink({
-    to,
-    labelKey,
-    onNavigate,
-  }: {
-    to: string
-    labelKey: string
-    onNavigate: () => void
-  }) {
-    const { t } = useTranslation()
+  to,
+  labelKey,
+  onNavigate,
+}: {
+  to: string
+  labelKey: string
+  onNavigate: () => void
+}) {
+  const { t } = useTranslation()
 
-    return (
-      <NavLink
-        to={to}
-        end={to === '/'}
-        onClick={onNavigate}
-        className={({ isActive }) =>
-          cn(
-            'flex min-h-12 items-center rounded-md px-3 py-2.5 text-[15px] font-medium text-font-black transition-colors hover:bg-accent/60',
-            isActive && 'text-transparent bg-clip-text bg-gradient-font'
-          )
-        }
-      >
-        {t(labelKey)}
-      </NavLink>
-    )
+  return (
+    <NavLink
+      to={to}
+      end={to === '/'}
+      onClick={onNavigate}
+      className={({ isActive }) =>
+        cn(
+          'flex min-h-12 items-center rounded-md px-3 py-2.5 text-[15px] font-medium text-font-black transition-colors hover:bg-accent/60',
+          isActive && 'text-transparent bg-clip-text bg-gradient-font'
+        )
+      }
+    >
+      {t(labelKey)}
+    </NavLink>
+  )
 }
 
 export function NavBar() {
@@ -136,7 +141,12 @@ export function NavBar() {
             <SheetHeader className="border-b border-border px-4 pb-3 pt-1">
               <SheetTitle className="sr-only">{t('nav.toggleMenu')}</SheetTitle>
               <div className="flex items-center justify-center">
-                <Link to="/" onClick={closeMobileMenu} aria-label="Yaung Ni Oo home" className="flex h-12 items-center justify-center">
+                <Link
+                  to="/"
+                  onClick={closeMobileMenu}
+                  aria-label="Yaung Ni Oo home"
+                  className="flex h-12 items-center justify-center"
+                >
                   <img
                     src="/assets/logo/logo.svg"
                     alt="Yaung Ni Oo logo"
@@ -149,12 +159,7 @@ export function NavBar() {
 
             <div className="flex flex-col gap-1 px-3 py-3">
               {NAV_LINKS.map(({ to, labelKey }) => (
-                <MobileNavLink
-                  key={to}
-                  to={to}
-                  labelKey={labelKey}
-                  onNavigate={closeMobileMenu}
-                />
+                <MobileNavLink key={to} to={to} labelKey={labelKey} onNavigate={closeMobileMenu} />
               ))}
 
               <Accordion type="single" collapsible>
@@ -177,7 +182,7 @@ export function NavBar() {
                           onClick={closeMobileMenu}
                           className={({ isActive }) =>
                             cn(
-                              'flex min-h-11 items-center rounded-md px-3 py-2 text-[15px] font-medium transition-colors hover:bg-accent/60',
+                              'flex min-h-11 items-center rounded-md px-3  text-[15px] font-medium transition-colors hover:bg-accent/60',
                               isActive && 'text-transparent bg-clip-text bg-gradient-font',
                               !isActive && 'text-font-black'
                             )

@@ -136,7 +136,7 @@ export default function HomePage() {
               </CardHeader>
 
               <CardContent className="px-4 pb-4 pt-0">
-                <CardDescription className="text-xs leading-snug text-muted-foreground">
+                <CardDescription className="text-xs  text-muted-foreground leading-[1.7] ">
                   {t(descKey)}
                 </CardDescription>
               </CardContent>
@@ -385,11 +385,11 @@ export default function HomePage() {
         <div className="w-full overflow-hidden rounded-xl border border-border bg-app-accent-bg">
           <div className="grid items-center gap-8 p-8 md:grid-cols-2 md:p-12">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm ">
                 {t('home.downloadTitle')}
               </p>
 
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-font-black sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-font-black sm:text-4xl !leading-[1.7]">
                 {t('home.downloadHead')}
               </h2>
 

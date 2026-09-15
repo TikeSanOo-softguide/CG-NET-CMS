@@ -14,7 +14,7 @@ import { useState } from 'react'
 
 function ServiceSkeleton() {
   return (
-    <Card className="group flex h-full flex-col overflow-hidden border shadow-sm card-glow">
+    <Card className="group flex h-full flex-col overflow-hidden border shadow-sm card-glow ">
       {/* Image section */}
       <div className="relative h-40 overflow-hidden bg-muted">
         <Skeleton className="h-full w-full rounded-none" />
@@ -70,10 +70,10 @@ export default function ServicesPage() {
     <main className="flex flex-1 flex-col">
       <PageHeader title={t('services.title')} subtitle={t('services.subtitle')} />
 
-      <SectionWrapper spacing="tight" className="flex-1 bg-muted/40">
+      <SectionWrapper spacing="tight" className="flex-1 bg-muted/40 !pb-0">
         {/* 1. Loading */}
         {isLoading && (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
             {Array.from({ length: 6 }).map((_, i) => (
               <ServiceSkeleton key={i} />
             ))}
