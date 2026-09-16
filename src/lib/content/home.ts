@@ -62,5 +62,5 @@ export const homeContent = {
     { value: '24/7', labelKey: 'home.stat5Label' },
   ],
 
-  downloadItems: [{ key: 'home.downloadItem', imageUrl: '/assets/download/download-app.svg' }],
+  downloadItems: [{ key: 'home.downloadItem', imageUrl: '/assets/download/download-app.png' }],
 } as const
