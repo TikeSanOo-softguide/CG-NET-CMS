@@ -16,9 +16,9 @@ const LANGUAGES: {
   nativeLabel: string
   flag: string
 }[] = [
-  { code: 'en', label: 'English', nativeLabel: 'English', flag: '🇬🇧' },
-  { code: 'my', label: 'Myanmar', nativeLabel: 'မြန်မာ', flag: '🇲🇲' },
-  { code: 'zh', label: 'Chinese', nativeLabel: '中文', flag: '🇨🇳' },
+  { code: 'en', label: 'English', nativeLabel: 'English', flag: 'us.svg' },
+  { code: 'my', label: 'Myanmar', nativeLabel: 'မြန်မာ', flag: 'mm.svg' },
+  { code: 'zh', label: 'Chinese', nativeLabel: '中文', flag: 'cn.svg' },
 ]
 
 export function LanguageSwitcher() {
@@ -103,10 +103,19 @@ export function LanguageSwitcher() {
               }
             `}
           >
-            <span className="mr-2 w-5 text-center" aria-hidden="true">
-              {lang.flag}
-            </span>
-            {lang.nativeLabel}
+          <div className="flex min-w-0 items-center"> 
+            <span className="mr-2 flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-xl"> 
+              <img 
+                src={`/assets/flags/${lang.flag}`} 
+                alt="flag" 
+                className="size-full object-cover" 
+                loading="lazy" 
+                decoding="async" /> 
+            </span> 
+            <span className="truncate leading-7"> 
+              {lang.nativeLabel} 
+            </span> 
+          </div>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
