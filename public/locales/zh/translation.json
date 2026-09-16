@@ -91,8 +91,8 @@
     "feature4Desc": "从安装到支持，绝不外包给第三方。",
     "feature5Title": "多语言支持",
     "feature5Desc": "以多种本地语言提供友好的服务。",
-    "galleryEyebrow": "员工活动", 
-    "galleryTitle": "晨光的员工活动", 
+    "galleryEyebrow": "员工活动",
+    "galleryTitle": "晨光的员工活动",
     "galleryDesc": "近距离了解晨光员工的日常活动、团队协作、办公生活以及精彩难忘的瞬间。",
     "galleryItem1": "光纤驱动的家庭连接",
     "galleryItem2": "稳定网络下的智能办公空间",
@@ -186,7 +186,9 @@
     "back": "返回促销页面",
     "viewAllPromotions": "查看所有促销活动",
     "noPromotion": "暂无促销活动",
-    "noPromotionDesc": "请稍后回来查看最新的促销活动。"
+    "noPromotionDesc": "请稍后回来查看最新的促销活动。",
+    "active": "进行中",
+    "promotionExpires": "促销截止日期:"
   },
   "career": {
     "title": "加入我们",
