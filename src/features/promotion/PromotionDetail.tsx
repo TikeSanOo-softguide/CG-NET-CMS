@@ -135,7 +135,9 @@ export default function PromotionDetail() {
                 loading="lazy"
               />
             ) : (
-              <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+              <div className="flex items-center justify-center w-full h-[200px] bg-muted text-font-muted text-lg font-medium">
+                  {t('common.noImage')}
+              </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60" />
           </div>

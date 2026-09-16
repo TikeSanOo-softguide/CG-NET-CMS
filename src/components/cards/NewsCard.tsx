@@ -59,7 +59,13 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
           <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
             {article.category ? getLocalized(article.category.name, lang) : t('common.noData')}
           </span>
-          <CardTitle className={cn('leading-[1.7]', compact ? 'text-sm' : 'text-base')}>
+          <CardTitle
+            className={cn(
+              'leading-[1.7] line-clamp-2 overflow-hidden text-ellipsis',
+              'min-h-[3.4em]',
+              compact ? 'text-sm' : 'text-base'
+            )}
+          >
             <Link to={`/news/${article.slug}`} className="hover:text-primary transition-colors">
               {getLocalized(article.title, lang)}
             </Link>
