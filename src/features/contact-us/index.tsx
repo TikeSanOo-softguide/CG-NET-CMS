@@ -81,7 +81,20 @@ export default function ContactUsPage() {
         popupAnchor: [0, -40],
       }),
     })
-      .bindPopup(`<strong>${COMPANY_LOCATION.name}</strong><br />Yangon, Myanmar`)
+      .bindPopup(`
+          <div>
+            <strong>${COMPANY_LOCATION.name}</strong><br />
+            <span>Tachileik, Myanmar</span><br />
+            <a
+              href="https://www.google.com/maps/place/20%C2%B027%2700.2%22N+99%C2%B054%2709.8%22E/@20.450127,99.902716,19z/data=!4m4!3m3!8m2!3d20.450057!4d99.90272?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="display:inline-block;margin-top:6px;color:#2563eb;font-weight:600;text-decoration:none;"
+            >
+              📍 View on Google Maps
+            </a>
+          </div>
+        `)
       .addTo(map)
 
     map.setView(new LatLng(COMPANY_LOCATION.lat, COMPANY_LOCATION.lng), 14)
