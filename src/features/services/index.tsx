@@ -54,27 +54,15 @@ export default function ServicesPage() {
   const services = data?.data || []
   const totalPages = Math.max(1, data?.meta?.last_page ?? 1)
 
-  function getCardClass(rowLength: number, index: number) {
-    if (rowLength === 2) {
-      if (index === 0) {
-        return 'lg:col-start-2 lg:col-span-2'
-      }
-
-      return 'lg:col-start-4 lg:col-span-2'
-    }
-
-    return 'lg:col-span-2'
-  }
-
   return (
     <main className="flex flex-1 flex-col">
       <PageHeader title={t('services.title')} subtitle={t('services.subtitle')} />
 
-      <SectionWrapper spacing="tight" className="flex-1 bg-muted/40 !pb-0">
+      <SectionWrapper spacing="tight" className="flex-1 bg-muted/40">
         {/* 1. Loading */}
         {isLoading && (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-10">
-            {Array.from({ length: 6 }).map((_, i) => (
+            {Array.from({ length: PAGE_SIZE }).map((_, i) => (
               <ServiceSkeleton key={i} />
             ))}
           </div>
@@ -94,23 +82,13 @@ export default function ServicesPage() {
 
         {/* 4. Services data */}
         {!isLoading && !isError && services.length > 0 && (
-          <div className="space-y-6">
-            {Array.from({ length: Math.ceil(services.length / 3) }, (_, rowIndex) => {
-              const rowServices = services.slice(rowIndex * 3, rowIndex * 3 + 3)
+          <>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+              {services.map((service, i) => (
+                <ServiceCard key={service.id} service={service} lang={lang} delay={i * 80} />
+              ))}
+            </div>
 
-              return (
-                <div
-                  key={rowIndex}
-                  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6"
-                >
-                  {rowServices.map((service, i) => (
-                    <div key={service.id} className={getCardClass(rowServices.length, i)}>
-                      <ServiceCard service={service} lang={lang} delay={(rowIndex * 3 + i) * 80} />
-                    </div>
-                  ))}
-                </div>
-              )
-            })}
             <Pagination
               page={page}
               totalPages={totalPages}
@@ -118,7 +96,7 @@ export default function ServicesPage() {
               t={t}
               disabled={isFetching}
             />
-          </div>
+          </>
         )}
       </SectionWrapper>
     </main>
