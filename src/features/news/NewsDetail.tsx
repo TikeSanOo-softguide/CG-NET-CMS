@@ -86,12 +86,18 @@ export default function NewsDetailPage() {
             </header>
 
             <div className="card-media rounded-xl overflow-hidden mb-6 w-full bg-muted">
-              <img
+              {article.image_url ? (
+                <img
                 src={`${STORAGE_URL}/${article.image_url}`}
                 alt={getLocalized(article.title, lang)}
                 className="block h-auto w-full object-contain"
                 loading="lazy"
               />
+              ) : (
+                <div className="flex items-center justify-center w-full h-[200px] bg-muted text-font-muted text-lg font-medium">
+                  {t('common.noImage')}
+                </div>
+              )}
             </div>
 
             <Separator className="mb-6" />

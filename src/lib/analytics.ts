@@ -21,7 +21,12 @@ function trackEvent({ name, properties }: AnalyticsEvent): void {
 }
 
 function trackPageView(path: string): void {
-  trackEvent({ name: 'page_view', properties: { path } })
+  if (!path) return
+  try {
+    trackEvent({ name: 'page_view', properties: { path } })
+  } catch (err) {
+    console.warn('Analytics error', err)
+  }
 }
 
 export const analytics = { trackEvent, trackPageView }

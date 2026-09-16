@@ -48,7 +48,7 @@ export default function PromotionDetail() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-background via-muted/30 to-background  sm:pt-6 md:pt-14 pb-10 sm:pb-14">
+    <main>
       <SectionWrapper className="py-0 bg-muted/40">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="space-y-3">
@@ -68,7 +68,7 @@ export default function PromotionDetail() {
                   if (hasStart && hasEnd) {
                     return (
                       <>
-                        <Calendar className="h-3 w-3 shrink-0" />
+                        <Calendar className="hidden h-3 w-3 shrink-0 sm:block" />
                         <span className="break-words">
                           {formatDate(promotion.startDate, getDateLocale(lang))} —{' '}
                           {formatDate(promotion.endDate, getDateLocale(lang))}
@@ -89,7 +89,7 @@ export default function PromotionDetail() {
                   if (!hasStart && hasEnd) {
                     return (
                       <>
-                        <Calendar className="h-3 w-3 shrink-0" />
+                        <Calendar className="hidden h-3 w-3 shrink-0 sm:block" />
                         <span className="break-words">
                           {t('promotions.promotionExpires')}{' '}
                           {formatDate(promotion.endDate, getDateLocale(lang))}
@@ -135,7 +135,9 @@ export default function PromotionDetail() {
                 loading="lazy"
               />
             ) : (
-              <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+              <div className="flex items-center justify-center w-full h-[200px] bg-muted text-font-muted text-lg font-medium">
+                  {t('common.noImage')}
+              </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60" />
           </div>

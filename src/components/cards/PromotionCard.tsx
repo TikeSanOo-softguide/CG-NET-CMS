@@ -24,7 +24,6 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
       <Card
         className={cn(
           'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl !bg-app-surface',
-
           'h-auto'
         )}
       >
@@ -32,7 +31,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
         <Link
           to={`/promotion/${promotion.slug}`}
 
-          className="card-media relative block w-full h-auto overflow-hidden"
+          className="card-media relative block w-full aspect-[4/1.7] overflow-hidden"
         >
           {promotion.imageUrl ? (
             <img
@@ -42,12 +41,13 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
                   : `${STORAGE_URL}/${promotion.imageUrl}`
               }
               alt={getLocalized(promotion.title, lang)}
-
-              className="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
             />
           ) : (
-            <div className="aspect-video w-full bg-muted" aria-label={t('common.noData')} />
+            <div className="flex items-center justify-center w-full h-full bg-muted text-font-muted text-lg font-medium">
+              {t('common.noImage')}
+            </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
