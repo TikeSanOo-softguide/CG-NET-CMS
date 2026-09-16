@@ -12,9 +12,9 @@ import { ErrorBoundary } from '@/components/common/ErrorBoundary'
 import { Toaster } from '@/components/ui/toaster'
 import { analytics } from '@/lib/analytics'
 import ScrollToTop from './components/common/ScrollToTop'
-import AppDownloadCard from './components/common/AppDownloadCard'
+// import AppDownloadCard from './components/common/AppDownloadCard'
 import PromotionModal from './components/common/PromotionModal'
-import { ConsentProvider } from './components/common/ConsentProvider'
+// import { ConsentProvider } from './components/common/ConsentProvider'
 import { useConsentManager } from '@c15t/react'
 import DotBackgroundDemo from './components/ui/dot-background'
 
@@ -63,7 +63,7 @@ function AppContent() {
 export default function App() {
   return (
     <HelmetProvider>
-      <ConsentProvider>
+      {/* <ConsentProvider> */}
         <QueryClientProvider client={queryClient}>
           <BrowserRouter
             future={{
@@ -73,14 +73,14 @@ export default function App() {
           >
             <ErrorBoundary>
               <PromotionModal lang={''} />
-              <AppDownloadCard />
+              {/* <AppDownloadCard /> */}
               <AppContent />
               <ScrollToTop />
             </ErrorBoundary>
           </BrowserRouter>
           {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
         </QueryClientProvider>
-      </ConsentProvider>
+      {/* </ConsentProvider> */}
     </HelmetProvider>
   )
 }
