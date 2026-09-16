@@ -59,7 +59,7 @@ export function formatDate(dateString: string | null, locale: string = 'en-US'):
 
   return date.toLocaleDateString(locale, {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   })
 }
@@ -107,4 +107,3 @@ export function localizedName(
   const label = name[normalizedLocale] ?? name.en ?? ''
   return label || ''
 }
-

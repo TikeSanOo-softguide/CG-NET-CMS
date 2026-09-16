@@ -98,11 +98,12 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
                   ) : (!hasStart && !hasEnd) || (hasStart && !hasEnd) ? (
                     <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
                       <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                      Active
+                      {t('promotions.active')}
                     </span>
                   ) : !hasStart && hasEnd ? (
                     <span className="text-muted-foreground">
-                      Expires: {formatDate(promotion.endDate, getDateLocale(lang))}
+                      {t('promotions.promotionExpires')}{' '}
+                      {formatDate(promotion.endDate, getDateLocale(lang))}
                     </span>
                   ) : null}
                 </span>
