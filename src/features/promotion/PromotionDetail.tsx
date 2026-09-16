@@ -81,7 +81,7 @@ export default function PromotionDetail() {
                     return (
                       <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
                         <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                        Active
+                        {t('promotions.active')}
                       </span>
                     )
                   }
@@ -91,7 +91,8 @@ export default function PromotionDetail() {
                       <>
                         <Calendar className="h-3 w-3 shrink-0" />
                         <span className="break-words">
-                          Expires: {formatDate(promotion.endDate, getDateLocale(lang))}
+                          {t('promotions.promotionExpires')}{' '}
+                          {formatDate(promotion.endDate, getDateLocale(lang))}
                         </span>
                       </>
                     )
