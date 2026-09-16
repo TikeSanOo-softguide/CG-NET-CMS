@@ -48,7 +48,7 @@ export default function PromotionDetail() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-background via-muted/30 to-background  sm:pt-6 md:pt-14 pb-10 sm:pb-14">
+    <main>
       <SectionWrapper className="py-0 bg-muted/40">
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="space-y-3">
@@ -68,7 +68,7 @@ export default function PromotionDetail() {
                   if (hasStart && hasEnd) {
                     return (
                       <>
-                        <Calendar className="h-3 w-3 shrink-0" />
+                        <Calendar className="hidden h-3 w-3 shrink-0 sm:block" />
                         <span className="break-words">
                           {formatDate(promotion.startDate, getDateLocale(lang))} —{' '}
                           {formatDate(promotion.endDate, getDateLocale(lang))}
@@ -89,7 +89,7 @@ export default function PromotionDetail() {
                   if (!hasStart && hasEnd) {
                     return (
                       <>
-                        <Calendar className="h-3 w-3 shrink-0" />
+                        <Calendar className="hidden h-3 w-3 shrink-0 sm:block" />
                         <span className="break-words">
                           {t('promotions.promotionExpires')}{' '}
                           {formatDate(promotion.endDate, getDateLocale(lang))}

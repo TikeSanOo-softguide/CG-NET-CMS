@@ -34,7 +34,8 @@
     "popular": "Most Popular",
     "featured": "Featured",
     "goBack": "Go Back",
-    "language": "LANGUAGE"
+    "language": "LANGUAGE",
+    "noImage": "No Image"
   },
   "announcement": {
     "serviceInterruption": "🔔 Service Interruption: Internet service is temporarily unavailable. Our team is working to restore the connection."

@@ -31,25 +31,27 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
       <Card
         className={cn(
           'group flex min-w-0 max-w-full flex-col overflow-hidden rounded-xl border shadow-sm card-glow !bg-app-surface',
-          compact ? 'h-[300px]' : 'h-full'
+          'h-auto'
         )}
       >
         <Link
           to={`/news/${article.slug}`}
           className={cn(
-            'card-media relative block w-full overflow-hidden',
-            compact ? 'h-[150px]' : 'h-auto'
+            'card-media relative block w-full aspect-[4/1.7] overflow-hidden',
           )}
         >
-          <img
-            src={`${STORAGE_URL}/${article.image_url}`}
-            alt={getLocalized(article.title, lang)}
-            className={cn(
-              'w-full transition-transform duration-300 group-hover:scale-105',
-              compact ? 'h-full object-cover' : 'h-auto block'
+          {article.image_url ? (
+            <img
+              src={`${STORAGE_URL}/${article.image_url}`}
+              alt={getLocalized(article.title, lang)}
+              className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            ) : (
+              <div className="flex items-center justify-center w-full h-full bg-muted text-font-muted text-lg font-medium">
+                {t('common.noImage')}
+              </div>
             )}
-            loading="lazy"
-          />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
 
@@ -65,12 +67,17 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
         </CardHeader>
 
         <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
-          <CardDescription
-            className={cn('leading-[1.7]', compact ? 'line-clamp-1 text-xs' : 'line-clamp-2')}
-          >
-            {getLocalized(article.description, lang)}
-          </CardDescription>
+          <div className="min-h-[3.4em] flex items-start">
+            <CardDescription
+              className={cn(
+                'line-clamp-2 leading-[1.7] text-sm text-font-black'
+              )}
+            >
+              {getLocalized(article.description, lang)}
+            </CardDescription>
+          </div>
         </CardContent>
+
 
         <CardFooter
           className={cn(

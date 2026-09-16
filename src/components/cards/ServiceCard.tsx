@@ -2,6 +2,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import type { Service } from '@/types/service'
+import { t } from 'i18next'
 
 interface ServiceCardProps {
   service: Service
@@ -19,7 +20,7 @@ export function ServiceCard({ service, lang, delay = 0, featured = false }: Serv
     ? service.image_url.startsWith('http')
       ? service.image_url
       : `${STORAGE_URL}/${service.image_url}`
-    : '/images/service-placeholder.jpg'
+    : ''
 
   return (
     <AnimatedCard delay={delay} variant="rise" className="h-full rounded-xl">
@@ -30,16 +31,20 @@ export function ServiceCard({ service, lang, delay = 0, featured = false }: Serv
       >
         {/* Image / Icon */}
         <div
-          className={`relative overflow-hidden bg-muted flex items-center justify-center ${
-            featured ? 'lg:w-2/5 lg:shrink-0 lg:min-h-64' : 'w-full'
-          }`}
+          className={`relative overflow-hidden w-full aspect-[4/1.7]  bg-muted flex items-center justify-center`}
         >
+        {imageUrl ? (
           <img
-            src={imageUrl || '/images/service-placeholder.jpg'}
+            src={imageUrl}
             alt={title}
 
-            className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full transition-transform duration-300 group-hover:scale-105"
           />
+          )  : (
+            <div className="flex items-center justify-center w-full h-full bg-muted text-font-muted text-lg font-medium">
+              {t('common.noImage')}
+            </div>
+          )}
         </div>
 
         {/* Content */}

@@ -34,7 +34,8 @@
     "popular": "最受欢迎",
     "featured": "精选",
     "goBack": "返回",
-    "language": "语言"
+    "language": "语言",
+    "noImage": "暂无图片"
   },
   "announcement": {
     "serviceInterruption": "🔔 服务中断：互联网服务暂时不可用。我们的团队正在努力恢复连接。"
