@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
-import { Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -9,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { normalizeLanguage, type SupportedLanguage } from '@/lib/i18n/languages'
+import { cn } from '@/lib/utils'
 
 const LANGUAGES: {
   code: SupportedLanguage
@@ -55,12 +55,19 @@ export function LanguageSwitcher() {
           aria-label={`Language: ${active.nativeLabel}. Click to switch language`}
           aria-haspopup="menu"
         >
-          <Globe className="h-4 w-4 shrink-0 text-font-black" aria-hidden="true" />
+          <span className=" flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-xl"> 
+              <img 
+                src={`/assets/flags/${active.flag}`} 
+                alt="flag" 
+                className="size-full object-cover" 
+                loading="lazy" 
+                decoding="async" /> 
+          </span> 
           <span className="hidden sm:inline text-font-black text-base font-medium">
             {active.nativeLabel}
           </span>
-          <span className="sm:hidden text-base text-font-black font-medium">
-            {active.code.toUpperCase()}
+          <span className="sm:hidden text-base text-font-black font-sm">
+            {active.nativeLabel}
           </span>
         </Button>
       </DropdownMenuTrigger>
@@ -105,16 +112,21 @@ export function LanguageSwitcher() {
           >
           <div className="flex min-w-0 items-center"> 
             <span className="mr-2 flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-xl"> 
-              <img 
-                src={`/assets/flags/${lang.flag}`} 
-                alt="flag" 
-                className="size-full object-cover" 
-                loading="lazy" 
-                decoding="async" /> 
+                <img 
+                  src={`/assets/flags/${lang.flag}`} 
+                  alt="flag" 
+                  className="size-full object-cover" 
+                  loading="lazy" 
+                  decoding="async" /> 
             </span> 
-            <span className="truncate leading-7"> 
-              {lang.nativeLabel} 
-            </span> 
+            <span
+              className={cn(
+                "truncate",
+                lang.code === "my" ? "leading-[1.8]" : "leading-[1.4]"
+              )}
+            >
+              {lang.nativeLabel}
+            </span>
           </div>
           </DropdownMenuItem>
         ))}
