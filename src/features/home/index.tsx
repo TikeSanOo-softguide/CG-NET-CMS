@@ -444,7 +444,7 @@ export default function HomePage() {
           <DirectionAwareButton 
             to="/packages?category=1" 
             label={t('home.heroCta')} 
-            color="#ffcf62" 
+            color="var(--color-yellow)" 
             className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]" 
           /> 
           <DirectionAwareButton 
