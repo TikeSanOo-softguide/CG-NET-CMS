@@ -46,13 +46,25 @@ function getCardWidth(width: number) {
 
   return '100%'
 }
-function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: SupportedLanguage }) {
+function PackageCarouselCard({
+  pkg,
+  lang,
+  isActive,
+  onClick,
+}: {
+  pkg: RecommendedPackage
+  lang: SupportedLanguage
+  isActive: boolean
+  onClick: () => void
+}) {
   return (
     <Card
+      onClick={onClick}
       className={[
-        'group relative h-[min(360px,calc(100svh_-_32px))]   sm:h-[360px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
-        'transition-all duration-300 ease-out',
-        'hover:z-10',
+        'group relative h-[min(360px,calc(100svh_-_32px))] sm:h-[360px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
+        'transition-all duration-300 ease-out cursor-pointer',
+        'sm:hover:z-10',
+        isActive ? 'z-10' : 'z-0',
       ].join(' ')}
     >
       <div className="card-media no-image-zoom relative h-full overflow-hidden rounded-xl border border-white/80 bg-muted/20 ">
@@ -66,9 +78,16 @@ function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: Sup
         ) : (
           <div className="h-full w-full rounded-xl border border-white/80 bg-muted/40" />
         )}
-        <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
+        <div
+          className={[
+            'absolute inset-0 bg-black/60 pointer-events-none transition-opacity duration-300',
+            'opacity-0',
+            'sm:group-hover:opacity-100',
+            isActive ? 'opacity-100' : 'opacity-0',
+          ].join(' ')}
+        />
 
-        <div className="absolute inset-x-0 bottom-[14%] flex justify-center px-4 sm:bottom-[12%]">
+        <div className="absolute inset-x-0 bottom-[25%] flex justify-center px-4 sm:bottom-[25%]">
           <Button
             asChild
             className={[
@@ -78,6 +97,7 @@ function PackageCarouselCard({ pkg, lang }: { pkg: RecommendedPackage; lang: Sup
               'transition-all duration-300 ease-out',
               'opacity-100 translate-y-0',
               'sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0',
+              isActive ? 'opacity-100 translate-y-0' : 'opacity-100 sm:opacity-0',
             ].join(' ')}
           >
             <Link
@@ -101,10 +121,16 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     typeof window === 'undefined' ? '20%' : getCardWidth(window.innerWidth)
   )
   const [activeIndex, setActiveIndex] = useState(0)
+  const [activeCardKey, setActiveCardKey] = useState<string | null>(null)
+
   const viewportRef = useRef<HTMLDivElement | null>(null)
   const touchStartX = useRef<number | null>(null)
   const rafRef = useRef<number | null>(null)
   const lastFrameRef = useRef<number | null>(null)
+  const pausedRef = useRef(false)
+  const isTouchInteractingRef = useRef(false)
+  const settleTimerRef = useRef<number | null>(null)
+  const isCorrectingLoopRef = useRef(false)
 
   const orderedPackages = useMemo(() => {
     return [...packages].sort((a, b) => {
@@ -128,6 +154,15 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     return [...base, ...base, ...base]
   }, [orderedPackages, cardsToShow])
 
+  const setAutoScrollPaused = useCallback((nextPaused: boolean) => {
+    pausedRef.current = nextPaused
+    setPaused(nextPaused)
+  }, [])
+
+  useEffect(() => {
+    pausedRef.current = paused
+  }, [paused])
+
   useEffect(() => {
     function onResize() {
       const width = window.innerWidth
@@ -145,7 +180,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     if (!viewport || !orderedPackages.length) return
 
     const segmentWidth = (viewport.scrollWidth + 16) / 3
-    viewport.scrollLeft = segmentWidth
+    viewport.scrollTo({ left: segmentWidth, behavior: 'auto' })
   }, [orderedPackages.length, cardWidth])
 
   useEffect(() => {
@@ -158,7 +193,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
       const delta = timestamp - lastFrameRef.current
       lastFrameRef.current = timestamp
 
-      if (!paused) {
+      if (!pausedRef.current) {
         const segmentWidth = (viewportEl.scrollWidth + 16) / 3
         viewportEl.scrollLeft += delta * SCROLL_PX_PER_MS
 
@@ -177,7 +212,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
       rafRef.current = null
       lastFrameRef.current = null
     }
-  }, [paused, orderedPackages.length, cardsToShow])
+  }, [orderedPackages.length, cardsToShow])
 
   function getCardStep() {
     const viewport = viewportRef.current
@@ -189,17 +224,11 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     return firstCard.getBoundingClientRect().width + gap
   }
 
-  const syncInfinitePosition = useCallback(() => {
+  const updateActiveIndex = useCallback(() => {
     const viewport = viewportRef.current
     if (!viewport || !orderedPackages.length) return
 
     const segmentWidth = (viewport.scrollWidth + 16) / 3
-    if (viewport.scrollLeft <= 0) {
-      viewport.scrollLeft += segmentWidth
-    } else if (viewport.scrollLeft >= segmentWidth * 2) {
-      viewport.scrollLeft -= segmentWidth
-    }
-
     const cardStep = getCardStep()
     if (!cardStep) return
 
@@ -208,6 +237,76 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
     const index = ((rawIndex % dotCount) + dotCount) % dotCount
     setActiveIndex(index)
   }, [dotCount, orderedPackages.length])
+
+  const correctInfinitePosition = useCallback(() => {
+    const viewport = viewportRef.current
+    if (!viewport || !orderedPackages.length || isCorrectingLoopRef.current) return
+
+    const segmentWidth = (viewport.scrollWidth + 16) / 3
+    const currentLeft = viewport.scrollLeft
+    let nextLeft = currentLeft
+
+    if (currentLeft <= 0) {
+      nextLeft = currentLeft + segmentWidth
+    } else if (currentLeft >= segmentWidth * 2) {
+      nextLeft = currentLeft - segmentWidth
+    }
+
+    if (Math.abs(nextLeft - currentLeft) > 0.5) {
+      isCorrectingLoopRef.current = true
+      viewport.scrollTo({
+        left: nextLeft,
+        behavior: 'auto',
+      })
+      window.requestAnimationFrame(() => {
+        isCorrectingLoopRef.current = false
+      })
+    }
+
+    updateActiveIndex()
+  }, [orderedPackages.length, updateActiveIndex])
+
+  const clearScrollSettledTimer = useCallback(() => {
+    if (settleTimerRef.current != null) {
+      window.clearTimeout(settleTimerRef.current)
+      settleTimerRef.current = null
+    }
+  }, [])
+
+  const handleScrollSettled = useCallback(() => {
+    if (isTouchInteractingRef.current) return
+
+    clearScrollSettledTimer()
+    correctInfinitePosition()
+    setAutoScrollPaused(false)
+  }, [clearScrollSettledTimer, correctInfinitePosition, setAutoScrollPaused])
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    if (!viewport || !orderedPackages.length) return
+
+    const handleScroll = () => {
+      if (isTouchInteractingRef.current) return
+
+      clearScrollSettledTimer()
+      settleTimerRef.current = window.setTimeout(() => {
+        handleScrollSettled()
+      }, 140)
+    }
+
+    const handleScrollEnd = () => {
+      handleScrollSettled()
+    }
+
+    viewport.addEventListener('scroll', handleScroll)
+    viewport.addEventListener('scrollend', handleScrollEnd)
+
+    return () => {
+      viewport.removeEventListener('scroll', handleScroll)
+      viewport.removeEventListener('scrollend', handleScrollEnd)
+      clearScrollSettledTimer()
+    }
+  }, [clearScrollSettledTimer, handleScrollSettled, orderedPackages.length])
 
   function goTo(index: number) {
     const viewport = viewportRef.current
@@ -219,7 +318,7 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
 
     viewport.scrollTo({
       left: segmentWidth + index * cardStep,
-      behavior: 'smooth',
+      behavior: 'auto',
     })
     setActiveIndex(index)
   }
@@ -233,22 +332,56 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
   }
 
   function onTouchStart(event: TouchEvent<HTMLDivElement>) {
+    isTouchInteractingRef.current = true
     touchStartX.current = event.touches[0]?.clientX ?? null
+    clearScrollSettledTimer()
+    setAutoScrollPaused(true)
   }
 
   function onTouchEnd(event: TouchEvent<HTMLDivElement>) {
     if (touchStartX.current == null) return
+
     const diff = (event.changedTouches[0]?.clientX ?? 0) - touchStartX.current
     touchStartX.current = null
+    isTouchInteractingRef.current = false
 
-    if (Math.abs(diff) < SWIPE_THRESHOLD) return
-    if (diff < 0) next()
-    else prev()
+    if (Math.abs(diff) >= SWIPE_THRESHOLD) {
+      if (diff < 0) next()
+      else prev()
+    }
+
+    const viewport = viewportRef.current
+    if (!viewport) return
+
+    clearScrollSettledTimer()
+    settleTimerRef.current = window.setTimeout(() => {
+      if (!isTouchInteractingRef.current) {
+        handleScrollSettled()
+      }
+    }, 180)
+  }
+
+  function onTouchCancel() {
+    isTouchInteractingRef.current = false
+    clearScrollSettledTimer()
+    if (!pausedRef.current) {
+      window.setTimeout(() => {
+        handleScrollSettled()
+      }, 120)
+    }
   }
 
   useEffect(() => {
-    syncInfinitePosition()
-  }, [cardWidth, cardsToShow, orderedPackages.length, syncInfinitePosition])
+    const viewport = viewportRef.current
+    if (!viewport || !orderedPackages.length) return
+
+    if (viewport.scrollLeft === 0) {
+      const segmentWidth = (viewport.scrollWidth + 16) / 3
+      viewport.scrollTo({ left: segmentWidth, behavior: 'auto' })
+    }
+
+    updateActiveIndex()
+  }, [cardWidth, cardsToShow, orderedPackages.length, updateActiveIndex])
 
   const trackStyle = {
     '--card-width': cardWidth,
@@ -257,30 +390,46 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
   return (
     <div
       className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setAutoScrollPaused(true)}
+      onMouseLeave={() => setAutoScrollPaused(false)}
     >
       <div
         ref={viewportRef}
         className="overflow-x-auto overflow-y-hidden scrollbar-none overscroll-x-contain"
+        style={{
+          touchAction: 'pan-x',
+          WebkitOverflowScrolling: 'touch',
+        }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        onScroll={syncInfinitePosition}
+        onTouchCancel={onTouchCancel}
       >
         <div className="flex gap-4 will-change-transform" style={trackStyle}>
-          {repeatedPackages.map((pkg, index) => (
-            <div
-              key={`${pkg.id}-${index}`}
-              data-package-card
-              className="shrink-0 py-2"
-              style={{
-                flex: '0 0 var(--card-width)',
-                maxWidth: '260px',
-              }}
-            >
-              <PackageCarouselCard pkg={pkg} lang={lang} />
-            </div>
-          ))}
+          {repeatedPackages.map((pkg, index) => {
+            const cardKey = `${pkg.id}-${index}`
+            const isActive = activeCardKey === cardKey
+
+            return (
+              <div
+                key={cardKey}
+                data-package-card
+                className="shrink-0 py-2"
+                style={{
+                  flex: '0 0 var(--card-width)',
+                  maxWidth: '260px',
+                }}
+              >
+                <PackageCarouselCard
+                  pkg={pkg}
+                  lang={lang}
+                  isActive={isActive}
+                  onClick={() =>
+                    setActiveCardKey((current) => (current === cardKey ? null : cardKey))
+                  }
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
 
