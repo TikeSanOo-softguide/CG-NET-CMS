@@ -162,7 +162,11 @@ export function NavBar() {
                 <MobileNavLink key={to} to={to} labelKey={labelKey} onNavigate={closeMobileMenu} />
               ))}
 
-              <Accordion type="single" collapsible>
+              <Accordion
+                type="single"
+                collapsible
+                defaultValue={isSupportRoute ? 'support' : undefined}
+              >
                 <AccordionItem value="support" className="border-none">
                   <AccordionTrigger
                     className={cn(
