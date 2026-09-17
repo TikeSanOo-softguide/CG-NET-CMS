@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { SiFacebook, SiWechat, SiTelegram, SiViber } from 'react-icons/si'
+import { SiFacebook, SiWechat, SiTelegram, SiViber, SiTiktok } from 'react-icons/si'
 import { Separator } from '@/components/ui/separator'
 import { useState } from 'react'
 import { useContact } from '@/hooks/useContact'
@@ -174,6 +174,20 @@ export function Footer() {
               className="text-slate-400 transition-colors hover:text-white"
             >
               <SiViber
+                className="h-5 w-5"
+                aria-hidden="true"
+              />
+            </a>
+
+            {/* Tiktok */}
+            <a
+              href="https://www.tiktok.com/@yaung.ni.oo.wifi"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Yaung-Ni-Oo Viber"
+              className="text-slate-400 transition-colors hover:text-white"
+            >
+              <SiTiktok
                 className="h-5 w-5"
                 aria-hidden="true"
               />

@@ -424,6 +424,37 @@ export default function HomePage() {
           </div>
         </div>
       </SectionWrapper>
+
+      {/* CTA Section */}
+      <SectionWrapper className="pb-10 md:pb-20 bg-muted/40">
+        <div className="relative overflow-hidden rounded-xl bg-gradient-font px-8 py-14 text-center md:px-16">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary-foreground/10 blur-2xl"
+          />
+          <h2 className="relative text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl">
+            {t('cta.ctaTitle')}
+
+          </h2>
+          <p className="relative mx-auto mt-4 max-w-xl text-base text-primary-foreground/80 sm:text-[17px]">
+            {t('cta.ctaDesc')}
+          </p>
+          <div className="relative mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href="/packages?category=1"
+              className="rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-primary transition-all duration-200 hover:brightness-95 active:scale-[0.98]"
+            >
+              {t('home.heroCta')}
+            </a>
+            <a
+              href="/contact-us"
+              className="rounded-xl border border-primary-foreground/40 px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]"
+            >
+              {t('nav.contact')}
+            </a>
+          </div>
+        </div>
+      </SectionWrapper>
     </main>
   )
 }

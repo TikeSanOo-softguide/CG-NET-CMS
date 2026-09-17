@@ -393,6 +393,10 @@
       "social": "Follow Us"
     }
   },
+  "cta": {
+    "ctaTitle":"Ready to get connected?",
+    "ctaDesc":"Choose a plan that fits your home or business — installation in as little as 48 hours."
+  },
   "location": {
     "title": "Available Locations",
     "subtitle": "Select a state, region, and area to check whether WiFi is live near you.",
