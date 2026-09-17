@@ -24,6 +24,7 @@ import { useGallery } from '@/hooks/useGallery'
 import { cn, getLocalized } from '@/lib/utils'
 import { useRecommendPackage } from '@/hooks/usePackages'
 import AnimatedStat from '@/components/common/AnimatedStat'
+import DirectionAwareButton from '@/components/common/DirectionAwareButton'
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
@@ -440,18 +441,17 @@ export default function HomePage() {
             {t('cta.ctaDesc')}
           </p>
           <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="/packages?category=1"
-              className="rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-primary transition-all duration-200 hover:brightness-95 active:scale-[0.98]"
-            >
-              {t('home.heroCta')}
-            </a>
-            <a
-              href="/contact-us"
-              className="rounded-xl border border-primary-foreground/40 px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]"
-            >
-              {t('nav.contact')}
-            </a>
+          <DirectionAwareButton 
+            to="/packages?category=1" 
+            label={t('home.heroCta')} 
+            color="#ffcf62" 
+            className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]" 
+          /> 
+          <DirectionAwareButton 
+            to="/contact-us"
+            label={t('nav.contact')}
+            className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]" 
+          /> 
           </div>
         </div>
       </SectionWrapper>
