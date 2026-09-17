@@ -3,10 +3,12 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { cn } from '@/lib/utils'
 import type { ComponentType } from 'react'
+import { Link } from 'react-router-dom'
 
 interface DirectionAwareButtonProps {
     label: string
     href?: string
+    to?: string
     icon?: ComponentType<{ className?: string }>
     color?: string
     className?: string
@@ -16,6 +18,7 @@ interface DirectionAwareButtonProps {
 export default function DirectionAwareButton({
     label,
     href = '#',
+    to,
     icon: Icon,
     color = 'var(--color-primary, #0100ca)',
     className,
@@ -130,30 +133,25 @@ export default function DirectionAwareButton({
         { scope: buttonRef },
     )
 
-    return (
-        <a
-            ref={buttonRef}
-            href={href}
-            target={target}
-            rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-            aria-label={label}
-            className={cn(
-                'relative isolate inline-flex items-center justify-center gap-2 overflow-hidden',
-                'rounded-full border border-border bg-app-surface px-6 py-3',
-                'text-sm font-semibold text-foreground no-underline',
-                className,
-            )}
-        >
-        <span
-                    ref={flairRef}
-                    aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 z-0 block rounded-full scale-0 will-change-transform"
-        >
-                    <span
+    const sharedClassName = cn(
+        'relative isolate inline-flex items-center justify-center gap-2 overflow-hidden',
+        'rounded-full border border-border bg-app-surface px-6 py-3',
+        'text-sm font-semibold text-foreground no-underline',
+        className,
+    )
+
+    const buttonContent = (
+        <>
+            <span
+                ref={flairRef}
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-0 block scale-0 rounded-full will-change-transform"
+            >
+                <span
                     className="absolute left-1/2 top-1/2 aspect-square w-[170%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-100"
-            style={{ backgroundColor: color }}
-                    />
-        </span>
+                    style={{ backgroundColor: color }}
+                />
+            </span>
 
             <span className="relative z-10 flex items-center gap-2 text-foreground">
                 {Icon && <Icon className="h-4 w-4" />}
@@ -165,10 +163,31 @@ export default function DirectionAwareButton({
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center gap-2"
                 style={{ clipPath: 'circle(0% at 50% 50%)', backgroundColor: color }}
-                >
+            >
                 {Icon && <Icon className="h-4 w-4 text-white" />}
                 <span className="text-white">{label}</span>
             </span>
+        </>
+    )
+
+    if (to) {
+        return (
+            <Link ref={buttonRef} to={to} aria-label={label} className={sharedClassName}>
+                {buttonContent}
+            </Link>
+        )
+    }
+
+    return (
+        <a
+            ref={buttonRef}
+            href={href}
+            target={target}
+            rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+            aria-label={label}
+            className={sharedClassName}
+        >
+            {buttonContent}
         </a>
     )
 }
