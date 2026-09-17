@@ -17,7 +17,7 @@ export default function CommonTab({ filters, activeValue, onValueChange }: Commo
   const { t } = useTranslation()
 
   return (
-    <div className="mb-5 w-full max-w-full overflow-x-auto overscroll-x-contain pb-1">
+    <div className="mb-5 w-full max-w-full overflow-x-auto overscroll-x-contain pb-1 [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:mx-[25vw] sm:[&::-webkit-scrollbar-track]:mx-[30vw] [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full">
       <Tabs value={activeValue} onValueChange={onValueChange} className="w-max min-w-full">
         <div className="flex w-max min-w-full justify-center px-1 sm:justify-center">
           <TabsList
