@@ -25,7 +25,7 @@ export default function AppGuidePage() {
       {/* App download links */}
       <div
         className="
-          mb-10
+          pb-10
           grid grid-cols-2
           gap-3
           px-4
@@ -78,7 +78,7 @@ export default function AppGuidePage() {
 
         <>
           {/* Overview cards */}
-          <div className="grid auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+          <div className="grid auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 pb-12">
             {appGuideContent.guides.map((guide, index) => {
               const IconComp = guide.icon
               return (
@@ -183,7 +183,7 @@ export default function AppGuidePage() {
           </Accordion>
 
           {/* Frequently Asked Questions (FAQ Section) */}
-          <div className="mt-16 mb-12" id="faq">
+          <div className="mt-16 pb-12" id="faq">
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-6 ">
               {t('appGuide.faqTitle')}
             </h2>

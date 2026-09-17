@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { privacyContent } from '@/lib/content/privacy'
+import DirectionAwareButton from '@/components/common/DirectionAwareButton'
 
 export default function PrivacyPage() {
 const { t } = useTranslation()
@@ -33,7 +34,7 @@ const renderTextList = (items: readonly string[]) => (
         subtitle={t('privacy.pageSubtitle')}
       />
 
-      <SectionWrapper>
+      <SectionWrapper className='bg-muted/40'>
         <div className="mx-auto max-w-5xl">
           {/* Hero */}
           <div className="border-b border-border/60 pb-5">
@@ -426,12 +427,13 @@ const renderTextList = (items: readonly string[]) => (
               {t(privacyContent.contactUs.descriptionKey)}
             </p>
 
-            <a
-              href={`mailto:${privacyContent.contactUs.email}`}
-              className="mt-6 inline-flex rounded-xl bg-app-yellow px-5 py-3 font-semibold text-font-black transition-transform hover:-translate-y-0.5"
-            >
-              {privacyContent.contactUs.email}
-            </a>
+            <DirectionAwareButton
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${privacyContent.contactUs.email}`}
+              label={privacyContent.contactUs.email}
+              color="var(--color-yellow)"
+              target='_blank'
+              className="rounded-xl mt-6 px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]" 
+            /> 
           </section>
         </div>
       </SectionWrapper>
