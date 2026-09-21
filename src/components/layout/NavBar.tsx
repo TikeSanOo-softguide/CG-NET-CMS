@@ -11,17 +11,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@radix-ui/react-accordion'
-import { SupportDropdown, SUPPORT_CATEGORIES } from './SupportDropdown'
 import { LanguageSwitcher } from './LanguageSwitcher'
-
-const NAV_LINKS = [
-  { to: '/', labelKey: 'nav.home' },
-  { to: '/services', labelKey: 'nav.services' },
-  { to: '/packages?category=mm-broadband', labelKey: 'nav.packages' },
-  { to: '/promotion', labelKey: 'nav.promotion' },
-  { to: '/news', labelKey: 'nav.news' },
-  { to: '/about', labelKey: 'nav.about' },
-] as const
+import { NEWS_CATEGORIES, SERVICE_CATEGORIES, SUPPORT_CATEGORIES } from '@/lib/content/navbar'
+import { CommonDropdown } from './CommonDropdown'
 
 function DesktopNavItem({ to, labelKey }: { to: string; labelKey: string }) {
   const { t } = useTranslation()
@@ -107,17 +99,33 @@ export function NavBar() {
   }, [location.pathname])
 
   const isSupportRoute = SUPPORT_CATEGORIES.some(({ to }) => location.pathname === to)
+  const isServiceRoute = SERVICE_CATEGORIES.some(({ to }) => location.pathname === to)
+  const isNewRoute = NEWS_CATEGORIES.some(({ to }) => location.pathname === to)
 
   const closeMobileMenu = () => setMobileOpen(false)
 
   return (
     <nav aria-label="Main navigation" className="flex items-center font-heading">
       <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
-        {NAV_LINKS.map(({ to, labelKey }) => (
-          <DesktopNavItem key={to} to={to} labelKey={labelKey} />
-        ))}
-
-        <SupportDropdown />
+        {/* Home */}
+        <DesktopNavItem key='home' to='/' labelKey='nav.home' />
+        {/* Service */}
+        <CommonDropdown
+          categories={SERVICE_CATEGORIES}
+          labelKey="nav.services"
+        />
+        {/* News */}
+        <CommonDropdown
+          categories={NEWS_CATEGORIES}
+          labelKey="nav.newsUpdate"
+        />
+        {/* About */}
+        <DesktopNavItem key='about' to='/about' labelKey='nav.about' />
+        {/* Support */}
+        <CommonDropdown 
+          categories={SUPPORT_CATEGORIES} 
+          labelKey="nav.support"
+        />
       </div>
 
       <div className="lg:hidden">
@@ -158,10 +166,87 @@ export function NavBar() {
             </SheetHeader>
 
             <div className="flex flex-col gap-1 px-3 py-3">
-              {NAV_LINKS.map(({ to, labelKey }) => (
-                <MobileNavLink key={to} to={to} labelKey={labelKey} onNavigate={closeMobileMenu} />
-              ))}
-
+              {/* Home Mobile*/}
+              <MobileNavLink key='home' to='/' labelKey='nav.home' onNavigate={closeMobileMenu} />
+              {/* Service Mobile*/}
+              <Accordion
+                type="single"
+                collapsible
+                defaultValue={isServiceRoute ? 'services' : undefined}
+              >
+                <AccordionItem value="support" className="border-none">
+                  <AccordionTrigger
+                    className={cn(
+                      'group flex min-h-12 w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-[15px] font-medium text-font-black transition-colors hover:no-underline hover:bg-accent/60',
+                      isServiceRoute && 'text-transparent bg-clip-text bg-gradient-font'
+                    )}
+                  >
+                    {t('nav.services')}
+                    <ChevronDown className="size-4 shrink-0 text-font-black transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1 pt-1">
+                    <div className="ml-3 border-l border-border/80 pl-3">
+                      {SERVICE_CATEGORIES.map(({ key, labelKey, to }) => (
+                        <NavLink
+                          key={key}
+                          to={to}
+                          onClick={closeMobileMenu}
+                          className={({ isActive }) =>
+                            cn(
+                              'flex min-h-11 items-center rounded-md px-3  text-[15px] font-medium transition-colors hover:bg-accent/60',
+                              isActive && 'text-transparent bg-clip-text bg-gradient-font',
+                              !isActive && 'text-font-black'
+                            )
+                          }
+                        >
+                          {t(labelKey)}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              {/* News Mobile*/}
+              <Accordion
+                type="single"
+                collapsible
+                defaultValue={isNewRoute ? 'news' : undefined}
+              >
+                <AccordionItem value="support" className="border-none">
+                  <AccordionTrigger
+                    className={cn(
+                      'group flex min-h-12 w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-[15px] font-medium text-font-black transition-colors hover:no-underline hover:bg-accent/60',
+                      isNewRoute && 'text-transparent bg-clip-text bg-gradient-font'
+                    )}
+                  >
+                    {t('nav.newsUpdate')}
+                    <ChevronDown className="size-4 shrink-0 text-font-black transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1 pt-1">
+                    <div className="ml-3 border-l border-border/80 pl-3">
+                      {NEWS_CATEGORIES.map(({ key, labelKey, to }) => (
+                        <NavLink
+                          key={key}
+                          to={to}
+                          onClick={closeMobileMenu}
+                          className={({ isActive }) =>
+                            cn(
+                              'flex min-h-11 items-center rounded-md px-3  text-[15px] font-medium transition-colors hover:bg-accent/60',
+                              isActive && 'text-transparent bg-clip-text bg-gradient-font',
+                              !isActive && 'text-font-black'
+                            )
+                          }
+                        >
+                          {t(labelKey)}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              {/* About Mobile*/}
+              <MobileNavLink key='about' to='/about' labelKey='nav.about' onNavigate={closeMobileMenu} />
+              {/* Support Mobile*/}
               <Accordion
                 type="single"
                 collapsible
@@ -199,7 +284,7 @@ export function NavBar() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-
+              {/* Language Mobile*/}
               <div className="mt-2 border-t border-border pt-3">
                 <div className="px-3 pb-2 text-[13px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
                   {t('common.language')}
