@@ -2,7 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './styles/index.css'
-import './lib/i18n' 
+import './lib/i18n'
+import { initGsap } from './lib/gsap'
+
+initGsap() 
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Root element not found. Check index.html.')

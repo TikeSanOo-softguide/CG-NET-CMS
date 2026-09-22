@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 export function usePromotion(page = 1, limit = 5, search = '') {
   const { i18n } = useTranslation()
-  const lang = i18n.language.split('-')[0]
+  const lang = (i18n.language ?? 'en').split('-')[0]
   return useQuery({
     queryKey: ['promotions', page, limit, search, lang],
     queryFn: () => getPromotions(page, limit, search, lang),

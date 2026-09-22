@@ -1,9 +1,7 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-
-gsap.registerPlugin(ScrollTrigger)
+import { initGsap, prefersReducedMotion } from '@/lib/gsap'
 
 interface CardItem {
   id: string
@@ -20,7 +18,8 @@ export function StackedCards({ items }: StackedCardsProps) {
 
   useGSAP(
     () => {
-      if (!containerRef.current || !trackRef.current) return
+      initGsap()
+      if (!containerRef.current || !trackRef.current || prefersReducedMotion()) return
 
       const images = gsap.utils.toArray<HTMLElement>('.stacked-image', containerRef.current)
 

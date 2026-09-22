@@ -3,14 +3,19 @@ import { useTranslation } from 'react-i18next'
 import { Home, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { useGsapReveal } from '@/hooks/useGsapReveal'
 
 export default function NotFoundPage() {
   const { t } = useTranslation()
   usePageTitle(t('common.notFound'))
+  const contentRef = useGsapReveal<HTMLElement>({ mode: 'fade' })
 
   return (
     <>
-      <main className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
+      <main
+        ref={contentRef}
+        className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center"
+      >
         <img 
           src="/assets/error/404.svg" 
           className="mx-auto w-64 h-64 object-contain" 

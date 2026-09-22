@@ -9,7 +9,7 @@ export function useNews(
     category = ''
   ) {
     const { i18n } = useTranslation()
-    const lang = i18n.language.split('-')[0]
+    const lang = (i18n.language ?? 'en').split('-')[0]
     return useQuery({
       queryKey: ['news', page, limit, search, category, lang],
       queryFn: () => getNews(

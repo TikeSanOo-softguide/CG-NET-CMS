@@ -213,7 +213,7 @@ export default function AvailableLocationPage({ state, area }: Props) {
   return (
     <main>
       <PageHeader title={t('location.title')} subtitle={t('location.subtitle')} />
-      <SectionWrapper spacing="compact" className="bg-muted/40 py-10">
+      <SectionWrapper spacing="compact" className="bg-muted/40 py-10" motion="fade">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pb-5">
           <label className="flex flex-col gap-2">
             <span className="text-sm font-semibold text-foreground">
