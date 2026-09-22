@@ -98,34 +98,33 @@ export function NavBar() {
     setMobileOpen(false)
   }, [location.pathname])
 
-  const isSupportRoute = SUPPORT_CATEGORIES.some(({ to }) => location.pathname === to)
-  const isServiceRoute = SERVICE_CATEGORIES.some(({ to }) => location.pathname === to)
-  const isNewRoute = NEWS_CATEGORIES.some(({ to }) => location.pathname === to)
+  const isSupportRoute = SUPPORT_CATEGORIES.some(({ to }) =>
+    location.pathname.startsWith(to.split('?')[0])
+  )
+
+  const isServiceRoute = SERVICE_CATEGORIES.some(({ to }) =>
+    location.pathname.startsWith(to.split('?')[0])
+  )
+
+  const isNewRoute = NEWS_CATEGORIES.some(({ to }) =>
+    location.pathname.startsWith(to.split('?')[0])
+  )
 
   const closeMobileMenu = () => setMobileOpen(false)
 
   return (
     <nav aria-label="Main navigation" className="flex items-center font-heading">
-      <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+      <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 collapsible">
         {/* Home */}
-        <DesktopNavItem key='home' to='/' labelKey='nav.home' />
+        <DesktopNavItem key="home" to="/" labelKey="nav.home" />
         {/* Service */}
-        <CommonDropdown
-          categories={SERVICE_CATEGORIES}
-          labelKey="nav.services"
-        />
+        <CommonDropdown categories={SERVICE_CATEGORIES} labelKey="nav.services" />
         {/* News */}
-        <CommonDropdown
-          categories={NEWS_CATEGORIES}
-          labelKey="nav.newsUpdate"
-        />
+        <CommonDropdown categories={NEWS_CATEGORIES} labelKey="nav.newsUpdate" />
         {/* About */}
-        <DesktopNavItem key='about' to='/about' labelKey='nav.about' />
+        <DesktopNavItem key="about" to="/about" labelKey="nav.about" />
         {/* Support */}
-        <CommonDropdown 
-          categories={SUPPORT_CATEGORIES} 
-          labelKey="nav.support"
-        />
+        <CommonDropdown categories={SUPPORT_CATEGORIES} labelKey="nav.support" />
       </div>
 
       <div className="lg:hidden">
@@ -167,14 +166,14 @@ export function NavBar() {
 
             <div className="flex flex-col gap-1 px-3 py-3">
               {/* Home Mobile*/}
-              <MobileNavLink key='home' to='/' labelKey='nav.home' onNavigate={closeMobileMenu} />
+              <MobileNavLink key="home" to="/" labelKey="nav.home" onNavigate={closeMobileMenu} />
               {/* Service Mobile*/}
               <Accordion
                 type="single"
                 collapsible
                 defaultValue={isServiceRoute ? 'services' : undefined}
               >
-                <AccordionItem value="support" className="border-none">
+                <AccordionItem value="services" className="border-none">
                   <AccordionTrigger
                     className={cn(
                       'group flex min-h-12 w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-[15px] font-medium text-font-black transition-colors hover:no-underline hover:bg-accent/60',
@@ -207,12 +206,8 @@ export function NavBar() {
                 </AccordionItem>
               </Accordion>
               {/* News Mobile*/}
-              <Accordion
-                type="single"
-                collapsible
-                defaultValue={isNewRoute ? 'news' : undefined}
-              >
-                <AccordionItem value="support" className="border-none">
+              <Accordion type="single" collapsible defaultValue={isNewRoute ? 'news' : undefined}>
+                <AccordionItem value="news" className="border-none">
                   <AccordionTrigger
                     className={cn(
                       'group flex min-h-12 w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-[15px] font-medium text-font-black transition-colors hover:no-underline hover:bg-accent/60',
@@ -245,7 +240,12 @@ export function NavBar() {
                 </AccordionItem>
               </Accordion>
               {/* About Mobile*/}
-              <MobileNavLink key='about' to='/about' labelKey='nav.about' onNavigate={closeMobileMenu} />
+              <MobileNavLink
+                key="about"
+                to="/about"
+                labelKey="nav.about"
+                onNavigate={closeMobileMenu}
+              />
               {/* Support Mobile*/}
               <Accordion
                 type="single"

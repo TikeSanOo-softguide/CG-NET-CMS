@@ -177,7 +177,8 @@
     "viewAllNews": "查看所有新闻",
     "relatedArticles": "相关文章",
     "noNews": "暂无文章",
-    "noNewsDesc": "请稍后再来查看最新新闻与动态。"
+    "noNewsDesc": "请稍后再来查看最新新闻与动态。",
+    "shareArticle": "分享文章"
   },
   "promotions": {
     "pageTitle": "促销 - 晨光",
@@ -414,9 +415,9 @@
       "social": "关注我们"
     }
   },
-  "cta": { 
-    "ctaTitle": "准备好连接了吗？", 
-    "ctaDesc": "选择适合您家庭或企业的套餐 — 最快可在 48 小时内完成安装。" 
+  "cta": {
+    "ctaTitle": "准备好连接了吗？",
+    "ctaDesc": "选择适合您家庭或企业的套餐 — 最快可在 48 小时内完成安装。"
   },
   "location": {
     "title": "可用位置",

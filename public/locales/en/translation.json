@@ -178,7 +178,8 @@
     "viewAllNews": "View All News",
     "relatedArticles": "Related Articles",
     "noNews": "No articles found",
-    "noNewsDesc": "Check back later for the latest news and updates."
+    "noNewsDesc": "Check back later for the latest news and updates.",
+    "shareArticle": "Share Article"
   },
   "career": {
     "title": "Join Our Team",
@@ -395,8 +396,8 @@
     }
   },
   "cta": {
-    "ctaTitle":"Ready to get connected?",
-    "ctaDesc":"Choose a plan that fits your home or business — installation in as little as 48 hours."
+    "ctaTitle": "Ready to get connected?",
+    "ctaDesc": "Choose a plan that fits your home or business — installation in as little as 48 hours."
   },
   "location": {
     "title": "Available Locations",
