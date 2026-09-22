@@ -1,4 +1,8 @@
-import { BilingualString } from '.'
+export interface BilingualString {
+  en: string | null
+  my: string | null
+  zh: string | null
+}
 
 export interface Gallery {
   id: string

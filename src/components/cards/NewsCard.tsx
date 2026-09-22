@@ -14,6 +14,7 @@ import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { cn, getLocalized, formatDate, getDateLocale } from '@/lib/utils'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import { NewsArticle } from '@/types/new'
+import { useState } from 'react'
 
 interface NewsCardProps {
   article: NewsArticle
@@ -26,6 +27,8 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
   const { t } = useTranslation()
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
 
+  const [imageError, setImageError] = useState(false)
+
   return (
     <AnimatedCard delay={delay} variant="rise" className="h-full min-w-0 max-w-full rounded-xl">
       <Card
@@ -36,22 +39,25 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
       >
         <Link
           to={`/news/${article.slug}`}
-          className={cn(
-            'card-media relative block w-full aspect-[4/1.7] overflow-hidden',
-          )}
+          className={cn('card-media relative block w-full aspect-[4/1.7] overflow-hidden')}
         >
-          {article.image_url ? (
+          {article.image_url && !imageError ? (
             <img
               src={`${STORAGE_URL}/${article.image_url}`}
               alt={getLocalized(article.title, lang)}
-              className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
+              onError={() => setImageError(true)}
             />
-            ) : (
-              <div className="flex items-center justify-center w-full h-full bg-muted text-font-muted text-lg font-medium">
-                {t('common.noImage')}
-              </div>
-            )}
+          ) : (
+            <div className="flex items-center justify-center w-full h-full bg-muted">
+              <img
+                src="/assets/logo/logo-muted.png"
+                alt="No image available"
+                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
 
@@ -74,16 +80,11 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
 
         <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
           <div className="min-h-[3.4em] flex items-start">
-            <CardDescription
-              className={cn(
-                'line-clamp-2 leading-[1.7] text-sm text-font-black'
-              )}
-            >
+            <CardDescription className={cn('line-clamp-2 leading-[1.7] text-sm text-font-black')}>
               {getLocalized(article.description, lang)}
             </CardDescription>
           </div>
         </CardContent>
-
 
         <CardFooter
           className={cn(

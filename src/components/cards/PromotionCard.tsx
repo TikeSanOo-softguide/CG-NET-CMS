@@ -7,6 +7,7 @@ import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { cn, formatDate, getDateLocale, getLocalized } from '@/lib/utils'
 import type { Promotion } from '@/types/promotion'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
+import { useState } from 'react'
 
 interface PromotionCardProps {
   promotion: Promotion
@@ -18,6 +19,7 @@ interface PromotionCardProps {
 export function PromotionCard({ promotion, lang, delay = 0, compact = false }: PromotionCardProps) {
   const { t } = useTranslation()
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+  const [imageError, setImageError] = useState(false)
 
   return (
     <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full relative">
@@ -33,7 +35,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
 
           className="card-media relative block w-full aspect-[4/1.7] overflow-hidden"
         >
-          {promotion.imageUrl ? (
+          {promotion.imageUrl && !imageError ? (
             <img
               src={
                 promotion.imageUrl.startsWith('http')
@@ -43,10 +45,15 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
               alt={getLocalized(promotion.title, lang)}
               className="w-full h-full transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
+              onError={() => setImageError(true)}
             />
           ) : (
             <div className="flex items-center justify-center w-full h-full bg-muted text-font-muted text-lg font-medium">
-              {t('common.noImage')}
+              <img
+                src="/assets/logo/logo-muted.png"
+                alt="No image available"
+                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
