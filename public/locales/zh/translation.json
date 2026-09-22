@@ -35,7 +35,9 @@
     "featured": "精选",
     "goBack": "返回",
     "language": "语言",
-    "noImage": "暂无图片"
+    "noImage": "暂无图片",
+    "checkOutThisArticle": "看看这篇文章！",
+    "checkOutThisPromotion": "看看这项促销活动！"
   },
   "announcement": {
     "serviceInterruption": "🔔 服务中断：互联网服务暂时不可用。我们的团队正在努力恢复连接。"
@@ -178,7 +180,8 @@
     "relatedArticles": "相关文章",
     "noNews": "暂无文章",
     "noNewsDesc": "请稍后再来查看最新新闻与动态。",
-    "shareArticle": "分享文章"
+    "shareArticle": "分享文章",
+    "checkOutThisArticle": "看看这篇文章！"
   },
   "promotions": {
     "pageTitle": "促销 - 晨光",
@@ -191,7 +194,9 @@
     "noPromotion": "暂无促销活动",
     "noPromotionDesc": "请稍后回来查看最新的促销活动。",
     "active": "进行中",
-    "promotionExpires": "促销截止日期:"
+    "promotionExpires": "促销截止日期:",
+    "sharePromotion": "分享促销活动",
+    "checkOutThisPromotion": "看看这项促销活动！"
   },
   "career": {
     "title": "加入我们",

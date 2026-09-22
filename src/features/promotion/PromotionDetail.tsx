@@ -8,6 +8,8 @@ import { usePromotionBySlug } from '@/hooks/usePromotion'
 import { formatDate, getDateLocale, getLocalized } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
 import { EmptyState } from '@/components/common/EmptyState'
+import { useState } from 'react'
+import { ShareButton } from '@/components/common/ShareButton'
 
 export default function PromotionDetail() {
   const { slug } = useParams()
@@ -15,6 +17,7 @@ export default function PromotionDetail() {
   const lang = normalizeLanguage(i18n.language)
   const { data: promotion, isLoading, isError } = usePromotionBySlug(slug ?? '')
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+  const [imageError, setImageError] = useState(false)
 
   if (isLoading) {
     return (
@@ -121,22 +124,21 @@ export default function PromotionDetail() {
             </h1>
           </div>
 
-          {/* Banner Image with modern shadow and zoom on hover */}
           <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-lg shadow-black/5 w-full transition-all duration-300 hover:shadow-xl hover:border-primary/30">
-            {promotion.imageUrl ? (
-              <img
-                src={
-                  promotion.imageUrl.startsWith('http')
-                    ? promotion.imageUrl
-                    : `${STORAGE_URL}/${promotion.imageUrl}`
-                }
-                alt={getLocalized(promotion.title, lang)}
-                className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-            ) : (
-              <div className="flex items-center justify-center w-full h-[200px] bg-muted text-font-muted text-lg font-medium">
-                  {t('common.noImage')}
+            {promotion.imageUrl && !imageError && (
+              <div className="group relative overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-lg shadow-black/5 w-full transition-all duration-300 hover:shadow-xl hover:border-primary/30">
+                <img
+                  src={
+                    promotion.imageUrl.startsWith('http')
+                      ? promotion.imageUrl
+                      : `${STORAGE_URL}/${promotion.imageUrl}`
+                  }
+                  alt={getLocalized(promotion.title, lang)}
+                  className="block h-auto w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  onError={() => setImageError(true)}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60" />
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60" />
@@ -144,11 +146,16 @@ export default function PromotionDetail() {
 
           {/* Description Card */}
           <div className="prose prose-neutral dark:prose-invert max-w-none space-y-4 text-font-muted leading-relaxed">
-            <p className="pb-12 sm:pb-16 text-sm sm:text-base whitespace-pre-line">
+            <p className="  text-sm sm:text-base whitespace-pre-line">
               {getLocalized(promotion.description, lang)}
             </p>{' '}
           </div>
         </div>
+        <ShareButton
+          title={promotion ? getLocalized(promotion.title, lang) : document.title}
+          text={t('promotions.checkOutThisPromotion')}
+          buttonText={t('promotions.sharePromotion')}
+        />
       </SectionWrapper>
     </main>
   )
