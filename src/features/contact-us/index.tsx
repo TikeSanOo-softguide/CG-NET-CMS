@@ -111,7 +111,7 @@ export default function ContactUsPage() {
   return (
     <>
       <PageHeader title={t('contact.title')} subtitle={t('contact.subtitle')} />
-      <SectionWrapper spacing="compact" className="py-10 bg-muted/40">
+      <SectionWrapper spacing="compact" className="py-10 bg-muted/40" motion="fade">
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
           <div className="flex flex-col gap-6">
             <div className="rounded-xl border border-border bg-card p-6 shadow-soft sm:p-8">

@@ -103,7 +103,7 @@ export function localizedName(
   name: { en: string; my: string; zh: string },
   locale: string = 'en'
 ): string {
-  const normalizedLocale = (locale.split('-')[0] ?? 'en') as 'en' | 'my' | 'zh'
+  const normalizedLocale = ((locale ?? 'en').split('-')[0] ?? 'en') as 'en' | 'my' | 'zh'
   const label = name[normalizedLocale] ?? name.en ?? ''
   return label || ''
 }

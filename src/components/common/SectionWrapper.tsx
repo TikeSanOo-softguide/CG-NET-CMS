@@ -1,10 +1,13 @@
 import { cn } from '@/lib/utils'
+import { useGsapReveal, type GsapRevealMode } from '@/hooks/useGsapReveal'
 
 interface SectionWrapperProps {
   children: React.ReactNode
   className?: string
   id?: string
   spacing?: 'default' | 'compact' | 'tight'
+  /** Section-level reveal. Use `fade` when the section contains a map. */
+  motion?: GsapRevealMode
 }
 
 export function SectionWrapper({
@@ -12,7 +15,10 @@ export function SectionWrapper({
   className,
   id,
   spacing = 'tight',
+  motion = 'rise',
 }: SectionWrapperProps) {
+  const contentRef = useGsapReveal<HTMLDivElement>({ mode: motion })
+
   return (
     <section
       id={id}
@@ -25,7 +31,9 @@ export function SectionWrapper({
         className
       )}
     >
-      <div className="container">{children}</div>
+      <div ref={contentRef} className="container">
+        {children}
+      </div>
     </section>
   )
 }

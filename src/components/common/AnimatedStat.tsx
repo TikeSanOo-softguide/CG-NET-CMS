@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { initGsap, prefersReducedMotion } from '@/lib/gsap'
 
 interface AnimatedStatProps {
     value: string
@@ -24,6 +22,15 @@ export default function AnimatedStat({ value }: AnimatedStatProps) {
         const suffix = match[2]
 
         const counter = { value: 0 }
+
+        initGsap()
+
+        if (prefersReducedMotion()) {
+            if (numberRef.current) {
+                numberRef.current.textContent = match[1] + suffix
+            }
+            return
+        }
 
         const ctx = gsap.context(() => {
         gsap.to(counter, {

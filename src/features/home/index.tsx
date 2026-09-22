@@ -25,6 +25,7 @@ import { cn, getLocalized } from '@/lib/utils'
 import { useRecommendPackage } from '@/hooks/usePackages'
 import AnimatedStat from '@/components/common/AnimatedStat'
 import DirectionAwareButton from '@/components/common/DirectionAwareButton'
+import { useGsapReveal } from '@/hooks/useGsapReveal'
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
@@ -42,6 +43,7 @@ export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState(initialCategory)
   const { data: galleryData, isLoading: galleryLoading, isError: galleryError } = useGallery()
 
+  const statsRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   const FILTERS = [
     { value: 'news', labelKey: 'home.latestNews' },
@@ -77,7 +79,10 @@ export default function HomePage() {
           className="relative z-30 -mt-3 sm:-mt-8 lg:-mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head"
           aria-label="Company statistics"
         >
-          <div className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)]">
+          <div
+            ref={statsRef}
+            className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
+          >
             <div className="grid grid-cols-6 lg:grid-cols-5">
               {homeContent.stats.map(({ value, labelKey }, index) => (
                 <div

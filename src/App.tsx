@@ -11,9 +11,8 @@ import { AppRoutes } from '@/routes/AppRoutes'
 import { ErrorBoundary } from '@/components/common/ErrorBoundary'
 import { Toaster } from '@/components/ui/toaster'
 import ScrollToTop from './components/common/ScrollToTop'
-// import AppDownloadCard from './components/common/AppDownloadCard'
+import { GsapProvider } from './components/animation/GsapProvider'
 import PromotionModal from './components/common/PromotionModal'
-// import { ConsentProvider } from './components/common/ConsentProvider'
 import DotBackgroundDemo from './components/ui/dot-background'
 
 const queryClient = new QueryClient({
@@ -53,7 +52,6 @@ function AppContent() {
 export default function App() {
   return (
     <HelmetProvider>
-      {/* <ConsentProvider> */}
         <QueryClientProvider client={queryClient}>
           <BrowserRouter
             future={{
@@ -62,15 +60,15 @@ export default function App() {
             }}
           >
             <ErrorBoundary>
-              <PromotionModal lang={''} />
-              {/* <AppDownloadCard /> */}
-              <AppContent />
-              <ScrollToTop />
+              <GsapProvider>
+                <PromotionModal lang={''} />
+                <AppContent />
+                <ScrollToTop />
+              </GsapProvider>
             </ErrorBoundary>
           </BrowserRouter>
           {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
         </QueryClientProvider>
-      {/* </ConsentProvider> */}
     </HelmetProvider>
   )
 }

@@ -4,7 +4,6 @@ import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { motion } from 'framer-motion'
 import { aboutContent } from '@/lib/content/about'
 import { StackedCards } from '@/components/common/StackedCards'
 import { Users, Gem, ShieldCheck, Megaphone, Target, Eye } from 'lucide-react'
@@ -12,6 +11,7 @@ import { useHashScroll } from '@/hooks/useHashScroll'
 import { useGallery } from '@/hooks/useGallery'
 import { EmptyState } from '@/components/common/EmptyState'
 import { Skeleton } from '@/components/ui/skeleton'
+import AnimatedStat from '@/components/common/AnimatedStat'
 
 export default function AboutPage() {
   const { t } = useTranslation()
@@ -39,14 +39,11 @@ export default function AboutPage() {
       <PageHeader title={t('about.title')} subtitle={t('about.tagline')} />
 
       {/* Our Story */}
-      <SectionWrapper className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0 bg-muted/40">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
-        >
+      <SectionWrapper
+        className="relative overflow-hidden !pt-0 !pb-12 lg:!pb-0 my-0 bg-muted/40"
+        motion="fade"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
               <h2 className="text-xl md:text-[35px] font-black tracking-tight bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
@@ -64,13 +61,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto my-1"
-          >
+          <div className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto my-1">
             {aboutContent.stats.map((stat, i) => {
               const IconComponent = stat.icon
               const angles = [0, 72, 144, 216, 288]
@@ -93,7 +84,7 @@ export default function AboutPage() {
                   <p
                     className={`text-sm sm:text-base font-black tracking-tight text-foreground ${stat.color} leading-relaxed py-0.5`}
                   >
-                    {stat.value}
+                    <AnimatedStat value={stat.value} />
                   </p>
 
                   <p className="text-[10px] sm:text-[10px] font-medium text-font-muted mt-0.5 sm:mt-1 px-1 text-center leading-relaxed py-0.5">
@@ -102,8 +93,8 @@ export default function AboutPage() {
                 </div>
               )
             })}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </SectionWrapper>
 
       {/* Mission & Vision */}
@@ -225,7 +216,7 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Activities Gallery */}
-      <SectionWrapper id="gallery" className="bg-muted/40">
+      <SectionWrapper id="gallery" className="bg-muted/40" motion="fade">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
           <div className="space-y-6 text-left relative">
             <div className="absolute -left-4 -top-4 w-32 h-32 bg-app-primary/10 rounded-full blur-2xl pointer-events-none"></div>
