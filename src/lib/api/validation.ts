@@ -3,9 +3,9 @@ import { ApiError } from './errors'
 
 export const bilingualStringSchema = z
   .object({
-    en: z.string().default(''),
-    my: z.string().default(''),
-    zh: z.string().default(''),
+    en: z.string().nullable().default(''),
+    my: z.string().nullable().default(''),
+    zh: z.string().nullable().default(''),
   })
   .passthrough()
 

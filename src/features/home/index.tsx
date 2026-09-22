@@ -348,7 +348,14 @@ export default function HomePage() {
                   : `${STORAGE_URL}/${item.imageUrl}`
                 : null
 
-              const displayTitle = getLocalized(item.label, lang)
+              const displayTitle = getLocalized(
+                {
+                  en: item.label.en ?? undefined,
+                  my: item.label.my ?? undefined,
+                  zh: item.label.zh ?? undefined,
+                },
+                lang
+              )
 
               return (
                 <AnimatedCard
@@ -440,23 +447,22 @@ export default function HomePage() {
           />
           <h2 className="relative text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl">
             {t('cta.ctaTitle')}
-
           </h2>
           <p className="relative mx-auto mt-4 max-w-xl text-base text-primary-foreground/80 sm:text-[17px]">
             {t('cta.ctaDesc')}
           </p>
           <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-          <DirectionAwareButton 
-            to="/packages?category=1" 
-            label={t('home.heroCta')} 
-            color="var(--color-yellow)" 
-            className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]" 
-          /> 
-          <DirectionAwareButton 
-            to="/contact-us"
-            label={t('nav.contact')}
-            className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]" 
-          /> 
+            <DirectionAwareButton
+              to="/packages?category=1"
+              label={t('home.heroCta')}
+              color="var(--color-yellow)"
+              className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]"
+            />
+            <DirectionAwareButton
+              to="/contact-us"
+              label={t('nav.contact')}
+              className="rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98]"
+            />
           </div>
         </div>
       </SectionWrapper>
