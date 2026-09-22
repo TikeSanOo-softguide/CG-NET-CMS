@@ -35,7 +35,9 @@
     "featured": "Featured",
     "goBack": "Go Back",
     "language": "LANGUAGE",
-    "noImage": "No Image"
+    "noImage": "No Image",
+    "checkOutThisArticle": "Check out this article!",
+    "checkOutThisPromotion": "Check out this promotion!"
   },
   "announcement": {
     "serviceInterruption": "🔔 Service Interruption: Internet service is temporarily unavailable. Our team is working to restore the connection."
@@ -45,7 +47,7 @@
     "services": "Services",
     "packages": "Packages",
     "news": "News",
-    "newsUpdate" : "News & Updates",
+    "newsUpdate": "News & Updates",
     "career": "Career",
     "promotion": "Promotions",
     "appGuide": "App Guide",
@@ -179,7 +181,8 @@
     "relatedArticles": "Related Articles",
     "noNews": "No articles found",
     "noNewsDesc": "Check back later for the latest news and updates.",
-    "shareArticle": "Share Article"
+    "shareArticle": "Share Article",
+    "checkOutThisArticle": "Check out this article!"
   },
   "career": {
     "title": "Join Our Team",
@@ -218,7 +221,9 @@
     "noPromotion": "No promotions found",
     "noPromotionDesc": "Check back later for the latest promotions.",
     "active": "Active",
-    "promotionExpires": "Promotion Expires:"
+    "promotionExpires": "Promotion Expires:",
+    "sharePromotion": "Share Promotion",
+    "checkOutThisPromotion": "Check out this promotion!"
   },
   "appGuide": {
     "title": "App Guide",

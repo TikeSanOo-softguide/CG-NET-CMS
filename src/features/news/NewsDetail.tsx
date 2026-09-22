@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -11,6 +11,8 @@ import { usePageTitle } from '@/hooks/usePageTitle'
 import { getLocalized, formatDate, getDateLocale } from '@/lib/utils'
 import { normalizeLanguage } from '@/lib/i18n'
 import { EmptyState } from '@/components/common/EmptyState'
+import { useState } from 'react'
+import { ShareButton } from '@/components/common/ShareButton'
 
 export default function NewsDetailPage() {
   const { slug = '' } = useParams()
@@ -18,22 +20,8 @@ export default function NewsDetailPage() {
   const lang = normalizeLanguage(i18n.language)
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   const { data: article, isLoading, isError } = useNewsBySlug(slug)
-
+  const [imageError, setImageError] = useState(false)
   usePageTitle(article ? getLocalized(article.title, lang) : t('news.detailPageTitle'))
-
-  const handleShare = async () => {
-    const shareData = {
-      title: article ? getLocalized(article.title, lang) : document.title,
-      text: 'Check out this article!',
-      url: window.location.href,
-    }
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData)
-      } catch {}
-    }
-  }
 
   if (isLoading) {
     return (
@@ -99,20 +87,17 @@ export default function NewsDetailPage() {
               </div>
             </header>
 
-            <div className="card-media rounded-xl overflow-hidden mb-6 w-full bg-muted">
-              {article.image_url ? (
+            {article.image_url && !imageError && (
+              <div className="card-media rounded-xl overflow-hidden mb-6 w-full bg-muted">
                 <img
                   src={`${STORAGE_URL}/${article.image_url}`}
                   alt={getLocalized(article.title, lang)}
                   className="block h-auto w-full object-contain"
                   loading="lazy"
+                  onError={() => setImageError(true)}
                 />
-              ) : (
-                <div className="flex items-center justify-center w-full h-[200px] bg-muted text-font-muted text-lg font-medium">
-                  {t('common.noImage')}
-                </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <Separator className="mb-6" />
             <div className="prose prose-slate prose-sm sm:prose-base max-w-none">
@@ -126,17 +111,11 @@ export default function NewsDetailPage() {
                 ))}
             </div>
           </article>
-
-          <div className="mt-12 flex justify-center ">
-            <button
-              type="button"
-              onClick={handleShare}
-              className="inline-flex items-center gap-2 rounded-xl bg-app-primary px-8 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-            >
-              <Share2 className="h-4 w-4" />
-              {t('news.shareArticle')}
-            </button>
-          </div>
+          <ShareButton
+            title={article ? getLocalized(article.title, lang) : document.title}
+            text={t('news.checkOutThisArticle')}
+            buttonText={t('news.shareArticle')}
+          />
         </div>
       </SectionWrapper>
     </main>
