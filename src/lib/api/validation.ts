@@ -178,6 +178,31 @@ export const contactResponseSchema = z.object({
     .default([]),
 })
 
+export const appVersionSchema = z.object({
+  id: z.union([z.number(), z.string()]).transform(Number),
+  platform: z.enum(['android', 'ios']),
+  version: z.string().default(''),
+  minimum_version: z.string().default(''),
+  download_url: z.string().default(''),
+  release_notes: z
+    .object({
+      en: z.string().default(''),
+      zh: z.string().default(''),
+      my: z.string().default(''),
+    })
+    .default({ en: '', zh: '', my: '' }),
+  force_update: z.coerce.boolean().default(false),
+  status: z.string().default('active'),
+  created_by: z.union([z.number(), z.string(), z.null()]).nullable().default(null),
+  updated_by: z.union([z.number(), z.string(), z.null()]).nullable().default(null),
+  created_at: z.string().default(''),
+  updated_at: z.string().default(''),
+})
+
+export const appVersionResponseSchema = z.object({
+  data: z.array(appVersionSchema).default([]),
+})
+
 export const apiArraySchema = z.array(z.record(z.string(), z.unknown()))
 export const apiObjectSchema = z.record(z.string(), z.unknown())
 

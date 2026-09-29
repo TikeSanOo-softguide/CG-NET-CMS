@@ -10,6 +10,7 @@ const NewsDetailPage = lazy(() => import('@/features/news/NewsDetail'))
 const PromotionPage = lazy(() => import('@/features/promotion'))
 const PromotionDetailPage = lazy(() => import('@/features/promotion/PromotionDetail'))
 const AppGuidePage = lazy(() => import('@/features/app-guide'))
+const AppVersionPage = lazy(() => import('@/features/app-version'))
 const PrivacyPage = lazy(() => import('@/features/privacy-policy'))
 const AboutPage = lazy(() => import('@/features/about'))
 const NotFoundPage = lazy(() => import('@/features/not-found'))
@@ -58,6 +59,7 @@ export function AppRoutes() {
         <Route path="/promotion" element={<PromotionPage />} />
         <Route path="/promotion/:slug" element={<PromotionDetailPage />} />
         <Route path="/app-guide" element={<AppGuidePage />} />
+        <Route path="/app-version" element={<AppVersionPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
         <Route path="/contact-us" element={<ContactPage />} />
