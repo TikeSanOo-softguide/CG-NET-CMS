@@ -3,11 +3,11 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 export function useHashScroll() {
-  const location = useLocation()
+  const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    if (location.hash) {
-      const element = document.getElementById(location.hash.substring(1))
+    if (hash) {
+      const element = document.getElementById(hash.substring(1))
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' })
@@ -16,5 +16,5 @@ export function useHashScroll() {
     } else {
       window.scrollTo(0, 0)
     }
-  }, [location])
+  }, [pathname, hash])
 }

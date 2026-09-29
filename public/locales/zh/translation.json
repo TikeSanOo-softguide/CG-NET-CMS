@@ -85,14 +85,14 @@
     "stat3Label": "网络可用性",
     "stat4Label": "服务年限",
     "stat5Label": "支持服务",
-    "feature1Title": "闪电般的网速",
-    "feature1Desc": "高达 1Gbps 光纤宽带，畅享流畅观影、游戏与办公。",
-    "feature2Title": "始终可靠",
-    "feature2Desc": "稳定、高速的网络连接。",
-    "feature3Title": "全天候支持",
-    "feature3Desc": "专业团队全天候为您提供帮助。",
-    "feature4Title": "全内部团队",
-    "feature4Desc": "从安装到支持，绝不外包给第三方。",
+    "feature1Title": "实时用量",
+    "feature1Desc": "实时查看每日和每月流量使用情况及设备明细。",
+    "feature2Title": "账单支付与记录",
+    "feature2Desc": "使用积分快速支付账单，随时查看历史记录。",
+    "feature3Title": "套餐升级",
+    "feature3Desc": "随时快速更换或升级您的套餐。",
+    "feature4Title": "客服与投诉",
+    "feature4Desc": "专业客服团队全天候为您提供帮助。",
     "feature5Title": "多语言支持",
     "feature5Desc": "以多种本地语言提供友好的服务。",
     "galleryEyebrow": "员工活动",
@@ -103,18 +103,22 @@
     "galleryItem3": "客户应用使用体验",
     "galleryItem4": "覆盖全城的网络能力",
     "galleryItem5": "始终在线的数字生活方式",
-    "downloadTitle": "晨光 App",
+    "downloadTitle": "应用访问",
     "downloadDesc": "通过手机即可管理您的账户、支付账单并获取支持服务。",
     "downloadSub1": "晨光 是您完善的宽带管理助手 — 可实时跟踪使用情况、查看账单、在线支付以及监控您的网络连接状态。",
     "downloadItem": "随时随地保持连接。",
-    "downloadHead": "下载 晨光 应用程序",
+    "downloadHead": "立即下载 Yaung Ni Oo 应用",
+    "downloadHeadSub": "支持 iOS 和 Android — 不到一分钟即可完成安装，并使用您的手机号码登录。",
     "downloadSub2": "旨在跟踪使用情况、查看账单并监控您的连接。",
     "downloadSub3": "状态，并提供实时更新。",
     "ctaTitle": "准备好接入网络了吗？",
     "ctaDesc": "加入缅甸超过 20 万满意客户的行列。",
     "ctaButton": "联系 晨光",
     "more": "更多",
-    "viewAllGallery": "查看全部图库"
+    "viewAllGallery": "查看全部图库",
+    "highlight1": "所有 Yaung Ni Oo 客户均可免费下载和使用",
+    "highlight2": "支持英语、缅甸语和中文界面",
+    "highlight3": "通过 OTP 验证保护安全登录"
   },
   "downloadCard": {
     "title": "下载 Yaung Ni Oo 应用程序",
@@ -225,6 +229,8 @@
     "benefit4Desc": "与才华出众、充满热情的同事在协作环境中共事。"
   },
   "appGuide": {
+    "appGuideEyebrow": "开始使用",
+    "appGuideTitle": "五个步骤即可开始使用",
     "title": "應用程式指南",
     "detailStep": "詳細步驟",
     "faqs": "常見問題",
@@ -244,56 +250,54 @@
     "faqTitle": "常見問題",
     "guides": {
       "1": {
-        "title": "下載 Yaung Ni Oo 應用",
-        "description": "從 App Store（iOS）或 Google Play（Android）下載 Yaung Ni Oo 移動應用。",
+        "title": "下载 Yaung Ni Oo App",
+        "description": "从 App Store（iOS）或 Google Play（Android）下载 Yaung Ni Oo 手机应用。",
         "steps": [
-          "在設備上打開 App Store 或 Google Play",
+          "打开 App Store 或 Google Play",
           "搜索“Yaung Ni Oo”",
-          "點擊“安裝”或“獲取”",
-          "等待下載完成"
+          "点击“获取”或“安装”",
+          "安装完成后打开 App"
         ]
       },
       "2": {
-        "title": "創建您的賬戶",
-        "description": "使用訂閱賬單上的賬號進行註冊。",
+        "title": "创建账户",
+        "description": "使用与您的订阅绑定的手机号码注册账户。",
         "steps": [
-          "打開 Yaung Ni Oo 應用",
-          "在歡迎頁點擊“註冊”",
-          "輸入賬單上的賬號",
-          "創建安全密碼",
-          "通過短信驗證手機號"
+          "打开 Yaung Ni Oo App",
+          "点击“注册”",
+          "输入您的手机号码",
+          "设置密码",
+          "验证您的手机号码"
         ]
       },
       "3": {
-        "title": "查詢您的用量",
-        "description": "在儀表盤實時查看流量、網速與服務狀態。",
+        "title": "查看使用情况",
+        "description": "在首页实时查看您的流量使用量、网速和服务状态。",
         "steps": [
-          "登錄 Yaung Ni Oo 應用",
-          "在儀表盤查看實時用量統計",
-          "點擊“用量詳情”查看明細",
-          "設置用量提醒，避免超額"
+          "登录 Yaung Ni Oo App",
+          "打开首页",
+          "点击“使用详情”查看详细信息"
         ]
       },
       "4": {
-        "title": "繳納賬單",
-        "description": "通過應用使用 MPU、KBZ Pay、Wave Money 或銀行轉賬直接繳納月費。",
+        "title": "选择套餐并付款",
+        "description": "选择您的套餐，并使用钱包积分完成付款。",
         "steps": [
-          "點擊底部導航中的“賬單”",
-          "查看當前賬單金額與到期日",
-          "選擇支付方式",
-          "完成支付",
-          "保存回執"
+          "打开“账单”",
+          "查看账单金额和付款日期",
+          "确认付款",
+          "查看付款凭证"
         ]
       },
       "5": {
-        "title": "報告問題",
-        "description": "直接在應用中提交工單並跟蹤處理進度。",
+        "title": "报告问题",
+        "description": "直接通过 App 提交服务问题，并跟踪处理状态。",
         "steps": [
-          "點擊“支持”選項卡",
-          "選擇“報告問題”",
-          "選擇問題分類",
-          "詳細描述問題",
-          "提交並跟蹤工單"
+          "点击“客服”选项卡",
+          "选择“报告问题”",
+          "选择问题类别",
+          "详细描述问题",
+          "提交并跟踪请求状态"
         ]
       }
     },

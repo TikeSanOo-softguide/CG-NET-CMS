@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
             {t('common.errorSubtitle')}
           </p>
           <div className="flex gap-3">
-            <Button onClick={this.handleReload}>{t('common.reload')}</Button>
+            <Button onClick={this.handleReload} className="bg-app-primary">{t('common.reload')}</Button>
             <Button variant="outline" onClick={this.handleReset}>
               {t('common.tryagain')}
             </Button>

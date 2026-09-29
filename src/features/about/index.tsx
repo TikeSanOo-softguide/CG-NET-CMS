@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SectionWrapper } from '@/components/common/SectionWrapper'
-import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { aboutContent } from '@/lib/content/about'
 import { StackedCards } from '@/components/common/StackedCards'
@@ -12,6 +11,7 @@ import { useGallery } from '@/hooks/useGallery'
 import { EmptyState } from '@/components/common/EmptyState'
 import { Skeleton } from '@/components/ui/skeleton'
 import AnimatedStat from '@/components/common/AnimatedStat'
+import TeamProcessRail from '@/components/common/TeamProcessRail'
 
 export default function AboutPage() {
   const { t } = useTranslation()
@@ -266,45 +266,14 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* Team */}
-      <SectionWrapper className="bg-muted/40">
-        <div className="text-center max-w-2xl mx-auto mb-5 space-y-3">
-          <h2 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight bg-gradient-font bg-clip-text text-transparent pb-3 pt-3 leading-relaxed py-2">
-            {t('about.ourTeam')}
-          </h2>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full mx-auto"></div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {aboutContent.team.map((member, i) => {
-            const IconComponent = member.icon
-
-            return (
-              <AnimatedCard
-                key={member.id}
-                delay={i * 100}
-                variant="zoom-in"
-                className="rounded-xl group"
-              >
-                <Card className="text-center h-full bg-app-surface border border-border/60 bg-gradient-to-b from-card via-card/50 to-muted/20 p-4 transition-all duration-300 hover:translate-y-0 hover:border-primary/50 hover:shadow-none">
-                  <CardHeader className="space-y-4 pt-6 flex flex-col items-center">
-                    <div className="relative flex items-center justify-center">
-                      <div
-                        className={`relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${member.bg} ${member.hoverBg} ${member.color} ${member.hoverColor} group-hover:scale-110 group-hover:shadow-[0_0_20px_currentColor]`}
-                        aria-hidden="true"
-                      >
-                        <IconComponent className="w-6 h-6 transition-colors duration-300" />
-                      </div>
-                    </div>
-
-                    <CardTitle className="text-sm md:text-base font-bold tracking-tight text-font-secondary group-hover:text-font-blue transition-colors duration-300 leading-relaxed py-0.5">
-                      {t(member.nameKey)}
-                    </CardTitle>
-                  </CardHeader>
-                </Card>
-              </AnimatedCard>
-            )
-          })}
-        </div>
-      </SectionWrapper>
+      <TeamProcessRail
+        aboutContent={aboutContent}
+        t={t}
+        SectionWrapper={SectionWrapper}
+        Card={Card}
+        CardHeader={CardHeader}
+        CardTitle={CardTitle}
+      />
     </main>
   )
 }
