@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowRight, Download } from 'lucide-react'
+import { ArrowRight, Check, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -407,10 +407,18 @@ export default function HomePage() {
               </h2>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-                {t('home.downloadSub1')}
-
-                {t('home.downloadSub2')}
-                <br />
+                {t('home.downloadHeadSub')}
+                <ul className="mt-6 space-y-2.5">
+                    {homeContent.highlight.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-2.5 text-[15px] text-foreground/80"
+                      >
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-font-blue" />
+                        {t(h)}
+                      </li>
+                    ))}
+                  </ul>
               </p>
 
               <button

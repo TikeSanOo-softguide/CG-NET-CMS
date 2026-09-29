@@ -316,3 +316,8 @@ html[lang='zh'] body {
 .c15t-consent-banner a[href='/privacy-policy']:hover {
   color: var(--color-hover) !important;
 }
+
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-yellow);
+}
