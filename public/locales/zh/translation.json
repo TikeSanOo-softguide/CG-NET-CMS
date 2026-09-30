@@ -50,7 +50,9 @@
     "newsUpdate": "新闻与更新",
     "career": "招聘",
     "promotion": "促销",
+    "download": "下载",
     "appGuide": "应用指南",
+    "yaungNiOoApp": "晨光 应用",
     "about": "关于我们",
     "contact": "联系我们",
     "support": "支持",
@@ -423,6 +425,16 @@
       "hours": "工作时间",
       "social": "关注我们"
     }
+  },
+  "app-version": {
+    "whatsNew": "新功能与更新： ",
+    "description": "探索我们最新应用版本中的全新功能与改进。",
+    "mobileTitle": "手机版 (Mobile)",
+    "mobileDesc": "随时随地管理您的宽带连接。通过我们的移动应用程序，您可以轻松查看每日网络使用情况，购买无限流量套餐，并随时充值余额。在您的口袋中体验无缝的网络控制。",
+    "mobileLink": "探索手机版功能",
+    "tabletTitle": "平板版 (Tablet)",
+    "tabletDesc": "利用更大的屏幕详细监控您的网络。舒适地查看您的使用历史记录，通过宽敞的仪表板管理您的 CPE 路由器设置，并与客服顺畅交流。专为更佳的视觉体验而优化。",
+    "tabletLink": "探索平板版功能"
   },
   "cta": {
     "ctaTitle": "准备好连接了吗？",

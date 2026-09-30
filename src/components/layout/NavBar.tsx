@@ -12,7 +12,12 @@ import {
   AccordionTrigger,
 } from '@radix-ui/react-accordion'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { NEWS_CATEGORIES, SERVICE_CATEGORIES, SUPPORT_CATEGORIES } from '@/lib/content/navbar'
+import {
+  DOWNLOAD_CATEGORIES,
+  NEWS_CATEGORIES,
+  SERVICE_CATEGORIES,
+  SUPPORT_CATEGORIES,
+} from '@/lib/content/navbar'
 import { CommonDropdown } from './CommonDropdown'
 
 function DesktopNavItem({ to, labelKey }: { to: string; labelKey: string }) {
@@ -110,6 +115,10 @@ export function NavBar() {
     location.pathname.startsWith(to.split('?')[0])
   )
 
+  const isDownloadRoute = DOWNLOAD_CATEGORIES.some(({ to }) =>
+    location.pathname.startsWith(to.split('?')[0])
+  )
+
   const closeMobileMenu = () => setMobileOpen(false)
 
   return (
@@ -123,6 +132,8 @@ export function NavBar() {
         <CommonDropdown categories={NEWS_CATEGORIES} labelKey="nav.newsUpdate" />
         {/* About */}
         <DesktopNavItem key="about" to="/about" labelKey="nav.about" />
+        {/* Download */}
+        <CommonDropdown categories={DOWNLOAD_CATEGORIES} labelKey="nav.download" />
         {/* Support */}
         <CommonDropdown categories={SUPPORT_CATEGORIES} labelKey="nav.support" />
       </div>
@@ -246,6 +257,44 @@ export function NavBar() {
                 labelKey="nav.about"
                 onNavigate={closeMobileMenu}
               />
+              {/* Download Mobile*/}
+              <Accordion
+                type="single"
+                collapsible
+                defaultValue={isDownloadRoute ? 'download' : undefined}
+              >
+                <AccordionItem value="download" className="border-none">
+                  <AccordionTrigger
+                    className={cn(
+                      'group flex min-h-12 w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-[15px] font-medium text-font-black transition-colors hover:no-underline hover:bg-accent/60',
+                      isDownloadRoute && 'text-transparent bg-clip-text bg-gradient-font'
+                    )}
+                  >
+                    {t('nav.download')}
+                    <ChevronDown className="size-4 shrink-0 text-font-black transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-1 pt-1">
+                    <div className="ml-3 border-l border-border/80 pl-3">
+                      {DOWNLOAD_CATEGORIES.map(({ key, labelKey, to }) => (
+                        <NavLink
+                          key={key}
+                          to={to}
+                          onClick={closeMobileMenu}
+                          className={({ isActive }) =>
+                            cn(
+                              'flex min-h-11 items-center rounded-md px-3  text-[15px] font-medium transition-colors hover:bg-accent/60',
+                              isActive && 'text-transparent bg-clip-text bg-gradient-font',
+                              !isActive && 'text-font-black'
+                            )
+                          }
+                        >
+                          {t(labelKey)}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
               {/* Support Mobile*/}
               <Accordion
                 type="single"

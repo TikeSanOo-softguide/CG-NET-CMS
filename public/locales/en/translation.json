@@ -50,7 +50,9 @@
     "newsUpdate": "News & Updates",
     "career": "Career",
     "promotion": "Promotions",
+    "download": "Download",
     "appGuide": "App Guide",
+    "yaungNiOoApp": "Yaung Ni Oo App",
     "about": "About",
     "contact": "Contact Us",
     "support": "Support",
@@ -403,6 +405,16 @@
       "hours": "Working Hours",
       "social": "Follow Us"
     }
+  },
+  "app-version": {
+    "whatsNew": "What’s new in ",
+    "description": "Discover the latest features and improvements in our newest app version.",
+    "mobileTitle": "Mobile",
+    "mobileDesc": "Manage your broadband connection on the go. With our mobile app, you can easily check your daily internet usage, purchase unlimited data packages, and redeem balances anytime, anywhere. Experience seamless network control right from your pocket.",
+    "mobileLink": "Explore mobile features",
+    "tabletTitle": "Tablet",
+    "tabletDesc": "Take advantage of a larger screen to monitor your network in detail. View your usage history comfortably, manage your CPE router settings with an expansive dashboard, and chat with customer support seamlessly. Optimized for a better viewing experience.",
+    "tabletLink": "Explore tablet features"
   },
   "cta": {
     "ctaTitle": "Ready to get connected?",
