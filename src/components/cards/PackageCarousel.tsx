@@ -61,7 +61,7 @@ function PackageCarouselCard({
     <Card
       onClick={onClick}
       className={[
-        'group relative h-[min(360px,calc(100svh_-_32px))] sm:h-[360px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
+        'group relative h-[min(240px,calc(100svh_-_32px))] sm:h-[360px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none z-0',
         'transition-all duration-300 ease-out cursor-pointer',
         'sm:hover:z-10',
         isActive ? 'z-10' : 'z-0',
@@ -91,7 +91,7 @@ function PackageCarouselCard({
           <Button
             asChild
             className={[
-              'w-[190px] gap-2 rounded-xl border border-app-white bg-transparent px-4 text-sm text-font-white backdrop-blur-sm',
+              'h-8 w-[125px] gap-1 rounded-xl border border-app-white bg-transparent px-2 text-xs text-font-white backdrop-blur-sm sm:h-10 sm:w-[190px] sm:gap-2 sm:px-4 sm:text-sm',
               'hover:-translate-y-0.5 hover:bg-white/10 hover:text-font-hover',
               'focus-visible:ring-[#004AC6]/60',
               'transition-all duration-300 ease-out',
@@ -413,10 +413,9 @@ export function PackageCarousel({ packages, lang }: PackageCarouselProps) {
               <div
                 key={cardKey}
                 data-package-card
-                className="shrink-0 py-2"
+                className="shrink-0 py-2 max-w-[180px] sm:max-w-[260px]"
                 style={{
                   flex: '0 0 var(--card-width)',
-                  maxWidth: '260px',
                 }}
               >
                 <PackageCarouselCard

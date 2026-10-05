@@ -78,7 +78,8 @@ export function HeroBanner({ lang }: HeroBannerProps) {
     else prev()
   }
 
-  const frameClass = 'relative aspect-[1920/550] w-full overflow-hidden text-white select-none'
+  const frameClass =
+    'relative aspect-square sm:aspect-[1920/550] w-full overflow-hidden text-white select-none'
 
   if (isLoading) {
     return (
@@ -126,7 +127,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             <img
               src={getImageUrl(s)}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[8000ms] ease-linear"
+              className="absolute inset-0 h-full w-full object-cover object-[90%_center] sm:object-center transition-transform duration-[8000ms] ease-linear"
               style={{
                 transform: isActive ? 'scale(1.02)' : 'scale(1)',
               }}

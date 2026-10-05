@@ -120,7 +120,9 @@ export default function AboutPage() {
                   </span>
                   <h3 className="text-xl font-bold text-foreground leading-relaxed">{label}</h3>
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground py-1">{text}</p>
+                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground py-1">
+                  {text}
+                </p>
               </article>
             ))}
           </div>
@@ -198,10 +200,10 @@ export default function AboutPage() {
           {/* Right Side: Text Content */}
           <div className="space-y-6">
             <div className="mx-auto inline-block rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 px-3 py-6 lg:mx-0">
-              <p className="text-3xl font-extrabold leading-relaxed text-navy sm:text-4xl mb-4 py-1">
+              <p className="text-xl font-extrabold leading-relaxed text-navy sm:text-4xl mb-4 py-1">
                 {t('about.brandText')}
               </p>
-              <p className="text-3xl font-extrabold leading-relaxed text-navy sm:text-4xl py-1">
+              <p className="text-xl font-extrabold leading-relaxed text-navy sm:text-4xl py-1">
                 {t('about.guidelineText')}
               </p>
             </div>

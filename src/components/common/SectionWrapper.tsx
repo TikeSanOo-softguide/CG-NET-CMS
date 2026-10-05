@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils'
 import { useGsapReveal, type GsapRevealMode } from '@/hooks/useGsapReveal'
+import { useTranslation } from 'react-i18next'
+import { normalizeLanguage } from '@/lib/i18n'
 
 interface SectionWrapperProps {
   children: React.ReactNode
@@ -51,6 +53,9 @@ export function SectionHeading({
   subtitle,
   align = 'center',
 }: SectionHeadingProps) {
+  const { i18n } = useTranslation()
+  const titleLeading = normalizeLanguage(i18n.language) === 'my' ? '!leading-[1.7]' : '!leading-tight'
+
   return (
     <div
       className={
@@ -60,7 +65,7 @@ export function SectionHeading({
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head !leading-[1.7]">
+      <h2 className={cn('mt-3 text-xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head', titleLeading)}>
         {title}
       </h2>
       {subtitle ? (
