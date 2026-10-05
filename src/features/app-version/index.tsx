@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { PageHeader } from '@/components/common/PageHeader'
@@ -18,6 +18,8 @@ export default function AppVersionPage() {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [activePlatform, setActivePlatform] = useState<AppPlatform>('android')
+  const versionCardRef = useRef<HTMLDivElement>(null)
+  const versionCardTopRef = useRef<number | null>(null)
 
   const { data, isLoading, isError, refetch } = useAppVersion()
 
@@ -42,6 +44,18 @@ export default function AppVersionPage() {
     currentVersion?.release_notes?.[lang] || currentVersion?.release_notes?.en || ''
   const versionText = currentVersion?.version ? `V${currentVersion.version}` : ''
 
+  useLayoutEffect(() => {
+    const versionCard = versionCardRef.current
+    if (!versionCard) return
+
+    if (isExpanded && versionCardTopRef.current !== null) {
+      const offset = versionCardTopRef.current - versionCard.getBoundingClientRect().top
+      versionCard.style.transform = `translateY(${offset}px)`
+    } else {
+      versionCard.style.transform = ''
+    }
+  }, [isExpanded])
+
   return (
     <main className="min-h-screen">
       <PageHeader title={t('nav.yaungNiOoApp')} subtitle={t('app-version.description')} />
@@ -56,7 +70,7 @@ export default function AppVersionPage() {
             />
           </div>
 
-          <h1 className="mb-4 text-xl font-bold tracking-tight text-font-black md:text-xl">
+          <h1 className="mb-4 text-xl font-bold tracking-tight text-font-blue md:text-[35px]">
             {t('nav.yaungNiOoApp')}
           </h1>
 
@@ -68,7 +82,7 @@ export default function AppVersionPage() {
 
       <SectionWrapper spacing="compact" className="bg-muted/40 pb-14 pt-4 md:pb-14 md:pt-8">
         <div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-8 rounded-[2rem] border border-white/5 bg-app-accent-bg p-8 shadow-xl md:flex-row md:p-10">
-          <div className="flex shrink-0 items-center justify-center">
+          <div ref={versionCardRef} className="flex shrink-0 items-center justify-center">
             {isLoading ? (
               <div className="flex h-28 w-28 animate-pulse items-center justify-center rounded-xl border-2 border-muted bg-muted/10 shadow-sm">
                 <div className="h-8 w-16 rounded bg-muted-foreground/20 md:h-10 md:w-20"></div>
@@ -84,8 +98,8 @@ export default function AppVersionPage() {
             )}
           </div>
           <div className="w-full flex-1 text-left">
-            <div className="mb-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-              <h2 className="text-2xl font-bold text-font-black transition-all duration-300 sm:text-3xl">
+            <div className="mb-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+              <h2 className="text-xl font-bold text-font-blue transition-all duration-300 md:text-[35px]">
                 {t('app-version.whatsNew')} {versionText}
               </h2>
 
@@ -99,6 +113,7 @@ export default function AppVersionPage() {
                       key={version.platform}
                       type="button"
                       onClick={() => {
+                        versionCardTopRef.current = null
                         setActivePlatform(version.platform as AppPlatform)
                         setIsExpanded(false)
                       }}
@@ -153,7 +168,13 @@ export default function AppVersionPage() {
                   {releaseNotes && releaseNotes.split('\n').length > 5 && (
                     <button
                       type="button"
-                      onClick={() => setIsExpanded((prev) => !prev)}
+                      onClick={() => {
+                        const willExpand = !isExpanded
+                        versionCardTopRef.current = willExpand
+                          ? (versionCardRef.current?.getBoundingClientRect().top ?? null)
+                          : null
+                        setIsExpanded(willExpand)
+                      }}
                       className="mt-2 text-sm font-medium text-sky-400 transition-colors hover:text-sky-300"
                     >
                       {isExpanded ? 'See less' : 'See more'}
@@ -178,10 +199,10 @@ export default function AppVersionPage() {
           </div>
 
           <div className="w-full text-left md:w-1/2">
-            <h2 className="mb-2 text-xl font-bold tracking-tight text-font-blue sm:text-xl md:text-5xl">
+            <h2 className="mb-4 text-xl font-bold leading-[1.8] tracking-tight text-font-blue md:text-[35px]">
               {t('app-version.mobileTitle')}
             </h2>
-            <p className="mb-6 max-w-lg text-[15px] leading-relaxed text-gray-400 md:text-base">
+            <p className="mb-6 max-w-lg text-[15px] leading-[2] text-gray-400 md:text-base">
               {t('app-version.mobileDesc')}
             </p>
             <a
@@ -198,10 +219,10 @@ export default function AppVersionPage() {
       <SectionWrapper className="border-t border-white/5 bg-muted/40 py-16 md:py-20">
         <div className="mx-auto flex w-full max-w-6xl flex-col-reverse items-center gap-8 md:flex-row md:items-center md:gap-12 lg:gap-16">
           <div className="w-full md:w-1/2 md:pr-4">
-            <h2 className="mb-2 text-xl font-bold tracking-tight text-font-blue sm:text-xl md:text-5xl">
+            <h2 className="mb-4 text-xl font-bold leading-[1.8] tracking-tight text-font-blue md:text-[35px]">
               {t('app-version.tabletTitle')}
             </h2>
-            <p className="mb-6 max-w-lg text-[15px] leading-relaxed text-gray-400 md:text-base">
+            <p className="mb-6 max-w-lg text-[15px] leading-[2] text-gray-400 md:text-base">
               {t('app-version.tabletDesc')}
             </p>
             <a
