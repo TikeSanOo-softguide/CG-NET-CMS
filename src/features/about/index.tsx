@@ -207,7 +207,7 @@ export default function AboutPage() {
                 {t('about.guidelineText')}
               </p>
             </div>
-            <h3 className="mt-6 text-2xl font-bold text-foreground sm:text-3xl leading-relaxed py-1">
+            <h3 className="mt-6 text-xl font-bold text-foreground sm:text-3xl leading-relaxed py-1">
               {t('about.brandGuidelineTitle')}
             </h3>
             <p className="text-font-muted text-sm md:text-base leading-relaxed max-w-lg py-1">

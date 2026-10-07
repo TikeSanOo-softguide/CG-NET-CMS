@@ -79,7 +79,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
   }
 
   const frameClass =
-    'relative aspect-square sm:aspect-[1920/550] w-full overflow-hidden text-white select-none'
+    'relative aspect-[4/3] sm:aspect-[16/7] lg:aspect-[1920/550] w-full overflow-hidden text-white select-none'
 
   if (isLoading) {
     return (
@@ -109,6 +109,7 @@ export function HeroBanner({ lang }: HeroBannerProps) {
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
+      {/* Slides */}
       {slides.map((s, i) => {
         const isActive = i === current
 
@@ -121,87 +122,183 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             aria-hidden={!isActive}
             className={cn(
               'absolute inset-0 transition-opacity duration-700',
-              isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              isActive ? 'z-10 opacity-100' : 'z-0 opacity-0'
             )}
           >
+            {/* Banner image */}
             <img
               src={getImageUrl(s)}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-[90%_center] sm:object-center transition-transform duration-[8000ms] ease-linear"
+              className="
+              absolute inset-0
+              h-full w-full
+              object-cover object-right
+              transition-transform
+              duration-[8000ms]
+              ease-linear
+            "
               style={{
                 transform: isActive ? 'scale(1.02)' : 'scale(1)',
               }}
               aria-hidden="true"
             />
 
-            <div className="absolute inset-0" aria-hidden="true" />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/5" aria-hidden="true" />
 
+            {/* Bottom gradient */}
             <div
-              className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent"
+              className="
+              absolute inset-x-0 bottom-0
+              h-16
+              sm:h-24
+              bg-gradient-to-t
+              from-black/40
+              to-transparent
+            "
               aria-hidden="true"
             />
           </div>
         )
       })}
 
+      {/* Previous / Next buttons */}
       {total > 1 && (
         <>
           <button
+            type="button"
             onClick={prev}
             aria-label="Previous slide"
-            className="hidden sm:flex absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/30 hover:bg-black/50 border border-white/20 backdrop-blur-sm items-center justify-center transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-white"
+            className="
+            hidden sm:flex
+            absolute left-3 md:left-5
+            top-1/2
+            z-20
+            -translate-y-1/2
+            h-9 w-9
+            items-center justify-center
+            rounded-full
+            border border-white/20
+            bg-black/30
+            backdrop-blur-sm
+            transition-all
+            hover:scale-110
+            hover:bg-black/50
+            focus-visible:ring-2
+            focus-visible:ring-white
+          "
           >
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           </button>
+
           <button
+            type="button"
             onClick={next}
             aria-label="Next slide"
-            className="hidden sm:flex absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/30 hover:bg-black/50 border border-white/20 backdrop-blur-sm items-center justify-center transition-all hover:scale-110 focus-visible:ring-2 focus-visible:ring-white"
+            className="
+            hidden sm:flex
+            absolute right-3 md:right-5
+            top-1/2
+            z-20
+            -translate-y-1/2
+            h-9 w-9
+            items-center justify-center
+            rounded-full
+            border border-white/20
+            bg-black/30
+            backdrop-blur-sm
+            transition-all
+            hover:scale-110
+            hover:bg-black/50
+            focus-visible:ring-2
+            focus-visible:ring-white
+          "
           >
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
           </button>
         </>
       )}
 
+      {/* Slide indicators */}
+
       {total > 1 && (
         <div
           role="tablist"
           aria-label="Slide navigation"
-          className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-10"
+          className="
+          absolute
+          bottom-6      
+          sm:bottom-12   
+          left-1/2
+          z-20
+          flex
+          -translate-x-1/2
+          items-center
+          gap-1           
+          sm:gap-1.5     
+        "
         >
           {slides.map((_, i) => (
             <button
               key={i}
+              type="button"
               role="tab"
               aria-selected={i === current}
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => goTo(i)}
               className={cn(
-                'rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white min-h-3 min-w-3 sm:min-h-0 sm:min-w-0 flex items-center justify-center',
-                i === current ? 'w-7 h-2 bg-white shadow' : 'w-2 h-2 bg-white/40 hover:bg-white/70'
+                `
+                flex
+                items-center
+                justify-center
+                rounded-full
+                transition-all
+                duration-300
+                focus-visible:ring-2
+                focus-visible:ring-white
+              `,
+                // Mobile တွင် အရွယ်အစားကို အတင်းအကျယ်ကြီး မဖြစ်စေရန် min-h-3 / min-w-3 များကို ဖယ်ရှားလိုက်ပါသည်
+                i === current
+                  ? 'h-1.5 w-4 sm:h-2 sm:w-7 bg-white shadow' // Active: Mobile တွင် အနည်းငယ်တို/ပါးသွားမည် (w-4, h-1.5)
+                  : 'h-1.5 w-1.5 sm:h-2 sm:w-2 bg-white/40 hover:bg-white/70' // Inactive: Mobile တွင် အစက်ပိုသေးသွားမည်
               )}
             />
           ))}
         </div>
       )}
 
+      {/* Progress bar */}
       {total > 1 && (
         <div
           aria-hidden="true"
           key={`pb-${current}`}
-          className="absolute bottom-0 left-0 h-[3px] bg-white/50 z-20 rounded-r"
+          className="
+          absolute
+          bottom-0
+          left-0
+          z-20
+          h-[3px]
+          rounded-r
+          bg-white/50
+        "
           style={{
             animation: `cgnet-progress ${AUTOPLAY_MS}ms linear ${paused ? 'paused' : 'running'}`,
           }}
         />
       )}
 
+      {/* Progress animation */}
       <style>{`
-        @keyframes cgnet-progress {
-          from { width: 0% }
-          to   { width: 100% }
+      @keyframes cgnet-progress {
+        from {
+          width: 0%;
         }
-      `}</style>
+
+        to {
+          width: 100%;
+        }
+      }
+    `}</style>
     </section>
   )
 }

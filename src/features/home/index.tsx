@@ -76,35 +76,57 @@ export default function HomePage() {
       {/* Stats */}
       <div className="bg-muted/40 pb-5">
         <section
-          className="relative z-30 -mt-3 sm:-mt-8 lg:-mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head"
-          aria-label="Company statistics"
+          className="
+            relative z-30
+            -mt-3 sm:-mt-8 lg:-mt-10
+            mx-auto
+            w-[92%] sm:w-[90%]
+            max-w-[1200px]
+            px-0
+            font-head
+          "
         >
           <div
             ref={statsRef}
             className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
           >
-            <div className="grid grid-cols-6 lg:grid-cols-5">
+            <div className="grid grid-cols-2 lg:grid-cols-5">
               {homeContent.stats.map(({ value, labelKey }, index) => (
                 <div
                   key={labelKey}
                   className={cn(
-                    // AFTER
-                    'flex flex-col items-center justify-center border-b border-r border-border py-1.5 sm:py-3 lg:h-[100px] px-1 text-center transition-all',
+                    'flex flex-col items-center justify-center',
+                    'border-border text-center',
 
-                    index < 3 ? 'col-span-2 lg:col-span-1' : 'col-span-3 lg:col-span-1',
+                    // Mobile
+                    index === 0
+                      ? 'col-span-2 min-h-[110px] border-b'
+                      : 'min-h-[85px] border-b border-r',
 
-                    index === 3 ? 'sm:col-span-3' : '',
-                    index === 4 ? 'sm:col-span-3 border-b-0 sm:border-b-0' : '',
+                    // Desktop
+                    'lg:col-span-1 lg:min-h-0 lg:h-[100px]',
+                    'lg:border-b-0',
 
-                    index === 4 ? 'border-b-0 lg:border-b-0' : '',
-                    'lg:border-b-0 lg:last:border-r-0'
+                    index === 4 && 'border-r-0'
                   )}
                 >
-                  <p className="text-[10px] sm:text-base md:text-lg lg:text-2xl font-extrabold tracking-tight text-font-blue">
+                  <p
+                    className={cn(
+                      'font-extrabold tracking-tight text-font-blue',
+                      index === 0
+                        ? 'text-2xl sm:text-3xl lg:text-2xl'
+                        : 'text-lg sm:text-xl lg:text-2xl'
+                    )}
+                  >
                     <AnimatedStat value={value} />
                   </p>
 
-                  <p className="text-[9px] sm:text-xs font-medium text-muted-foreground truncate w-full !leading-[1.7] ">
+                  <p
+                    className={cn(
+                      'mt-1 font-medium text-muted-foreground',
+                      index === 0 ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-xs'
+                    )}
+                  >
                     {t(labelKey)}
                   </p>
                 </div>
