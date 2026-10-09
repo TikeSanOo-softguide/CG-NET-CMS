@@ -76,35 +76,57 @@ export default function HomePage() {
       {/* Stats */}
       <div className="bg-muted/40 pb-5">
         <section
-          className="relative z-30 -mt-3 sm:-mt-8 lg:-mt-10 mx-auto w-[92%] max-w-[1200px] px-0 font-head"
-          aria-label="Company statistics"
+          className="
+            relative z-30
+            -mt-3 sm:-mt-8 lg:-mt-10
+            mx-auto
+            w-[92%] sm:w-[90%]
+            max-w-[1200px]
+            px-0
+            font-head
+          "
         >
           <div
             ref={statsRef}
             className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
           >
-            <div className="grid grid-cols-6 lg:grid-cols-5">
+            <div className="grid grid-cols-2 lg:grid-cols-5">
               {homeContent.stats.map(({ value, labelKey }, index) => (
                 <div
                   key={labelKey}
                   className={cn(
-                    // AFTER
-                    'flex flex-col items-center justify-center border-b border-r border-border py-1.5 sm:py-3 lg:h-[100px] px-1 text-center transition-all',
+                    'flex flex-col items-center justify-center',
+                    'border-border text-center',
 
-                    index < 3 ? 'col-span-2 lg:col-span-1' : 'col-span-3 lg:col-span-1',
+                    // Mobile
+                    index === 0
+                      ? 'col-span-2 min-h-[110px] border-b'
+                      : 'min-h-[85px] border-b border-r',
 
-                    index === 3 ? 'sm:col-span-3' : '',
-                    index === 4 ? 'sm:col-span-3 border-b-0 sm:border-b-0' : '',
+                    // Desktop
+                    'lg:col-span-1 lg:min-h-0 lg:h-[100px]',
+                    'lg:border-b-0',
 
-                    index === 4 ? 'border-b-0 lg:border-b-0' : '',
-                    'lg:border-b-0 lg:last:border-r-0'
+                    index === 4 && 'border-r-0'
                   )}
                 >
-                  <p className="text-[10px] sm:text-base md:text-lg lg:text-2xl font-extrabold tracking-tight text-font-blue">
+                  <p
+                    className={cn(
+                      'font-extrabold tracking-tight text-font-blue',
+                      index === 0
+                        ? 'text-2xl sm:text-3xl lg:text-2xl'
+                        : 'text-lg sm:text-xl lg:text-2xl'
+                    )}
+                  >
                     <AnimatedStat value={value} />
                   </p>
 
-                  <p className="text-[9px] sm:text-xs font-medium text-muted-foreground truncate w-full !leading-[1.7] ">
+                  <p
+                    className={cn(
+                      'mt-1 font-medium text-muted-foreground',
+                      index === 0 ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-xs'
+                    )}
+                  >
                     {t(labelKey)}
                   </p>
                 </div>
@@ -113,7 +135,6 @@ export default function HomePage() {
           </div>
         </section>
       </div>
-
 
       {/* Why Choose Us */}
       <SectionWrapper className="bg-muted/40 !py-6 md:!py-14" spacing="default">
@@ -404,7 +425,7 @@ export default function HomePage() {
         />
 
         {galleryError && <ErrorMessage />}
-        
+
         {galleryLoading && (
           <>
             {/* Mobile */}
@@ -415,10 +436,7 @@ export default function HomePage() {
 
               <div className="mt-3 flex gap-3 overflow-hidden">
                 {Array.from({ length: 2 }).map((_, i) => (
-                  <Skeleton
-                    key={i}
-                    className="h-[110px] min-w-[42%] rounded-2xl"
-                  />
+                  <Skeleton key={i} className="h-[110px] min-w-[42%] rounded-2xl" />
                 ))}
               </div>
             </div>
@@ -432,10 +450,7 @@ export default function HomePage() {
                     : 'md:col-span-1 rounded-[28px]'
 
                 return (
-                  <div
-                    key={i}
-                    className={`${cardClass} overflow-hidden`}
-                  >
+                  <div key={i} className={`${cardClass} overflow-hidden`}>
                     <Skeleton className="h-full w-full rounded-[28px]" />
                   </div>
                 )
@@ -447,229 +462,211 @@ export default function HomePage() {
         {!galleryLoading &&
           !galleryError &&
           (!galleryData?.data || galleryData.data.length === 0) && (
-            <EmptyState
-              title={t('common.noData')}
-              description={t('common.emptyStateDesc')}
-            />
-        )}
+            <EmptyState title={t('common.noData')} description={t('common.emptyStateDesc')} />
+          )}
 
-        {!galleryLoading &&
-          !galleryError &&
-          galleryData?.data &&
-          galleryData.data.length > 0 && (
-            <>
-          {/* ================================= */}
-          {/* MOBILE GALLERY */}
-          {/* ================================= */}
-          <div className="lg:hidden">
-            {(() => {
-              const items = galleryData.data.slice(0, 5)
-              const item = items[activeGalleryImage] ?? items[0]
-              const imageUrl = item.imageUrl
-                ? item.imageUrl.startsWith('http')
-                  ? item.imageUrl
-                  : `${STORAGE_URL}/${item.imageUrl}`
-                : null
-              const displayTitle = getLocalized(
-                {
-                  en: item.label.en ?? undefined,
-                  my: item.label.my ?? undefined,
-                  zh: item.label.zh ?? undefined,
-                },
-                lang
-              )
+        {!galleryLoading && !galleryError && galleryData?.data && galleryData.data.length > 0 && (
+          <>
+            {/* ================================= */}
+            {/* MOBILE GALLERY */}
+            {/* ================================= */}
+            <div className="lg:hidden">
+              {(() => {
+                const items = galleryData.data.slice(0, 5)
+                const item = items[activeGalleryImage] ?? items[0]
+                const imageUrl = item.imageUrl
+                  ? item.imageUrl.startsWith('http')
+                    ? item.imageUrl
+                    : `${STORAGE_URL}/${item.imageUrl}`
+                  : null
+                const displayTitle = getLocalized(
+                  {
+                    en: item.label.en ?? undefined,
+                    my: item.label.my ?? undefined,
+                    zh: item.label.zh ?? undefined,
+                  },
+                  lang
+                )
 
-              return (
-                <>
-                  <AnimatedCard
-                    key={item.id}
-                    delay={0}
-                    variant="rise"
-                    className="group relative h-[320px] overflow-hidden rounded-[24px] border border-border/60 bg-card shadow-sm"
-                  >
-                    {imageUrl ? (
-                      <img
-                        src={imageUrl}
-                        alt={displayTitle || 'Gallery image'}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div
-                        className="h-full w-full bg-muted"
-                        aria-label={t('common.noData')}
-                      />
+                return (
+                  <>
+                    <AnimatedCard
+                      key={item.id}
+                      delay={0}
+                      variant="rise"
+                      className="group relative h-[320px] overflow-hidden rounded-[24px] border border-border/60 bg-card shadow-sm"
+                    >
+                      {imageUrl ? (
+                        <img
+                          src={imageUrl}
+                          alt={displayTitle || 'Gallery image'}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+                      )}
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
+                      {displayTitle && (
+                        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                          <div>
+                            <p className="text-base font-semibold tracking-wide text-white">
+                              {displayTitle}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </AnimatedCard>
+
+                    {items.length > 1 && (
+                      <div className="mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 scrollbar-none">
+                        {items.slice(1).map((thumbnail, i) => {
+                          const thumbnailUrl = thumbnail.imageUrl
+                            ? thumbnail.imageUrl.startsWith('http')
+                              ? thumbnail.imageUrl
+                              : `${STORAGE_URL}/${thumbnail.imageUrl}`
+                            : null
+                          const thumbnailTitle = getLocalized(
+                            {
+                              en: thumbnail.label.en ?? undefined,
+                              my: thumbnail.label.my ?? undefined,
+                              zh: thumbnail.label.zh ?? undefined,
+                            },
+                            lang
+                          )
+                          const imageIndex = i + 1
+
+                          return (
+                            <button
+                              key={thumbnail.id}
+                              type="button"
+                              aria-label={`Show gallery image ${imageIndex + 1}`}
+                              aria-pressed={activeGalleryImage === imageIndex}
+                              onClick={() => setActiveGalleryImage(imageIndex)}
+                              className={`group relative h-[115px] min-w-[44%] snap-start overflow-hidden rounded-2xl border bg-card text-left shadow-sm ${
+                                activeGalleryImage === imageIndex
+                                  ? 'border-app-primary ring-2 ring-app-primary/30'
+                                  : 'border-border/60'
+                              }`}
+                            >
+                              {thumbnailUrl ? (
+                                <img
+                                  src={thumbnailUrl}
+                                  alt={thumbnailTitle || 'Gallery image'}
+                                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <div
+                                  className="h-full w-full bg-muted"
+                                  aria-label={t('common.noData')}
+                                />
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+                              {thumbnailTitle && (
+                                <div className="absolute inset-x-0 bottom-0 p-3">
+                                  <p className="line-clamp-1 text-xs font-medium text-white">
+                                    {thumbnailTitle}
+                                  </p>
+                                </div>
+                              )}
+                            </button>
+                          )
+                        })}
+                      </div>
                     )}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
+                    <div
+                      className="mt-2 flex justify-center gap-1.5"
+                      role="group"
+                      aria-label="Gallery slides"
+                    >
+                      {items.map((galleryItem, i) => (
+                        <button
+                          key={galleryItem.id}
+                          type="button"
+                          aria-label={`Show gallery image ${i + 1}`}
+                          aria-current={i === activeGalleryImage}
+                          onClick={() => setActiveGalleryImage(i)}
+                          className={`h-2.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-app-primary focus-visible:ring-offset-2 ${
+                            i === activeGalleryImage ? 'w-5 bg-app-primary' : 'w-2.5 bg-border'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+
+            {/* ================================= */}
+            {/* DESKTOP GALLERY */}
+            {/* ================================= */}
+            <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
+              {galleryData.data.slice(0, 5).map((item, i) => {
+                const cardClass =
+                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-xl' : 'md:col-span-1 rounded-xl'
+
+                const imageUrl = item.imageUrl
+                  ? item.imageUrl.startsWith('http')
+                    ? item.imageUrl
+                    : `${STORAGE_URL}/${item.imageUrl}`
+                  : null
+
+                const displayTitle = getLocalized(
+                  {
+                    en: item.label.en ?? undefined,
+                    my: item.label.my ?? undefined,
+                    zh: item.label.zh ?? undefined,
+                  },
+                  lang
+                )
+
+                return (
+                  <AnimatedCard
+                    key={item.id}
+                    delay={i * 90}
+                    variant="rise"
+                    className={`group relative h-full overflow-hidden border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl ${cardClass}`}
+                  >
+                    <div className="card-media h-full">
+                      {imageUrl ? (
+                        <img
+                          src={imageUrl}
+                          alt={displayTitle || 'Gallery image'}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+                      )}
+                    </div>
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
+
                     {displayTitle && (
-                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
-                        <div>
-                          <p className="text-base font-semibold tracking-wide text-white">
-                            {displayTitle}
-                          </p>
-                        </div>
+                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                        <p className="text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:text-base">
+                          {displayTitle}
+                        </p>
                       </div>
                     )}
                   </AnimatedCard>
-
-                  {items.length > 1 && (
-                    <div className="mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 scrollbar-none">
-                      {items.slice(1).map((thumbnail, i) => {
-                        const thumbnailUrl = thumbnail.imageUrl
-                          ? thumbnail.imageUrl.startsWith('http')
-                            ? thumbnail.imageUrl
-                            : `${STORAGE_URL}/${thumbnail.imageUrl}`
-                          : null
-                        const thumbnailTitle = getLocalized(
-                          {
-                            en: thumbnail.label.en ?? undefined,
-                            my: thumbnail.label.my ?? undefined,
-                            zh: thumbnail.label.zh ?? undefined,
-                          },
-                          lang
-                        )
-                        const imageIndex = i + 1
-
-                        return (
-                          <button
-                            key={thumbnail.id}
-                            type="button"
-                            aria-label={`Show gallery image ${imageIndex + 1}`}
-                            aria-pressed={activeGalleryImage === imageIndex}
-                            onClick={() => setActiveGalleryImage(imageIndex)}
-                            className={`group relative h-[115px] min-w-[44%] snap-start overflow-hidden rounded-2xl border bg-card text-left shadow-sm ${
-                              activeGalleryImage === imageIndex
-                                ? 'border-app-primary ring-2 ring-app-primary/30'
-                                : 'border-border/60'
-                            }`}
-                          >
-                            {thumbnailUrl ? (
-                              <img
-                                src={thumbnailUrl}
-                                alt={thumbnailTitle || 'Gallery image'}
-                                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                loading="lazy"
-                              />
-                            ) : (
-                              <div
-                                className="h-full w-full bg-muted"
-                                aria-label={t('common.noData')}
-                              />
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
-                            {thumbnailTitle && (
-                              <div className="absolute inset-x-0 bottom-0 p-3">
-                                <p className="line-clamp-1 text-xs font-medium text-white">
-                                  {thumbnailTitle}
-                                </p>
-                              </div>
-                            )}
-                          </button>
-                        )
-                      })}
-                    </div>
-                  )}
-
-                  <div
-                    className="mt-2 flex justify-center gap-1.5"
-                    role="group"
-                    aria-label="Gallery slides"
-                  >
-                    {items.map((galleryItem, i) => (
-                      <button
-                        key={galleryItem.id}
-                        type="button"
-                        aria-label={`Show gallery image ${i + 1}`}
-                        aria-current={i === activeGalleryImage}
-                        onClick={() => setActiveGalleryImage(i)}
-                        className={`h-2.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-app-primary focus-visible:ring-offset-2 ${
-                          i === activeGalleryImage
-                            ? 'w-5 bg-app-primary'
-                            : 'w-2.5 bg-border'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )
-            })()}
-          </div>
-
-          {/* ================================= */}
-          {/* DESKTOP GALLERY */}
-          {/* ================================= */}
-          <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
-            {galleryData.data.slice(0, 5).map((item, i) => {
-              const cardClass =
-                i === 0
-                  ? 'md:col-span-2 md:row-span-2 rounded-xl'
-                  : 'md:col-span-1 rounded-xl'
-
-              const imageUrl = item.imageUrl
-                ? item.imageUrl.startsWith('http')
-                  ? item.imageUrl
-                  : `${STORAGE_URL}/${item.imageUrl}`
-                : null
-
-              const displayTitle = getLocalized(
-                {
-                  en: item.label.en ?? undefined,
-                  my: item.label.my ?? undefined,
-                  zh: item.label.zh ?? undefined,
-                },
-                lang
-              )
-
-              return (
-                <AnimatedCard
-                  key={item.id}
-                  delay={i * 90}
-                  variant="rise"
-                  className={`group relative h-full overflow-hidden border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl ${cardClass}`}
-                >
-                  <div className="card-media h-full">
-                    {imageUrl ? (
-                      <img
-                        src={imageUrl}
-                        alt={displayTitle || 'Gallery image'}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div
-                        className="h-full w-full bg-muted"
-                        aria-label={t('common.noData')}
-                      />
-                    )}
-                  </div>
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-100" />
-
-                  {displayTitle && (
-                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                      <p className="text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:text-base">
-                        {displayTitle}
-                      </p>
-                    </div>
-                  )}
-                </AnimatedCard>
-              )
-            })}
-          </div>
-        </>
+                )
+              })}
+            </div>
+          </>
         )}
       </SectionWrapper>
 
       {/* Download Section */}
       <SectionWrapper id="app" className="bg-muted/40 !py-6 md:!py-10">
         <div className="w-full overflow-hidden rounded-2xl border border-border bg-app-accent-bg">
-
           {/* ============================= */}
           {/* Mobile Download Design */}
           {/* ============================= */}
           <div className="md:hidden">
-
             {/* App Preview */}
             <div className="relative flex justify-center overflow-hidden px-5 pt-7">
               <div
@@ -692,7 +689,6 @@ export default function HomePage() {
 
             {/* Content */}
             <div className="px-5 pb-6 pt-6 text-center">
-
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-font-blue">
                 {t('home.downloadTitle')}
               </p>
@@ -716,9 +712,7 @@ export default function HomePage() {
                       <Check className="h-3 w-3 text-font-blue" />
                     </span>
 
-                    <span className="leading-[1.6]">
-                      {t(h)}
-                    </span>
+                    <span className="leading-[1.6]">{t(h)}</span>
                   </li>
                 ))}
               </ul>
@@ -738,31 +732,31 @@ export default function HomePage() {
           {/* Desktop Download Design */}
           {/* ============================= */}
           <div className="hidden md:grid md:grid-cols-2 md:items-center md:gap-8 md:p-12">
-
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-xl">
                 {t('home.downloadTitle')}
               </p>
 
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-font-black sm:text-4xl !leading-[1.7]">
+              <h2
+                className={cn(
+                  'mt-3 text-xl font-extrabold tracking-tight text-font-black sm:text-4xl',
+                  lang === 'my' ? '!leading-[1.7]' : '!leading-tight'
+                )}
+              >
                 {t('home.downloadHead')}
               </h2>
 
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-[17px]">
                 {t('home.downloadHeadSub')}
+                <ul className="mt-6 space-y-2.5">
+                  {homeContent.highlight.map((h) => (
+                    <li key={h} className="flex items-start gap-2.5 text-[15px] text-foreground/80">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-font-blue" />
+                      {t(h)}
+                    </li>
+                  ))}
+                </ul>
               </p>
-
-              <ul className="mt-6 space-y-2.5">
-                {homeContent.highlight.map((h) => (
-                  <li
-                    key={h}
-                    className="flex items-start gap-2.5 text-[15px] text-foreground/80"
-                  >
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-font-blue" />
-                    {t(h)}
-                  </li>
-                ))}
-              </ul>
 
               <button
                 type="button"
@@ -792,7 +786,6 @@ export default function HomePage() {
       {/* CTA Section */}
       <SectionWrapper className="bg-muted/40 !py-6 md:!pb-20 md:!pt-14">
         <div className="relative overflow-hidden rounded-2xl bg-gradient-font px-5 py-10 text-center sm:px-8 md:px-16 md:py-14">
-
           {/* Content */}
           <div className="relative">
             <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-2 shadow-md ring-1 ring-white/40">
