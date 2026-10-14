@@ -150,10 +150,10 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             <div
               className="
               absolute inset-x-0 bottom-0
-              h-16
-              sm:h-24
+              h-20
+              sm:h-32
               bg-gradient-to-t
-              from-black/40
+              from-black/25
               to-transparent
             "
               aria-hidden="true"
@@ -175,15 +175,15 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             top-1/2
             z-20
             -translate-y-1/2
-            h-9 w-9
+            h-11 w-11
             items-center justify-center
             rounded-full
-            border border-white/20
-            bg-black/30
-            backdrop-blur-sm
-            transition-all
-            hover:scale-110
-            hover:bg-black/50
+            border border-white/25
+            bg-white/10
+            backdrop-blur-md
+            transition-colors
+            duration-500
+            hover:bg-white/20
             focus-visible:ring-2
             focus-visible:ring-white
           "
@@ -201,15 +201,15 @@ export function HeroBanner({ lang }: HeroBannerProps) {
             top-1/2
             z-20
             -translate-y-1/2
-            h-9 w-9
+            h-11 w-11
             items-center justify-center
             rounded-full
-            border border-white/20
-            bg-black/30
-            backdrop-blur-sm
-            transition-all
-            hover:scale-110
-            hover:bg-black/50
+            border border-white/25
+            bg-white/10
+            backdrop-blur-md
+            transition-colors
+            duration-500
+            hover:bg-white/20
             focus-visible:ring-2
             focus-visible:ring-white
           "
@@ -277,9 +277,9 @@ export function HeroBanner({ lang }: HeroBannerProps) {
           bottom-0
           left-0
           z-20
-          h-[3px]
+          h-[2px]
           rounded-r
-          bg-white/50
+          bg-[#ffcf62]/80
         "
           style={{
             animation: `cgnet-progress ${AUTOPLAY_MS}ms linear ${paused ? 'paused' : 'running'}`,

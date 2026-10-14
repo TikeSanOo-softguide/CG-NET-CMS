@@ -85,6 +85,7 @@ const config: Config = {
           hover: 'var(--color-hover)', //button hover
           bar: 'var(--color-bar)', //stat bar
           footer: 'var(--color-footer)', //footer
+          navy: 'var(--color-navy)',
           card: 'var(--color-card-bg)', //card bg
           yellow: 'var(--color-yellow)',
           'accent-bg': 'var(--color-app-accent-bg)',
@@ -134,6 +135,11 @@ const config: Config = {
       backgroundImage: {
         'gradient-font': 'var(--gradient-font)',
         'gradient-bg': 'var(--gradient-bg)',
+        'gradient-luxe': 'var(--gradient-luxe)',
+      },
+      boxShadow: {
+        soft: '0 2px 10px rgba(15, 23, 42, 0.06)',
+        lift: '0 18px 40px -20px rgba(8, 10, 61, 0.28)',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -158,6 +164,15 @@ const config: Config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.4s ease-out',
+      },
+      fontSize: {
+        h1: ['var(--fs-h1)', { lineHeight: 'var(--lh-heading)' }],
+        h2: ['var(--fs-h2)', { lineHeight: 'var(--lh-heading)' }],
+        h3: ['var(--fs-h3)', { lineHeight: 'var(--lh-heading)' }],
+        'body-lg': ['var(--fs-body-lg)', { lineHeight: '1.7' }],
+        body: ['var(--fs-body)', { lineHeight: '1.6' }],
+        small: ['var(--fs-small)', { lineHeight: '1.5' }],
+        caption: ['var(--fs-caption)', { lineHeight: '1.4' }],
       },
       fontFamily: {
         myanmar: ['"Noto Sans Myanmar"', '"Pyidaungsu"', '"Padauk"', 'sans-serif'],

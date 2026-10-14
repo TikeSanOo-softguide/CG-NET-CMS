@@ -27,7 +27,8 @@ interface CommonDropdownProps {
 export function CommonDropdown({ categories, labelKey, onClose }: CommonDropdownProps) {
     const { t } = useTranslation()
     const location = useLocation()
-    const isActive = categories.some(({ to }) => location.pathname === to.split('?')[0])
+    const isPathActive = (to: string) => location.pathname === to.split('?')[0]
+    const isActive = categories.some(({ to }) => isPathActive(to))
 
     return (
         <DropdownMenu modal={false}>
@@ -72,17 +73,15 @@ export function CommonDropdown({ categories, labelKey, onClose }: CommonDropdown
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             {categories.map(({ key, labelKey: categoryLabelKey, icon: Icon, to }) => (
-            <DropdownMenuItem key={key} asChild>
-                <NavLink
-                to={to}
-                onClick={onClose}
-                className={({ isActive: itemIsActive }) =>
-                    cn(
-                    'flex cursor-pointer items-center gap-2 rounded-md border-0 px-3 py-2 text-base font-heading font-medium outline-none ring-0 transition-colors hover:bg-transparent focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
-                    itemIsActive ? 'bg-gradient-font bg-clip-text text-transparent' : 'text-font-black'
-                    )
-                }
-                >
+            <DropdownMenuItem
+                key={key}
+                asChild
+                className={cn(
+                'flex cursor-pointer items-center gap-2 rounded-md border-0 px-3 py-2 text-base font-heading font-medium outline-none ring-0 transition-colors hover:bg-transparent focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+                isPathActive(to) ? 'bg-gradient-font bg-clip-text text-transparent' : 'text-font-black'
+                )}
+            >
+                <NavLink to={to} onClick={onClose}>
                 <Icon className="h-4 w-4 shrink-0 text-font-blue" aria-hidden="true" />
                 {t(categoryLabelKey)}
                 </NavLink>

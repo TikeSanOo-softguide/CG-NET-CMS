@@ -47,6 +47,32 @@ interface SectionHeadingProps {
   align?: 'center' | 'left'
 }
 
+export function SectionEyebrow({
+  children,
+  align = 'center',
+  className,
+}: {
+  children: React.ReactNode
+  align?: 'center' | 'left'
+  className?: string
+}) {
+  return (
+    <p
+      className={cn(
+        'flex items-center gap-3 text-small font-semibold uppercase tracking-[0.18em] text-font-blue',
+        align === 'center' && 'justify-center',
+        className
+      )}
+    >
+      <span aria-hidden="true" className="h-px w-6 bg-current opacity-40" />
+      {children}
+      {align === 'center' && (
+        <span aria-hidden="true" className="h-px w-6 bg-current opacity-40" />
+      )}
+    </p>
+  )
+}
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -59,17 +85,17 @@ export function SectionHeading({
   return (
     <div
       className={
-        align === 'center' ? 'mx-auto max-w-2xl text-center mb-6 md:mb-10' : 'max-w-2xl text-left'
+        align === 'center'
+          ? 'mx-auto mb-6 max-w-2xl text-center md:mb-8 lg:mb-10'
+          : 'max-w-2xl text-left'
       }
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
-        {eyebrow}
-      </p>
-      <h2 className={cn('mt-3 text-xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head', titleLeading)}>
+      {eyebrow ? <SectionEyebrow align={align}>{eyebrow}</SectionEyebrow> : null}
+      <h2 className={cn('mt-3 text-h2 font-bold tracking-[-0.02em] text-foreground font-head', titleLeading)}>
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+        <p className="mt-2 text-body-lg leading-relaxed text-muted-foreground">
           {subtitle}
         </p>
       ) : null}

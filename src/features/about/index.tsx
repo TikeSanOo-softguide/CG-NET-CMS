@@ -46,7 +46,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <h2 className="text-xl md:text-[35px] font-black tracking-tight bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
+              <h2 className="text-h2 font-black tracking-tight bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
                 {t('about.ourStory')}
               </h2>
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>
@@ -101,7 +101,7 @@ export default function AboutPage() {
       <SectionWrapper>
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-5">
-            <h2 className="text-xl sm:text-3xl md:text-[35px] font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-3">
+            <h2 className="text-h2 font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-3">
               {t('about.purpose')}
             </h2>
 

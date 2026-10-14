@@ -192,7 +192,7 @@ export default function TeamProcessRail({
 
                     {/* Rail Node */}
                     <div className="absolute left-6 flex -translate-x-1/2 items-center justify-center md:left-1/2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary bg-background text-[10px] font-bold text-primary">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary bg-background text-caption font-bold text-primary">
                             {index + 1}
                         </div>
                     </div>

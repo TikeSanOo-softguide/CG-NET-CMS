@@ -25,7 +25,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
     <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full relative">
       <Card
         className={cn(
-          'group flex flex-col overflow-hidden border shadow-sm card-glow rounded-xl !bg-app-surface',
+          'group flex flex-col overflow-hidden border border-white shadow-soft rounded-xl !bg-app-surface',
           'h-auto'
         )}
       >
@@ -43,7 +43,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
                   : `${STORAGE_URL}/${promotion.imageUrl}`
               }
               alt={getLocalized(promotion.title, lang)}
-              className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
               onError={() => setImageError(true)}
             />
@@ -52,7 +52,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
               <img
                 src="/assets/logo/logo-muted.png"
                 alt="No image available"
-                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </div>
           )}
@@ -60,7 +60,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
         </Link>
 
         <CardHeader className="pb-2 pt-3">
-          <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
+          <span className="w-fit rounded-full bg-accent px-3 py-1 text-caption font-bold uppercase tracking-wider text-app-primary">
             {t('nav.promotion')}
           </span>
           <CardTitle

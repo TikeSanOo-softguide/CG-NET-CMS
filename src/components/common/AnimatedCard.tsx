@@ -27,12 +27,12 @@ export function AnimatedCard({
   as: Tag = 'div',
 }: AnimatedCardProps) {
   const defaultHover =
-    '[@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:shadow-xl [@media(hover:hover)]:hover:shadow-black/10 [@media(hover:hover)]:hover:border-primary/30'
+    '[@media(hover:hover)]:motion-safe:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-lift [@media(hover:hover)]:hover:border-primary/20'
 
   return (
     <Tag
       className={cn(
-        'transition-all duration-300 ease-out',
+        'transition-all duration-500 ease-out motion-reduce:transition-none',
         hoverClass ?? defaultHover,
         className
       )}

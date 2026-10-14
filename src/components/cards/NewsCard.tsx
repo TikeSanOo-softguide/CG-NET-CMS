@@ -33,7 +33,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
     <AnimatedCard delay={delay} variant="rise" className="h-full min-w-0 max-w-full rounded-xl">
       <Card
         className={cn(
-          'group flex min-w-0 max-w-full flex-col overflow-hidden rounded-xl border shadow-sm card-glow !bg-app-surface',
+          'group flex min-w-0 max-w-full flex-col overflow-hidden rounded-xl border border-white shadow-soft !bg-app-surface',
           'h-auto'
         )}
       >
@@ -45,7 +45,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
             <img
               src={`${STORAGE_URL}/${article.image_url}`}
               alt={getLocalized(article.title, lang)}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
               onError={() => setImageError(true)}
             />
@@ -54,7 +54,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
               <img
                 src="/assets/logo/logo-muted.png"
                 alt="No image available"
-                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-700 group-hover:scale-[1.03]"
               />
             </div>
           )}
@@ -62,7 +62,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
         </Link>
 
         <CardHeader className="pb-2 pt-3">
-          <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
+          <span className="w-fit rounded-full bg-accent px-3 py-1 text-caption font-bold uppercase tracking-wider text-app-primary">
             {article.category ? getLocalized(article.category.name, lang) : t('common.noData')}
           </span>
           <CardTitle
