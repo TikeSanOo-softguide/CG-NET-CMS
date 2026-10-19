@@ -4,10 +4,10 @@ import type { SupportedLanguage } from '@/lib/i18n/languages'
 /** Shared luxury type styles — section + card titles/descriptions stay consistent. */
 
 export const typeEyebrow =
-  'text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-font-blue lg:text-[0.875rem]'
+  'text-[12px] font-semibold uppercase tracking-[0.1em] text-font-blue md:text-[13px] lg:text-[14px]'
 
 export const typeSectionTitle =
-  'font-head text-h2 font-semibold tracking-[-0.025em] text-foreground'
+  'font-head text-[18px] font-semibold tracking-[-0.025em] text-foreground md:text-[30px] lg:text-h2'
 
 export const typeSectionDesc =
   'text-body-lg font-normal tracking-[0.012em] text-muted-foreground'

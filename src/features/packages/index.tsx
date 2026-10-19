@@ -11,6 +11,7 @@ import i18n from '@/lib/i18n'
 import PackageSelection from './PackageSelection'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ErrorMessage } from '@/components/common/ErrorMessage'
+import { cn } from '@/lib/utils'
 
 export default function PackagesPage() {
   const { t } = useTranslation()
@@ -18,6 +19,8 @@ export default function PackagesPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialCategory = searchParams.get('category') ?? ''
   const [activeFilter, setActiveFilter] = useState(initialCategory)
+  const [shownFilter, setShownFilter] = useState(initialCategory)
+  const [contentVisible, setContentVisible] = useState(true)
   const {
     data: packages,
     isLoading: packagesLoading,
@@ -92,6 +95,18 @@ export default function PackagesPage() {
     networks,
   ])
 
+  useEffect(() => {
+    if (activeFilter === shownFilter) return
+
+    setContentVisible(false)
+    const timeout = window.setTimeout(() => {
+      setShownFilter(activeFilter)
+      setContentVisible(true)
+    }, 160)
+
+    return () => window.clearTimeout(timeout)
+  }, [activeFilter, shownFilter])
+
   function handleFilterChange(value: string) {
     setActiveFilter(value)
     if (value) {
@@ -101,12 +116,12 @@ export default function PackagesPage() {
     }
   }
 
-  function renderPackageContent() {
-    if (activeFilter === 'other-service') {
+  function renderPackageContent(filter: string) {
+    if (filter === 'other-service') {
       return <OtherPackage addons={addons ?? []} />
     }
 
-    const selectedNetwork = networks?.find((network) => String(network.id) === activeFilter)
+    const selectedNetwork = networks?.find((network) => String(network.id) === filter)
     const selectedPackages = packages?.filter((pkg) => pkg.network.id === selectedNetwork?.id) ?? []
 
     if (!selectedNetwork) {
@@ -118,7 +133,7 @@ export default function PackagesPage() {
 
     return (
       <PackageSelection
-        key={activeFilter}
+        key={filter}
         network={selectedNetwork}
         packages={selectedPackages}
         initialSpeed={initialSpeed ? Number(initialSpeed) : undefined}
@@ -128,10 +143,10 @@ export default function PackagesPage() {
   }
 
   const isLoading =
-    networksLoading || packagesLoading || (activeFilter === 'other-service' && addonsLoading)
+    networksLoading || packagesLoading || (shownFilter === 'other-service' && addonsLoading)
 
   const isError =
-    networksError || packagesError || (activeFilter === 'other-service' && addonsError)
+    networksError || packagesError || (shownFilter === 'other-service' && addonsError)
 
   const handleRetry = () => {
     void refetchNetworks()
@@ -154,7 +169,12 @@ export default function PackagesPage() {
           />
         </div>
 
-        <div className="mt-6">
+        <div
+          className={cn(
+            'mt-6 transition-opacity duration-200 ease-out motion-reduce:transition-none',
+            contentVisible ? 'opacity-100' : 'opacity-0'
+          )}
+        >
           {isLoading && (
             <div className="space-y-4">
               <Skeleton className="h-8 w-40 mb-6" />
@@ -169,7 +189,7 @@ export default function PackagesPage() {
 
           {isError && <ErrorMessage onRetry={handleRetry} />}
 
-          {!isLoading && !isError && renderPackageContent()}
+          {!isLoading && !isError && renderPackageContent(shownFilter)}
         </div>
       </SectionWrapper>
     </main>

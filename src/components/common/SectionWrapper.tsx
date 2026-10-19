@@ -19,6 +19,8 @@ interface SectionWrapperProps {
   motionDuration?: number
   /** Override ScrollTrigger start. */
   motionStart?: string
+  /** Run the reveal only while this media query matches. */
+  motionMedia?: string
 }
 
 export function SectionWrapper({
@@ -29,11 +31,13 @@ export function SectionWrapper({
   motion = 'rise',
   motionDuration,
   motionStart,
+  motionMedia,
 }: SectionWrapperProps) {
   const contentRef = useGsapReveal<HTMLDivElement>({
     mode: motion,
     duration: motionDuration,
     start: motionStart,
+    media: motionMedia,
   })
 
   return (

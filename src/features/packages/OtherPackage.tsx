@@ -77,21 +77,17 @@ export default function OtherPackage({
                 <button
                   key={addon.id}
                   type="button"
-                  className={[
-                    "relative min-w-0 rounded-xl border p-5 text-left transition-all duration-200 bg-white/90",
-                  ].join(" ")}
+                  className="relative min-w-0 rounded-xl border border-[#eeeeee] bg-white px-5 pb-5 pt-4 text-left shadow-sm transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:border-[#d9e2ff] hover:shadow-md motion-reduce:transition-none motion-reduce:hover:transform-none"
                 >
-                  <div className="pr-8">
-                    <p className="text-sm font-bold">
-                      {getAddonName(addon)}                  
+                  <div className="pr-2">
+                    <p className="text-[15px] font-semibold leading-snug tracking-[0.025em] text-neutral-900">
+                      {getAddonName(addon)}
                     </p>
                   </div>
                   <div className="mt-4">
-                    <p className="text-2xl font-bold">
+                    <p className="text-[26px] font-semibold leading-none text-neutral-900">
                       {Math.round(addon.price)}
-                      <span className="ml-1 text-sm font-medium">
-                        元
-                      </span>
+                      <span className="ml-1 text-[13px] font-medium">元</span>
                     </p>
                   </div>
                 </button>

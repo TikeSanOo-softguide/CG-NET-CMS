@@ -182,12 +182,13 @@ export default function HomePage() {
                     'flex flex-col items-center justify-center border-border/60 px-2 text-center',
 
                     // Mobile
-                    index === 0 ? 'col-span-2 h-[88px]' : 'h-[76px]',
+                    'h-[72px]',
+                    index === 0 && 'col-span-2',
                     index <= 2 && 'border-b',
                     (index === 1 || index === 3) && 'border-r',
 
                     // Tablet
-                    'md:col-span-1 md:h-[96px] md:border-b-0',
+                    'md:col-span-1 md:h-[88px] md:border-b-0',
                     index < 4 ? 'md:border-r' : 'md:border-r-0',
 
                     // Laptop & desktop
@@ -197,7 +198,7 @@ export default function HomePage() {
                   <p
                     className={cn(
                       'font-extrabold tabular-nums tracking-tight text-font-blue',
-                      index === 0 ? 'text-3xl md:text-2xl lg:text-3xl' : 'text-xl md:text-2xl lg:text-3xl'
+                      'text-[20px]/none md:text-[25px]/none lg:text-3xl'
                     )}
                   >
                     <AnimatedStat value={value} />
@@ -206,7 +207,7 @@ export default function HomePage() {
                   <p
                     className={cn(
                       'mt-1 font-medium text-muted-foreground',
-                      'text-small'
+                      'text-[12px]/[1.5] md:text-[13px]/[1.5] lg:text-small'
                     )}
                   >
                     {t(labelKey)}
@@ -457,7 +458,7 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Photo Gallery */}
-      <SectionWrapper className={SECTION_Y}>
+      <SectionWrapper className={SECTION_Y} motionMedia="(min-width: 1024px)">
         <SectionHeading
           eyebrow={t('home.galleryEyebrow')}
           title={t('home.galleryTitle')}
@@ -704,8 +705,9 @@ export default function HomePage() {
         motion="fade"
         motionDuration={0.35}
         motionStart="top 95%"
+        motionMedia="(min-width: 1024px)"
       >
-        <AnimatedCard className="group relative rounded-[12px] bg-app-accent-bg shadow-soft">
+        <AnimatedCard className="group relative rounded-[12px] bg-app-accent-bg shadow-soft max-lg:transition-none">
           <div className="relative overflow-hidden rounded-[12px]">
             <div
               aria-hidden
@@ -770,13 +772,14 @@ export default function HomePage() {
                 {homeContent.downloadItems.map((item) => (
                   <div
                     key={item.key}
-                    className="mx-auto inline-flex max-w-full overflow-hidden rounded-[12px] shadow-soft transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                    className="mx-auto inline-flex max-w-full overflow-hidden rounded-[12px] shadow-soft lg:transition-transform lg:duration-500 lg:ease-out lg:group-hover:scale-[1.02]"
                   >
                     <img
                       src={item.imageUrl}
                       alt={t(item.key)}
+                      width={800}
+                      height={532}
                       className="block h-auto max-h-[280px] w-auto max-w-full object-contain sm:max-h-[320px] lg:max-h-[340px]"
-                      loading="lazy"
                     />
                   </div>
                 ))}
@@ -792,6 +795,7 @@ export default function HomePage() {
         motion="fade"
         motionDuration={0.35}
         motionStart="top 95%"
+        motionMedia="(min-width: 1024px)"
       >
         <div className="relative overflow-hidden rounded-[12px] bg-gradient-font px-5 py-4 text-center sm:px-8 md:px-16 md:py-5">
           <div className="relative">
