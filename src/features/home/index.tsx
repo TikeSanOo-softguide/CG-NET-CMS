@@ -4,11 +4,7 @@ import { ArrowRight, Check, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import {
-  SectionWrapper,
-  SectionHeading,
-  SectionEyebrow,
-} from '@/components/common/SectionWrapper'
+import { SectionWrapper, SectionHeading } from '@/components/common/SectionWrapper'
 import { ErrorMessage } from '@/components/common/ErrorMessage'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { PackageCarousel } from '@/components/cards/PackageCarousel'
@@ -18,25 +14,36 @@ import { useLatestNews } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { homeContent } from '@/lib/content/home'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import { useLatestPromotions } from '@/hooks/usePromotion'
 import { PromotionCard } from '@/components/cards/PromotionCard'
 import { EmptyState } from '@/components/common/EmptyState'
 import CommonTab from '@/components/common/CommonTab'
 import { useGallery } from '@/hooks/useGallery'
 import { cn, getLocalized } from '@/lib/utils'
+import {
+  cardDescClass,
+  cardTitleClass,
+  sectionDescClass,
+  sectionTitleClass,
+} from '@/lib/typography'
 import { useRecommendPackage } from '@/hooks/usePackages'
 import AnimatedStat from '@/components/common/AnimatedStat'
 import DirectionAwareButton from '@/components/common/DirectionAwareButton'
 import { useGsapReveal } from '@/hooks/useGsapReveal'
+import { useGsapStagger } from '@/hooks/useGsapStagger'
+import { initGsap, prefersReducedMotion } from '@/lib/gsap'
 
-const SECTION_Y = 'py-12 md:py-16 lg:py-24'
+const SECTION_Y = 'py-8 md:py-10 lg:py-14'
 
 type Feature = (typeof homeContent.features)[number]
 
 function FeatureCard({ feature, className }: { feature: Feature; className?: string }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const lang = normalizeLanguage(i18n.language)
   const { icon: Icon, titleKey, descKey } = feature
 
   return (
@@ -54,13 +61,11 @@ function FeatureCard({ feature, className }: { feature: Feature; className?: str
           <Icon className="h-5 w-5" />
         </div>
 
-        <CardTitle className="text-body-lg font-semibold leading-tight text-foreground">
-          {t(titleKey)}
-        </CardTitle>
+        <CardTitle className={cardTitleClass(lang)}>{t(titleKey)}</CardTitle>
       </CardHeader>
 
       <CardContent className="px-5 pb-5 pt-0">
-        <CardDescription className="text-body leading-[1.7] text-muted-foreground">
+        <CardDescription className={cn('mt-1', cardDescClass(lang))}>
           {t(descKey)}
         </CardDescription>
       </CardContent>
@@ -86,7 +91,54 @@ export default function HomePage() {
   const [activeGalleryImage, setActiveGalleryImage] = useState(0)
   const [activeFeature, setActiveFeature] = useState(0)
   const statsRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
+  const featureHeadRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
+  const featureMobileRef = useGsapStagger({ stagger: 0.1 })
+  const featureTabletRef = useGsapStagger({ stagger: 0.1 })
+  const featureDesktopRef = useGsapStagger({ stagger: 0.1 })
+  const newsHeadRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
+  const newsGridRef = useGsapStagger({
+    stagger: 0.12,
+    deps: [news?.length, activeFilter],
+  })
+  const promoGridRef = useGsapStagger({
+    stagger: 0.12,
+    deps: [promotions?.length, activeFilter],
+  })
+  const downloadImageRef = useRef<HTMLDivElement>(null)
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+
+  initGsap()
+  useGSAP(
+    () => {
+      const el = downloadImageRef.current
+      if (!el || prefersReducedMotion()) return
+
+      // Image entrance only on laptop+ — mobile/tablet stay instant (no delay).
+      const mm = gsap.matchMedia()
+      mm.add('(min-width: 1024px)', () => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, x: 28 },
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            clearProps: 'transform',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 90%',
+              once: true,
+              toggleActions: 'play none none none',
+            },
+          }
+        )
+      })
+
+      return () => mm.revert()
+    },
+    { scope: downloadImageRef }
+  )
   const FILTERS = [
     { value: 'news', labelKey: 'home.latestNews' },
     { value: 'promotion', labelKey: 'nav.promotion' },
@@ -167,18 +219,20 @@ export default function HomePage() {
       </div>
 
       {/* Why Choose Us */}
-      <SectionWrapper className={cn('bg-muted/40', SECTION_Y)}>
-        <SectionHeading
-          eyebrow={t('home.whyChooseUs')}
-          title={t('home.whyChooseUsTitle')}
-          subtitle={t('home.whyChooseUsDesc')}
-        />
+      <SectionWrapper className={cn('bg-muted/40', SECTION_Y)} motion="none">
+        <div ref={featureHeadRef}>
+          <SectionHeading
+            eyebrow={t('home.whyChooseUs')}
+            title={t('home.whyChooseUsTitle')}
+          />
+        </div>
 
         {/* ============================= */}
         {/* Mobile Design */}
         {/* ============================= */}
         <div className="md:hidden">
           <div
+            ref={featureMobileRef}
             className="-mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-4 scrollbar-none"
             onScroll={(e) => {
               const el = e.currentTarget
@@ -212,7 +266,7 @@ export default function HomePage() {
         {/* ============================= */}
         {/* Tablet Design */}
         {/* ============================= */}
-        <div className="hidden grid-cols-2 gap-3 md:grid lg:hidden">
+        <div ref={featureTabletRef} className="hidden grid-cols-2 gap-3 md:grid lg:hidden">
           {homeContent.features.map((feature) => (
             <FeatureCard key={feature.titleKey} feature={feature} />
           ))}
@@ -221,7 +275,10 @@ export default function HomePage() {
         {/* ============================= */}
         {/* Desktop Design */}
         {/* ============================= */}
-        <div className="hidden gap-3 lg:grid lg:grid-cols-3 xl:grid-cols-5">
+        <div
+          ref={featureDesktopRef}
+          className="hidden gap-3 lg:grid lg:grid-cols-3 xl:grid-cols-5"
+        >
           {homeContent.features.map((feature) => (
             <FeatureCard key={feature.titleKey} feature={feature} />
           ))}
@@ -233,7 +290,6 @@ export default function HomePage() {
         <SectionHeading
           eyebrow={t('home.featuredEyebrow')}
           title={t('home.featuredPackages')}
-          subtitle={t('home.featuredPackagesDesc')}
         />
 
         {pkgLoading && (
@@ -266,12 +322,13 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Latest News */}
-      <SectionWrapper className={cn('bg-muted/40', SECTION_Y)}>
-        <SectionHeading
-          eyebrow={t('home.whatsNew')}
-          title={t('home.latestTitle')}
-          subtitle={t('home.latestNewsDesc')}
-        />
+      <SectionWrapper className={cn('bg-muted/40', SECTION_Y)} motion="none">
+        <div ref={newsHeadRef}>
+          <SectionHeading
+            eyebrow={t('home.whatsNew')}
+            title={t('home.latestTitle')}
+          />
+        </div>
 
         {/* Tabs */}
         <CommonTab
@@ -308,7 +365,10 @@ export default function HomePage() {
             )}
 
             {!newsLoading && !newsError && news && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              <div
+                ref={newsGridRef}
+                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5"
+              >
                 {news.slice(0, 3).map((article, i) => (
                   <NewsCard key={article.id} article={article} lang={lang} delay={i * 100} />
                 ))}
@@ -363,7 +423,10 @@ export default function HomePage() {
             )}
 
             {!isLoading && !isError && promotions && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              <div
+                ref={promoGridRef}
+                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5"
+              >
                 {promotions?.slice(0, 3).map((promotion, i) => (
                   <PromotionCard
                     key={promotion.id}
@@ -398,7 +461,6 @@ export default function HomePage() {
         <SectionHeading
           eyebrow={t('home.galleryEyebrow')}
           title={t('home.galleryTitle')}
-          subtitle={t('home.galleryDesc')}
         />
 
         {galleryError && <ErrorMessage />}
@@ -407,8 +469,8 @@ export default function HomePage() {
           <>
             {/* Mobile */}
             <div className="lg:hidden">
-              <div className="h-[320px] overflow-hidden rounded-2xl">
-                <Skeleton className="h-full w-full rounded-2xl" />
+              <div className="h-[320px] overflow-hidden rounded-[12px]">
+                <Skeleton className="h-full w-full rounded-[12px]" />
               </div>
 
               <div className="mt-3 flex gap-3 overflow-hidden">
@@ -422,11 +484,11 @@ export default function HomePage() {
             <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
               {Array.from({ length: 5 }).map((_, i) => {
                 const cardClass =
-                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-2xl' : 'md:col-span-1 rounded-2xl'
+                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[12px]' : 'md:col-span-1 rounded-[12px]'
 
                 return (
                   <div key={i} className={`${cardClass} overflow-hidden`}>
-                    <Skeleton className="h-full w-full rounded-2xl" />
+                    <Skeleton className="h-full w-full rounded-[12px]" />
                   </div>
                 )
               })}
@@ -469,7 +531,7 @@ export default function HomePage() {
                       key={item.id}
                       delay={0}
                       variant="rise"
-                      className="group relative h-[320px] overflow-hidden rounded-2xl border border-white bg-card shadow-soft"
+                      className="group relative h-[320px] overflow-hidden rounded-[12px] border border-white bg-card shadow-soft"
                     >
                       {imageUrl ? (
                         <img
@@ -581,7 +643,7 @@ export default function HomePage() {
             <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
               {galleryData.data.slice(0, 5).map((item, i) => {
                 const cardClass =
-                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-2xl' : 'md:col-span-1 rounded-2xl'
+                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[12px]' : 'md:col-span-1 rounded-[12px]'
 
                 const imageUrl = item.imageUrl
                   ? item.imageUrl.startsWith('http')
@@ -636,149 +698,104 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Download Section */}
-      <SectionWrapper id="app" className={cn('bg-muted/40', SECTION_Y)}>
-        <div className="w-full overflow-hidden rounded-2xl border border-white bg-app-accent-bg shadow-soft">
-          {/* ============================= */}
-          {/* Mobile Download Design */}
-          {/* ============================= */}
-          <div className="md:hidden">
-            {/* App Preview */}
-            <div className="relative flex justify-center overflow-hidden px-5 pt-7">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-10 h-48 w-48 -translate-x-1/2 rounded-full bg-[#0100ca]/10 blur-3xl"
-              />
+      <SectionWrapper
+        id="app"
+        className={cn('bg-muted/40', SECTION_Y)}
+        motion="fade"
+        motionDuration={0.35}
+        motionStart="top 95%"
+      >
+        <AnimatedCard className="group relative rounded-[12px] bg-app-accent-bg shadow-soft">
+          <div className="relative overflow-hidden rounded-[12px]">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-0 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full bg-[#0100ca]/10 blur-3xl lg:block"
+            />
 
-              <div className="relative w-[82%] max-w-[320px]">
+            {/* Mobile + tablet: stacked | Desktop: equal columns, shared padding */}
+            <div className="relative grid grid-cols-1 items-center lg:grid-cols-2 lg:min-h-[440px]">
+              {/* Text */}
+              <div className="order-1 flex flex-col justify-center px-5 py-8 text-center sm:px-8 lg:order-1 lg:px-10 lg:py-12 lg:text-left xl:px-12">
+                <h2 className={cn(sectionTitleClass(lang, 'text-font-black'), 'lg:text-left')}>
+                  {t('home.downloadHead')}
+                </h2>
+
+                <p
+                  className={cn(
+                    'mx-auto mt-3 max-w-md lg:mx-0',
+                    sectionDescClass(lang)
+                  )}
+                >
+                  {t('home.downloadHeadSub')}
+                </p>
+
+                <ul className="mx-auto mt-5 max-w-md space-y-3 text-left lg:mx-0">
+                  {homeContent.highlight.map((h) => (
+                    <li key={h} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-app-primary/10">
+                        <Check
+                          className="h-3 w-3 text-app-primary"
+                          strokeWidth={2.5}
+                          aria-hidden="true"
+                        />
+                      </span>
+                      <span
+                        className={cn(
+                          'text-small text-foreground/80',
+                          lang === 'my' ? 'leading-[1.7]' : 'leading-snug'
+                        )}
+                      >
+                        {t(h)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex w-full justify-center lg:mt-8">
+                  <button
+                    type="button"
+                    className="mx-auto inline-flex h-11 items-center justify-center gap-2 rounded-[8px] bg-app-primary px-6 text-small font-semibold text-white shadow-soft transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+                  >
+                    <Download className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span className="leading-none">{t('downloadCard.downloadApp')}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Image — equal top/bottom inset; capped height so card edge stays clear */}
+              <div
+                ref={downloadImageRef}
+                className="order-2 flex items-center justify-center px-5 py-8 sm:px-8 lg:order-2 lg:px-10 lg:py-12 xl:px-12"
+              >
                 {homeContent.downloadItems.map((item) => (
-                  <img
+                  <div
                     key={item.key}
-                    src={item.imageUrl}
-                    alt={t(item.key)}
-                    className="h-auto w-full rounded-2xl drop-shadow-xl"
-                    loading="lazy"
-                  />
+                    className="mx-auto inline-flex max-w-full overflow-hidden rounded-[12px] shadow-soft transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                  >
+                    <img
+                      src={item.imageUrl}
+                      alt={t(item.key)}
+                      className="block h-auto max-h-[280px] w-auto max-w-full object-contain sm:max-h-[320px] lg:max-h-[340px]"
+                      loading="lazy"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
-
-            {/* Content */}
-            <div className="px-5 pb-6 pt-6 text-center">
-              <SectionEyebrow>{t('home.downloadTitle')}</SectionEyebrow>
-
-              <h2
-                className={cn(
-                  'mt-3 text-h2 font-bold tracking-[-0.02em] text-font-black font-head',
-                  lang === 'my' ? '!leading-[1.7]' : '!leading-tight'
-                )}
-              >
-                {t('home.downloadHead')}
-              </h2>
-
-              <p className="mx-auto mt-2 max-w-sm text-body-lg leading-relaxed text-muted-foreground">
-                {t('home.downloadHeadSub')}
-              </p>
-
-              {/* Highlights */}
-              <ul className="mx-auto mt-5 max-w-sm space-y-2.5 text-left">
-                {homeContent.highlight.map((h) => (
-                  <li
-                    key={h}
-                    className="flex items-start gap-2.5 rounded-lg bg-background/50 px-3 py-2 text-small text-foreground/80"
-                  >
-                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#0100ca]/10">
-                      <Check className="h-3 w-3 text-font-blue" />
-                    </span>
-
-                    <span className="leading-[1.6]">{t(h)}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Download Button */}
-              <button
-                type="button"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-app-primary px-6 py-3.5 text-body font-semibold text-white shadow-soft transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-              >
-                <Download className="h-4 w-4" />
-                {t('downloadCard.downloadApp')}
-              </button>
-            </div>
           </div>
-
-          {/* ============================= */}
-          {/* Desktop Download Design */}
-          {/* ============================= */}
-          <div className="hidden md:grid md:grid-cols-2 md:items-center md:gap-8 md:p-12">
-            <div>
-              <SectionEyebrow align="left">{t('home.downloadTitle')}</SectionEyebrow>
-
-              <h2
-                className={cn(
-                  'mt-3 text-h2 font-bold tracking-[-0.02em] text-font-black font-head',
-                  lang === 'my' ? '!leading-[1.7]' : '!leading-tight'
-                )}
-              >
-                {t('home.downloadHead')}
-              </h2>
-
-              <p className="mt-2 max-w-md text-body-lg leading-relaxed text-muted-foreground">
-                {t('home.downloadHeadSub')}
-              </p>
-
-              <ul className="mt-6 space-y-2.5">
-                {homeContent.highlight.map((h) => (
-                  <li key={h} className="flex items-start gap-2.5 text-body text-foreground/80">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-font-blue" />
-                    {t(h)}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                type="button"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-app-primary px-6 py-3.5 text-body font-semibold text-white shadow-soft transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-              >
-                <Download className="h-4 w-4" />
-                {t('downloadCard.downloadApp')}
-              </button>
-            </div>
-
-            <div className="relative flex h-full items-center justify-center md:justify-end">
-              {homeContent.downloadItems.map((item) => (
-                <div key={item.key} className="w-full rounded-xl">
-                  <img
-                    src={item.imageUrl}
-                    alt={t(item.key)}
-                    className="h-auto w-full rounded-2xl drop-shadow-xl"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        </AnimatedCard>
       </SectionWrapper>
 
       {/* CTA Section */}
-      <SectionWrapper className={SECTION_Y}>
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-luxe px-5 py-12 text-center shadow-lift sm:px-8 md:px-16 md:py-16">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#ffcf62]/15 blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-[#0100ca]/40 blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ffcf62]/60 to-transparent"
-          />
-
-          {/* Content */}
+      <SectionWrapper
+        className="bg-muted/40 py-5 md:py-6 lg:py-8"
+        motion="fade"
+        motionDuration={0.35}
+        motionStart="top 95%"
+      >
+        <div className="relative overflow-hidden rounded-[12px] bg-gradient-font px-5 py-4 text-center sm:px-8 md:px-16 md:py-5">
           <div className="relative">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-2 shadow-md ring-1 ring-white/40">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-[12px] bg-white p-2 shadow-md ring-1 ring-white/40">
               <img
                 src="/assets/logo/logo.svg"
                 alt="Yaung Ni Oo logo"
@@ -787,31 +804,31 @@ export default function HomePage() {
               />
             </span>
 
-            <h2
-              className={cn(
-                'mt-5 text-h2 font-bold tracking-[-0.02em] text-primary-foreground font-head',
-                lang === 'my' ? '!leading-[1.7]' : '!leading-tight'
-              )}
-            >
+            <h2 className={cn(sectionTitleClass(lang, 'mt-3 text-primary-foreground'))}>
               {t('cta.ctaTitle')}
             </h2>
 
-            <p className="mx-auto mt-2 max-w-sm text-body-lg leading-relaxed text-primary-foreground/80 sm:max-w-xl">
+            <p
+              className={cn(
+                'mx-auto mt-2.5 max-w-sm sm:max-w-xl',
+                sectionDescClass(lang, 'text-primary-foreground/80')
+              )}
+            >
               {t('cta.ctaDesc')}
             </p>
 
-            {/* Buttons */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
               <DirectionAwareButton
                 to="/packages?category=1"
                 label={t('home.heroCta')}
-                className="w-full border-app-yellow bg-app-yellow px-7 py-3.5 text-body active:scale-[0.98] sm:w-auto"
+                color="var(--color-yellow)"
+                className="w-full rounded-[8px] px-4 py-2 text-small font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98] sm:w-auto"
               />
 
               <DirectionAwareButton
                 to="/contact-us"
                 label={t('nav.contact')}
-                className="w-full border-white px-7 py-3.5 text-body active:scale-[0.98] sm:w-auto"
+                className="w-full rounded-[8px] border border-primary-foreground/20 px-4 py-2 text-small font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98] sm:w-auto"
               />
             </div>
           </div>

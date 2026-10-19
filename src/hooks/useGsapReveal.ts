@@ -8,6 +8,10 @@ export type GsapRevealMode = 'rise' | 'fade' | 'none'
 interface UseGsapRevealOptions {
   mode?: GsapRevealMode
   disabled?: boolean
+  /** Override default duration (seconds). */
+  duration?: number
+  /** Override ScrollTrigger start, e.g. 'top 95%'. */
+  start?: string
 }
 
 /**
@@ -17,7 +21,12 @@ interface UseGsapRevealOptions {
 export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
   options: UseGsapRevealOptions = {}
 ) {
-  const { mode = 'rise', disabled = false } = options
+  const {
+    mode = 'rise',
+    disabled = false,
+    duration = GSAP_REVEAL.duration,
+    start = GSAP_REVEAL.start,
+  } = options
   const ref = useRef<T>(null)
 
   initGsap()
@@ -30,7 +39,7 @@ export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
       const tweenVars: gsap.TweenVars = {
         autoAlpha: 1,
         y: 0,
-        duration: GSAP_REVEAL.duration,
+        duration,
         ease: 'power2.out',
         immediateRender: true,
         onComplete: () => {
@@ -38,7 +47,7 @@ export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
         },
         scrollTrigger: {
           trigger: el,
-          start: GSAP_REVEAL.start,
+          start,
           once: true,
           toggleActions: 'play none none none',
         },
@@ -52,7 +61,7 @@ export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
 
       gsap.fromTo(el, fromVars, tweenVars)
     },
-    { scope: ref, dependencies: [mode, disabled] }
+    { scope: ref, dependencies: [mode, disabled, duration, start] }
   )
 
   return ref

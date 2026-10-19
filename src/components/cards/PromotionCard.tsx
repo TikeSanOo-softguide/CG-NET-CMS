@@ -2,9 +2,17 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { cn, formatDate, getDateLocale, getLocalized } from '@/lib/utils'
+import { newsDescClass, newsTitleClass, typeNewsChip } from '@/lib/typography'
 import type { Promotion } from '@/types/promotion'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import { useState } from 'react'
@@ -21,122 +29,111 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
   const [imageError, setImageError] = useState(false)
 
+  const imageSrc = promotion.imageUrl
+    ? promotion.imageUrl.startsWith('http')
+      ? promotion.imageUrl
+      : `${STORAGE_URL}/${promotion.imageUrl}`
+    : null
+
+  const hasStart =
+    typeof promotion.startDate === 'string' && promotion.startDate.trim() !== ''
+  const hasEnd =
+    typeof promotion.endDate === 'string' && promotion.endDate.trim() !== ''
+
   return (
-    <AnimatedCard delay={delay} variant="rise" className="rounded-xl h-full relative">
-      <Card
-        className={cn(
-          'group flex flex-col overflow-hidden border border-white shadow-soft rounded-xl !bg-app-surface',
-          'h-auto'
-        )}
-      >
-        {/* 1. Top Image Header */}
+    <AnimatedCard delay={delay} variant="rise" className="relative h-full min-w-0 max-w-full rounded-[12px]">
+      <Card className="group flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-[12px] border border-white shadow-soft !bg-app-surface">
         <Link
           to={`/promotion/${promotion.slug}`}
-
-          className="card-media relative block w-full aspect-[4/1.7] overflow-hidden"
+          className="relative block w-full overflow-hidden bg-muted"
         >
-          {promotion.imageUrl && !imageError ? (
+          {imageSrc && !imageError ? (
             <img
-              src={
-                promotion.imageUrl.startsWith('http')
-                  ? promotion.imageUrl
-                  : `${STORAGE_URL}/${promotion.imageUrl}`
-              }
+              src={imageSrc}
               alt={getLocalized(promotion.title, lang)}
-              className="w-full h-full transition-transform duration-700 group-hover:scale-[1.03]"
+              className="block h-auto w-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.01]"
               loading="lazy"
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="flex items-center justify-center w-full h-full bg-muted text-font-muted text-lg font-medium">
+            <div className="flex aspect-[16/9] w-full items-center justify-center bg-muted">
               <img
                 src="/assets/logo/logo-muted.png"
                 alt="No image available"
-                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-700 group-hover:scale-[1.03]"
+                className="h-16 w-auto object-contain opacity-60"
               />
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
 
-        <CardHeader className="pb-2 pt-3">
-          <span className="w-fit rounded-full bg-accent px-3 py-1 text-caption font-bold uppercase tracking-wider text-app-primary">
-            {t('nav.promotion')}
-          </span>
+        <CardHeader className={cn('space-y-2.5 pb-2 pt-4', compact && 'px-4')}>
+          <span className={typeNewsChip}>{t('nav.promotion')}</span>
           <CardTitle
             className={cn(
-              'leading-[1.7] line-clamp-2 overflow-hidden text-ellipsis',
-              'min-h-[3.4em]',
-              compact ? 'text-sm' : 'text-base'
+              newsTitleClass(lang),
+              'line-clamp-2 overflow-hidden text-ellipsis',
+              lang === 'my' ? 'min-h-[3.1em]' : 'min-h-[2.6em]',
+              compact && 'text-h4'
             )}
           >
             <Link
               to={`/promotion/${promotion.slug}`}
-              className="transition-colors hover:text-primary block"
+              className="transition-colors duration-200 hover:text-app-primary"
             >
               {getLocalized(promotion.title, lang)}
             </Link>
           </CardTitle>
         </CardHeader>
 
-        <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
-          {(() => {
-            const hasStart =
-              promotion.startDate &&
-              typeof promotion.startDate === 'string' &&
-              promotion.startDate.trim() !== ''
-            const hasEnd =
-              promotion.endDate &&
-              typeof promotion.endDate === 'string' &&
-              promotion.endDate.trim() !== ''
+        <CardContent className={cn('flex-1 space-y-2 pt-0', compact && 'px-4')}>
+          <CardDescription
+            className={cn(
+              newsDescClass(lang),
+              'line-clamp-2',
+              lang === 'my' ? 'min-h-[3.4em]' : 'min-h-[3.1em]'
+            )}
+          >
+            {getLocalized(promotion.description, lang)}
+          </CardDescription>
 
-            return (
-              <div className="flex items-center justify-between text-xs">
-                {hasStart && hasEnd && (
-                  <span className="text-muted-foreground">{t('promotions.periodLabel')}</span>
-                )}
-
-                <span className="text-right font-medium text-font-black">
-                  {hasStart && hasEnd ? (
-                    <>
-                      {formatDate(promotion.startDate, getDateLocale(lang))} -{' '}
-                      {formatDate(promotion.endDate, getDateLocale(lang))}
-                    </>
-                  ) : (!hasStart && !hasEnd) || (hasStart && !hasEnd) ? (
-                    <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
-                      <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                      {t('promotions.active')}
-                    </span>
-                  ) : !hasStart && hasEnd ? (
-                    <span className="text-muted-foreground">
-                      {t('promotions.promotionExpires')}{' '}
-                      {formatDate(promotion.endDate, getDateLocale(lang))}
-                    </span>
-                  ) : null}
-                </span>
-              </div>
-            )
-          })()}
+          <div className="flex min-h-[1.4em] items-center justify-between gap-2 text-caption tracking-[0.02em]">
+            {hasStart && hasEnd ? (
+              <span className="font-medium text-font-blue">
+                {t('promotions.periodLabel')}{' '}
+                {formatDate(promotion.startDate!, getDateLocale(lang))} -{' '}
+                {formatDate(promotion.endDate!, getDateLocale(lang))}
+              </span>
+            ) : (!hasStart && !hasEnd) || (hasStart && !hasEnd) ? (
+              <span className="inline-flex items-center gap-1.5 font-semibold text-green-600">
+                <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                {t('promotions.active')}
+              </span>
+            ) : !hasStart && hasEnd ? (
+              <span className="font-medium text-amber-600">
+                {t('promotions.promotionExpires')}{' '}
+                {formatDate(promotion.endDate!, getDateLocale(lang))}
+              </span>
+            ) : null}
+          </div>
         </CardContent>
 
         <CardFooter
           className={cn(
-            'relative flex items-center justify-end gap-2 pt-3',
-            compact && 'px-4 pb-3'
+            'relative flex items-center justify-end gap-2 px-6 pb-3 pt-2',
+            compact && 'px-4 pb-2.5'
           )}
         >
-          {/* Shorter top border */}
           <div className="absolute left-1/2 top-0 h-px w-[90%] -translate-x-1/2 bg-border" />
 
           <Button
             variant="ghost"
             size="sm"
             asChild
-            className="h-8 gap-1 px-2 text-font-blue hover:text-font-blue"
+            className="h-6 gap-0.5 px-1.5 text-caption font-medium text-font-blue hover:bg-transparent hover:text-font-blue"
           >
-            <Link to={`/promotion/${promotion.slug}`} className="flex items-center gap-1.5">
+            <Link to={`/promotion/${promotion.slug}`}>
               {t('promotions.viewDetail')}
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              <ArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>
           </Button>
         </CardFooter>

@@ -27,7 +27,7 @@ export function AnimatedCard({
   as: Tag = 'div',
 }: AnimatedCardProps) {
   const defaultHover =
-    '[@media(hover:hover)]:motion-safe:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-lift [@media(hover:hover)]:hover:border-primary/20'
+    '[@media(hover:hover)]:motion-safe:hover:-translate-y-2 [@media(hover:hover)]:hover:shadow-lift [@media(hover:hover)]:hover:border-primary/20'
 
   return (
     <Tag

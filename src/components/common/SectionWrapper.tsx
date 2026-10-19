@@ -2,6 +2,11 @@ import { cn } from '@/lib/utils'
 import { useGsapReveal, type GsapRevealMode } from '@/hooks/useGsapReveal'
 import { useTranslation } from 'react-i18next'
 import { normalizeLanguage } from '@/lib/i18n'
+import {
+  sectionDescClass,
+  sectionTitleClass,
+  typeEyebrow,
+} from '@/lib/typography'
 
 interface SectionWrapperProps {
   children: React.ReactNode
@@ -10,6 +15,10 @@ interface SectionWrapperProps {
   spacing?: 'default' | 'compact' | 'tight'
   /** Section-level reveal. Use `fade` when the section contains a map. */
   motion?: GsapRevealMode
+  /** Override reveal duration (seconds). */
+  motionDuration?: number
+  /** Override ScrollTrigger start. */
+  motionStart?: string
 }
 
 export function SectionWrapper({
@@ -18,8 +27,14 @@ export function SectionWrapper({
   id,
   spacing = 'tight',
   motion = 'rise',
+  motionDuration,
+  motionStart,
 }: SectionWrapperProps) {
-  const contentRef = useGsapReveal<HTMLDivElement>({ mode: motion })
+  const contentRef = useGsapReveal<HTMLDivElement>({
+    mode: motion,
+    duration: motionDuration,
+    start: motionStart,
+  })
 
   return (
     <section
@@ -59,7 +74,8 @@ export function SectionEyebrow({
   return (
     <p
       className={cn(
-        'flex items-center gap-3 text-small font-semibold uppercase tracking-[0.18em] text-font-blue',
+        'flex items-center gap-3',
+        typeEyebrow,
         align === 'center' && 'justify-center',
         className
       )}
@@ -80,25 +96,19 @@ export function SectionHeading({
   align = 'center',
 }: SectionHeadingProps) {
   const { i18n } = useTranslation()
-  const titleLeading = normalizeLanguage(i18n.language) === 'my' ? '!leading-[1.7]' : '!leading-tight'
+  const lang = normalizeLanguage(i18n.language)
 
   return (
     <div
       className={
         align === 'center'
-          ? 'mx-auto mb-6 max-w-2xl text-center md:mb-8 lg:mb-10'
+          ? 'mx-auto mb-4 max-w-2xl text-center md:mb-5 lg:mb-6'
           : 'max-w-2xl text-left'
       }
     >
       {eyebrow ? <SectionEyebrow align={align}>{eyebrow}</SectionEyebrow> : null}
-      <h2 className={cn('mt-3 text-h2 font-bold tracking-[-0.02em] text-foreground font-head', titleLeading)}>
-        {title}
-      </h2>
-      {subtitle ? (
-        <p className="mt-2 text-body-lg leading-relaxed text-muted-foreground">
-          {subtitle}
-        </p>
-      ) : null}
+      <h2 className={cn('mt-3', sectionTitleClass(lang))}>{title}</h2>
+      {subtitle ? <p className={cn('mt-2.5', sectionDescClass(lang))}>{subtitle}</p> : null}
     </div>
   )
 }

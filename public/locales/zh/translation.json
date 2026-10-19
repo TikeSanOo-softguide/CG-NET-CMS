@@ -96,7 +96,7 @@
     "feature4Title": "客服与投诉",
     "feature4Desc": "专业客服团队全天候为您提供帮助。",
     "feature5Title": "多语言支持",
-    "feature5Desc": "以多种本地语言提供友好的服务。",
+    "feature5Desc": "以多种本地语言提供服务。",
     "galleryEyebrow": "员工活动",
     "galleryTitle": "晨光的员工活动",
     "galleryDesc": "近距离了解晨光员工的日常活动、团队协作、办公生活以及精彩难忘的瞬间。",
@@ -109,7 +109,7 @@
     "downloadDesc": "通过手机即可管理您的账户、支付账单并获取支持服务。",
     "downloadSub1": "晨光 是您完善的宽带管理助手 — 可实时跟踪使用情况、查看账单、在线支付以及监控您的网络连接状态。",
     "downloadItem": "随时随地保持连接。",
-    "downloadHead": "立即下载 Yaung Ni Oo 应用",
+    "downloadHead": "立即下载 YNO 应用！",
     "downloadHeadSub": "支持 iOS 和 Android — 不到一分钟即可完成安装，并使用您的手机号码登录。",
     "downloadSub2": "旨在跟踪使用情况、查看账单并监控您的连接。",
     "downloadSub3": "状态，并提供实时更新。",
@@ -119,8 +119,8 @@
     "more": "更多",
     "viewAllGallery": "查看全部图库",
     "highlight1": "所有 Yaung Ni Oo 客户均可免费下载和使用",
-    "highlight2": "支持英语、缅甸语和中文界面",
-    "highlight3": "通过 OTP 验证保护安全登录"
+    "highlight2": "支持英语、缅甸语与中文的多语言界面",
+    "highlight3": "通过 OTP 验证安全登录"
   },
   "downloadCard": {
     "title": "下载 Yaung Ni Oo 应用程序",

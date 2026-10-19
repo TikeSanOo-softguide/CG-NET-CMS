@@ -5,7 +5,7 @@ import type { SupportedLanguage } from './i18n/languages'
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      'font-size': [{ text: ['h1', 'h2', 'h3', 'body-lg', 'body', 'small', 'caption'] }],
+      'font-size': [{ text: ['h1', 'h2', 'h3', 'h4', 'body-lg', 'body', 'small', 'caption'] }],
       shadow: [{ shadow: ['soft', 'lift'] }],
     },
   },
