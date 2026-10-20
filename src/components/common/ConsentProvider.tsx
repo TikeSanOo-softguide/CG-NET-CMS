@@ -79,10 +79,10 @@ export function ConsentProvider({
                         consentBannerFooterSubGroup: 'flex items-center gap-4',
 
                         buttonSecondary:
-                            'h-auto rounded-none border-0 border-b border-gray-500 bg-transparent px-0 py-0 text-[10px] font-semibold uppercase tracking-[0.12em] text-gray-600 shadow-none hover:border-foreground hover:bg-transparent hover:text-foreground',
+                            'h-auto rounded-none border-0 border-b border-gray-500 bg-transparent px-0 py-0 text-caption font-semibold uppercase tracking-[0.12em] text-gray-600 shadow-none hover:border-foreground hover:bg-transparent hover:text-foreground',
 
                         buttonPrimary:
-                            'h-8 min-w-[64px] rounded-none border-0 !bg-[var(--color-primary)] px-4 text-[10px] font-bold uppercase tracking-[0.08em] text-white shadow-none transition-colors hover:!bg-[var(--color-hover)]',
+                            'h-8 min-w-[64px] rounded-none border-0 !bg-[var(--color-primary)] px-4 text-caption font-bold uppercase tracking-[0.08em] text-white shadow-none transition-colors hover:!bg-[var(--color-hover)]',
                     },
 
                     consentActions: {

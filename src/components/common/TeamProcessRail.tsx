@@ -129,7 +129,7 @@ export default function TeamProcessRail({
         <SectionWrapper className="bg-muted/40 py-16">
         {/* Section Header */}
         <div className="mx-auto mb-12 max-w-2xl space-y-3 text-center">
-            <h2 className="bg-gradient-font bg-clip-text pb-3 pt-3 text-xl font-black leading-relaxed tracking-tight text-transparent sm:text-3xl md:text-4xl">
+            <h2 className="bg-gradient-font bg-clip-text pb-3 pt-3 text-[18px] font-black leading-relaxed tracking-tight text-transparent md:text-[30px] lg:text-[36px]">
             {t('about.ourTeam')}
             </h2>
 
@@ -183,7 +183,7 @@ export default function TeamProcessRail({
                                     </div>
                                 </div>
 
-                                <CardTitle className="text-base font-bold tracking-tight text-font-secondary">
+                                <CardTitle className="text-[14px] font-bold tracking-tight text-font-secondary md:text-[16px] lg:text-[18px]">
                                     {t(member.nameKey)}
                                 </CardTitle>
                             </CardHeader>
@@ -192,7 +192,7 @@ export default function TeamProcessRail({
 
                     {/* Rail Node */}
                     <div className="absolute left-6 flex -translate-x-1/2 items-center justify-center md:left-1/2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary bg-background text-[10px] font-bold text-primary">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary bg-background text-caption font-bold text-primary">
                             {index + 1}
                         </div>
                     </div>

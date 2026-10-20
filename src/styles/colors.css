@@ -8,6 +8,7 @@
   --color-hover: #0100ca;
   --color-bar: #0100ca;
   --color-footer: #080a3d;
+  --color-navy: #080a3d;
   --color-card-bg: #f5f5f5;
 
   /* Font */
@@ -16,7 +17,7 @@
   --color-font-blue: #0100ca;
   --color-font-light-blue: #bfdbfe;
   --color-font-white: #ffffff;
-  --color-font-muted: #64748b;
+  --color-font-muted: #616a78;
   --color-font-hover: #dbeafe;
 
   /* Home Section */
@@ -48,6 +49,7 @@
   /* Gradient Section */
   --gradient-font: linear-gradient(to right, var(--color-primary), #1d4ed8, #9333ea);
   --gradient-bg: linear-gradient(to right, #1d4ed8, #3b82f6);
+  --gradient-luxe: linear-gradient(135deg, #080a3d 0%, #0d1166 60%, var(--color-primary) 100%);
 }
 
 /* Dark mode */

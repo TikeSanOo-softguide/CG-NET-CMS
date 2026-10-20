@@ -74,7 +74,7 @@ export default function PackageSelection({
   })
 
   useEffect(() => {
-    if (!packages.length) return
+    if (!packages.length || (initialSpeed == null && initialTerm == null)) return
 
     const targetSpeed = initialSpeed ? Number(initialSpeed) : undefined
     const targetTerm = initialTerm ? Number(initialTerm) : undefined
@@ -195,24 +195,21 @@ export default function PackageSelection({
                       type="button"
                       onClick={() => selectPackage(pkg)}
                       className={[
-                        'relative min-w-0 rounded-xl border p-5 text-left transition-all duration-200',
+                        'relative min-w-0 rounded-xl border bg-white px-5 pb-5 pt-4 text-left shadow-sm transition-[border-color,box-shadow,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:hover:transform-none',
                         active
-                          ? 'border-app-primary bg-white shadow-lg ring-2 ring-sky-100'
-                          : 'border-neutral-200 bg-white/80 shadow-sm hover:-translate-y-0.5 hover:shadow-md',
+                          ? 'border-app-primary'
+                          : 'border-[#eeeeee] hover:-translate-y-0.5 hover:border-[#d9e2ff] hover:shadow-md',
                       ].join(' ')}
                     >
                       {active && (
-                        <div className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-app-primary text-white">
-                          <Check size={14} />
+                        <div className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-app-primary text-white">
+                          <Check size={12} />
                         </div>
                       )}
 
-                      <div className="pr-8">
+                      <div className="pr-7">
                         <p
-                          className={[
-                            'text-sm font-bold',
-                            active ? 'text-font-blue' : 'text-neutral-800',
-                          ].join(' ')}
+                          className="text-[15px] font-semibold leading-snug tracking-[0.025em] text-neutral-900"
                         >
                           {networkName}
                         </p>
@@ -221,15 +218,15 @@ export default function PackageSelection({
                       <div className="mt-4">
                         <p
                           className={[
-                            'text-2xl font-bold',
-                            active ? 'text-font-blue' : 'text-neutral-900',
+                            'text-[26px] font-semibold leading-none',
+                            active ? 'text-app-primary' : 'text-neutral-900',
                           ].join(' ')}
                         >
                           {pkg.speed.mbps}
-                          <span className="ml-1 text-sm font-medium">Mbps</span>
+                          <span className="ml-1 text-[13px] font-medium">Mbps</span>
                         </p>
                       </div>
-                      <p className="mt-1 text-sm text-muted-foreground">
+                      <p className="mt-2 text-[15px] font-medium leading-snug text-neutral-600">
                         {Number(pkg.price).toLocaleString()} 元/mo
                       </p>
                     </button>
@@ -271,13 +268,13 @@ export default function PackageSelection({
             )}
 
             <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
-              <div className="rounded-xl border border-neutral-200 bg-white/80 p-5 shadow-sm">
+              <div className="rounded-xl border border-[#eeeeee] bg-white p-5">
                 <div className="mb-5">
-                  <h2 className="text-sm font-semibold text-neutral-800">
+                  <h2 className="text-[15px] font-semibold leading-snug tracking-[0.025em] text-neutral-900">
                     {t('packages.durationHead')}
                   </h2>
 
-                  <p className="mt-1 text-xs text-neutral-400">{t('packages.durationDec')}</p>
+                  <p className="mt-1 text-[13px] leading-snug text-neutral-500">{t('packages.durationDec')}</p>
                 </div>
 
                 <div className="relative px-2">
@@ -310,7 +307,7 @@ export default function PackageSelection({
 
                           <span
                             className={[
-                              'mt-3 text-xs font-medium',
+                              'mt-3 text-[13px] font-medium leading-snug',
                               active ? 'text-neutral-900' : 'text-neutral-500',
                             ].join(' ')}
                           >
@@ -325,21 +322,21 @@ export default function PackageSelection({
                 </div>
               </div>
 
-              <div className="rounded-xl border border-neutral-200 bg-white/80 p-5 shadow-sm">
+              <div className="rounded-xl border border-[#eeeeee] bg-white p-5">
                 <div className="flex h-full items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-neutral-600">
-                      <Coins size={21} />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f4f7ff] text-app-primary">
+                      <Coins size={18} />
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-neutral-700">
+                      <p className="text-[15px] font-semibold leading-snug tracking-[0.025em] text-neutral-900">
                         {t('packages.installationFee')}
                       </p>
                     </div>
                   </div>
 
-                  <p className="shrink-0 text-lg font-bold text-neutral-900">
+                  <p className="shrink-0 text-[22px] font-semibold leading-none text-neutral-900">
                     {installationFee.toLocaleString()} 元
                   </p>
                 </div>
@@ -347,30 +344,34 @@ export default function PackageSelection({
             </div>
           </div>
 
-          <aside className="h-fit rounded-xl border border-neutral-200 bg-white/90 p-5 shadow-lg xl:sticky xl:top-5">
-            <div className="border-b border-neutral-200 pb-4">
-              <h2 className="text-lg font-bold text-neutral-900">{t('packages.yourSelection')}</h2>
+          <aside className="h-fit rounded-xl border border-[#eeeeee] bg-white p-5 xl:sticky xl:top-5">
+            <div className="border-b border-[#f2f2f2] pb-4">
+              <h2 className="text-[18px] font-semibold leading-snug tracking-[0.025em] text-neutral-900">
+                {t('packages.yourSelection')}
+              </h2>
 
-              <p className="mt-1 text-xs text-neutral-400">{t('packages.reviewYourPackage')}</p>
+              <p className="mt-1 text-[13px] leading-snug text-neutral-500">
+                {t('packages.reviewYourPackage')}
+              </p>
             </div>
 
             <div className="space-y-5 pt-5">
               <div>
-                <p className="text-xs text-neutral-400">{t('packages.package')}</p>
+                <p className="text-[13px] leading-snug text-neutral-500">{t('packages.package')}</p>
 
-                <div className="mt-2 flex items-center gap-2">
-                  <Globe size={16} className="text-neutral-500" />
+                <div className="mt-1.5 flex items-center gap-2">
+                  <Globe size={15} className="text-neutral-400" />
 
-                  <p className="text-sm font-semibold text-neutral-900">
+                  <p className="text-[15px] font-medium leading-snug text-neutral-900">
                     {networkName} - {selectedPackage.speed.mbps} Mbps
                   </p>
                 </div>
               </div>
 
               <div>
-                <p className="text-xs text-neutral-400">{t('packages.duration')}</p>
+                <p className="text-[13px] leading-snug text-neutral-500">{t('packages.duration')}</p>
 
-                <p className="mt-2 text-sm font-medium text-neutral-800">
+                <p className="mt-1.5 text-[15px] font-medium leading-snug text-neutral-800">
                   {selectedDuration}{' '}
                   {selectedDuration === 1
                     ? t('packages.months').replace(/months/i, 'Month')
@@ -378,18 +379,20 @@ export default function PackageSelection({
                 </p>
               </div>
 
-              <div className="border-t border-neutral-200 pt-1">
+              <div className="border-t border-[#f2f2f2] pt-1">
                 <div className="mt-1 flex items-end justify-between gap-3">
-                  <span className="text-sm text-neutral-500">{t('packages.totalPrice')}</span>
+                  <span className="text-[15px] leading-snug text-neutral-500">
+                    {t('packages.totalPrice')}
+                  </span>
 
-                  <span className="text-2xl font-bold text-neutral-900">
+                  <span className="text-[26px] font-semibold leading-none text-neutral-900">
                     {totalPrice.toLocaleString()} 元
                   </span>
                 </div>
               </div>
 
-              <div className="rounded-xl bg-neutral-50 p-3">
-                <div className="flex items-center justify-between text-xs">
+              <div className="rounded-lg border border-[#f2f2f2] bg-white p-3">
+                <div className="flex items-center justify-between text-[13px] leading-snug">
                   <span className="text-neutral-500">{t('packages.package')}</span>
 
                   <span className="font-medium text-neutral-800">
@@ -397,7 +400,7 @@ export default function PackageSelection({
                   </span>
                 </div>
 
-                <div className="mt-2 flex items-center justify-between text-xs">
+                <div className="mt-2 flex items-center justify-between text-[13px] leading-snug">
                   <span className="text-neutral-500">{t('packages.installationFee')}</span>
 
                   <span className="font-medium text-neutral-800">

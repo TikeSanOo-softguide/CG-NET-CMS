@@ -57,7 +57,7 @@ export default function PromotionDetail() {
           <div className="space-y-3">
             <div className="flex items-center justify-between gap-3 py-3 sm:py-0">
               {/* Date Badge */}
-              <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 px-3 pt-2 pb-1.5 sm:py-1.5 rounded-full bg-font-blue/10 text-primary text-[11px] sm:text-xs font-medium border border-font-blue/20 max-w-full text-center sm:text-left">
+              <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 px-3 pt-2 pb-1.5 sm:py-1.5 rounded-full bg-font-blue/10 text-primary text-caption font-medium border border-font-blue/20 max-w-full text-center sm:text-left">
                 {(() => {
                   const hasStart =
                     promotion.startDate &&

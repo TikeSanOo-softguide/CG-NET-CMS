@@ -8,6 +8,12 @@ export type GsapRevealMode = 'rise' | 'fade' | 'none'
 interface UseGsapRevealOptions {
   mode?: GsapRevealMode
   disabled?: boolean
+  /** Override default duration (seconds). */
+  duration?: number
+  /** Override ScrollTrigger start, e.g. 'top 95%'. */
+  start?: string
+  /** Run the reveal only while this media query matches. */
+  media?: string
 }
 
 /**
@@ -17,7 +23,13 @@ interface UseGsapRevealOptions {
 export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
   options: UseGsapRevealOptions = {}
 ) {
-  const { mode = 'rise', disabled = false } = options
+  const {
+    mode = 'rise',
+    disabled = false,
+    duration = GSAP_REVEAL.duration,
+    start = GSAP_REVEAL.start,
+    media,
+  } = options
   const ref = useRef<T>(null)
 
   initGsap()
@@ -27,32 +39,43 @@ export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
       const el = ref.current
       if (!el || disabled || mode === 'none' || prefersReducedMotion()) return
 
-      const tweenVars: gsap.TweenVars = {
-        autoAlpha: 1,
-        y: 0,
-        duration: GSAP_REVEAL.duration,
-        ease: 'power2.out',
-        immediateRender: true,
-        onComplete: () => {
-          el.style.willChange = 'auto'
-        },
-        scrollTrigger: {
-          trigger: el,
-          start: GSAP_REVEAL.start,
-          once: true,
-          toggleActions: 'play none none none',
-        },
+      const play = () => {
+        const tweenVars: gsap.TweenVars = {
+          autoAlpha: 1,
+          y: 0,
+          duration,
+          ease: 'power2.out',
+          immediateRender: true,
+          onComplete: () => {
+            el.style.willChange = 'auto'
+          },
+          scrollTrigger: {
+            trigger: el,
+            start,
+            once: true,
+            toggleActions: 'play none none none',
+          },
+        }
+
+        if (mode === 'rise') {
+          tweenVars.clearProps = 'transform'
+        }
+
+        const fromVars = mode === 'fade' ? { autoAlpha: 0 } : { autoAlpha: 0, y: GSAP_REVEAL.y }
+
+        gsap.fromTo(el, fromVars, tweenVars)
       }
 
-      if (mode === 'rise') {
-        tweenVars.clearProps = 'transform'
+      if (!media) {
+        play()
+        return
       }
 
-      const fromVars = mode === 'fade' ? { autoAlpha: 0 } : { autoAlpha: 0, y: GSAP_REVEAL.y }
-
-      gsap.fromTo(el, fromVars, tweenVars)
+      const mm = gsap.matchMedia()
+      mm.add(media, play)
+      return () => mm.revert()
     },
-    { scope: ref, dependencies: [mode, disabled] }
+    { scope: ref, dependencies: [mode, disabled, duration, start, media] }
   )
 
   return ref

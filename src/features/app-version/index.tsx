@@ -70,7 +70,7 @@ export default function AppVersionPage() {
             />
           </div>
 
-          <h1 className="mb-4 text-xl font-bold tracking-tight text-font-blue md:text-[35px]">
+          <h1 className="mb-4 text-h1 font-bold tracking-tight text-font-blue">
             {t('nav.yaungNiOoApp')}
           </h1>
 
@@ -99,7 +99,7 @@ export default function AppVersionPage() {
           </div>
           <div className="w-full flex-1 text-left">
             <div className="mb-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
-              <h2 className="text-xl font-bold text-font-blue transition-all duration-300 md:text-[35px]">
+              <h2 className="text-h2 font-bold text-font-blue transition-all duration-300">
                 {t('app-version.whatsNew')} {versionText}
               </h2>
 
@@ -199,7 +199,7 @@ export default function AppVersionPage() {
           </div>
 
           <div className="w-full text-left md:w-1/2">
-            <h2 className="mb-4 text-xl font-bold leading-[1.8] tracking-tight text-font-blue md:text-[35px]">
+            <h2 className="mb-4 text-h2 font-bold leading-[1.8] tracking-tight text-font-blue">
               {t('app-version.mobileTitle')}
             </h2>
             <p className="mb-6 max-w-lg text-[15px] leading-[2] text-gray-400 md:text-base">
@@ -219,7 +219,7 @@ export default function AppVersionPage() {
       <SectionWrapper className="border-t border-white/5 bg-muted/40 py-16 md:py-20">
         <div className="mx-auto flex w-full max-w-6xl flex-col-reverse items-center gap-8 md:flex-row md:items-center md:gap-12 lg:gap-16">
           <div className="w-full md:w-1/2 md:pr-4">
-            <h2 className="mb-4 text-xl font-bold leading-[1.8] tracking-tight text-font-blue md:text-[35px]">
+            <h2 className="mb-4 text-h2 font-bold leading-[1.8] tracking-tight text-font-blue">
               {t('app-version.tabletTitle')}
             </h2>
             <p className="mb-6 max-w-lg text-[15px] leading-[2] text-gray-400 md:text-base">

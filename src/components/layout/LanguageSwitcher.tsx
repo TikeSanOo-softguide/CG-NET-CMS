@@ -46,6 +46,7 @@ export function LanguageSwitcher() {
           className="
             gap-1.5 
             shrink-0
+            font-heading
             focus:ring-0
             focus:ring-offset-0
             focus-visible:outline-none
@@ -92,6 +93,7 @@ export function LanguageSwitcher() {
               border-0
               px-3 py-2      
               text-base
+              font-heading
               outline-none
               ring-0
               focus:outline-none
