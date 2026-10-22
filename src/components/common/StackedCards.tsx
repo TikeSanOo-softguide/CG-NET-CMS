@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { initGsap, prefersReducedMotion } from '@/lib/gsap'
@@ -15,6 +15,7 @@ interface StackedCardsProps {
 export function StackedCards({ items }: StackedCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
+  const [failedImages, setFailedImages] = useState<Set<string>>(() => new Set())
 
   useGSAP(
     () => {
@@ -82,12 +83,23 @@ export function StackedCards({ items }: StackedCardsProps) {
                 zIndex: index + 1,
               }}
             >
-              <img
-                src={item.imageUrl}
-                alt={item.id}
-                className="h-full w-full object-cover"
-                draggable={false}
-              />
+              {item.imageUrl && !failedImages.has(item.id) ? (
+                <img
+                  src={item.imageUrl}
+                  alt={item.id}
+                  className="h-full w-full object-cover"
+                  draggable={false}
+                  onError={() => setFailedImages((failed) => new Set(failed).add(item.id))}
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-muted">
+                  <img
+                    src="/assets/logo/logo-muted.png"
+                    alt="No image available"
+                    className="h-16 w-auto object-contain opacity-60"
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>

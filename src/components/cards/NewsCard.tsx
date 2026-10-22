@@ -50,7 +50,7 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="flex aspect-[16/9] w-full items-center justify-center bg-muted">
+            <div className="flex aspect-[2.4/1] w-full items-center justify-center bg-muted">
               <img
                 src="/assets/logo/logo-muted.png"
                 alt="No image available"

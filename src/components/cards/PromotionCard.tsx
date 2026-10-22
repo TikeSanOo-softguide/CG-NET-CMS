@@ -35,13 +35,15 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
       : `${STORAGE_URL}/${promotion.imageUrl}`
     : null
 
-  const hasStart =
-    typeof promotion.startDate === 'string' && promotion.startDate.trim() !== ''
-  const hasEnd =
-    typeof promotion.endDate === 'string' && promotion.endDate.trim() !== ''
+  const hasStart = typeof promotion.startDate === 'string' && promotion.startDate.trim() !== ''
+  const hasEnd = typeof promotion.endDate === 'string' && promotion.endDate.trim() !== ''
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="relative h-full min-w-0 max-w-full rounded-[12px]">
+    <AnimatedCard
+      delay={delay}
+      variant="rise"
+      className="relative h-full min-w-0 max-w-full rounded-[12px]"
+    >
       <Card className="group flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-[12px] border border-white shadow-soft !bg-app-surface">
         <Link
           to={`/promotion/${promotion.slug}`}
@@ -56,7 +58,7 @@ export function PromotionCard({ promotion, lang, delay = 0, compact = false }: P
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="flex aspect-[16/9] w-full items-center justify-center bg-muted">
+            <div className="flex aspect-[2.4/1]  w-full items-center justify-center bg-muted">
               <img
                 src="/assets/logo/logo-muted.png"
                 alt="No image available"

@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import type { Service } from '@/types/service'
 import { t } from 'i18next'
+import { useState } from 'react'
 
 interface ServiceCardProps {
   service: Service
@@ -31,6 +32,7 @@ function splitServiceDescription(description: string) {
 
 export function ServiceCard({ service, lang, delay = 0, featured = false }: ServiceCardProps) {
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+  const [imageError, setImageError] = useState(false)
   const title = service.title[lang] || service.title.en || ''
   const description = service.description[lang] || service.description.en || ''
   const { intro, features } = splitServiceDescription(description)
@@ -51,20 +53,25 @@ export function ServiceCard({ service, lang, delay = 0, featured = false }: Serv
       >
         <div
           className={cn(
-            'relative w-full overflow-hidden bg-white',
+            'relative w-full overflow-hidden bg-muted',
             featured && 'shrink-0 lg:w-[46%]'
           )}
         >
-          {imageUrl ? (
+          {imageUrl && !imageError ? (
             <img
               src={imageUrl}
               alt={title}
               className="block h-auto w-full transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
+              onError={() => setImageError(true)}
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-muted px-4 text-center text-lg font-medium text-font-muted">
-              {t('common.noImage')}
+            <div className="flex aspect-[2.6/1] w-full items-center justify-center bg-muted">
+              <img
+                src="/assets/logo/logo-muted.png"
+                alt={t('common.noImage')}
+                className="h-16 w-auto object-contain opacity-60"
+              />
             </div>
           )}
         </div>
