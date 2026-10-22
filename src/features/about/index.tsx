@@ -118,7 +118,9 @@ export default function AboutPage() {
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent">
                     <Icon className="h-6 w-6 text-font-blue" />
                   </span>
-                  <h3 className="text-[14px] font-bold leading-relaxed text-foreground md:text-[16px] lg:text-[18px]">{label}</h3>
+                  <h3 className="text-[14px] font-bold leading-relaxed text-foreground md:text-[16px] lg:text-[18px]">
+                    {label}
+                  </h3>
                 </div>
                 <p className="mt-5 py-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   {text}
@@ -257,9 +259,11 @@ export default function AboutPage() {
               items={
                 galleryData.data.map((item) => ({
                   id: item.id,
-                  imageUrl: item.imageUrl?.startsWith('http')
-                    ? item.imageUrl
-                    : `${STORAGE_URL}/${item.imageUrl}`,
+                  imageUrl: item.imageUrl?.trim()
+                    ? item.imageUrl.startsWith('http')
+                      ? item.imageUrl
+                      : `${STORAGE_URL}/${item.imageUrl}`
+                    : '',
                 })) as any
               }
             />

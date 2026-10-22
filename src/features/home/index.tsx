@@ -65,9 +65,7 @@ function FeatureCard({ feature, className }: { feature: Feature; className?: str
       </CardHeader>
 
       <CardContent className="px-5 pb-5 pt-0">
-        <CardDescription className={cn('mt-1', cardDescClass(lang))}>
-          {t(descKey)}
-        </CardDescription>
+        <CardDescription className={cn('mt-1', cardDescClass(lang))}>{t(descKey)}</CardDescription>
       </CardContent>
     </AnimatedCard>
   )
@@ -89,6 +87,7 @@ export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState(initialCategory)
   const { data: galleryData, isLoading: galleryLoading, isError: galleryError } = useGallery()
   const [activeGalleryImage, setActiveGalleryImage] = useState(0)
+  const [failedGalleryImages, setFailedGalleryImages] = useState<Set<string>>(() => new Set())
   const [activeFeature, setActiveFeature] = useState(0)
   const statsRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
   const featureHeadRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
@@ -222,10 +221,7 @@ export default function HomePage() {
       {/* Why Choose Us */}
       <SectionWrapper className={cn('bg-muted/40', SECTION_Y)} motion="none">
         <div ref={featureHeadRef}>
-          <SectionHeading
-            eyebrow={t('home.whyChooseUs')}
-            title={t('home.whyChooseUsTitle')}
-          />
+          <SectionHeading eyebrow={t('home.whyChooseUs')} title={t('home.whyChooseUsTitle')} />
         </div>
 
         {/* ============================= */}
@@ -276,10 +272,7 @@ export default function HomePage() {
         {/* ============================= */}
         {/* Desktop Design */}
         {/* ============================= */}
-        <div
-          ref={featureDesktopRef}
-          className="hidden gap-3 lg:grid lg:grid-cols-3 xl:grid-cols-5"
-        >
+        <div ref={featureDesktopRef} className="hidden gap-3 lg:grid lg:grid-cols-3 xl:grid-cols-5">
           {homeContent.features.map((feature) => (
             <FeatureCard key={feature.titleKey} feature={feature} />
           ))}
@@ -288,10 +281,7 @@ export default function HomePage() {
 
       {/* Featured Packages */}
       <SectionWrapper className={SECTION_Y}>
-        <SectionHeading
-          eyebrow={t('home.featuredEyebrow')}
-          title={t('home.featuredPackages')}
-        />
+        <SectionHeading eyebrow={t('home.featuredEyebrow')} title={t('home.featuredPackages')} />
 
         {pkgLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -325,10 +315,7 @@ export default function HomePage() {
       {/* Latest News */}
       <SectionWrapper className={cn('bg-muted/40', SECTION_Y)} motion="none">
         <div ref={newsHeadRef}>
-          <SectionHeading
-            eyebrow={t('home.whatsNew')}
-            title={t('home.latestTitle')}
-          />
+          <SectionHeading eyebrow={t('home.whatsNew')} title={t('home.latestTitle')} />
         </div>
 
         {/* Tabs */}
@@ -459,10 +446,7 @@ export default function HomePage() {
 
       {/* Photo Gallery */}
       <SectionWrapper className={SECTION_Y} motionMedia="(min-width: 1024px)">
-        <SectionHeading
-          eyebrow={t('home.galleryEyebrow')}
-          title={t('home.galleryTitle')}
-        />
+        <SectionHeading eyebrow={t('home.galleryEyebrow')} title={t('home.galleryTitle')} />
 
         {galleryError && <ErrorMessage />}
 
@@ -485,7 +469,9 @@ export default function HomePage() {
             <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
               {Array.from({ length: 5 }).map((_, i) => {
                 const cardClass =
-                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[12px]' : 'md:col-span-1 rounded-[12px]'
+                  i === 0
+                    ? 'md:col-span-2 md:row-span-2 rounded-[12px]'
+                    : 'md:col-span-1 rounded-[12px]'
 
                 return (
                   <div key={i} className={`${cardClass} overflow-hidden`}>
@@ -534,15 +520,24 @@ export default function HomePage() {
                       variant="rise"
                       className="group relative h-[320px] overflow-hidden rounded-[12px] border border-white bg-card shadow-soft"
                     >
-                      {imageUrl ? (
+                      {imageUrl && !failedGalleryImages.has(item.id) ? (
                         <img
                           src={imageUrl}
                           alt={displayTitle || 'Gallery image'}
                           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                           loading="lazy"
+                          onError={() =>
+                            setFailedGalleryImages((failed) => new Set(failed).add(item.id))
+                          }
                         />
                       ) : (
-                        <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+                        <div className="flex h-full w-full items-center justify-center bg-muted">
+                          <img
+                            src="/assets/logo/logo-muted.png"
+                            alt={t('common.noImage')}
+                            className="h-12 w-auto object-contain opacity-60 sm:h-16"
+                          />
+                        </div>
                       )}
 
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
@@ -588,18 +583,26 @@ export default function HomePage() {
                                   : 'border-border/60'
                               }`}
                             >
-                              {thumbnailUrl ? (
+                              {thumbnailUrl && !failedGalleryImages.has(thumbnail.id) ? (
                                 <img
                                   src={thumbnailUrl}
                                   alt={thumbnailTitle || 'Gallery image'}
                                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                                   loading="lazy"
+                                  onError={() =>
+                                    setFailedGalleryImages((failed) =>
+                                      new Set(failed).add(thumbnail.id)
+                                    )
+                                  }
                                 />
                               ) : (
-                                <div
-                                  className="h-full w-full bg-muted"
-                                  aria-label={t('common.noData')}
-                                />
+                                <div className="flex h-full w-full items-center justify-center bg-muted">
+                                  <img
+                                    src="/assets/logo/logo-muted.png"
+                                    alt={t('common.noImage')}
+                                    className="h-8 w-auto object-contain opacity-60 sm:h-10"
+                                  />
+                                </div>
                               )}
                               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
                               {thumbnailTitle && (
@@ -644,7 +647,9 @@ export default function HomePage() {
             <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
               {galleryData.data.slice(0, 5).map((item, i) => {
                 const cardClass =
-                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[12px]' : 'md:col-span-1 rounded-[12px]'
+                  i === 0
+                    ? 'md:col-span-2 md:row-span-2 rounded-[12px]'
+                    : 'md:col-span-1 rounded-[12px]'
 
                 const imageUrl = item.imageUrl
                   ? item.imageUrl.startsWith('http')
@@ -669,15 +674,24 @@ export default function HomePage() {
                     className={`group relative h-full overflow-hidden border border-white bg-card shadow-soft ${cardClass}`}
                   >
                     <div className="card-media h-full">
-                      {imageUrl ? (
+                      {imageUrl && !failedGalleryImages.has(item.id) ? (
                         <img
                           src={imageUrl}
                           alt={displayTitle || 'Gallery image'}
                           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                           loading="lazy"
+                          onError={() =>
+                            setFailedGalleryImages((failed) => new Set(failed).add(item.id))
+                          }
                         />
                       ) : (
-                        <div className="h-full w-full bg-muted" aria-label={t('common.noData')} />
+                        <div className="flex h-full w-full items-center justify-center bg-muted">
+                          <img
+                            src="/assets/logo/logo-muted.png"
+                            alt={t('common.noImage')}
+                            className="h-16 w-auto object-contain opacity-60"
+                          />
+                        </div>
                       )}
                     </div>
 
@@ -722,12 +736,7 @@ export default function HomePage() {
                   {t('home.downloadHead')}
                 </h2>
 
-                <p
-                  className={cn(
-                    'mx-auto mt-3 max-w-md lg:mx-0',
-                    sectionDescClass(lang)
-                  )}
-                >
+                <p className={cn('mx-auto mt-3 max-w-md lg:mx-0', sectionDescClass(lang))}>
                   {t('home.downloadHeadSub')}
                 </p>
 
