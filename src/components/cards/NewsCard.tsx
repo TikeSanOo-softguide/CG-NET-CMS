@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/card'
 import { AnimatedCard } from '@/components/common/AnimatedCard'
 import { cn, getLocalized, formatDate, getDateLocale } from '@/lib/utils'
+import { newsDescClass, newsTitleClass, typeNewsChip } from '@/lib/typography'
 import type { SupportedLanguage } from '@/lib/i18n/languages'
 import { NewsArticle } from '@/types/new'
 import { useState } from 'react'
@@ -30,72 +31,77 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
   const [imageError, setImageError] = useState(false)
 
   return (
-    <AnimatedCard delay={delay} variant="rise" className="h-full min-w-0 max-w-full rounded-xl">
+    <AnimatedCard delay={delay} variant="rise" className="h-full min-w-0 max-w-full rounded-[12px]">
       <Card
         className={cn(
-          'group flex min-w-0 max-w-full flex-col overflow-hidden rounded-xl border shadow-sm card-glow !bg-app-surface',
-          'h-auto'
+          'group flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-[12px] border border-white shadow-soft !bg-app-surface'
         )}
       >
         <Link
           to={`/news/${article.slug}`}
-          className={cn('card-media relative block w-full aspect-[4/1.7] overflow-hidden')}
+          className="relative block w-full overflow-hidden bg-muted"
         >
           {article.image_url && !imageError ? (
             <img
               src={`${STORAGE_URL}/${article.image_url}`}
               alt={getLocalized(article.title, lang)}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="block h-auto w-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.01]"
               loading="lazy"
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className="flex items-center justify-center w-full h-full bg-muted">
+            <div className="flex aspect-[16/9] w-full items-center justify-center bg-muted">
               <img
                 src="/assets/logo/logo-muted.png"
                 alt="No image available"
-                className="h-20 w-auto opacity-70 object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                className="h-16 w-auto object-contain opacity-60"
               />
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         </Link>
 
-        <CardHeader className="pb-2 pt-3">
-          <span className="w-fit rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-app-primary">
+        <CardHeader className={cn('space-y-2.5 pb-2 pt-4', compact && 'px-4')}>
+          <span className={typeNewsChip}>
             {article.category ? getLocalized(article.category.name, lang) : t('common.noData')}
           </span>
           <CardTitle
             className={cn(
-              'leading-[1.7] line-clamp-2 overflow-hidden text-ellipsis',
-              'min-h-[3.4em]',
-              compact ? 'text-sm' : 'text-base'
+              newsTitleClass(lang),
+              'line-clamp-2 overflow-hidden text-ellipsis',
+              lang === 'my' ? 'min-h-[3.1em]' : 'min-h-[2.6em]',
+              compact && 'text-h4'
             )}
           >
-            <Link to={`/news/${article.slug}`} className="hover:text-primary transition-colors">
+            <Link
+              to={`/news/${article.slug}`}
+              className="transition-colors duration-200 hover:text-app-primary"
+            >
               {getLocalized(article.title, lang)}
             </Link>
           </CardTitle>
         </CardHeader>
 
         <CardContent className={cn('flex-1 pt-0', compact && 'px-4')}>
-          <div className="min-h-[3.4em] flex items-start">
-            <CardDescription className={cn('line-clamp-2 leading-[1.7] text-sm text-font-black')}>
-              {getLocalized(article.description, lang)}
-            </CardDescription>
-          </div>
+          <CardDescription
+            className={cn(
+              newsDescClass(lang),
+              'line-clamp-2',
+              lang === 'my' ? 'min-h-[3.4em]' : 'min-h-[3.1em]'
+            )}
+          >
+            {getLocalized(article.description, lang)}
+          </CardDescription>
         </CardContent>
 
         <CardFooter
           className={cn(
-            'relative flex items-center justify-between gap-2 pt-3',
-            compact && 'px-4 pb-3'
+            'relative flex items-center justify-between gap-2 px-6 pb-3 pt-2',
+            compact && 'px-4 pb-2.5'
           )}
         >
-          {/* Shorter top border */}
           <div className="absolute left-1/2 top-0 h-px w-[90%] -translate-x-1/2 bg-border" />
 
-          <span className="text-xs text-muted-foreground">
+          <span className="text-caption tracking-[0.02em] text-muted-foreground">
             {formatDate(article.created_at, getDateLocale(lang))}
           </span>
 
@@ -103,11 +109,11 @@ export function NewsCard({ article, lang, delay = 0, compact = false }: NewsCard
             variant="ghost"
             size="sm"
             asChild
-            className="h-8 gap-1 px-2 text-font-blue hover:text-font-blue"
+            className="h-6 gap-0.5 px-1.5 text-caption font-medium text-font-blue hover:bg-transparent hover:text-font-blue"
           >
             <Link to={`/news/${article.slug}`}>
               {t('common.readMore')}
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              <ArrowRight className="h-3 w-3" aria-hidden="true" />
             </Link>
           </Button>
         </CardFooter>

@@ -14,27 +14,21 @@ import { useState } from 'react'
 
 function ServiceSkeleton() {
   return (
-    <Card className="group flex h-full flex-col overflow-hidden border shadow-sm card-glow ">
-      {/* Image section */}
-      <div className="relative h-40 overflow-hidden bg-muted">
+    <Card className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#eeeeee] bg-white shadow-soft">
+      <div className="relative aspect-[4/1.7] overflow-hidden bg-muted">
         <Skeleton className="h-full w-full rounded-none" />
       </div>
 
-      {/* Content section */}
-      <div className="flex flex-1 flex-col p-6">
-        {/* Title */}
+      <div className="flex flex-1 flex-col px-5 py-5 sm:px-6">
         <Skeleton className="mb-3 h-6 w-3/5" />
-
-        {/* Description */}
         <div className="space-y-2">
           <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-5/6" />
-          <Skeleton className="h-4 w-2/3" />
+          <Skeleton className="h-4 w-4/5" />
         </div>
-
-        {/* Bottom section */}
-        <div className="mt-auto pt-5">
-          <Skeleton className="h-4 w-1/3" />
+        <div className="mt-3 flex flex-col gap-1">
+          <Skeleton className="h-6 w-full rounded-md" />
+          <Skeleton className="h-6 w-full rounded-md" />
+          <Skeleton className="h-6 w-4/5 rounded-md" />
         </div>
       </div>
     </Card>

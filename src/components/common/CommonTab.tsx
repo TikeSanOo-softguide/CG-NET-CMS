@@ -29,7 +29,7 @@ export default function CommonTab({ filters, activeValue, onValueChange }: Commo
               items-center
               justify-start
               gap-0.5
-              rounded-full
+              rounded-[18px]
               border
               border-slate-100
               bg-white
@@ -40,42 +40,53 @@ export default function CommonTab({ filters, activeValue, onValueChange }: Commo
               sm:p-1.5
             "
           >
-            {filters.map(({ value, labelKey, label }) => (
-              <TabsTrigger
-                key={value}
-                value={value}
-                className="
-                  flex
-                  h-9
-                  shrink-0
-                  items-center
-                  justify-center
-                  whitespace-nowrap
-                  rounded-full
-                  px-4
-                  text-xs
-                  font-medium
-                  text-gray-500
-                  outline-none
-                  transition-all
+            {filters.map(({ value, labelKey, label }) => {
+              const text = label ?? t(labelKey ?? '')
 
-                  hover:bg-gray-50
-                  hover:text-font-blue
+              return (
+                <TabsTrigger
+                  key={value}
+                  value={value}
+                  className="
+                    flex
+                    h-9
+                    shrink-0
+                    items-center
+                    justify-center
+                    whitespace-nowrap
+                    rounded-[18px]
+                    px-4
+                    text-[13px]
+                    font-semibold
+                    text-gray-500
+                    outline-none
+                    transition-colors
+                    duration-200
+                    ease-out
 
-                  data-[state=active]:bg-blue-50
-                  data-[state=active]:font-semibold
-                  data-[state=active]:text-font-blue
-                  data-[state=active]:shadow-none
-                  data-[state=active]:hover:bg-blue-50
+                    hover:bg-gray-50
+                    hover:text-font-blue
 
-                  sm:h-11
-                  sm:px-5
-                  sm:text-sm
-                "
-              >
-                {label ?? t(labelKey ?? '')}
-              </TabsTrigger>
-            ))}
+                    data-[state=active]:bg-blue-50
+                    data-[state=active]:font-bold
+                    data-[state=active]:text-font-blue
+                    data-[state=active]:shadow-none
+                    data-[state=active]:hover:bg-blue-50
+
+                    sm:h-11
+                    sm:px-5
+                    sm:text-[15px]
+                  "
+                >
+                  <span className="inline-grid">
+                    <span className="col-start-1 row-start-1">{text}</span>
+                    <span aria-hidden="true" className="invisible col-start-1 row-start-1 font-bold">
+                      {text}
+                    </span>
+                  </span>
+                </TabsTrigger>
+              )
+            })}
           </TabsList>
         </div>
       </Tabs>

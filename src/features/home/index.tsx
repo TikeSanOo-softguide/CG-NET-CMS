@@ -14,18 +14,64 @@ import { useLatestNews } from '@/hooks/useNews'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { normalizeLanguage } from '@/lib/i18n'
 import { homeContent } from '@/lib/content/home'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import { useLatestPromotions } from '@/hooks/usePromotion'
 import { PromotionCard } from '@/components/cards/PromotionCard'
 import { EmptyState } from '@/components/common/EmptyState'
 import CommonTab from '@/components/common/CommonTab'
 import { useGallery } from '@/hooks/useGallery'
 import { cn, getLocalized } from '@/lib/utils'
+import {
+  cardDescClass,
+  cardTitleClass,
+  sectionDescClass,
+  sectionTitleClass,
+} from '@/lib/typography'
 import { useRecommendPackage } from '@/hooks/usePackages'
 import AnimatedStat from '@/components/common/AnimatedStat'
 import DirectionAwareButton from '@/components/common/DirectionAwareButton'
 import { useGsapReveal } from '@/hooks/useGsapReveal'
+import { useGsapStagger } from '@/hooks/useGsapStagger'
+import { initGsap, prefersReducedMotion } from '@/lib/gsap'
+
+const SECTION_Y = 'py-8 md:py-10 lg:py-14'
+
+type Feature = (typeof homeContent.features)[number]
+
+function FeatureCard({ feature, className }: { feature: Feature; className?: string }) {
+  const { t, i18n } = useTranslation()
+  const lang = normalizeLanguage(i18n.language)
+  const { icon: Icon, titleKey, descKey } = feature
+
+  return (
+    <AnimatedCard
+      className={cn(
+        'group relative flex min-h-[180px] flex-col overflow-hidden rounded-xl border border-white bg-app-surface text-center shadow-soft',
+        className
+      )}
+    >
+      <CardHeader className="px-5 pb-1.5 pt-5">
+        <div
+          className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-font-blue transition-colors duration-500 group-hover:bg-app-primary group-hover:text-white"
+          aria-hidden="true"
+        >
+          <Icon className="h-5 w-5" />
+        </div>
+
+        <CardTitle className={cardTitleClass(lang)}>{t(titleKey)}</CardTitle>
+      </CardHeader>
+
+      <CardContent className="px-5 pb-5 pt-0">
+        <CardDescription className={cn('mt-1', cardDescClass(lang))}>
+          {t(descKey)}
+        </CardDescription>
+      </CardContent>
+    </AnimatedCard>
+  )
+}
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
@@ -43,8 +89,56 @@ export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState(initialCategory)
   const { data: galleryData, isLoading: galleryLoading, isError: galleryError } = useGallery()
   const [activeGalleryImage, setActiveGalleryImage] = useState(0)
+  const [activeFeature, setActiveFeature] = useState(0)
   const statsRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
+  const featureHeadRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
+  const featureMobileRef = useGsapStagger({ stagger: 0.1 })
+  const featureTabletRef = useGsapStagger({ stagger: 0.1 })
+  const featureDesktopRef = useGsapStagger({ stagger: 0.1 })
+  const newsHeadRef = useGsapReveal<HTMLDivElement>({ mode: 'rise' })
+  const newsGridRef = useGsapStagger({
+    stagger: 0.12,
+    deps: [news?.length, activeFilter],
+  })
+  const promoGridRef = useGsapStagger({
+    stagger: 0.12,
+    deps: [promotions?.length, activeFilter],
+  })
+  const downloadImageRef = useRef<HTMLDivElement>(null)
   const STORAGE_URL = `${import.meta.env.VITE_APP_URL}/storage`
+
+  initGsap()
+  useGSAP(
+    () => {
+      const el = downloadImageRef.current
+      if (!el || prefersReducedMotion()) return
+
+      // Image entrance only on laptop+ — mobile/tablet stay instant (no delay).
+      const mm = gsap.matchMedia()
+      mm.add('(min-width: 1024px)', () => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, x: 28 },
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            clearProps: 'transform',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 90%',
+              once: true,
+              toggleActions: 'play none none none',
+            },
+          }
+        )
+      })
+
+      return () => mm.revert()
+    },
+    { scope: downloadImageRef }
+  )
   const FILTERS = [
     { value: 'news', labelKey: 'home.latestNews' },
     { value: 'promotion', labelKey: 'nav.promotion' },
@@ -74,48 +168,37 @@ export default function HomePage() {
       <HeroBanner lang={lang} />
 
       {/* Stats */}
-      <div className="bg-muted/40 pb-5">
-        <section
-          className="
-            relative z-30
-            -mt-3 sm:-mt-8 lg:-mt-10
-            mx-auto
-            w-[92%] sm:w-[90%]
-            max-w-[1200px]
-            px-0
-            font-head
-          "
-        >
+      <div className="bg-muted/40">
+        <section className="container relative z-30 -mt-3 font-head sm:-mt-8 lg:-mt-10">
           <div
             ref={statsRef}
-            className="overflow-hidden rounded-xl border border-border bg-white shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
+            className="mx-auto max-w-[1200px] overflow-hidden rounded-xl border border-white bg-white shadow-soft"
           >
-            <div className="grid grid-cols-2 lg:grid-cols-5">
+            <div className="grid grid-cols-2 md:grid-cols-5">
               {homeContent.stats.map(({ value, labelKey }, index) => (
                 <div
                   key={labelKey}
                   className={cn(
-                    'flex flex-col items-center justify-center',
-                    'border-border text-center',
+                    'flex flex-col items-center justify-center border-border/60 px-2 text-center',
 
                     // Mobile
-                    index === 0
-                      ? 'col-span-2 min-h-[110px] border-b'
-                      : 'min-h-[85px] border-b border-r',
+                    'h-[72px]',
+                    index === 0 && 'col-span-2',
+                    index <= 2 && 'border-b',
+                    (index === 1 || index === 3) && 'border-r',
 
-                    // Desktop
-                    'lg:col-span-1 lg:min-h-0 lg:h-[100px]',
-                    'lg:border-b-0',
+                    // Tablet
+                    'md:col-span-1 md:h-[88px] md:border-b-0',
+                    index < 4 ? 'md:border-r' : 'md:border-r-0',
 
-                    index === 4 && 'border-r-0'
+                    // Laptop & desktop
+                    'lg:h-[112px]'
                   )}
                 >
                   <p
                     className={cn(
-                      'font-extrabold tracking-tight text-font-blue',
-                      index === 0
-                        ? 'text-2xl sm:text-3xl lg:text-2xl'
-                        : 'text-lg sm:text-xl lg:text-2xl'
+                      'font-extrabold tabular-nums tracking-tight text-font-blue',
+                      'text-[20px]/none md:text-[25px]/none lg:text-3xl'
                     )}
                   >
                     <AnimatedStat value={value} />
@@ -124,7 +207,7 @@ export default function HomePage() {
                   <p
                     className={cn(
                       'mt-1 font-medium text-muted-foreground',
-                      index === 0 ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-xs'
+                      'text-[12px]/[1.5] md:text-[13px]/[1.5] lg:text-small'
                     )}
                   >
                     {t(labelKey)}
@@ -137,53 +220,46 @@ export default function HomePage() {
       </div>
 
       {/* Why Choose Us */}
-      <SectionWrapper className="bg-muted/40 !py-6 md:!py-14" spacing="default">
-        <SectionHeading
-          eyebrow={t('home.whyChooseUs')}
-          title={t('home.whyChooseUsTitle')}
-          subtitle={t('home.whyChooseUsDesc')}
-        />
+      <SectionWrapper className={cn('bg-muted/40', SECTION_Y)} motion="none">
+        <div ref={featureHeadRef}>
+          <SectionHeading
+            eyebrow={t('home.whyChooseUs')}
+            title={t('home.whyChooseUsTitle')}
+          />
+        </div>
 
         {/* ============================= */}
         {/* Mobile Design */}
         {/* ============================= */}
         <div className="md:hidden">
-          <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 scrollbar-none">
-            {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
-              <AnimatedCard
-                key={titleKey}
-                delay={i * 90}
-                className="group relative flex min-w-[82%] snap-center overflow-hidden rounded-2xl border border-border/60 bg-app-surface p-5 shadow-sm transition-all duration-300"
-              >
-                {/* Decorative glow */}
-                <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/10 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
+          <div
+            ref={featureMobileRef}
+            className="-mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-4 scrollbar-none"
+            onScroll={(e) => {
+              const el = e.currentTarget
+              const card = el.firstElementChild as HTMLElement | null
+              if (!card) return
+              setActiveFeature(Math.round(el.scrollLeft / (card.offsetWidth + 8)))
+            }}
+          >
+            {homeContent.features.map((feature) => (
+              <FeatureCard
+                key={feature.titleKey}
+                feature={feature}
+                className="min-w-[82%] snap-center"
+              />
+            ))}
+          </div>
 
-                <div className="relative flex w-full items-center gap-4">
-                  {/* Icon */}
-                  <div
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-font-blue shadow-sm transition-transform duration-300 group-hover:scale-105"
-                    aria-hidden="true"
-                  >
-                    <Icon className="h-6 w-6" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="min-w-0 flex-1">
-                    <CardTitle className="text-sm font-semibold leading-snug text-foreground">
-                      {t(titleKey)}
-                    </CardTitle>
-
-                    <CardDescription className="mt-1.5 text-xs leading-[1.6] text-muted-foreground">
-                      {t(descKey)}
-                    </CardDescription>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-all duration-300 group-hover:bg-app-primary group-hover:text-white">
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </div>
-                </div>
-              </AnimatedCard>
+          <div className="flex justify-center gap-1.5" aria-hidden="true">
+            {homeContent.features.map((feature, i) => (
+              <span
+                key={feature.titleKey}
+                className={cn(
+                  'h-1.5 rounded-full transition-all duration-500',
+                  i === activeFeature ? 'w-5 bg-app-primary' : 'w-1.5 bg-border'
+                )}
+              />
             ))}
           </div>
         </div>
@@ -191,92 +267,36 @@ export default function HomePage() {
         {/* ============================= */}
         {/* Tablet Design */}
         {/* ============================= */}
-        <div className="hidden md:block lg:hidden">
-          <div className="grid grid-cols-2 gap-4">
-            {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
-              <AnimatedCard
-                key={titleKey}
-                delay={i * 90}
-                className="group relative flex min-h-[165px] overflow-hidden rounded-2xl border border-border/70 bg-app-surface p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]"
-              >
-                {/* Decorative glow */}
-                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
-
-                <div className="relative flex w-full items-start gap-4">
-                  {/* Icon */}
-                  <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-font-blue shadow-sm transition-transform duration-300 group-hover:scale-105"
-                    aria-hidden="true"
-                  >
-                    <Icon className="h-5 w-5" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="min-w-0 flex-1">
-                    <CardTitle className="text-sm font-semibold leading-snug text-foreground">
-                      {t(titleKey)}
-                    </CardTitle>
-
-                    <CardDescription className="mt-2 text-xs leading-[1.7] text-muted-foreground">
-                      {t(descKey)}
-                    </CardDescription>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-all duration-300 group-hover:bg-app-primary group-hover:text-white">
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </div>
-                </div>
-              </AnimatedCard>
-            ))}
-          </div>
+        <div ref={featureTabletRef} className="hidden grid-cols-2 gap-3 md:grid lg:hidden">
+          {homeContent.features.map((feature) => (
+            <FeatureCard key={feature.titleKey} feature={feature} />
+          ))}
         </div>
 
         {/* ============================= */}
         {/* Desktop Design */}
         {/* ============================= */}
-        <div className="hidden md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-5">
-          {homeContent.features.map(({ icon: Icon, titleKey, descKey }, i) => (
-            <AnimatedCard
-              key={titleKey}
-              delay={i * 90}
-              className="group relative flex h-[180px] flex-col overflow-hidden rounded-xl border border-border/70 bg-app-surface text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-18px_rgba(37,99,235,0.35)]"
-            >
-              <CardHeader className="pb-2 pt-5">
-                <div
-                  className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-font-blue transition-all duration-300 group-hover:scale-110"
-                  aria-hidden="true"
-                >
-                  <Icon className="h-5 w-5" />
-                </div>
-
-                <CardTitle className="text-sm font-semibold leading-tight text-foreground">
-                  {t(titleKey)}
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="px-4 pb-4 pt-0">
-                <CardDescription className="text-xs leading-[1.7] text-muted-foreground">
-                  {t(descKey)}
-                </CardDescription>
-              </CardContent>
-            </AnimatedCard>
+        <div
+          ref={featureDesktopRef}
+          className="hidden gap-3 lg:grid lg:grid-cols-3 xl:grid-cols-5"
+        >
+          {homeContent.features.map((feature) => (
+            <FeatureCard key={feature.titleKey} feature={feature} />
           ))}
         </div>
       </SectionWrapper>
 
       {/* Featured Packages */}
-      <SectionWrapper className="!py-6 md:!py-14">
+      <SectionWrapper className={SECTION_Y}>
         <SectionHeading
           eyebrow={t('home.featuredEyebrow')}
           title={t('home.featuredPackages')}
-          subtitle={t('home.featuredPackagesDesc')}
         />
 
         {pkgLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {[1, 2, 3, 4, 5].map((i) => (
-              <Card key={i} className="overflow-hidden rounded-[12px]">
+              <Card key={i} className="overflow-hidden rounded-xl">
                 <Skeleton className="h-44 w-full rounded-none" />
                 <CardHeader>
                   <Skeleton className="h-6 w-3/4" />
@@ -303,12 +323,13 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Latest News */}
-      <SectionWrapper className="bg-muted/40 !py-6 md:!py-14">
-        <SectionHeading
-          eyebrow={t('home.whatsNew')}
-          title={t('home.latestTitle')}
-          subtitle={t('home.latestNewsDesc')}
-        />
+      <SectionWrapper className={cn('bg-muted/40', SECTION_Y)} motion="none">
+        <div ref={newsHeadRef}>
+          <SectionHeading
+            eyebrow={t('home.whatsNew')}
+            title={t('home.latestTitle')}
+          />
+        </div>
 
         {/* Tabs */}
         <CommonTab
@@ -323,7 +344,10 @@ export default function HomePage() {
             {newsLoading && (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                 {[1, 2, 3].map((i) => (
-                  <Card key={i} className="h-[300px] overflow-hidden rounded-[20px]">
+                  <Card
+                    key={i}
+                    className="h-[300px] overflow-hidden rounded-xl border-white shadow-soft"
+                  >
                     <Skeleton className="h-[150px] w-full rounded-none" />
                     <CardHeader className="px-4 pt-3">
                       <Skeleton className="h-4 w-2/3" />
@@ -342,7 +366,10 @@ export default function HomePage() {
             )}
 
             {!newsLoading && !newsError && news && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              <div
+                ref={newsGridRef}
+                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5"
+              >
                 {news.slice(0, 3).map((article, i) => (
                   <NewsCard key={article.id} article={article} lang={lang} delay={i * 100} />
                 ))}
@@ -351,7 +378,11 @@ export default function HomePage() {
 
             {(news?.length ?? 0) > 0 && (
               <div className="text-center mt-5">
-                <Button variant="outline" className="bg-font-white" asChild>
+                <Button
+                  variant="outline"
+                  className="rounded-full bg-font-white px-6 text-body transition-colors duration-500 hover:border-app-primary hover:bg-font-white hover:text-font-blue"
+                  asChild
+                >
                   <Link to="/news">
                     {t('news.viewAllNews')}
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -368,7 +399,10 @@ export default function HomePage() {
             {isLoading && (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                 {[1, 2, 3].map((i) => (
-                  <Card key={i} className="h-[300px] overflow-hidden rounded-[20px]">
+                  <Card
+                    key={i}
+                    className="h-[300px] overflow-hidden rounded-xl border-white shadow-soft"
+                  >
                     <Skeleton className="h-[150px] w-full rounded-none" />
                     <CardHeader className="px-4 pt-3">
                       <Skeleton className="h-4 w-2/3" />
@@ -390,7 +424,10 @@ export default function HomePage() {
             )}
 
             {!isLoading && !isError && promotions && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+              <div
+                ref={promoGridRef}
+                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5"
+              >
                 {promotions?.slice(0, 3).map((promotion, i) => (
                   <PromotionCard
                     key={promotion.id}
@@ -404,7 +441,11 @@ export default function HomePage() {
 
             {(promotions?.length ?? 0) > 0 && (
               <div className="text-center mt-5">
-                <Button variant="outline" className="bg-font-white" asChild>
+                <Button
+                  variant="outline"
+                  className="rounded-full bg-font-white px-6 text-body transition-colors duration-500 hover:border-app-primary hover:bg-font-white hover:text-font-blue"
+                  asChild
+                >
                   <Link to="/promotion">
                     {t('promotions.viewAllPromotions')}
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -417,11 +458,10 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Photo Gallery */}
-      <SectionWrapper className="!py-6 md:!py-14">
+      <SectionWrapper className={SECTION_Y} motionMedia="(min-width: 1024px)">
         <SectionHeading
           eyebrow={t('home.galleryEyebrow')}
           title={t('home.galleryTitle')}
-          subtitle={t('home.galleryDesc')}
         />
 
         {galleryError && <ErrorMessage />}
@@ -430,13 +470,13 @@ export default function HomePage() {
           <>
             {/* Mobile */}
             <div className="lg:hidden">
-              <div className="h-[320px] overflow-hidden rounded-[24px]">
-                <Skeleton className="h-full w-full rounded-[24px]" />
+              <div className="h-[320px] overflow-hidden rounded-[12px]">
+                <Skeleton className="h-full w-full rounded-[12px]" />
               </div>
 
               <div className="mt-3 flex gap-3 overflow-hidden">
                 {Array.from({ length: 2 }).map((_, i) => (
-                  <Skeleton key={i} className="h-[110px] min-w-[42%] rounded-2xl" />
+                  <Skeleton key={i} className="h-[115px] min-w-[44%] rounded-xl" />
                 ))}
               </div>
             </div>
@@ -445,13 +485,11 @@ export default function HomePage() {
             <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
               {Array.from({ length: 5 }).map((_, i) => {
                 const cardClass =
-                  i === 0
-                    ? 'md:col-span-2 md:row-span-2 rounded-[28px]'
-                    : 'md:col-span-1 rounded-[28px]'
+                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[12px]' : 'md:col-span-1 rounded-[12px]'
 
                 return (
                   <div key={i} className={`${cardClass} overflow-hidden`}>
-                    <Skeleton className="h-full w-full rounded-[28px]" />
+                    <Skeleton className="h-full w-full rounded-[12px]" />
                   </div>
                 )
               })}
@@ -494,13 +532,13 @@ export default function HomePage() {
                       key={item.id}
                       delay={0}
                       variant="rise"
-                      className="group relative h-[320px] overflow-hidden rounded-[24px] border border-border/60 bg-card shadow-sm"
+                      className="group relative h-[320px] overflow-hidden rounded-[12px] border border-white bg-card shadow-soft"
                     >
                       {imageUrl ? (
                         <img
                           src={imageUrl}
                           alt={displayTitle || 'Gallery image'}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                           loading="lazy"
                         />
                       ) : (
@@ -511,7 +549,7 @@ export default function HomePage() {
                       {displayTitle && (
                         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
                           <div>
-                            <p className="text-base font-semibold tracking-wide text-white">
+                            <p className="text-body-lg font-semibold tracking-wide text-white">
                               {displayTitle}
                             </p>
                           </div>
@@ -544,9 +582,9 @@ export default function HomePage() {
                               aria-label={`Show gallery image ${imageIndex + 1}`}
                               aria-pressed={activeGalleryImage === imageIndex}
                               onClick={() => setActiveGalleryImage(imageIndex)}
-                              className={`group relative h-[115px] min-w-[44%] snap-start overflow-hidden rounded-2xl border bg-card text-left shadow-sm ${
+                              className={`group relative h-[115px] min-w-[44%] snap-start overflow-hidden rounded-xl border bg-card text-left shadow-soft ${
                                 activeGalleryImage === imageIndex
-                                  ? 'border-app-primary ring-2 ring-app-primary/30'
+                                  ? 'border-app-primary ring-2 ring-[#0100ca]/30'
                                   : 'border-border/60'
                               }`}
                             >
@@ -554,7 +592,7 @@ export default function HomePage() {
                                 <img
                                   src={thumbnailUrl}
                                   alt={thumbnailTitle || 'Gallery image'}
-                                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                                   loading="lazy"
                                 />
                               ) : (
@@ -566,7 +604,7 @@ export default function HomePage() {
                               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
                               {thumbnailTitle && (
                                 <div className="absolute inset-x-0 bottom-0 p-3">
-                                  <p className="line-clamp-1 text-xs font-medium text-white">
+                                  <p className="line-clamp-1 text-caption font-medium text-white">
                                     {thumbnailTitle}
                                   </p>
                                 </div>
@@ -606,7 +644,7 @@ export default function HomePage() {
             <div className="hidden auto-rows-[190px] grid-cols-1 gap-4 lg:grid lg:grid-cols-4">
               {galleryData.data.slice(0, 5).map((item, i) => {
                 const cardClass =
-                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-xl' : 'md:col-span-1 rounded-xl'
+                  i === 0 ? 'md:col-span-2 md:row-span-2 rounded-[12px]' : 'md:col-span-1 rounded-[12px]'
 
                 const imageUrl = item.imageUrl
                   ? item.imageUrl.startsWith('http')
@@ -628,14 +666,14 @@ export default function HomePage() {
                     key={item.id}
                     delay={i * 90}
                     variant="rise"
-                    className={`group relative h-full overflow-hidden border border-border/70 bg-card shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl ${cardClass}`}
+                    className={`group relative h-full overflow-hidden border border-white bg-card shadow-soft ${cardClass}`}
                   >
                     <div className="card-media h-full">
                       {imageUrl ? (
                         <img
                           src={imageUrl}
                           alt={displayTitle || 'Gallery image'}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                           loading="lazy"
                         />
                       ) : (
@@ -647,7 +685,7 @@ export default function HomePage() {
 
                     {displayTitle && (
                       <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                        <p className="text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:text-base">
+                        <p className="text-body font-semibold tracking-wide text-white drop-shadow-sm">
                           {displayTitle}
                         </p>
                       </div>
@@ -661,134 +699,107 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* Download Section */}
-      <SectionWrapper id="app" className="bg-muted/40 !py-6 md:!py-10">
-        <div className="w-full overflow-hidden rounded-2xl border border-border bg-app-accent-bg">
-          {/* ============================= */}
-          {/* Mobile Download Design */}
-          {/* ============================= */}
-          <div className="md:hidden">
-            {/* App Preview */}
-            <div className="relative flex justify-center overflow-hidden px-5 pt-7">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-10 h-48 w-48 -translate-x-1/2 rounded-full bg-app-primary/10 blur-3xl"
-              />
+      <SectionWrapper
+        id="app"
+        className={cn('bg-muted/40', SECTION_Y)}
+        motion="fade"
+        motionDuration={0.35}
+        motionStart="top 95%"
+        motionMedia="(min-width: 1024px)"
+      >
+        <AnimatedCard className="group relative rounded-[12px] bg-app-accent-bg shadow-soft max-lg:transition-none">
+          <div className="relative overflow-hidden rounded-[12px]">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-0 top-1/2 hidden h-48 w-48 -translate-y-1/2 rounded-full bg-[#0100ca]/10 blur-3xl lg:block"
+            />
 
-              <div className="relative w-[82%] max-w-[320px]">
-                {homeContent.downloadItems.map((item) => (
-                  <img
-                    key={item.key}
-                    src={item.imageUrl}
-                    alt={t(item.key)}
-                    className="h-auto w-full rounded-2xl drop-shadow-2xl"
-                    loading="lazy"
-                  />
-                ))}
-              </div>
-            </div>
+            {/* Mobile + tablet: stacked | Desktop: equal columns, shared padding */}
+            <div className="relative grid grid-cols-1 items-center lg:grid-cols-2 lg:min-h-[440px]">
+              {/* Text */}
+              <div className="order-1 flex flex-col justify-center px-5 py-8 text-center sm:px-8 lg:order-1 lg:px-10 lg:py-12 lg:text-left xl:px-12">
+                <h2 className={cn(sectionTitleClass(lang, 'text-font-black'), 'lg:text-left')}>
+                  {t('home.downloadHead')}
+                </h2>
 
-            {/* Content */}
-            <div className="px-5 pb-6 pt-6 text-center">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-font-blue">
-                {t('home.downloadTitle')}
-              </p>
+                <p
+                  className={cn(
+                    'mx-auto mt-3 max-w-md lg:mx-0',
+                    sectionDescClass(lang)
+                  )}
+                >
+                  {t('home.downloadHeadSub')}
+                </p>
 
-              <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-font-black !leading-[1.5]">
-                {t('home.downloadHead')}
-              </h2>
-
-              <p className="mx-auto mt-3 max-w-sm text-sm leading-[1.7] text-muted-foreground">
-                {t('home.downloadHeadSub')}
-              </p>
-
-              {/* Highlights */}
-              <ul className="mx-auto mt-5 max-w-sm space-y-2.5 text-left">
-                {homeContent.highlight.map((h) => (
-                  <li
-                    key={h}
-                    className="flex items-start gap-2.5 rounded-lg bg-background/50 px-3 py-2 text-xs text-foreground/80"
-                  >
-                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-app-primary/10">
-                      <Check className="h-3 w-3 text-font-blue" />
-                    </span>
-
-                    <span className="leading-[1.6]">{t(h)}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Download Button */}
-              <button
-                type="button"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-app-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-              >
-                <Download className="h-4 w-4" />
-                {t('downloadCard.downloadApp')}
-              </button>
-            </div>
-          </div>
-
-          {/* ============================= */}
-          {/* Desktop Download Design */}
-          {/* ============================= */}
-          <div className="hidden md:grid md:grid-cols-2 md:items-center md:gap-8 md:p-12">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-xl">
-                {t('home.downloadTitle')}
-              </p>
-
-              <h2
-                className={cn(
-                  'mt-3 text-xl font-extrabold tracking-tight text-font-black sm:text-4xl',
-                  lang === 'my' ? '!leading-[1.7]' : '!leading-tight'
-                )}
-              >
-                {t('home.downloadHead')}
-              </h2>
-
-              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-                {t('home.downloadHeadSub')}
-                <ul className="mt-6 space-y-2.5">
+                <ul className="mx-auto mt-5 max-w-md space-y-3 text-left lg:mx-0">
                   {homeContent.highlight.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5 text-[15px] text-foreground/80">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-font-blue" />
-                      {t(h)}
+                    <li key={h} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-app-primary/10">
+                        <Check
+                          className="h-3 w-3 text-app-primary"
+                          strokeWidth={2.5}
+                          aria-hidden="true"
+                        />
+                      </span>
+                      <span
+                        className={cn(
+                          'text-small text-foreground/80',
+                          lang === 'my' ? 'leading-[1.7]' : 'leading-snug'
+                        )}
+                      >
+                        {t(h)}
+                      </span>
                     </li>
                   ))}
                 </ul>
-              </p>
 
-              <button
-                type="button"
-                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-app-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-              >
-                <Download className="h-4 w-4" />
-                {t('downloadCard.downloadApp')}
-              </button>
-            </div>
-
-            <div className="relative flex h-full items-center justify-center md:justify-end">
-              {homeContent.downloadItems.map((item) => (
-                <div key={item.key} className="w-full rounded-xl">
-                  <img
-                    src={item.imageUrl}
-                    alt={t(item.key)}
-                    className="h-auto w-full rounded-xl drop-shadow-xl"
-                    loading="lazy"
-                  />
+                <div className="mt-6 flex w-full justify-center lg:mt-8">
+                  <button
+                    type="button"
+                    className="mx-auto inline-flex h-11 items-center justify-center gap-2 rounded-[8px] bg-app-primary px-6 text-small font-semibold text-white shadow-soft transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+                  >
+                    <Download className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <span className="leading-none">{t('downloadCard.downloadApp')}</span>
+                  </button>
                 </div>
-              ))}
+              </div>
+
+              {/* Image — equal top/bottom inset; capped height so card edge stays clear */}
+              <div
+                ref={downloadImageRef}
+                className="order-2 flex items-center justify-center px-5 py-8 sm:px-8 lg:order-2 lg:px-10 lg:py-12 xl:px-12"
+              >
+                {homeContent.downloadItems.map((item) => (
+                  <div
+                    key={item.key}
+                    className="mx-auto inline-flex max-w-full overflow-hidden rounded-[12px] shadow-soft lg:transition-transform lg:duration-500 lg:ease-out lg:group-hover:scale-[1.02]"
+                  >
+                    <img
+                      src={item.imageUrl}
+                      alt={t(item.key)}
+                      width={800}
+                      height={532}
+                      className="block h-auto max-h-[280px] w-auto max-w-full object-contain sm:max-h-[320px] lg:max-h-[340px]"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </AnimatedCard>
       </SectionWrapper>
 
       {/* CTA Section */}
-      <SectionWrapper className="bg-muted/40 !py-6 md:!pb-20 md:!pt-14">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-font px-5 py-10 text-center sm:px-8 md:px-16 md:py-14">
-          {/* Content */}
+      <SectionWrapper
+        className="bg-muted/40 py-5 md:py-6 lg:py-8"
+        motion="fade"
+        motionDuration={0.35}
+        motionStart="top 95%"
+        motionMedia="(min-width: 1024px)"
+      >
+        <div className="relative overflow-hidden rounded-[12px] bg-gradient-font px-5 py-4 text-center sm:px-8 md:px-16 md:py-5">
           <div className="relative">
-            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-2 shadow-md ring-1 ring-white/40">
+            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-[12px] bg-white p-2 shadow-md ring-1 ring-white/40">
               <img
                 src="/assets/logo/logo.svg"
                 alt="Yaung Ni Oo logo"
@@ -797,27 +808,31 @@ export default function HomePage() {
               />
             </span>
 
-            <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl">
+            <h2 className={cn(sectionTitleClass(lang, 'mt-3 text-primary-foreground'))}>
               {t('cta.ctaTitle')}
             </h2>
 
-            <p className="mx-auto mt-3 max-w-sm text-sm leading-[1.7] text-primary-foreground/80 sm:max-w-xl sm:text-[17px]">
+            <p
+              className={cn(
+                'mx-auto mt-2.5 max-w-sm sm:max-w-xl',
+                sectionDescClass(lang, 'text-primary-foreground/80')
+              )}
+            >
               {t('cta.ctaDesc')}
             </p>
 
-            {/* Buttons */}
-            <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:justify-center">
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
               <DirectionAwareButton
                 to="/packages?category=1"
                 label={t('home.heroCta')}
                 color="var(--color-yellow)"
-                className="w-full rounded-xl px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98] sm:w-auto"
+                className="w-full rounded-[8px] px-4 py-2 text-small font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98] sm:w-auto"
               />
 
               <DirectionAwareButton
                 to="/contact-us"
                 label={t('nav.contact')}
-                className="w-full rounded-xl border border-primary-foreground/20 px-6 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98] sm:w-auto"
+                className="w-full rounded-[8px] border border-primary-foreground/20 px-4 py-2 text-small font-semibold transition-all duration-200 hover:bg-primary-foreground/10 active:scale-[0.98] sm:w-auto"
               />
             </div>
           </div>

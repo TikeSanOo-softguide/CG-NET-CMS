@@ -46,7 +46,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <h2 className="text-xl md:text-[35px] font-black tracking-tight bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2">
+              <h2 className="text-[18px] font-black tracking-tight bg-gradient-font bg-clip-text text-transparent leading-relaxed py-2 md:text-[30px] lg:text-h2">
                 {t('about.ourStory')}
               </h2>
               <div className="h-1.5 w-28 bg-gradient-to-r from-primary via-blue-500 to-purple-500 rounded-full"></div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="lg:col-span-5 relative w-full h-[300px] sm:h-[540px] mx-auto my-1">
+          <div className="lg:col-span-5 relative w-full h-[370px] sm:h-[540px] mx-auto my-1">
             {aboutContent.stats.map((stat, i) => {
               const IconComponent = stat.icon
               const angles = [0, 72, 144, 216, 288]
@@ -73,7 +73,7 @@ export default function AboutPage() {
                   style={{
                     transform: `translate(-60%, -50%) rotate(${angle}deg) var(--orbit-translate) rotate(-${angle}deg)`,
                   }}
-                  className="absolute left-1/2 top-1/2 [--orbit-translate:translate(110px)] sm:[--orbit-translate:translate(170px)] w-24 h-24 sm:w-36 sm:h-36 bg-card border-2 border-border hover:border-app-primary rounded-full flex flex-col items-center justify-center text-center p-3 shadow-2xl transition-all duration-300 hover:scale-110 hover:z-20 cursor-pointer group"
+                  className="absolute left-1/2 top-1/2 [--orbit-translate:translate(116px)] sm:[--orbit-translate:translate(170px)] w-[120px] h-[120px] sm:w-36 sm:h-36 bg-card border-2 border-border hover:border-app-primary rounded-full flex flex-col items-center justify-center text-center p-2 sm:p-3 shadow-2xl transition-all duration-300 hover:scale-110 hover:z-20 cursor-pointer group"
                 >
                   <div
                     className={`w-8 h-8 sm:w-10 sm:h-10 rounded-2xl ${stat.iconBg} ${stat.hoverBg} flex items-center justify-center ${stat.color} ${stat.hoverColor} mb-0.5 sm:mb-1 transition-all duration-300`}
@@ -101,7 +101,7 @@ export default function AboutPage() {
       <SectionWrapper>
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-5">
-            <h2 className="text-xl sm:text-3xl md:text-[35px] font-bold mb-2 mt-2 md:mb-3 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-3">
+            <h2 className="text-[18px] font-bold mb-2 mt-2 md:mb-3 md:text-[30px] lg:text-h2 bg-gradient-font bg-clip-text text-transparent leading-relaxed py-3">
               {t('about.purpose')}
             </h2>
 
@@ -118,9 +118,9 @@ export default function AboutPage() {
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent">
                     <Icon className="h-6 w-6 text-font-blue" />
                   </span>
-                  <h3 className="text-xl font-bold text-foreground leading-relaxed">{label}</h3>
+                  <h3 className="text-[14px] font-bold leading-relaxed text-foreground md:text-[16px] lg:text-[18px]">{label}</h3>
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground py-1">
+                <p className="mt-5 py-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   {text}
                 </p>
               </article>
@@ -141,7 +141,7 @@ export default function AboutPage() {
                   <Users className="w-5 h-5 sm:w-6 sm:h-6 text-icon-user" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
+                  <h4 className="text-font-blue text-[14px] font-bold mb-0.5 leading-relaxed md:text-[16px] lg:text-[18px]">
                     {t('about.personalityTitle')}
                   </h4>
                   <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
@@ -156,7 +156,7 @@ export default function AboutPage() {
                   <Gem className="w-5 h-5 sm:w-6 sm:h-6 text-icon-map" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
+                  <h4 className="text-font-blue text-[14px] font-bold mb-0.5 leading-relaxed md:text-[16px] lg:text-[18px]">
                     {t('about.coreValuesTitle')}
                   </h4>
                   <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
@@ -171,7 +171,7 @@ export default function AboutPage() {
                   <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-icon-activity" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
+                  <h4 className="text-font-blue text-[14px] font-bold mb-0.5 leading-relaxed md:text-[16px] lg:text-[18px]">
                     {t('about.brandPromiseTitle')}
                   </h4>
                   <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
@@ -186,7 +186,7 @@ export default function AboutPage() {
                   <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-icon-award duration-300" />
                 </div>
                 <div>
-                  <h4 className="text-font-blue text-base sm:text-lg font-bold mb-0.5 leading-relaxed">
+                  <h4 className="text-font-blue text-[14px] font-bold mb-0.5 leading-relaxed md:text-[16px] lg:text-[18px]">
                     {t('about.toneOfVoiceTitle')}
                   </h4>
                   <p className="text-font-muted text-xs sm:text-sm leading-relaxed py-0.5">
@@ -199,15 +199,15 @@ export default function AboutPage() {
 
           {/* Right Side: Text Content */}
           <div className="space-y-6">
-            <div className="mx-auto inline-block rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 px-3 py-6 lg:mx-0">
-              <p className="text-xl font-extrabold leading-relaxed text-navy sm:text-4xl mb-4 py-1">
+            <div className="mx-auto inline-block rounded-lg bg-gradient-to-br from-amber-300 to-amber-400 px-3 py-2.5 md:px-4 md:py-3.5 lg:mx-0 lg:px-5 lg:py-4">
+              <p className="mb-1 py-1 text-[16px] font-extrabold leading-relaxed text-navy md:mb-1.5 md:text-[22px] lg:mb-2 lg:text-[28px]">
                 {t('about.brandText')}
               </p>
-              <p className="text-xl font-extrabold leading-relaxed text-navy sm:text-4xl py-1">
+              <p className="py-1 text-[16px] font-extrabold leading-relaxed text-navy md:text-[22px] lg:text-[28px]">
                 {t('about.guidelineText')}
               </p>
             </div>
-            <h3 className="mt-6 text-xl font-bold text-foreground sm:text-3xl leading-relaxed py-1">
+            <h3 className="mt-6 text-[16px] font-bold text-foreground leading-relaxed py-1 md:text-[22px] lg:text-[28px]">
               {t('about.brandGuidelineTitle')}
             </h3>
             <p className="text-font-muted text-sm md:text-base leading-relaxed max-w-lg py-1">
@@ -228,7 +228,7 @@ export default function AboutPage() {
               {t(aboutContent.culture.badgeKey)}
             </div>
 
-            <h3 className="text-xl md:text-4xl font-black tracking-tight leading-relaxed py-1">
+            <h3 className="text-[18px] font-black tracking-tight leading-relaxed py-1 md:text-[30px] lg:text-[36px]">
               <span className="bg-gradient-font bg-clip-text text-transparent inline-block leading-relaxed py-1">
                 {t(aboutContent.culture.titleKey1)}
               </span>

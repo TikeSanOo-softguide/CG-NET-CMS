@@ -20,7 +20,7 @@ const PAGE_SIZE = 6
 
 function NewsSkeleton() {
   return (
-    <Card className="overflow-hidden border-border/60 rounded-xl">
+    <Card className="overflow-hidden border-border/60 rounded-[12px]">
       <Skeleton className="h-44 w-full rounded-none" />
       <CardHeader>
         <Skeleton className="h-5 w-1/3 mb-2" />

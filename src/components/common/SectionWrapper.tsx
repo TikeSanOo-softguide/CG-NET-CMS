@@ -2,6 +2,11 @@ import { cn } from '@/lib/utils'
 import { useGsapReveal, type GsapRevealMode } from '@/hooks/useGsapReveal'
 import { useTranslation } from 'react-i18next'
 import { normalizeLanguage } from '@/lib/i18n'
+import {
+  sectionDescClass,
+  sectionTitleClass,
+  typeEyebrow,
+} from '@/lib/typography'
 
 interface SectionWrapperProps {
   children: React.ReactNode
@@ -10,6 +15,12 @@ interface SectionWrapperProps {
   spacing?: 'default' | 'compact' | 'tight'
   /** Section-level reveal. Use `fade` when the section contains a map. */
   motion?: GsapRevealMode
+  /** Override reveal duration (seconds). */
+  motionDuration?: number
+  /** Override ScrollTrigger start. */
+  motionStart?: string
+  /** Run the reveal only while this media query matches. */
+  motionMedia?: string
 }
 
 export function SectionWrapper({
@@ -18,8 +29,16 @@ export function SectionWrapper({
   id,
   spacing = 'tight',
   motion = 'rise',
+  motionDuration,
+  motionStart,
+  motionMedia,
 }: SectionWrapperProps) {
-  const contentRef = useGsapReveal<HTMLDivElement>({ mode: motion })
+  const contentRef = useGsapReveal<HTMLDivElement>({
+    mode: motion,
+    duration: motionDuration,
+    start: motionStart,
+    media: motionMedia,
+  })
 
   return (
     <section
@@ -47,6 +66,33 @@ interface SectionHeadingProps {
   align?: 'center' | 'left'
 }
 
+export function SectionEyebrow({
+  children,
+  align = 'center',
+  className,
+}: {
+  children: React.ReactNode
+  align?: 'center' | 'left'
+  className?: string
+}) {
+  return (
+    <p
+      className={cn(
+        'flex items-center gap-3',
+        typeEyebrow,
+        align === 'center' && 'justify-center',
+        className
+      )}
+    >
+      <span aria-hidden="true" className="h-px w-6 bg-current opacity-40" />
+      {children}
+      {align === 'center' && (
+        <span aria-hidden="true" className="h-px w-6 bg-current opacity-40" />
+      )}
+    </p>
+  )
+}
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -54,25 +100,19 @@ export function SectionHeading({
   align = 'center',
 }: SectionHeadingProps) {
   const { i18n } = useTranslation()
-  const titleLeading = normalizeLanguage(i18n.language) === 'my' ? '!leading-[1.7]' : '!leading-tight'
+  const lang = normalizeLanguage(i18n.language)
 
   return (
     <div
       className={
-        align === 'center' ? 'mx-auto max-w-2xl text-center mb-6 md:mb-10' : 'max-w-2xl text-left'
+        align === 'center'
+          ? 'mx-auto mb-4 max-w-2xl text-center md:mb-5 lg:mb-6'
+          : 'max-w-2xl text-left'
       }
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-font-blue sm:text-sm">
-        {eyebrow}
-      </p>
-      <h2 className={cn('mt-3 text-xl font-extrabold tracking-tight text-foreground sm:text-4xl font-head', titleLeading)}>
-        {title}
-      </h2>
-      {subtitle ? (
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-          {subtitle}
-        </p>
-      ) : null}
+      {eyebrow ? <SectionEyebrow align={align}>{eyebrow}</SectionEyebrow> : null}
+      <h2 className={cn('mt-3', sectionTitleClass(lang))}>{title}</h2>
+      {subtitle ? <p className={cn('mt-2.5', sectionDescClass(lang))}>{subtitle}</p> : null}
     </div>
   )
 }
